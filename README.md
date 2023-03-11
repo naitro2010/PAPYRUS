@@ -1,1 +1,0 @@
-# UnforgivingDevices_PAPYRUS
