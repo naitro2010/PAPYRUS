@@ -1,0 +1,14 @@
+﻿Format: 2.2
+
+Language: Papyrus
+
+   Extension: psc
+
+   Line Comment: ;
+   Block Comment: ;/ /;
+   Case Sensitive: No
+
+   # No prototypes, as some of them might be big as fuck
+   Function Prototype Enders: \n
+   Variable Prototype Enders: \n
+   File Prototype Ender: \n
