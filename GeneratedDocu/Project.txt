@@ -137,7 +137,7 @@ Source Folder: ../../Scripts/Source
 #    systems.  You can enter absolute paths and they will be converted
 #    automatically.
 
-HTML Output Folder: ../../docs/Documantation
+HTML Output Folder: ../../docs/Documentation
 
 # Generated Documentation
 # ------------------------------------------------------------------------
