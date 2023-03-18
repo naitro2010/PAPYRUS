@@ -1,11 +1,16 @@
-﻿Format: 2.2
+Format: 2.2
 
 # This is the main file you use to configure Natural Docs for your project.
 
-Title: UnforgivingDevices
 
 # Project Information
 # ------------------------------------------------------------------------
+
+Title: Unforgiving Devices
+Subtitle: Documentation of unforgiving Devices
+
+Home Page: homepage.html
+
 
 # This is where you put general information about your project.  None of these
 # settings are required, though Title is recommended.
@@ -62,10 +67,12 @@ Title: UnforgivingDevices
 #    You can also set encodings for specific folders by adding Encoding lines
 #    in Source Folder sections.
 
-Source Folder: ../../Scripts/Source
 
 # Source Code
 # ------------------------------------------------------------------------
+
+Source Folder: ..\..\Scripts\Source
+
 
 # This is where you tell Natural Docs which folders it should scan for source
 # files.  If you add any on the command line this section is ignored except
@@ -137,10 +144,13 @@ Source Folder: ../../Scripts/Source
 #    systems.  You can enter absolute paths and they will be converted
 #    automatically.
 
-HTML Output Folder: ../../docs/Documentation
+
 
 # Generated Documentation
 # ------------------------------------------------------------------------
+
+HTML Output Folder: ..\..\docs\Documentation
+
 
 # This is where you tell Natural Docs what kind of documentation you want
 # built and where it should be put.  If you use any of these options on the
