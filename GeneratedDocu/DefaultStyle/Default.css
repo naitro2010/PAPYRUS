@@ -91,3 +91,9 @@
 .NDSummary {
     background-color: #99CCFF;
 }
+
+.NDContentPage a:link,
+.NDContentPage a:visited {
+    color: red;
+    font-weight: bold;
+}
