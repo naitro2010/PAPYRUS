@@ -1,0 +1,93 @@
+﻿.TClass .CTitle,
+.TInterface .CTitle,
+.TStruct .CTitle,
+.TSection .CTitle,
+.TDatabase .CTitle,
+.TDatabaseTable .CTitle,
+.TFile.first .CTitle {
+    font-size: 3.1rem;
+    background-color: red;
+    margin-bottom: .75rem;
+    text-align: center;
+    border: 4px solid #000000;
+    }
+
+.SuEntry.TFile.first {
+    color: black;
+    background-color: red;
+    border: 4px solid #000000;
+    text-align: center;
+    }
+    
+.TGroup {
+    color: black;
+    background-color: green;
+    font-weight: bold;
+    text-align: center;
+    border-left: 2px solid #000000;
+    border-right: 2px solid #000000;
+    border-top: 2px solid #000000;
+    border-bottom: 2px solid #000000;
+    }
+
+.SuEntry.TGroup {
+    margin: 0 0 0 0;
+    }
+
+.CTopic.TVariable .CTitle,
+.SuEntry.TVariable {
+    background-color: #FF8000;
+}
+
+.TVariable{
+    background-color: #FFCC99;
+}
+
+.CTopic.TFunction .CTitle,
+.SuEntry.TFunction
+ {
+    background-color: #0080FF;
+}
+
+.TFunction{
+    background-color: #6666FF;
+}
+
+.MEntry.MFile {
+    color: white;
+    background-color: red;
+}
+
+.MFile.Selected {
+    color: white;
+    font-weight: bold;
+    background-color: #CC0000;
+}
+
+.MEntry.MFile:hover {
+    background-color: #FF6666;
+}
+
+.SuEntry {
+    color: black;
+}
+
+.TInformation {
+    background-color: #E0E0E0;
+}
+
+.CTopic.TFile.first {
+    background-color: #E0E0E0;
+}
+
+.CDefinitionList {
+    background-color: #99CCFF;
+}
+
+.TFunction .CCode {
+    background-color: #99CCFF;
+}
+
+.NDSummary {
+    background-color: #99CCFF;
+}

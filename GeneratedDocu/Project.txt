@@ -1,4 +1,4 @@
-Format: 2.2
+﻿Format: 2.2
 
 # This is the main file you use to configure Natural Docs for your project.
 
@@ -7,8 +7,9 @@ Format: 2.2
 # ------------------------------------------------------------------------
 
 Title: Unforgiving Devices
-Subtitle: Documentation of unforgiving Devices
+Subtitle: Documentation of Unforgiving Devices
 
+Style: DefaultStyle
 Home Page: homepage.html
 
 
@@ -72,6 +73,7 @@ Home Page: homepage.html
 # ------------------------------------------------------------------------
 
 Source Folder: ..\..\Scripts\Source
+   Name: Scripts
 
 
 # This is where you tell Natural Docs which folders it should scan for source
