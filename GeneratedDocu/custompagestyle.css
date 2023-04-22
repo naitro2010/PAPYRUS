@@ -1,0 +1,18 @@
+    table, th, td {
+      border: 3px solid black;
+      border-collapse: collapse;
+      text-align: center;
+      background-color: black;
+      text-transform: capitalize;
+    }
+    tr, td {
+      color: black;
+      font-size: 20px;
+      background-color: #45b555;
+    }
+    tr, th {
+      color: black;
+      font-size: 35px;
+      background-color: #457a55;
+      border-bottom-width: 10px;
+    }
