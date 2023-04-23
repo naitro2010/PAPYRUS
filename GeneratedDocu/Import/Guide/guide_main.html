@@ -18,192 +18,327 @@
           </tr>
         </table>
 
-<h1> Custom devices </h1>
+        <h1> Device Minegames </h1>
 
-    There are few minigames at this point. In general, there are 3 types
-    <h2> Default struggle minigame </h2>
-    Will reduce device durability. Crits can occur, and they reduce a greater amount of durability.
-    
-    Following minigames are of this type
-    
-    <h3> Normal struggle </h3>
-    Uses only stamina. Moderate dmg to durability and condition. Uses Pickpocket skill
-    <table class="UDMinigame">
-      <tr>
-        <td class="UDMinigameName"> Add to Durability damage formula </td>
-        <td class="UDMinigameVal"> BaseDmg + 125% * BaseDmg * (Agility skill) / 100 </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Damage multiplier </td>
-        <td class="UDMinigameVal"> Physical Resist  - 30% * Condition</td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Condition multiplier </td>
-        <td class="UDMinigameVal"> 10% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Stamina usage </td>
-        <td class="UDMinigameVal"> 75% + 3.5%AV</td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Magicka usage </td>
-        <td class="UDMinigameVal"> -40% * Magicka Regen</td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Health  usage </td>
-        <td class="UDMinigameVal"> -40% * Health Regen</td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Minimum stamina </td>
-        <td class="UDMinigameVal"> 25% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Minimum magicka </td>
-        <td class="UDMinigameVal"> 0% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Minimum health </td>
-        <td class="UDMinigameVal"> 0% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Exhaustion multiplier </td>
-        <td class="UDMinigameVal"> 50% </td>
-      </tr>
-    </table>
-    
-    <h3> Desperate struggle </h3>
-    Uses stamina and health. Bigger dmg to durability, and small dmg to condition. Durability dmg increases with device reducing durability. Uses Two Handed skill
-    <table class="UDMinigame">
-      <tr>
-        <td class="UDMinigameName"> Durability damage formula </td>
-        <td class="UDMinigameVal"> BaseDmg + 100% * BaseDmg * (5.0 - (5.0*Relative durability) + (Strength skill) / 100)</td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Damage multiplier </td>
-        <td class="UDMinigameVal"> Physical Resist  - 20% * Condition</td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Condition multiplier </td>
-        <td class="UDMinigameVal"> 50% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Stamina usage </td>
-        <td class="UDMinigameVal"> 110%</td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Magicka usage </td>
-        <td class="UDMinigameVal"> -50% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Health  usage </td>
-        <td class="UDMinigameVal"> 50% + 6%AV</td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Minimum stamina </td>
-        <td class="UDMinigameVal"> 20% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Minimum magicka </td>
-        <td class="UDMinigameVal"> 0% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Minimum health </td>
-        <td class="UDMinigameVal"> 40% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Exhaustion multiplier </td>
-        <td class="UDMinigameVal"> 160% </td>
-      </tr>
-    </table>
-    
-    <h3> Magicka struggle </h3>
-    Uses stamina and magicka. Moderate dmg to durability and great dmg to condition. Uses Pickpocket skill
-    <table class="UDMinigame">
-      <tr>
-        <td class="UDMinigameName"> Durability damage formula </td>
-        <td class="UDMinigameVal"> BaseDmg + 100% * BaseDmg * (Magicka skill) / 100</td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Damage multiplier </td>
-        <td class="UDMinigameVal"> Magicka Resist - 30% * Condition </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Condition multiplier </td>
-        <td class="UDMinigameVal"> 250% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Stamina usage </td>
-        <td class="UDMinigameVal"> 65% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Magicka usage </td>
-        <td class="UDMinigameVal"> 75% + 5%AV</td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Health  usage </td>
-        <td class="UDMinigameVal"> -80% * Health Regen</td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Minimum stamina </td>
-        <td class="UDMinigameVal"> 40% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Minimum magicka </td>
-        <td class="UDMinigameVal"> 70% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Minimum health </td>
-        <td class="UDMinigameVal"> 0% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Exhaustion multiplier </td>
-        <td class="UDMinigameVal"> 120% </td>
-      </tr>
-    </table>
-    
-    <h3> Slow struggle </h3>
-    Uses stamina and magicka. Moderate dmg to durability and great dmg to condition. Uses Pickpocket skill
-    <table class="UDMinigame">
-      <tr>
-        <td class="UDMinigameName"> Durability damage formula </td>
-        <td class="UDMinigameVal"> BaseDmg </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Damage multiplier </td>
-        <td class="UDMinigameVal"> 8% * Physical Resist </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Condition multiplier </td>
-        <td class="UDMinigameVal"> 0% (No condition damage) </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Stamina usage </td>
-        <td class="UDMinigameVal"> -70% * Stamina Regen</td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Magicka usage </td>
-        <td class="UDMinigameVal"> -70% * Magicka Regen</td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Health  usage </td>
-        <td class="UDMinigameVal"> -80% * Health Regen</td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Minimum stamina </td>
-        <td class="UDMinigameVal"> 0% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Minimum magicka </td>
-        <td class="UDMinigameVal"> 0% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Minimum health </td>
-        <td class="UDMinigameVal"> 0% </td>
-      </tr>
-      <tr>
-        <td class="UDMinigameName"> Exhaustion multiplier </td>
-        <td class="UDMinigameVal"> No exhaustion is applied </td>
-      </tr>
-    </table>
+        <div>
+          <img src="../Media/minigame1.jpg" alt="Example of minigame" width="400" height="400">
+          <img src="../Media/minigame2.jpg" alt="Device menu with available minigames" width="400" height="400">
+          <img src="../Media/minigame3.jpg" alt="Example of crit in minigame" width="400" height="400">
+        </div>
+
+        Device minigames are a more immersive rework of a Devious Devices way of escaping device. <br>
+        
+        While original aproache was to only play animation and then based on RNG escape or fail to escape device. <br>
+        
+        Unforgiving Devices approach is to give player more degrees of freedom when trying to escape the device. Every custom device type can also have custom mingame, giving it unique approach when escaping from it.
+        
+        
+        <h2> Default struggle minigame </h2>
+        
+        Default type of minigame which as available for most of devices (if not set otherwise or if device is inescapable) <br>
+        
+        While in minigame, actors stats are constantly drained. Once one of the stats reaches 0, minigame will end. Different minigames can require different stats and different ammount of stats per second. <br>
+        
+        While in minigame, crit can occur. Crit can be recognized by visual effect (on either HUD or player shader, depending on MCM setting). 
+        While crit is on, player can press the corresponding crit button, which will generaly result in benefical bonus (durability reduction, stats refill)
+
+        Following default minigames are available
+        
+        <h3 class="UDMinigameHeader"> Normal struggle </h3>
+        <div class="UDMinigameDescription">
+            Uses only stamina. Moderate dmg to durability and condition. Uses Pickpocket skill
+        </div>
+        <br>
+        <table class="UDMinigame">
+          <tr>
+            <td class="UDMinigameName"> Add to Durability damage formula </td>
+            <td class="UDMinigameVal"> BaseDmg + 125% * BaseDmg * AgilitySkill / 100 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Damage multiplier </td>
+            <td class="UDMinigameVal"> PhysicalResist  - 30% * ConditionLevel</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Condition multiplier </td>
+            <td class="UDMinigameVal"> 10% </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Stamina usage </td>
+            <td class="UDMinigameVal"> 75% * BaseDrain + 3.5% * MaxStamina</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Magicka usage </td>
+            <td class="UDMinigameVal"> -1 * 40% * MagickaRegen</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Health  usage </td>
+            <td class="UDMinigameVal"> -1 * 40% * HealthRegen</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum stamina </td>
+            <td class="UDMinigameVal"> 25% * MaxStamina</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum magicka </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum health </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Exhaustion multiplier </td>
+            <td class="UDMinigameVal"> 50% </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Crit </td>
+            <td class="UDMinigameVal"> Reduce big amount of durability. Refill some stats </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Pressing Special Button </td>
+            <td class="UDMinigameVal"> Does nothing </td>
+          </tr>
+        </table>
+        
+        <h3 class="UDMinigameHeader"> Desperate struggle </h3>
+        <div class="UDMinigameDescription">
+            Uses stamina and health. Bigger dmg to durability, and small dmg to condition. Durability dmg increases with device reducing durability. Uses Two Handed skill
+        </div>
+        <br>
+        <table class="UDMinigame">
+          <tr>
+            <td class="UDMinigameName"> Durability damage formula </td>
+            <td class="UDMinigameVal"> BaseDmg + 100% * BaseDmg * (5.0 - 5.0*RelativeDurability + StrengthSkill / 100)</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Damage multiplier </td>
+            <td class="UDMinigameVal"> PhysicalResist  - 20% * ConditionLevel</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Condition multiplier </td>
+            <td class="UDMinigameVal"> 50% </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Stamina usage </td>
+            <td class="UDMinigameVal"> 110% * BaseDrain</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Magicka usage </td>
+            <td class="UDMinigameVal"> -1 * 50% * MagickaRegen </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Health  usage </td>
+            <td class="UDMinigameVal"> 50% * BaseDrain + 6% * MaxHealth</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum stamina </td>
+            <td class="UDMinigameVal"> 20% * MaxStamina </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum magicka </td>
+            <td class="UDMinigameVal"> 0% </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum health </td>
+            <td class="UDMinigameVal"> 40% * MaxHealth </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Exhaustion multiplier </td>
+            <td class="UDMinigameVal"> 160% </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Crit </td>
+            <td class="UDMinigameVal"> Reduce big amount of durability. Refill some stats </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Pressing Special Button </td>
+            <td class="UDMinigameVal"> Does nothing </td>
+          </tr>
+        </table>
+        
+        <h3 class="UDMinigameHeader"> Magicka struggle </h3>
+        <div class="UDMinigameDescription">
+            Uses stamina and magicka. Moderate dmg to durability and great damage to condition. Uses Pickpocket skill
+        </div>
+        <br>
+        <table class="UDMinigame">
+          <tr>
+            <td class="UDMinigameName"> Durability damage formula </td>
+            <td class="UDMinigameVal"> BaseDmg + 100% * BaseDmg * MagickaSkill / 100</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Damage multiplier </td>
+            <td class="UDMinigameVal"> MagickaResist - 30% * Condition </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Condition multiplier </td>
+            <td class="UDMinigameVal"> 250% </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Stamina usage </td>
+            <td class="UDMinigameVal"> 65% * Base Drain </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Magicka usage </td>
+            <td class="UDMinigameVal"> 75% * BaseDrain + 5% * MaxMagicka</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Health  usage </td>
+            <td class="UDMinigameVal"> -1 * 80% * HealthRegen</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum stamina </td>
+            <td class="UDMinigameVal"> 40% * MaxStamina </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum magicka </td>
+            <td class="UDMinigameVal"> 70% * MaxMagicka </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum health </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Exhaustion multiplier </td>
+            <td class="UDMinigameVal"> 120% </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Crit </td>
+            <td class="UDMinigameVal"> Reduce big amount of durability. Refill some stats </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Pressing Special Button </td>
+            <td class="UDMinigameVal"> Does nothing </td>
+          </tr>
+        </table>
+        
+        <h3 class="UDMinigameHeader"> Slow struggle </h3>
+        <div class="UDMinigameDescription">
+            Uses stamina and magicka. Moderate dmg to durability and great dmg to condition. Uses Pickpocket skill
+        </div>
+        <br>
+        <table class="UDMinigame">
+          <tr>
+            <td class="UDMinigameName"> Durability damage formula </td>
+            <td class="UDMinigameVal"> BaseDmg </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Damage multiplier </td>
+            <td class="UDMinigameVal"> 8% * PhysicalResist </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Condition multiplier </td>
+            <td class="UDMinigameVal"> 0% (No condition damage) </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Stamina usage </td>
+            <td class="UDMinigameVal"> -1 * 70% * StaminaRegen</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Magicka usage </td>
+            <td class="UDMinigameVal"> -1 * 70% * MagickaRegen</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Health  usage </td>
+            <td class="UDMinigameVal"> -1 * 80% * Health Regen</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum stamina </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum magicka </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum health </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Exhaustion multiplier </td>
+            <td class="UDMinigameVal"> No exhaustion is applied </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Crit </td>
+            <td class="UDMinigameVal"> Disabled </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Pressing Special Button </td>
+            <td class="UDMinigameVal"> Does nothing </td>
+          </tr>
+        </table>
+        
+        <h3 class="UDMinigameHeader"> Cutting minigame </h3>
+        <div class="UDMinigameDescription">
+            Cutting minigames allow to reduce big amount of condition if the said device is weak to cutting. <br>
+            On every press of Special Button, cutting progress will be added. <br>
+            Once cutting progress reaches 100, the device will be cut, and big amount of ondition will be reduced. Small amount of durability will also be reduced.
+        </div>
+        <br>
+        <table class="UDMinigame">
+          <tr>
+            <td class="UDMinigameName"> Durability damage formula </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Damage multiplier </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Condition multiplier </td>
+            <td class="UDMinigameVal"> 0% (No condition damage) </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Stamina usage </td>
+            <td class="UDMinigameVal"> 100% * BaseDrain + 4% * MaxStamina</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Magicka usage </td>
+            <td class="UDMinigameVal"> -1 * 50% * MagickaRegen</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Health  usage </td>
+            <td class="UDMinigameVal"> 50% * BaseDrain + 1% * MaxHealth</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum stamina </td>
+            <td class="UDMinigameVal"> 80% * MaxStamina </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum magicka </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum health </td>
+            <td class="UDMinigameVal"> 50% * MaxHealth</td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Exhaustion multiplier </td>
+            <td class="UDMinigameVal"> 100% </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Crit </td>
+            <td class="UDMinigameVal"> Add big amount of cutting progress </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Pressing Special Button </td>
+            <td class="UDMinigameVal"> Adds small amount of cutting progress </td>
+          </tr>
+        </table>
+        
+        <h3 class="UDMinigameHeader"> Lockpick minigame </h3>
+        <div class="UDMinigameDescription">
+            TODO
+        </div>
+        
+        <h3 class="UDMinigameHeader"> Unlock lock minigame </h3>
+        <div class="UDMinigameDescription">
+            TODO
+        </div>
+        
+        <h3 class="UDMinigameHeader"> Repair lock minigame </h3>
+        <div class="UDMinigameDescription">
+            TODO
+        </div>
     </body>
 </html>
