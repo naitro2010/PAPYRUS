@@ -1,18 +1,39 @@
-    table, th, td {
+    table.UDLegend, th, td {
       border: 3px solid black;
       border-collapse: collapse;
       text-align: center;
       background-color: black;
-      text-transform: capitalize;
     }
-    tr, td {
+    td.UDLegend {
       color: black;
       font-size: 20px;
       background-color: #45b555;
     }
-    tr, th {
+    th.UDLegend {
       color: black;
       font-size: 35px;
       background-color: #457a55;
       border-bottom-width: 10px;
+      font-weight: bold;
+    }
+    
+    table.UDMinigame, th, td {
+      border: 3px solid black;
+      border-collapse: collapse;
+      text-align: center;
+      background-color: black;
+      width:75%;
+    }
+    td.UDMinigameName {
+      color: black;
+      font-size: 20px;
+      background-color: white;
+      width:30%;
+    }
+    td.UDMinigameVal {
+      color: black;
+      font-size: 20px;
+      background-color: #C3C3C3;
+      font-weight: bold;
+      width:70%;
     }
