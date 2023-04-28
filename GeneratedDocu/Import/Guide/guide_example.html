@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Guide</title>
+        <link rel="stylesheet" href="../Style/custompagestyle.css">
+    </head>
+    <body class="UDGuide">
+        <table style="width:15%" class="UDLegend">
+          <tr>
+            <th class="UDLegend">Menu</th>
+          </tr>
+          <tr>
+            <td class="UDLegend"><a href="../../home.html"> Main Page </a></td>
+          </tr>
+          <tr>
+            <td class="UDLegend"> <a href="guide_main.html"> Guide </a>  </td>
+          </tr>
+          <tr>
+            <td class="UDLegend"> <a href="guide_controls.html"> Controls </a> </td>
+          </tr>
+          <tr>
+            <td class="UDLegend"> Practical Example </td>
+          </tr>
+        </table>
+
+        <h1> Example </h1>
+        
+        Purpose of this page is to give a practical example on how to use the mod. All moding will be done with SSEEdit (TES5Edit would also work). 
+        
+        Papyrus scripts will be compiled using provided build scripts, so it is not required to download additional script. Basically, all you need to create this mod, is to have xEdit and working Unforgiving Devices.
+        
+        So, for purpose of the example, our goal will be following to create following devices
+        
+         <ol>
+          <li>Ponygirl armbinder - Device will fastly repair itself if wearer doesn't move</li>
+          <li>Ponygirl anal plug - Anal plug which whose vibration strength will change based on distance traveled. The more the wearer moves, the more will plug vibrate to reward its victim. But it will also slowly loose durability when moving. But only if actor is not belted</li>
+          <li>Ponygirl boots - Boots which will slowly reduce wearers health if they don't move</li>
+        </ol>
+
+        <h2> Getting started </h2>
+        
+        Everytime we will be creating new device, we will use new existing devices to make our job easier. For that reason, lets open up the xEdit and select both UnforgivingDevices.esp and all DeviousDevices .esm modules (assests, integration, expansion)
+        
+        
+        Then lets find a device which we will use for our devices. Lets use following devices
+        
+         <ol>
+          <li>Ponygirl armbinder - Black Ebonite armbinder</li>
+          <li>Ponygirl anal plug - </li>
+          <li>Ponygirl boots - Black ebonite pony boots</li>
+        </ol>
+        
+        
+        For now lets only copy Inventory Devices. Theese are the devices which have the name. So we can easily find the required device by name.
+        After finding the device, right click it and select "Copy as new record into...". Rename the editorID so it is more clear what device it is.
+
+        After that, select "(new file).esp", and the one without ESM flag. This will copy our device to our new mod. Lets new our new mod "Unforgiving Devices - Example"
+
+        <div>
+          <img src="../Media/Example1.jpg" alt="Example1" width="600" height="400">
+        </div>
+        
+        Now we need to also copy the render devices. Easiest way will be to just open our copied device, and check property deviceRendered on script zadequipscript. So lets
+        
+        <div>
+          <img src="../Media/Example2.jpg" alt="Example2" width="400" height="200">
+        </div>
+        
+        After that, we can hold Right Ctrl and click on the editorID of render device. This will open the form with the render device. After it opens, just do the same thing as with Inventory devices.
+        If you followed the steps correctly, you should now have something like this:
+        
+        <div>
+          <img src="../Media/Example3.jpg" alt="Example3" width="600" height="400">
+        </div>
+        
+        Now we need to update properties so they are linked to our new devices. Open every single of the device and change properties deviceInventory and deviceRendered.
+        The said properties have to be linked to the forms we just created. For example, the created UD_Example_PonyArmbinder_ID should have the properties updates like this
+        
+        <div>
+          <img src="../Media/Example4.jpg" alt="Example4" width="1000" height="400">
+        </div>
+        
+        This have to be done for all 3 inventory devices. After that save the plugin with Ctrl+S so we don't loose our progress in case of some unexpected issue.
+        
+        Now we can edit the devices to be more in tought with our idea. We are just going to rename tham as otherwise this example will be too long. 
+        I will only say that if you want to change the textures or 3D of device, you can do it by editing render script.
+        
+        Devices can be renamed by editing field "FULL - Name" on the form. It is under the script so you have to scroll a little.
+        
+        After it is renamed, our mod looks like this
+        
+        <div>
+          <img src="../Media/Example5.jpg" alt="Example5" width="600" height="400">
+        </div>
+        
+        <h2> Patching devices </h2>
+        
+        Till now this had nothing to do with Unforgiving Devices, and if you want to create new Devious Devices, you will most likely use exact same approach. 
+        Now we need to patch our device so it works correctly with UD. but before we do it, we will first have to add Unforgiving Devices as master to our mod. 
+        Right click our mod and select "Add master". Then select UnforigingDevices.esp
+        
+        <div>
+          <img src="../Media/Example6.jpg" alt="Example6" width="400" height="500">
+        </div>
+        
+        Patching time. First we have to get the patching script. The script is not in the installed mod, but in the fomod. So oyu have to open the mod installer. 
+        The patching scripts are in folder dev/xEdit. The scripts have to be copied to "Edit Scripts" folder, which will be in folder that you placed xEdit in. Now before we start the patch, its good idea to save our mod.
+        Click on our mod with right click and select "Apply script...". In followup window, select "UD_PatchingScript" script from "script" dropdown menu, and click on Ok.
+        
+        If all went ok, following text should show up in Messages
+        
+        <div>
+          <img src="../Media/Example7.jpg" alt="Example7" width="600" height="200">
+        </div>
+        
+        Check if patched devices seems ok. They should not shows error in any of the properties.
+        
+        <h2> Devices customization </h2>
+        
+        Now that our devices are usable in UD, we can start to edit them to our liking. I recommend to check documentation first, and mainly the Customization groupd of UD_CustomDevice_RenderScript
+        
+        Most, if not all furthere customization will be only done on Render device, as that is where all magick happens. It is important to note all patched devices are processed differently in UD then the ones that are unpatched.
+        If you for example change some setting of the device while it still have Patched keyword, the value will be most liekly changed when device is locked on. 
+        Because off that, lets remove Patching keywords from our Pony Armbinder device, so we have at least one device to customize.
+        
+        <div>
+          <img src="../Media/Example8.jpg" alt="Example8" width="1200" height="600">
+        </div>
+        
+        Lets do following changes to our Pony Armbinder
+        
+        <ol>
+          <li>UD_durability_damage_base -> 0.75 = This way device will be little harder, but not too much</li>
+          <li>UD_base_stat_drain -> 5 = Struggling will last longer as less stats will be drained</li>
+          <li>UD_ResistPhysical -> 0.2 = Device will have physical resistence of 20%</li>
+          <li>UD_ResistMagicka -> 2.0 = Device will regain durability if actor tried to struggle using magick</li>
+          <li>UD_StruggleCritChance -> 45 = Big (45%) chance of crit on every second of minigame</li>
+          <li>UD_StruggleCritDuration -> 0.7 = Duration of crit is only 0.7 seconds</li>
+          <li>UD_StruggleCritMul -> 2.5 = Crit multiplier is 2.5x</li>
+          <li>UD_Level -> -2 = Device will have similiar level as its wearer</li>
+        </ol>
+        
+        Lets also add UD_PatchHard keyword to other 2 devices, so they are little harder to escape
+        
+        Now that all of that is done, we can start the scripting, which will give our devies their unique behaviour
+        
+        <h2> Scripting </h2>
+        
+        First, save and close the xEdit so our mod esp is created. Create new mod if using ModOrganizer and place our esp in to it. Create new folder Script in it. Next create folder Source inside the folder Scripts.
+        Lastly copy following files
+        
+        <ol>
+          <li>BUILD_ALL.bat from Scripts folder in Unforgiving Devices installed mod (1.main/Scripts in fomod zip). Copy it to our Scripts folder (but not the Source folder!)</li>
+          <li>RenderDeviceTemplate.psc from docs folder to our Scripts/Source folder</li>
+        </ol>
+        
+        Now, copy the RenderDeviceTemplate.psc 2 times, so you have exactly 3 copies of the script
+        
+        Rename them so they are named as follows
+        
+        <div>
+          <img src="../Media/Example9.jpg" alt="Example9" width="600" height="150">
+        </div>
+        
+        Now we have to edit the templates so it works. For now all we need to do is to edit ;/DEVICE SCRIPT NAME/; so it says correct name, and ;/PARENT SCRIPT NAME/; which says the name of parent script.
+        
+        <ol>
+          <li>;/DEVICE SCRIPT NAME/; - Name of the script file. So in our example, it will be UD_PonyArmbinder_RD, etc...</li>
+          <li>;/PARENT SCRIPT NAME/; - Parent script. For Pony Armbinder, we will use UD_CustomHeavyBondage_RenderScript. For Pony Boots, we will use UD_CustomBoots_RenderScript. For Pony Plug, we will use UD_CustomPlug_RenderScript</li>
+        </ol>
+        
+        After changing all files correctly, we can try to compile them.
+        
+        Open the Source folder, and run BUILD_ALL.bat. Note that it first needs to download all required sources, so it depending on your connection it might take a while. 
+        Good new is that it only needs to download once. 
+        After that, you can compile offline if you want to.
+        
+        
+        
+    </body>
+</html>
