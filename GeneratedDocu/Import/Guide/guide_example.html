@@ -176,7 +176,382 @@
         Good new is that it only needs to download once. 
         After that, you can compile offline if you want to.
         
+        If you did everything ok, the BUILD_ALL.bat should show something like this
         
+        <div>
+          <img src="../Media/Example10.jpg" alt="Example10" width="800" height="800">
+        </div>
         
+        Now, we have to link our new scripts in xEdit to our devices. So lets again open up the xEdit and our mod.
+        Go to all the render devices, and replace existing ScriptName with our new script
+        
+        <div>
+          <img src="../Media/Example11.jpg" alt="Example11" width="600" height="550">
+          <img src="../Media/Example12.jpg" alt="Example12" width="500" height="400">
+        </div>
+        
+        Do it for all of our devices. After its done, we can finaly get to scripting.
+        
+        First lets edit UD_DeviceType in function InitPost. For armbinder, lets change the UD_DeviceType to "Pony Armbinder". For other scripts, we will do the similiar
+        
+        <h3> Pony Armbinder </h3>
+        
+        As said on beginning, we want this device to be repairing itself while actor stands in one place. Following is snippet from the code that does exactly that.
+        You can see that only functions InitPost, OnUpdatePost and GetAiPriority were edited. New Deactivation minigame is also added to demonstrate how to add simple minigame.
+        
+        <br> <code style="white-space: pre;">
+        Scriptname UD_PonyArmbinder_RD extends UD_CustomHeavyBondage_RenderScript
+
+        import UnforgivingDevicesMain
+
+        Float _lastX                    = 0.0
+        Float _lastY                    = 0.0
+        Bool  _deactivationMinigameON   = false
+        Float _DeactivationProgress     = 0.0
+        
+        ;our new minigame
+        bool Function _DeactivationMinigame(Bool abSilent = False)
+            if !minigamePrecheck(abSilent)
+                return False
+            endif
+            
+            if _DeactivationProgress >= 100.0
+                if !abSilent
+                    UDmain.Print(GetDeviceName()+" is already deactivated!")
+                endif
+                return false
+            endif
+            
+            ;reset minigame values, have to be always called before we do some changes
+            resetMinigameValues()
+            
+            ;minigame will not damage device
+            setMinigameOffensiveVar(False,0.0,0.0,True)
+            
+            ;minigame willdrain 100% of base stat drain + 10% of actor stamina per second
+            setMinigameWearerVar(True,UD_base_stat_drain + getMaxActorValue(getWearer(),"Stamina",0.1))
+            
+            ;minigame will cause exhaustion with only 50% duration
+            setMinigameEffectVar(True,True,0.5)
+            
+            ;toggle on widget, and set it to be automatically updated on every tick. Set color to 0x12345678. No icon provided in this case
+            setMinigameWidgetVar(True, False, True, 0x12345678, -1, -1)
+            
+            ;set minimum stat
+            setMinigameMinStats(0.8)
+            
+            ;check minigame and start it if its ok
+            if minigamePostcheck(abSilent)
+                ;set our _deactivationMinigameON flag on, so we can use it in other override functions
+                _deactivationMinigameON = True
+                minigame()
+                _deactivationMinigameON = False
+                return true
+            endif
+            return false
+        EndFunction
+        
+        Function InitPost()
+            parent.InitPost()
+            UD_DeviceType = "Device type"
+            UD_ActiveEffectName = "Active effect name"
+            
+            _lastX          = GetWearer().GetPositionX()
+            _lastY          = GetWearer().GetPositionY()
+        EndFunction
+        
+        ...
+        
+        Function OnMinigameTick(Float abUpdateTime)
+            if _DeactivationMinigameON
+                ;increase progress by 5/s
+                _DeactivationProgress += 5.0*abUpdateTime
+                
+                ;stop minigame if progress is full
+                if _DeactivationProgress >= 100.0
+                    StopMinigame()
+                endif
+            else
+                parent.OnMinigameTick(abUpdateTime)
+            endif
+        EndFunction
+        
+        ...
+        
+        Function OnUpdatePost(float afTimePassed)
+            parent.OnUpdatePost(afTimePassed)
+            
+            ;only check if device is not deactivated
+            if _DeactivationProgress &lt; 100.0
+                Actor loc_actor = GetWearer()
+                
+                ;lets calculate the avarage speed from last update per minute
+                float loc_distance = _CalcTraveledDistance()
+                float loc_avaragespeed = loc_distance/(UDCDmain.UD_UpdateTime)
+
+                ;if wearer is in minigame, count it as movement
+                if UDCDmain.ActorInMinigame(loc_actor)
+                    loc_avaragespeed += 100
+                endif
+                
+                ;print info to console, so we can calibrate the value
+                float loc_repairamount = fRange((20/loc_avaragespeed)*UDCDmain.UD_UpdateTime,0.0,10.0)
+                GInfo(self+"::Repaired by ="+loc_repairamount)
+                
+                RefillDurability(loc_repairamount)
+                
+                _lastX          = loc_actor.GetPositionX()
+                _lastY          = loc_actor.GetPositionY()
+            endif
+        EndFunction
+        
+        Float Function _CalcTraveledDistance()
+            Actor loc_actor = GetWearer()
+            if loc_actor.IsOnMount()
+                return 0.0
+            endif
+            Float loc_x  = loc_actor.GetPositionX()
+            Float loc_y  = loc_actor.GetPositionY()
+            Float loc_Dx = _lastX - loc_x
+            Float loc_Dy = _lastY - loc_Y
+            return Math.sqrt(loc_Dx*loc_Dx + loc_Dy*loc_Dy)
+        EndFunction
+        
+        ...
+        
+        Function onDeviceMenuInitPost(bool[] aaControl)
+            parent.onDeviceMenuInitPost(aaControl)
+            aaControl[16]                               = False ;disable filder
+            UDCDmain.currentDeviceMenu_allowSpecialMenu = True ;always show special menu. Option will only show if atleast one of the currentDeviceMenu_switch is true
+            UDCDmain.currentDeviceMenu_switch1          = True ;always show deactivation option
+        EndFunction
+        
+        ...
+        
+        string Function addInfoString(string asInfo = "")
+            String loc_info = parent.addInfoString(asInfo)
+            ;add info about deactionation to details
+            loc_info += "Deactivation= " + Round(_DeactivationProgress*100) + "\n"
+            return loc_info
+        EndFunction
+        
+        ...
+        
+        Function updateWidget(bool abForce = false)
+            if _DeactivationMinigameON
+                ;update widget with our value
+                SetWidgetVal(_DeactivationProgress/100.0)
+            else
+                parent.updateWidget(abForce)
+            endif
+        EndFunction
+        
+        ...
+        
+        bool Function proccesSpecialMenu(int aiMsgChoice)
+            if aiMsgChoice == 0
+                ;start deactivation minigame, and show messages
+                return _DeactivationMinigame(False)
+            else
+                return false
+            endif
+        EndFunction
+        
+        ...
+        
+        Int Function GetAiPriority()
+            ;hight priority
+            return 90
+        EndFunction
+        </code>
+        
+        <h3> Pony Boots </h3>
+        This this will damage actors health if the actors doesn't move. This is again done by editing some function in the script
+        <br> <code style="white-space: pre;">
+        Scriptname UD_PonyBoots_RD extends UD_CustomBoots_RenderScript
+
+        import UnforgivingDevicesMain
+
+        Float _lastX            = 0.0
+        Float _lastY            = 0.0
+        
+        Function InitPost()
+            parent.InitPost()
+            UD_DeviceType = "Pony Boots"
+            UD_ActiveEffectName = "Active effect name"
+            
+            _lastX          = GetWearer().GetPositionX()
+            _lastY          = GetWearer().GetPositionY()
+        EndFunction
+        
+        Function OnUpdatePost(float afTimePassed)
+            parent.OnUpdatePost(afTimePassed)
+            
+            Actor loc_actor = GetWearer()
+            
+            ;lets calculate the avarage speed from last update per minute
+            float loc_distance = _CalcTraveledDistance()
+            float loc_avaragespeed = loc_distance/(UDCDMain.UD_UpdateTime)
+            ;if wearer is in minigame, count it as movement
+            if !UDCDmain.ActorInMinigame(loc_actor) &amp;&amp; loc_avaragespeed &lt; 150
+                float loc_damage = 2.5*UDCDMain.UD_UpdateTime
+                ;damage health only if actor have atleast 20 health
+                if (GetWearer().GetAV("Health")) > (loc_damage - 20)
+                    GetWearer().DamageAV("Health",loc_damage)
+                else
+                    GetWearer().ForceActorValue("Health",20)
+                endif
+            endif
+
+            _lastX          = loc_actor.GetPositionX()
+            _lastY          = loc_actor.GetPositionY()
+        EndFunction
+        
+        Int Function GetAiPriority()
+            ;parent priority + 10
+            return parent.GetAiPriority() + 10
+        EndFunction
+        </code>
+        
+        <h3> Pony plug </h3>
+        Lastly, the plug should vibrate the more the actor moves. This is yet again done by editing some of the template functions
+        <br> <code style="white-space: pre;">
+        Scriptname UD_PonyPlug_RD extends UD_CustomPlug_RenderScript
+
+        import UnforgivingDevicesMain
+
+        Float _lastX            = 0.0
+        Float _lastY            = 0.0
+        
+        Function InitPost()
+            parent.InitPost()
+            
+            ;device type
+            UD_DeviceType = "Pony Plug"
+            
+            ;can't activate
+            UD_ActiveEffectName = ""
+            
+            ;infinite vibration duration
+            UD_VibDuration = -1
+            
+            ;vibration strength
+            UD_VibStrength = 10
+            
+            ;normal edging mode -> no edging
+            UD_EdgingMode  =  0
+            
+            ;device cant be struggled from
+            UD_durability_damage_base = 0.0
+        EndFunction
+
+        ...
+
+        bool Function canBeActivated()
+            ;device cant be activated
+            return False
+        EndFunction
+
+        ...
+
+        Function OnUpdatePost(float afTimePassed)
+            parent.OnUpdatePost(afTimePassed)
+            
+            Actor loc_actor         = GetWearer()
+            
+            ;lets calculate the avarage speed from last update per minute
+            float loc_distance      = _CalcTraveledDistance()
+            float loc_avaragespeed  = fRange(loc_distance/(UDCDmain.UD_UpdateTime),0.0,300.0)
+
+            ;if wearer is in minigame, count it as movement
+            if UDCDmain.ActorInMinigame(loc_actor)
+                loc_avaragespeed    += 100
+            endif
+            
+            ;print info to console, so we can calibrate the value
+            int loc_newstrength = iRange(Round(loc_avaragespeed/2.0),10,100)
+            
+            if loc_newstrength
+                GInfo(self+"::Chenging plug strength to  ="+loc_newstrength)
+                ForceStrength(loc_newstrength)
+            endif
+            
+            if loc_avaragespeed > 25.0
+                float loc_dmg = (loc_avaragespeed/200.0)*UDCDmain.UD_UpdateTime
+                GInfo(self+"::Plug damaged by ="+loc_dmg)
+                decreaseDurabilityAndCheckUnlock(loc_dmg,0.0,false)
+            else
+                refillDurability(0.5*UDCDmain.UD_UpdateTime)
+            endif
+            
+            _lastX          = loc_actor.GetPositionX()
+            _lastY          = loc_actor.GetPositionY()
+        EndFunction
+
+        ;function which will get us the traveled distance
+        Float Function _CalcTraveledDistance()
+            Actor loc_actor = GetWearer()
+            if loc_actor.IsOnMount()
+                return 0.0
+            endif
+            Float loc_x  = loc_actor.GetPositionX()
+            Float loc_y  = loc_actor.GetPositionY()
+            Float loc_Dx = _lastX - loc_x
+            Float loc_Dy = _lastY - loc_Y
+            return Math.sqrt(loc_Dx*loc_Dx + loc_Dy*loc_Dy)
+        EndFunction
+
+        ...
+
+        Int Function GetAiPriority()
+            return 0
+        EndFunction
+        </code>
+        
+        <h1> Making patch quest </h1>
+        
+        Now that our devices are done, we can do one last thing, and that is to add them as new abadon suit. This means that if actor consumes concetrated black goo, or equips abadon plug, these devices can appear
+        
+        Lets use the existing PatchTemple.psc which is in docs folder, and rename it to UD_Example_PatchScript.psc. Next we will edit the script in following way
+        
+        <br> <code style="white-space: pre;">
+        Scriptname UD_Example_PatchScript extends UD_PatchInit
+
+        import UnforgivingDevicesMain
+
+        Armor Property PonyArmbinder auto
+        Armor Property PonyBoots auto
+        Armor Property PonyPlug auto
+
+        ;called when one of the suits was choosen to be locked on
+        Function EquipSuit(Actor akActor,String asEventName)
+            ;wait for menu to close before we lock the devices
+            Utility.wait(0.01)
+            
+            ;disable actor, so they cant move while devices are locked on
+            UDmain.UDCDmain.DisableActor(akActor)
+            
+            ;only if the event is UD_Patch_Example_Pony
+            if asEventName == "UD_Patch_Example_Pony"
+                libs.lockdevice(akActor,PonyArmbinder)
+                libs.lockdevice(akActor,PonyBoots)
+                libs.lockdevice(akActor,PonyPlug)
+            endif
+            
+            ;enable actor
+            UDmain.UDCDmain.EnableActor(akActor)
+        EndFunction
+        </code> <br>
+        
+        After that, we make new script, and add our script to it. We will then fill all relevant properties
+        
+        <div>
+          <img src="../Media/Example13.jpg" alt="Example13" width="900" height="350">
+          <img src="../Media/Example14.jpg" alt="Example14" width="500" height="500">
+          <br>
+          <img src="../Media/Example15.jpg" alt="Example15" width="350" height="200">
+        </div>
+        
+        Once that is done, we can just save all the work, compile all the script, and try our work in game.
     </body>
 </html>
