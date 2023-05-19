@@ -234,6 +234,7 @@ EndProperty
 /;
 
 ;MAIN VALUES
+
 ;/  Variable: UD_Level
     Level of device. By default set to 1.
     
@@ -2118,7 +2119,7 @@ EndFunction
 /;
 Function unlockRestrain(bool abForceDestroy = false,bool abWaitForRemove = True)
     if IsUnlocked
-        if UDmain.TraceAllowed()        
+        if UDmain.TraceAllowed()
             UDmain.Log("unlockRestrain()"+getDeviceHeader()+": Device is already unlocked! Aborting ",1)
         endif
         return
@@ -5126,9 +5127,8 @@ EndFunction
 
 ;/  Function: lockpickMinigameWH
     Starts lockpick minigame with helper. This function include all checks and is safew to be called at all times.
-
+    
     Parameters:
-
         akHelper    - Actor who will be used as helper
 
     Returns:
@@ -5763,20 +5763,22 @@ Function _keyUnlockDevice()
     endif
 EndFunction
 
-;adds struggle debuff to Wearer and Helper
-
 ;/  Function: addStruggleExhaustion
     Adds struggle exhaustion to wearer and helper
+    
+    Parameters:
+    
+        akHelper - minigame helper
 /;
-Function addStruggleExhaustion()
+Function addStruggleExhaustion(Actor akHelper)
     if UDmain.TraceAllowed()
         UDmain.Log("UD_CustomDevice_RenderScript::addStruggleExhaustion("+getDeviceHeader()+") called")
     endif
     if UD_applyExhastionEffect
         UDCDmain.AddExhaustion(Wearer,_exhaustion_mult)
-        if _minigameHelper
-            UDCDmain.AddExhaustion(_minigameHelper,_exhaustion_mult_helper)
-            UDCDmain.ResetHelperCD(_minigameHelper,Wearer,UDCDmain.UD_MinigameHelpXPBase)
+        if akHelper
+            UDCDmain.AddExhaustion(akHelper,_exhaustion_mult_helper)
+            UDCDmain.ResetHelperCD(akHelper,Wearer,UDCDmain.UD_MinigameHelpXPBase)
         endif
     endif
 EndFunction
@@ -6079,7 +6081,7 @@ EndFunction
 
 ;set minigame widget variables
 
-;/  Function: setMinigameEffectVar
+;/  Function: setMinigameWidgetVar
     Sets minigame widget appearance values
     
     Parameters:
@@ -6199,8 +6201,6 @@ EndFunction
 bool Function IsPaused()
     return _PauseMinigame
 EndFunction
-
-
 
 ;/  Function: minigamePostcheck
     Check wearer and helper minimum stats
@@ -6402,7 +6402,7 @@ Function minigame()
         if loc_WearerSlot
             loc_WearerSlot.Send_MinigameStarter(self)
         else
-            UDCDMain.UDPP.Send_MinigameStarter(Wearer,self)
+            UDmain.UDPP.Send_MinigameStarter(Wearer,self)
         endif
     else
         MinigameStarter()
@@ -6434,7 +6434,7 @@ Function minigame()
     if loc_WearerSlot
         loc_WearerSlot.Send_MinigameParalel(self)
     else
-        UDCDMain.UDPP.Send_MinigameParalel(Wearer,self)
+        UDmain.UDPP.Send_MinigameParalel(Wearer,self)
     endif
     
     float durability_onstart = current_device_health
@@ -6586,7 +6586,7 @@ Function minigame()
             UDmain.Print(getWearerName()+" succesfully escaped out of " + deviceInventory.GetName() + "!",2)
         endif
         if !loc_WearerIsPlayer
-            UpdateMotivation(Wearer,50) ;increase NPC motivation on failed escape
+            UpdateMotivation(Wearer,50) ;increase NPC motivation on successful escape
         endif
     else
         if loc_is3DLoaded

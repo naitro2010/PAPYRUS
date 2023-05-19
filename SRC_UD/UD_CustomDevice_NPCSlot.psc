@@ -1397,8 +1397,9 @@ Function TurnOffAllVibrators()
     while UD_equipedCustomDevices[i]
         UD_CustomVibratorBase_RenderScript loc_vib = (UD_equipedCustomDevices[i] as UD_CustomVibratorBase_RenderScript)
         if loc_vib && !(loc_vib as UD_ControlablePlug_RenderScript)
-            if loc_vib.isVibrating()
-                if UDmain.TraceAllowed()                
+            ;do not stp vibrators which are turned or forever
+            if loc_vib.isVibrating() && !loc_vib.isVibratingForever()
+                if UDmain.TraceAllowed()
                     UDmain.Log("Stoping " + UD_equipedCustomDevices[i].getDeviceName() + " on " + getSlotedNPCName())
                 endif
                 (UD_equipedCustomDevices[i] as UD_CustomVibratorBase_RenderScript).stopVibrating()
@@ -1743,12 +1744,18 @@ Armor       Property UD_GlobalDeviceUnlockMutex_Device                      = no
 Keyword     Property UD_UnlockToken                                         = none      auto hidden    
 
 Function ResetMutex_Lock(Armor invDevice)
+    if UDmain.TraceAllowed()
+        UDmain.Log(self+"::ResetMutex_Lock()",2)
+    endif
     UD_GlobalDeviceMutex_inventoryScript                = false
     UD_GlobalDeviceMutex_InventoryScript_Failed         = false
     UD_GlobalDeviceMutex_Device                         = invDevice
 EndFunction
 
 Function ResetMutex_Unlock(Armor invDevice)
+    if UDmain.TraceAllowed()
+        UDmain.Log(self+"::ResetMutex_Unlock()",2)
+    endif
     UD_GlobalDeviceUnlockMutex_InventoryScript            = false
     UD_GlobalDeviceUnlockMutex_InventoryScript_Failed     = false
     UD_UnlockToken                                        = none
@@ -1785,10 +1792,19 @@ Function StartLockMutex()
     endwhile
     _LOCKDEVICE_MUTEX = true
     GoToState("UpdatePaused")
+    if UDmain.TraceAllowed()
+        UDmain.Log(self+"::StartLockMutex()",2)
+    endif
 EndFunction
 
 Function EndLockMutex()
+    if UDmain.TraceAllowed()
+        UDmain.Log(self+"::EndLockMutex()",2)
+    endif
     GoToState("")
+    UD_GlobalDeviceMutex_Device = none
+    UD_GlobalDeviceMutex_InventoryScript = false
+    UD_GlobalDeviceMutex_InventoryScript_Failed = false
     _LOCKDEVICE_MUTEX = false
 EndFunction
 
@@ -1803,10 +1819,19 @@ Function StartUnLockMutex()
     endwhile
     _UNLOCKDEVICE_MUTEX = true
     GoToState("UpdatePaused")
+    if UDmain.TraceAllowed()
+        UDmain.Log(self+"::StartUnLockMutex()",2)
+    endif
 EndFunction
 
 Function EndUnLockMutex()
+    if UDmain.TraceAllowed()
+        UDmain.Log(self+"::EndUnLockMutex()",2)
+    endif
     GoToState("")
+    UD_GlobalDeviceUnlockMutex_Device = none
+    UD_GlobalDeviceUnlockMutex_InventoryScript = false
+    UD_GlobalDeviceUnlockMutex_InventoryScript_Failed = false
     _UNLOCKDEVICE_MUTEX = false
 EndFunction
 
@@ -1814,15 +1839,29 @@ Bool Function IsUnlockMutexed(Armor invDevice)
     return UD_GlobalDeviceUnlockMutex_Device == invDevice
 EndFunction
 
-
 Function ProccesLockMutex()
+    if UDmain.TraceAllowed()
+        UDmain.Log(self+"::ProccesLockMutex()",2)
+    endif
     float loc_time = 0.0
-    while loc_time <= 3.0 && (!UD_GlobalDeviceMutex_InventoryScript)
+    while loc_time <= 1.5 && (!UD_GlobalDeviceMutex_InventoryScript)
         Utility.waitMenuMode(0.1)
         loc_time += 0.1
     endwhile
     
-    if UD_GlobalDeviceMutex_InventoryScript_Failed || loc_time >= 3.0
+    if !IsPlayer() && loc_time >= 1.5 && UDmain.IsAnyMenuOpen()
+        if UDmain.TraceAllowed()
+            UDmain.Log(self+"::ProccesLockMutex() - Timeout on NPC, waiting for menu to close and try again",2)
+        endif
+        Utility.wait(0.01)
+        loc_time = 0.0
+        while loc_time <= 1.5 && (!UD_GlobalDeviceMutex_InventoryScript)
+            Utility.waitMenuMode(0.1)
+            loc_time += 0.1
+        endwhile
+    endif
+    
+    if UD_GlobalDeviceMutex_InventoryScript_Failed || loc_time >= 1.5
         UDmain.Error("LockDevicePatched("+GetSlotedNPCName()+","+UD_GlobalDeviceMutex_Device.getName()+") failed!!! ID Fail? " + UD_GlobalDeviceMutex_InventoryScript_Failed)
     endif
     
@@ -1830,13 +1869,29 @@ Function ProccesLockMutex()
 EndFunction
 
 Function ProccesUnlockMutex()
+    if UDmain.TraceAllowed()
+        UDmain.Log(self+"::ProccesUnlockMutex()",2)
+    endif
     float loc_time = 0.0
-    while loc_time <= 3.0 && (!UD_GlobalDeviceUnlockMutex_InventoryScript)
+    bool  loc_failed = false
+    while loc_time <= 1.5 && (!UD_GlobalDeviceUnlockMutex_InventoryScript)
         Utility.waitMenuMode(0.1)
         loc_time += 0.1
     endwhile
     
-    if UD_GlobalDeviceUnlockMutex_InventoryScript_Failed || loc_time >= 3.0
+    if !IsPlayer() && loc_time >= 1.5 && UDmain.IsAnyMenuOpen()
+        if UDmain.TraceAllowed()
+            UDmain.Log(self+"::ProccesUnlockMutex() - Timeout on NPC, waiting for menu to close and try again",2)
+        endif
+        Utility.wait(0.01)
+        loc_time = 0.0
+        while loc_time <= 1.5 && (!UD_GlobalDeviceUnlockMutex_InventoryScript)
+            Utility.waitMenuMode(0.1)
+            loc_time += 0.1
+        endwhile
+    endif
+    
+    if UD_GlobalDeviceUnlockMutex_InventoryScript_Failed || loc_time >= 1.5
         UDmain.Error("UnLockDevicePatched("+GetSlotedNPCName()+","+UD_GlobalDeviceUnlockMutex_Device.getName()+") failed!!! ID Fail? " + UD_GlobalDeviceUnlockMutex_InventoryScript_Failed)
     endif
     
@@ -2284,7 +2339,6 @@ Function CleanOrgasmUpdate()
     endif
 EndFunction
 
-
 Function VibrateUpdate(Int aiUpdateTime)
     int i = 0
     while UD_ActiveVibrators[i]
@@ -2301,7 +2355,7 @@ Function EndAllVibrators()
     while UD_ActiveVibrators[i]
         UD_CustomVibratorBase_RenderScript loc_vib = UD_ActiveVibrators[i] as UD_CustomVibratorBase_RenderScript
         if loc_vib
-            loc_vib.VibrateEnd(True,False)
+            loc_vib._VibrateEnd(True,False)
             UD_ActiveVibrators[i] = none
         endif
         i+=1
@@ -2520,15 +2574,12 @@ Function Receive_MinigameParalel()
         akHelper.setAV("MagickaRate", magickaRateHelper)
     endif
     
-    loc_device._MinigameParProc_2 = false
-    
     if loc_haveplayer
         loc_device.hideHUDbars() ;hides HUD (not realy?)
-        
-        if loc_device.WearerIsPlayer() || loc_device.HelperIsPlayer()
-            loc_device.hideWidget()
-        endif
+        loc_device.hideWidget()
     endif
+    
+    loc_device._MinigameParProc_2 = false
     
     if loc_is3DLoaded
         UDEM.ResetExpressionRaw(akActor,15)
@@ -2537,8 +2588,8 @@ Function Receive_MinigameParalel()
         endif
     endif
     
-    if loc_is3DLoaded
-        loc_device.addStruggleExhaustion()
+    if loc_is3DLoaded && (UDmain.UDGV.UDG_MinigameExhaustion.Value == 1)
+        loc_device.addStruggleExhaustion(akHelper)
     endif
     _MinigameParalel_ON = False
 EndFunction

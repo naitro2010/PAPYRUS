@@ -136,6 +136,13 @@ Event OnInit()
 EndEvent
 
 Function GameUpdate()
+    ; === Check player slot ===
+    UD_CustomDevice_NPCSlot loc_playerslot = GetPlayerSlot()
+    ;Player is not swet to reference, set it and init it
+    if loc_playerslot.GetActor() != UDmain.Player
+        loc_playerslot.ForceRefTo(UDmain.Player)
+        loc_playerslot.OnInit()
+    endif
     ; ==== check static slots ====
     if IsManager()
         ReregisterStaticSlots()
@@ -150,7 +157,7 @@ Function GameUpdate()
     UD_Slots = GetNumAliases()
     SlotGameUpdate()
     CheckOrgasmLoops()
-    RegisterForSingleUpdate(UDCDmain.UD_UpdateTime*2.0)
+    RegisterForSingleUpdate(10.0)
     registerForSingleUpdateGameTime(1.0)
 EndFunction
 
@@ -267,7 +274,7 @@ EndFunction
 Function FreeUnusedSlots()
     int index = 0
     Int loc_Size1 = GetNumAliases() - 1
-    Int loc_Size2 = UDCD_NPCF.GetNumAliases() - 1
+    Int loc_Size2 = UDCD_NPCF.GetNumAliases()
     while index < loc_Size1 ;all aliases, excluding player
         UD_CustomDevice_NPCSlot loc_slot = (GetNthAlias(index) as UD_CustomDevice_NPCSlot)
         Actor loc_actor = loc_slot.GetActor()
@@ -532,7 +539,7 @@ UD_CustomDevice_NPCSlot Function getNPCSlotByIndex(int iIndex)
 EndFunction
 
 UD_CustomDevice_NPCSlot Function getPlayerSlot()
-    return GetNthAlias(UD_Slots - 1) as UD_CustomDevice_NPCSlot
+    return GetAliasByName("NPCSlot_Player") as UD_CustomDevice_NPCSlot
 EndFunction
 
 Function UpdateDevices(float fTimePassed)
@@ -543,7 +550,6 @@ Function UpdateDevices(float fTimePassed)
             UpdateSlotDevices(loc_slot,fTimePassed)
         endif
         index += 1
-        Utility.waitMenuMode(0.1)
     endwhile
 EndFunction
 

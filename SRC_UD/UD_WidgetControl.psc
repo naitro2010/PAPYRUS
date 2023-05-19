@@ -187,12 +187,19 @@ Int                         Property    UD_TextOutlineShift         = 1     Auto
 
     If True, then some redundant notifications from vibrators will be ignored.
     
-    Do not edit, *READ ONLY!*.
+    Do not edit, *READ ONLY!*. Configurable on MCM UI Widgets page by user.
 /;
 Bool                        Property    UD_FilterVibNotifications   = True  Auto    Hidden
 
-Int _UD_TextAnchor = 1
+;/  Variable: UD_TextFadeOutTime
 
+    Text fade time.
+    
+    Do not edit, *READ ONLY!*. Configurable on MCM UI Widgets page by user.
+/;
+Float                       Property    UD_TextFadeTime             = 1.0   Auto    Hidden
+
+Int _UD_TextAnchor = 1
 ;/  Variable: UD_TextAnchor
 
     Anchor for the text notification output area (vertical position).
@@ -219,13 +226,13 @@ Int Property UD_TextAnchor Hidden
     EndFunction
 EndProperty
 
+Int _UD_TextPadding = 0
 ;/  Variable: UD_TextAnchor
 
     Vertical shift of the output area relative to the anchor (see <UD_TextAnchor>).
     
     Do not edit, *READ ONLY!*. Configurable on MCM UI Widgets page by user.
 /;
-Int _UD_TextPadding = 0
 Int Property UD_TextPadding Hidden
     Int Function Get()
         Return _UD_TextPadding
@@ -405,7 +412,7 @@ Bool Function SingletonCheck()
 EndFunction
 
 Event OnInit()
-    RegisterForSingleUpdate(12) ;maintenance update
+    RegisterForSingleUpdate(6) ;maintenance update
 EndEvent
 
 Event OnUpdate()
@@ -419,24 +426,15 @@ Event OnUpdate()
             return ;fatal error, do not use the module
         endif
         Ready = True
-        OnUIReload(abGameLoad = True)
-        InitWidgetsRequest(abGameLoad = True, abMeters = True, abIcons = True, abText = True)
+        ; initialization on new game
+        OnUIReload(abGameLoad = False)
     EndIf
-    if UDmain.IsEnabled()
-;        If _OnUpdateMutex
-;            Return
-;        EndIf
-;        _OnUpdateMutex = True
-;        If _InitMetersRequested || _InitIconsRequested || _InitTextRequested
-;            InitWidgetsCheck(_InitAfterLoadGame)
-;            _InitAfterLoadGame = False
-;        EndIf
-;        _OnUpdateMutex = False
-    endif
     RegisterForSingleUpdate(30) ;maintenance update
 EndEvent
 
-Function Update()
+
+Function GameUpdate()
+    ; initializations on game load
     OnUIReload(abGameLoad = True)
     ; upgrade version
     UD_MeterVertPadding = 1.50
@@ -458,6 +456,7 @@ EndFunction
 ===========================================================================================
 /; 
 
+bool _ReloadMutex = False
 ;/  Function: OnUIReload
 
     In this function, the interface is reloaded:
@@ -471,6 +470,16 @@ EndFunction
         abGameLoad               - True if function called on game reload.
 /;
 Function OnUIReload(Bool abGameLoad)
+    if _ReloadMutex
+        if UDmain.TraceAllowed()
+            UDMain.Log("UD_WidgetControl::OnUIReload() abGameLoad = " + abGameLoad + ", already reloading, aborting",3)
+        endif
+        return
+    endif
+    _ReloadMutex = True
+    if UDmain.TraceAllowed()
+        UDMain.Log("UD_WidgetControl::OnUIReload() abGameLoad = " + abGameLoad,3)
+    endif
     StatusEffect_Register("dd-piercing-nipples", W_ICON_CLUSTER_DEVICES)
     StatusEffect_Register("dd-plug-vaginal", W_ICON_CLUSTER_DEVICES)
     StatusEffect_Register("dd-piercing-clit", W_ICON_CLUSTER_DEVICES)
@@ -504,16 +513,21 @@ Function OnUIReload(Bool abGameLoad)
             i += 1
         EndWhile
     endif
+    
     Meter_SetColor("device-main", 0xFF005E, 0xFF307C, 0)
     Meter_SetColor("device-condition", 0x4df319, 0x62ff00, 0)
     Meter_SetColor("player-orgasm", 0xE727F5, 0xF775FF, 0xFF00BC)
     
     SendModEvent("UD_AfterUIReload", "", UDmain.UseiWW() as Float)
+    
+    _ReloadMutex = False
 EndFunction
 
 ; should be called before placing widgets
 Function RefreshCanvasMetrics()
-    UDMain.Log("UD_WidgetControl::RefreshCanvasMetrics()")
+    if UDmain.TraceAllowed()
+        UDMain.Log("UD_WidgetControl::RefreshCanvasMetrics()", 3)
+    endif
 
     Float hud_padding = UI.GetNumber("HUD Menu", "_root.HUDMovieBaseInstance.TopLeftRefY")
     Float hud_left = UI.GetNumber("HUD Menu", "_root.HUDMovieBaseInstance.TopLeftRefX")
@@ -562,12 +576,14 @@ Bool _InitAfterLoadGame = False
         abText            - Request to rebuild notification lines.
 /;
 Function InitWidgetsRequest(Bool abGameLoad = False, Bool abMeters = False, Bool abIcons = False, Bool abText = False)
-    UDmain.Log("UD_WidgetControl::InitWidgetsRequest() abGameLoad = " + abGameLoad + " , abMeters = " + abMeters + " , abIcons = " + abIcons + " , abText = " + abText, 3)
-    _InitAfterLoadGame = _InitAfterLoadGame || abGameLoad
-    _InitMetersRequested = _InitMetersRequested || abMeters
-    _InitIconsRequested = _InitIconsRequested || abIcons
-    _InitTextRequested = _InitTextRequested || abText
-    RegisterForSingleUpdate(0.5)
+    if UDmain.TraceAllowed()
+        UDmain.Log("UD_WidgetControl::InitWidgetsRequest() abGameLoad = " + abGameLoad + " , abMeters = " + abMeters + " , abIcons = " + abIcons + " , abText = " + abText,3)
+    endif
+    _InitAfterLoadGame      = _InitAfterLoadGame    || abGameLoad
+    _InitMetersRequested    = _InitMetersRequested  || abMeters
+    _InitIconsRequested     = _InitIconsRequested   || abIcons
+    _InitTextRequested      = _InitTextRequested    || abText
+    _CheckInitWidgets()
 EndFunction
 
 ; Rebuild meter widgets
@@ -703,7 +719,6 @@ EndFunction
         abForce           - Instant change of the value (applied only in standard rendering mode).
 /;
 Function Meter_SetFillPercent(String asName, Float afValue, Bool abForce = false)
-    UDMain.Log("UD_WidgetControl::Meter_SetFillPercent() asName = " + asName + ", afValue = " + afValue)
     UD_WidgetBase loc_widget = _GetVanillaMeter(asName)
     If loc_widget == None
         Return
@@ -1013,7 +1028,9 @@ UD_WidgetBase Function _GetVanillaMeter(String asName)
             Return UD_VanillaWidgets[i]
         EndIf
     EndWhile
-    UDMain.Log("UD_WidgetControl::_GetVanillaMeter() Can't find vanilla widget with the name " + asName)
+    if UDmain.TraceAllowed()
+        UDMain.Log("UD_WidgetControl::_GetVanillaMeter() Can't find vanilla widget with the name " + asName)
+    endif
     Return None
 EndFunction
 
@@ -1058,6 +1075,9 @@ Bool _CreateIcon_Mutex = False
 Function _CreateIconWidget(UD_WidgetStatusEffect_RefAlias akData, Int aiX, Int aiY, Int aiAlpha, Bool abForceDestory = False)
 EndFunction
 
+Function _DestroyIconWidget(UD_WidgetStatusEffect_RefAlias akData)
+EndFunction
+
 Bool _FindEmptyME_Mutex = False
 
 UD_WidgetMeter_RefAlias Function _GetMeter(String asName, Bool abFindEmpty = True)
@@ -1099,46 +1119,93 @@ Bool _CreateMeter_Mutex = False
 Function _CreateMeterWidget(UD_WidgetMeter_RefAlias akData, Int aiX, Int aiY, Bool abForceDestory = False)
 EndFunction
 
+Function _DestroyMeterWidget(UD_WidgetMeter_RefAlias akData)
+EndFunction
+
+Function _CheckInitWidgets()
+EndFunction
+
+Bool _InitWidgetMutex = False
 Bool _InitMetersMutex = False
 Bool _OnUpdateMutex = False
 ;Use iWidget instead
 State iWidgetInstalled
 
     Event OnBeginState()
+        if UDmain.TraceAllowed()
+            UDMain.Log("UD_WidgetControl::OnBeginState() State = " + GetState(), 3)
+        endif
         _Animation_LastGameTime = Utility.GetCurrentRealTime()
         RegisterForSingleUpdate(_Animation_Update)
     EndEvent
     
     Event OnUpdate()
+        if !SingletonCheck()
+            UnregisterForUpdate()
+            return
+        endif
         if UDmain.IsEnabled()
             If _OnUpdateMutex
                 Return
             EndIf
             _OnUpdateMutex = True
-            If _InitMetersRequested || _InitIconsRequested || _InitTextRequested
-                UnregisterForUpdate()
-                RefreshCanvasMetrics()
-                If _InitMetersRequested
-                    _InitMetersRequested = !InitMeters(_InitAfterLoadGame)
-                EndIf
-                If _InitTextRequested
-                    _InitTextRequested = !InitText(_InitAfterLoadGame)
-                EndIf
-                If _InitIconsRequested
-                    _InitIconsRequested = !InitIcons(_InitAfterLoadGame)
-                EndIf
-                _InitAfterLoadGame = False
-            EndIf
+            _CheckInitWidgets()
             _AnimateWidgets()
             RegisterForSingleUpdate(_Animation_Update)
             _OnUpdateMutex = False
         else
+            if UDmain.TraceAllowed()
+                UDmain.Log(self+"::OnUpdate - Main mod is updating - skipping",3)
+            endif
             RegisterForSingleUpdate(5.0)
         endif
     EndEvent
+    
+    Function _CheckInitWidgets()
+        if _InitWidgetMutex
+            return
+        endif
+        _InitWidgetMutex = True
+        If _InitMetersRequested || _InitIconsRequested || _InitTextRequested
+            RefreshCanvasMetrics()
+            If _InitMetersRequested
+                _InitMetersRequested    = !InitMeters(_InitAfterLoadGame)
+            EndIf
+            If _InitTextRequested
+                _InitTextRequested      = !InitText(_InitAfterLoadGame)
+            EndIf
+            If _InitIconsRequested
+                _InitIconsRequested     = !InitIcons(_InitAfterLoadGame)
+            EndIf
+            _InitAfterLoadGame = False
+        EndIf
+        _InitWidgetMutex = False
+    EndFunction
+    
+    Event OnEndState()
+        if UDmain.TraceAllowed()
+            UDMain.Log("UD_WidgetControl::OnEndState() State = " + GetState(), 3)
+        endif
+        Int i = MeterSlots.Length
+        While i > 0
+            i -= 1
+            If MeterSlots[i].Name != ""
+                _DestroyMeterWidget(MeterSlots[i])
+            EndIf
+        EndWhile
+        i = StatusEffectSlots.Length
+        While i > 0
+            i -= 1
+            If StatusEffectSlots[i].Name != ""
+                _DestroyIconWidget(StatusEffectSlots[i])
+            EndIf
+        EndWhile
+    EndEvent
         
     Bool Function InitMeters(Bool abGameLoad = False)
-        UDMain.Log("UD_WidgetControl::InitMeters() abGameLoad = " + abGameLoad, 3)
+        if UDmain.TraceAllowed()
+            UDMain.Log("UD_WidgetControl::InitMeters() abGameLoad = " + abGameLoad, 3)
+        endif
         _InitMetersMutex = True
         Utility.Wait(0.2)                   ; waiting for the end of all UpdatePercent_***Widget calls
         If abGameLoad
@@ -1174,7 +1241,9 @@ State iWidgetInstalled
     EndFunction
     
     Bool Function InitText(Bool abGameLoad = False)
-        UDMain.Log("UD_WidgetControl::InitText() abGameLoad = " + abGameLoad, 3)
+        if UDmain.TraceAllowed()
+            UDMain.Log("UD_WidgetControl::InitText() abGameLoad = " + abGameLoad, 3)
+        endif
         If abGameLoad
         ; clearing IDs on game load since all widgets are already destroyed
             _Text_LinesId = PapyrusUtil.IntArray(0)
@@ -1220,7 +1289,9 @@ State iWidgetInstalled
     EndFunction
     
     Bool Function InitIcons(Bool abGameLoad = False)
-        UDMain.Log("UD_WidgetControl::InitIcons() abGameLoad = " + abGameLoad, 3)
+        if UDmain.TraceAllowed()
+            UDMain.Log("UD_WidgetControl::InitIcons() abGameLoad = " + abGameLoad,3)
+        endif
         If abGameLoad
         ; clearing IDs on game load since all widgets are already destroyed
             Int i = StatusEffectSlots.Length
@@ -1349,7 +1420,9 @@ State iWidgetInstalled
     EndFunction
 
     Function _CreateMeterWidget(UD_WidgetMeter_RefAlias akData, Int aiX, Int aiY, Bool abForceDestory = False)
-        UDMain.Log("UD_WidgetControl::_CreateMeterWidget() akData = " + akData + ", aiX = " + aiX + ", aiY = " + aiY + ", abForceDestory = " + abForceDestory, 3)
+        if UDmain.TraceAllowed()
+            UDMain.Log("UD_WidgetControl::_CreateMeterWidget() akData = " + akData + ", aiX = " + aiX + ", aiY = " + aiY + ", abForceDestory = " + abForceDestory, 3)
+        endif
         If akData == None || akData.Name == ""
             Return
         EndIf
@@ -1362,7 +1435,7 @@ State iWidgetInstalled
         EndIf
         _CreateMeter_Mutex = True
 
-        If (akData.Id > 0 && _iWidget_MeterPosFix) || abForceDestory
+        If akData.Id > 0 && (_iWidget_MeterPosFix || abForceDestory)
             iWidget.destroy(akData.Id)
             akData.Id = -1
         EndIf
@@ -1378,6 +1451,7 @@ State iWidgetInstalled
         
         If akData.IconId > 0
             iWidget.destroy(akData.IconId)
+            akData.IconId = -1
         EndIf
         
         If akData.IconName != ""
@@ -1390,7 +1464,21 @@ State iWidgetInstalled
         EndIf
         _CreateMeter_Mutex = False
     EndFunction
-    
+
+    Function _DestroyMeterWidget(UD_WidgetMeter_RefAlias akData)
+        if UDmain.TraceAllowed()
+            UDMain.Log("UD_WidgetControl::_DestroyMeterWidget() akData = " + akData, 3)
+        endif
+        If akData.IconId > 0
+            iWidget.destroy(akData.IconId)
+            akData.IconId = -1
+        EndIf
+        If akData.Id > 0
+            iWidget.destroy(akData.Id)
+            akData.Id = -1
+        EndIf
+    EndFunction
+        
     ;use to convert from hex to this sinfull way of writting colors
     Function _UpdateMeterColor(Int aiId, int aiColor, int aiColor2 = 0, int aiFlashColor = 0xFFFFFF)
         Int loc_lightR  = Math.LogicalAnd(Math.RightShift(aiColor,16),0xFF)
@@ -1469,7 +1557,9 @@ State iWidgetInstalled
             Return
         EndIf
         If _InitMetersMutex
-            UDMain.Log("UD_WidgetControl::Meter_SetIcon() _InitMetersMutex = " + _InitMetersMutex, 3)
+            if UDmain.TraceAllowed()
+                UDMain.Log("UD_WidgetControl::Meter_SetIcon() _InitMetersMutex = " + _InitMetersMutex, 3)
+            endif
             Return
         EndIf
         If loc_data.IconName == asIconName
@@ -1526,7 +1616,7 @@ State iWidgetInstalled
         While i < len
             If StringUtil.GetNthChar(str, i) == " "
                 If UD_TextLineLength < (i - line_start)
-                    If prev_space <= line_start         ; very long word
+                    If prev_space <= line_start         ; very long word 
                         prev_space = i
                     EndIf
                     If _Text_LinesId.Length <= text_line_index
@@ -1563,7 +1653,9 @@ State iWidgetInstalled
     EndFunction
     
     Function _CreateIconWidget(UD_WidgetStatusEffect_RefAlias akData, Int aiX, Int aiY, Int aiAlpha, Bool abForceDestory = False)
-        UDMain.Log("UD_WidgetControl::_CreateIconWidget() akData = " + akData + ", aiX = " + aiX + ", aiY = " + aiY + ", aiAlpha = " + aiAlpha, 3)
+        if UDmain.TraceAllowed()
+            UDMain.Log("UD_WidgetControl::_CreateIconWidget() akData = " + akData + ", aiX = " + aiX + ", aiY = " + aiY + ", aiAlpha = " + aiAlpha,3)
+        endif
         If akData == None || akData.Name == ""
             Return
         EndIf
@@ -1576,13 +1668,19 @@ State iWidgetInstalled
         EndIf
         _CreateIcon_Mutex = True
 
-        If (akData.Id > 0 && (akData.Variant != akData.VariantLoaded)) || abForceDestory
+        If akData.Id > 0 && ((akData.Variant != akData.VariantLoaded) || abForceDestory)
             iWidget.destroy(akData.Id)
             akData.Id = -1
+            if UDmain.TraceAllowed()
+                UDMain.Log("UD_WidgetControl::_CreateIconWidget() destroy id = " + akData.Id,3)
+            endif
         EndIf
         If akData.Id < 0
             akData.Id = iWidget.loadLibraryWidget(akData.FileName)
             akData.VariantLoaded = akData.Variant
+            if UDmain.TraceAllowed()
+                UDMain.Log("UD_WidgetControl::_CreateIconWidget() loadLibraryWidget id = " + akData.Id,3)
+            endif
         EndIf
         If akData.AuxId > 0 && abForceDestory
             iWidget.destroy(akData.AuxId)
@@ -1592,6 +1690,8 @@ State iWidgetInstalled
             akData.AuxId = iWidget.loadLibraryWidget("background")
         EndIf
         akData.Alpha = aiAlpha
+        akData.Stage = -1
+        akData.Timer = 0
         
         iWidget.setSize(akData.Id, UD_IconsSize, UD_IconsSize)
         iWidget.setPos(akData.Id, aiX, aiY)
@@ -1605,6 +1705,20 @@ State iWidgetInstalled
         iWidget.setVisible(akData.AuxId, (akData.Visible && akData.Enabled) as Int)
         _SetTextRGB(akData.AuxId, 0)
         _CreateIcon_Mutex = False
+    EndFunction
+    
+    Function _DestroyIconWidget(UD_WidgetStatusEffect_RefAlias akData)
+        if UDmain.TraceAllowed()
+            UDMain.Log("UD_WidgetControl::_DestroyIconWidget() akData = " + akData, 3)
+        endif
+        If akData.AuxId > 0
+            iWidget.destroy(akData.AuxId)
+            akData.AuxId = -1
+        EndIf
+        If akData.Id > 0
+            iWidget.destroy(akData.Id)
+            akData.Id = -1
+        EndIf
     EndFunction
     
     Function StatusEffect_SetVisible(String asName, Bool abVisible = True)
@@ -1731,11 +1845,11 @@ State iWidgetInstalled
             Int i = _Text_LinesId.Length
             While i > 0
                 i -= 1
-                iWidget.doTransitionByTime(_Text_LinesId[i], 0, 1.0, "alpha")
-                iWidget.doTransitionByTime(_Text_LinesOutlineId[i], 0, 1.0, "alpha")
+                iWidget.doTransitionByTime(_Text_LinesId[i], 0, UD_TextFadeTime, "alpha")
+                iWidget.doTransitionByTime(_Text_LinesOutlineId[i], 0, UD_TextFadeTime, "alpha")
             EndWhile
             _Text_AnimStage = 2
-        ElseIf _Text_AnimStage == 2 && _Text_Timer >= _Text_Duration + 1.0
+        ElseIf _Text_AnimStage == 2 && _Text_Timer >= _Text_Duration + UD_TextFadeTime
             _Text_AnimStage = -1
             Int i = _Text_LinesId.Length
             While i > 0

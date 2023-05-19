@@ -3,8 +3,8 @@
 Scriptname UnforgivingDevicesMain extends Quest  conditional
 {Main script of Unforgiving Devices}
 
-
 Quest       Property UD_UtilityQuest    auto
+Quest       Property UD_LibsQuest       auto
 
 Actor Property Player auto hidden
 
@@ -375,15 +375,14 @@ Event OnInit()
     ;Print("Installing Unforgiving Devices...")
     if zadbq.modVersion
         ;DD is already installed when UD is installed
-        ;UD will not correctly replace DD script when they are already set update
+        ;UD will not correctly replace DD script when they are already set
         ;because of that UD is incompatible with already ongoing DD moded game
         string loc_msg = "!!!!ERROR!!!!\n"
         loc_msg += "Unforgiving Devices detected that it was installed on already ongoing game. "
-        loc_msg += "Without starting fresh game, UD will not be able to use mutexes which are needed for safe run of the mod. "
-        loc_msg += "\n\n!Please consider starting new game for the best experience.!"
+        loc_msg += "Without starting fresh game, UD will not be able to correctly lock/unlock devices! "
+        loc_msg += "\n\n!Please, start a new game or clean uninstall DD and install it on the same time with UD!"
         debug.messagebox(loc_msg)
     endif
-    
 
     if CheckSubModules()
         RegisterForSingleUpdate(1.0)
@@ -516,6 +515,16 @@ Function ENABLE()
 EndFunction
 
 Function OnGameReload()
+    if !_Initialized
+        if !UDNPCM.Ready
+            GWarning(self+"::OnGameReload() - Skipping because mod is not fully initialized")
+            return
+        else
+            ;user installed mod after init variable was added
+            _Initialized = True
+        endif
+    endif
+
     if _Disabled
         return ;mod is disabled, do nothing
     endif
@@ -524,79 +533,110 @@ Function OnGameReload()
         return ;mod is already updating, most likely because user saved the game while the mod was already updating
     endif
     
-    if !CheckSubModules()
-        return ;Fatal error when initializing UD
-    endif
-    
     _Updating = True
+    
     DISABLE()
     
-    Utility.waitMenuMode(1.5)
+    Utility.waitMenuMode(0.5)
     
     Print("Updating Unforgiving Devices, please wait...")
+    Info("OnGameReload() called! - Updating Unforgiving Devices...")
     
     if !Ready
         Utility.waitMenuMode(2.5)
     endif
     
-    Utility.waitMenuMode(1.5)
+    Utility.waitMenuMode(0.5)
     
-    CLog("OnGameReload() called! - Updating Unforgiving Devices...")
-    
-    ;update all scripts
-    Update()
-    
-    if UDWC.Ready
-        UDWC.Update()
+    if _UpdateCheck()
+        ;update all scripts
+        Update()
+        
+        if !CheckSubModules() || _FatalError
+            ENABLE()
+            _Updating = False
+            return ;Fatal error when initializing UD
+        endif
+        
+        UDWC.GameUpdate()
+        
+        UDMC.Update()
+        
+        BoundCombat.Update()
+        
+        UDlibs.Update()
+        
+        UDCDMain.Update()
+
+        Config.Update()
+        
+        UDPP.Update()
+        
+        UDOMNPC.Update()  ;NPC orgasm manager
+        UDOMPlayer.Update() ;player orgasm manager
+        
+        UDEM.Update()
+        
+        UDNPCM.GameUpdate()
+        
+        UDLLP.Update()
+
+        UDRRM.Update()
+        
+        if UDAM.Ready
+            UDAM.Update()
+        endif
+        
+        if UDCM.Ready
+            UDCM.Update()
+        endif
+
+        UDAbadonQuest.Update()
+        
+        Info("<=====| Unforgiving Devices updated |=====>")
+        Print("Unforgiving Devices updated")
     else
-        Error("Can't update UDWC because the script is not ready")
+        Info("<=====| !!Unforgiving Devices FAILED!! |=====>")
+        Print("Unforgiving Devices update FAILED")
     endif
-    
-    UDMC.Update()
-    
-    BoundCombat.Update()
-    
-    UDlibs.Update()
-    
-    UDCDMain.Update()
-
-    Config.Update()
-    
-    UDPP.Update()
-    
-    UDOMNPC.Update()  ;NPC orgasm manager
-    UDOMPlayer.Update() ;player orgasm manager
-    
-    UDEM.Update()
-    
-    UDNPCM.GameUpdate()
-    
-    UDLLP.Update()
-
-    UDRRM.Update()
-    
-    if UDAM.Ready
-        UDAM.Update()
-    endif
-    
-    if UDCM.Ready
-        UDCM.Update()
-    endif
-
-    UDAbadonQuest.Update()
-    
-    Info("<=====| Unforgiving Devices updated |=====>")
     
     _Updating = False
     ENABLE()
-    
-    Print("Unforgiving Devices updated")
-    
 EndFunction
 
 Event OnUpdate()
+    GInfo(self + "::OnUpdate() - Called")
+    _Init()
     Update()
 EndEvent
+
+Bool _Initialized = False
+Function _Init()
+    ;start quest manually
+    UDNPCM.Start()
+    
+    Float loc_timeout = 0.0
+    Float loc_maxtime = 5.0
+    
+    ;wait for quest to get ready
+    while !UDNPCM.Ready && loc_timeout < loc_maxtime
+        Utility.wait(0.25)
+        loc_timeout += 0.25
+    endwhile
+    if loc_timeout >= loc_maxtime
+        ;ERROR
+        GError("NPC manager can't be started!! Mod will be disabled!")
+        ShowSingleMessageBox("!!FATAL ERROR!!\nFailed to load NPC manager and its slots!! Mod will be disabled untill quest correctly starts.\n Please contact developers on LL or GitHub")
+        _FatalError = True
+    else
+        GInfo("NPC manager started successfully")
+    endif
+    
+    ;init mcm
+    config.Init()
+    
+    _Initialized = True
+EndFunction
 
 Function Update()
     if !Player
@@ -604,30 +644,54 @@ Function Update()
         Player = Game.GetPlayer()
     endif
     
-    if !UDEM
-        Error("UDEM not loaded! Loading...")
-        UDEM = GetMeMyForm(0x156417,"UnforgivingDevices.esp") as UD_ExpressionManager
-        Error("UDEM set to "+UDEM)
+    if _FatalError
+        GError(self+"::Update() - Skipped because mod have fatal error")
+        return
     endif
+    
+    _ValidateModules()
+    _CheckOptionalMods()
+    _CheckPatchesOrder()
+    
+    if !Ready
+        if _UpdateCheck() || _FatalError
+            UD_hightPerformance = UD_hightPerformance
+            UDlibs.OrgasmExhaustionSpell.SetNthEffectDuration(0, 180) ;for backward compatibility
+            
+            RegisterForModEvent("UD_VibEvent","EventVib")
+            
+            Info("<=====| UnforgivingDevicesMain installed |=====>")
+            
+            Print("Unforgiving Devices Ready!")
+            
+            Ready = true
+        else
+            Error("<=====| !!UnforgivingDevicesMain installation FAILED!! |=====>")
+            Print("Unforgiving Devices installation failed!")
+            return
+        endif
+    endif
+    
+    SendModEvent("UD_PatchUpdate") ;send update event to all patches. Will force patches to check if they are installed correctly
+    
+    UDCDmain.UpdateQuestKeywords()
+    UDCDmain.UpdateGenericKeys()
+    
+    _StartModulesManual()
+EndFunction
 
-    if !UDPP
-        Error("UDPP not loaded! Loading...")
-        UDPP = (self as Quest) as UD_ParalelProcess
-        Error("UDPP set to "+UDPP)
-    endif
+;used for validating modules forms between versions
+Function _ValidateModules()
+    Info(self + "::_ValidateModules() - Validating modules...")
+    ;validate modules that were moved between versions
+    UDPP    = GetMeMyForm(0x0120B6,"UnforgivingDevices.esp") as UD_ParalelProcess
+    UDLLP   = GetMeMyForm(0x0120B4,"UnforgivingDevices.esp") as UD_LeveledList_Patcher
+    UD_LibsQuest    = GetMeMyForm(0x0120B5,"UnforgivingDevices.esp") as Quest
+    UDlibs          = UD_LibsQuest as UD_Libs
+    ItemManager     = UD_LibsQuest as UDItemManager
+    UDRRM           = UD_LibsQuest as UD_RandomRestraintManager
     
-    if !UDNPCM
-        Error("UDNPCM not loaded! Loading...")
-        UDNPCM = GetMeMyForm(0x14E7EB,"UnforgivingDevices.esp") as UD_CustomDevices_NPCSlotsManager
-        Error("UDNPCM set to "+UDNPCM)
-    endif
-    
-    if !UDMM
-        Error("UDMM not loaded! Loading...")
-        UDMM = GetMeMyForm(0x15B555,"UnforgivingDevices.esp") as UD_MutexManagerScript
-        Error("UDMM set to "+UDMM)
-    endif
-    
+    ;validate expression system
     Quest loc_DDexpressionQuest = GetMeMyForm(0x000800,"Devious Devices - Integration.esm") as Quest
     if !ZadExpressionSystemInstalled && loc_DDexpressionQuest
         Info("ZAD Expression System detected: switching...")
@@ -638,27 +702,42 @@ Function Update()
         UDEM.GoToState("DDExpressionSystemInstalled")
         Info("ZAD Expression System detected: DONE")
     endif
-    
-    _CheckOptionalMods()
-    _CheckPatchesOrder()
-    
-    if !Ready
-        UD_hightPerformance = UD_hightPerformance
-        UDlibs.OrgasmExhaustionSpell.SetNthEffectDuration(0, 180) ;for backward compatibility
-        
-        RegisterForModEvent("UD_VibEvent","EventVib")
-        
-        Info("<=====| UnforgivingDevicesMain installed |=====>")
-        
-        Print("Unforgiving Devices Ready!")
-        
-        Ready = true
+    Info(self + "::_ValidateModules() - Modules validated")
+EndFunction
+
+Function _StartModulesManual()
+    if !UDPP.IsRunning()
+        UDPP.start()
     endif
     
-    SendModEvent("UD_PatchUpdate") ;send update event to all patches. Will force patches to check if they are installed correctly
+    if !UDLLP.IsRunning()
+        UDLLP.start()
+    endif
     
-    UDCDmain.UpdateQuestKeywords()
-    UDCDmain.UpdateGenericKeys()
+    if !UDlibs.IsRunning()
+        UDlibs.start()
+    endif
+
+    if !UDRRM.IsRunning()
+        UDRRM.start()
+    endif
+
+    if !ItemManager.IsRunning()
+        ItemManager.start()
+    endif
+    
+    if !UDCM.IsRunning()
+        UDCM.start()
+    endif
+EndFunction
+
+;last check before mod is ready. At this point, all optional mods are checked as so, can be used.
+Bool Function _UpdateCheck()
+    Bool loc_cond = true
+    
+    loc_cond = loc_cond && (!PO3Installed || PO3_SKSEFunctions.IsScriptAttachedToForm(zadbq,"zadlibs_UDPatch")) ;ud patch script have to be pressent on zadquest
+
+    return loc_cond
 EndFunction
 
 Function _CheckOptionalMods()
@@ -838,6 +917,12 @@ Function Log(String asMsg, int aiLevel = 1)
             ConsoleUtil.PrintMessage(loc_msg)
         endif
     endif
+EndFunction
+
+Function LogDebug(String asMsg)
+    string loc_msg = "[UD,D,T="+Utility.GetCurrentRealTime()+"]: " + asMsg
+    debug.trace(loc_msg)
+    ConsoleUtil.PrintMessage(loc_msg)
 EndFunction
 
 ;/  Function: CLog
@@ -2230,6 +2315,18 @@ EndFunction
 /;
 Bool Function IsMenuOpen()
     return UDMC.UD_MenuOpened
+EndFunction
+
+;/  Function: IsMenuOpenRaw
+
+    This function check if any menu is open. Ignores all checks.
+
+    Returns:
+
+        True if ANY menu is open
+/;
+Bool Function IsAnyMenuOpen()
+    return UDMC.UD_MenuListIDBit
 EndFunction
 
 ;/  Function: IsMenuOpenID

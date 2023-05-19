@@ -273,7 +273,7 @@ Bool Function UnlockDevice(actor akActor, armor deviceInventory, armor deviceRen
         If (genericonly && deviceInventory.HasKeyWord(zad_BlockGeneric)) || deviceInventory.HasKeyWord(zad_QuestItem)
             UDmain.Error("UnlockDevice("+MakeDeviceHeader(akActor,deviceInventory)+") aborted because device is not a generic item.")
             loc_res = false
-        else                
+        else
             Armor loc_renDevice = none
             
             ;get render device, this is important as function will not work without RD
@@ -307,9 +307,11 @@ Bool Function UnlockDevice(actor akActor, armor deviceInventory, armor deviceRen
                 ;ignore ID events to prevent unwanted behavier
                 StorageUtil.SetIntValue(akActor, "UD_ignoreEvent" + deviceInventory, 0x110)
                 
+                Int loc_idcount = akActor.getItemCount(deviceInventory)
+                
                 ;send and receive device from event container, so inside unlock function can be called
-                akActor.removeItem(deviceInventory,1,True,UDCDmain.EventContainer_ObjRef)    
-                UDCDmain.EventContainer_ObjRef.removeItem(deviceInventory,1,True,akActor)                  
+                akActor.removeItem(deviceInventory,loc_idcount,True,UDCDmain.EventContainer_ObjRef)
+                UDCDmain.EventContainer_ObjRef.removeItem(deviceInventory,loc_idcount,True,akActor)
 
                 ;procces mutex untill device is unlocked
                 if loc_slot
@@ -653,31 +655,21 @@ EndFunction
 
 ; Stop vibration event on actor.
 Function StopVibrating(actor akActor)
-    if akActor.WornHasKeyword(UDCDmain.UDlibs.UnforgivingDevice) && UDCDmain.isRegistered(akActor)
-        if UDmain.TraceAllowed()        
+    if akActor.WornHasKeyword(UDlibs.UnforgivingDevice) && UDCDmain.isRegistered(akActor)
+        if UDmain.TraceAllowed()
             UDmain.Log("StopVibrating("+GetActorName(akActor)+") - using patched version: " + akActor)
         endif
         UDCDmain.StopAllVibrators(akActor)
         akActor.SetFactionRank(zadVibratorFaction, 0)
         akActor.RemoveFromFaction(zadVibratorFaction)
     else
-        if UDmain.TraceAllowed()        
+        if UDmain.TraceAllowed()
             UDmain.Log("StopVibrating("+GetActorName(akActor)+") - using default version: " + akActor)
         endif
         parent.StopVibrating(akActor)
     endif
 EndFunction
 
-Bool _VibEffectMutex = false
-Function StartVibrateEffectMutex()
-    while _VibEffectMutex
-        Utility.waitMenuMode(0.01)
-    endwhile
-    _VibEffectMutex = true
-EndFunction
-Function EndVibrateEffectMutex()
-    _VibEffectMutex = false
-EndFunction
 int Function VibrateEffect(actor akActor, int vibStrength, int duration, bool teaseOnly=false, bool silent = false)
     if UDmain.TraceAllowed()    
         UDmain.Log("VibrateEffect(): " + akActor + ", " + vibStrength + ", " + duration)
