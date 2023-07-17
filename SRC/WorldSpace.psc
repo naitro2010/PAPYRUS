@@ -1,1 +1,2 @@
-Scriptname WorldSpace extends Form Hidden
+scriptname worldspace extends form hidden
+;This file was cleaned with papyrusSourceHeadliner

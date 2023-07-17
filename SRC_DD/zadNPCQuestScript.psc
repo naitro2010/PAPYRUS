@@ -1,28 +1,20 @@
-Scriptname ZadNPCQuestScript Extends  zadBaseDeviceQuest
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-ReferenceAlias[] Property MonitoredNPCs Auto
-zadBQ00 Property questScript Auto
-
-Float Property LastUpdateTime Auto
-Bool Property IsProcessing Auto
-
-Function DoRegisterGameTime()
-EndFunction
-Function DoRegister()
-EndFunction
-Function Maintenance()
-EndFunction
-Event OnUpdateGameTime()
-EndEvent
-Event OnUpdate()
-EndEvent
-Function ProcessGagEffect(actor akActor)
-EndFunction
-Function ProcessArmbinderEffect(actor akActor)
-EndFunction
+scriptname zadnpcquestscript extends  zadbasedevicequest
+referencealias[] property monitorednpcs auto
+zadbq00 property questscript auto
+float property lastupdatetime auto
+bool property isprocessing auto
+function doregistergametime()
+endfunction
+function doregister()
+endfunction
+function maintenance()
+endfunction
+event onupdategametime()
+endevent
+event onupdate()
+endevent
+function processgageffect(actor akactor)
+endfunction
+function processarmbindereffect(actor akactor)
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

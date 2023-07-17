@@ -1,5 +1,4 @@
-Scriptname UD_UIETextInput extends UITextEntryMenu
-{Override of UIExtension script UITextEntryMenu for future use}
-
-Function Update()
-EndFunction
+scriptname ud_uietextinput extends uitextentrymenu
+function update()
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

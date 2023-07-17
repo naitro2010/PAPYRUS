@@ -1,17 +1,10 @@
-Scriptname LeveledActor extends Form Hidden
-
-; Adds the given count of the given form to the under the given level in this leveled list
-Function AddForm(Form apForm, int aiLevel) native
-
-; Removes all script added forms from this leveled list
-Function Revert() native
-
-; SKSE additions built 2015-05-24 00:46:48.937000 UTC
-int Function GetNumForms() native
-Form Function GetNthForm(int n) native
-
-int Function GetNthLevel(int n) native
-Function SetNthLevel(int n, int level) native
-
-int Function GetNthCount(int n) native
-Function SetNthCount(int n, int count) native
+scriptname leveledactor extends form hidden
+function addform(form apform, int ailevel) native
+function revert() native
+int function getnumforms() native
+form function getnthform(int n) native
+int function getnthlevel(int n) native
+function setnthlevel(int n, int level) native
+int function getnthcount(int n) native
+function setnthcount(int n, int count) native
+;This file was cleaned with papyrusSourceHeadliner

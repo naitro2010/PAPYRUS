@@ -1,28 +1,16 @@
-Scriptname ColorForm extends Form Hidden
-
-int Function GetColor() native
-Function SetColor(int color) native
-
-int Function GetRed()
-	return ColorComponent.GetRed(Self.GetColor())
-EndFunction
-
-int Function GetGreen()
-	return ColorComponent.GetGreen(Self.GetColor())
-EndFunction
-
-int Function GetBlue()
-	return ColorComponent.GetBlue(Self.GetColor())
-EndFunction
-
-float Function GetHue()
-	return ColorComponent.GetHue(Self.GetColor())
-EndFunction
-
-float Function GetSaturation()
-	return ColorComponent.GetSaturation(Self.GetColor())
-EndFunction
-
-float Function GetValue()
-	return ColorComponent.GetValue(Self.GetColor())
-EndFunction
+scriptname colorform extends form hidden
+int function getcolor() native
+function setcolor(int color) native
+int function getred()
+endfunction
+int function getgreen()
+endfunction
+int function getblue()
+endfunction
+float function gethue()
+endfunction
+float function getsaturation()
+endfunction
+float function getvalue()
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

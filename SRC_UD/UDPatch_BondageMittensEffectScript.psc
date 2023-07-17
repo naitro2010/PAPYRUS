@@ -1,5 +1,4 @@
-Scriptname UDPatch_BondageMittensEffectScript extends zadx_BondageMittensEffectScript 
-
-bool Function isDeviousDevice(Form device)
-    return parent.isDeviousDevice(device) || device.haskeyword(libs.zad_deviousPlug) ;allow plugs to be equipped/locked
-EndFunction
+scriptname udpatch_bondagemittenseffectscript extends zadx_bondagemittenseffectscript 
+bool function isdeviousdevice(form device)
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

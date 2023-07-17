@@ -1,71 +1,56 @@
-Scriptname CombatStyle extends Form Hidden
-
-; functions related to the General Tab values
-float Function GetOffensiveMult() native
-float Function GetDefensiveMult() native
-float Function GetGroupOffensiveMult() native
-float Function GetAvoidThreatChance() native
-float Function GetMeleeMult() native
-float Function GetRangedMult() native
-float Function GetMagicMult() native
-float Function GetShoutMult() native
-float Function GetStaffMult() native
-float Function GetUnarmedMult() native
-
-Function SetOffensiveMult(float mult) native
-Function SetDefensiveMult(float mult) native
-Function SetGroupOffensiveMult(float mult) native
-Function SetAvoidThreatChance(float chance) native
-Function SetMeleeMult(float mult) native
-Function SetRangedMult(float mult) native
-Function SetMagicMult(float mult) native
-Function SetShoutMult(float mult) native
-Function SetStaffMult(float mult) native
-Function SetUnarmedMult(float mult) native
-
-; functions related to the Melee tab values
-float Function GetMeleeAttackStaggeredMult() native
-float Function GetMeleePowerAttackStaggeredMult() native
-float Function GetMeleePowerAttackBlockingMult() native
-float Function GetMeleeBashMult() native
-float Function GetMeleeBashRecoiledMult() native
-float Function GetMeleeBashAttackMult() native
-float Function GetMeleeBashPowerAttackMult() native
-float Function GetMeleeSpecialAttackMult() native
-bool Function GetAllowDualWielding() native
-
-Function SetMeleeAttackStaggeredMult(float mult) native
-Function SetMeleePowerAttackStaggeredMult(float mult) native
-Function SetMeleePowerAttackBlockingMult(float mult) native
-Function SetMeleeBashMult(float mult) native
-Function SetMeleeBashRecoiledMult(float mult) native
-Function SetMeleeBashAttackMult(float mult) native
-Function SetMeleeBashPowerAttackMult(float mult) native
-Function SetMeleeSpecialAttackMult(float mult) native
-Function SetAllowDualWielding(bool allow) native
-
-; functions related to the Close Range tab values
-float Function GetCloseRangeDuelingCircleMult() native
-float Function GetCloseRangeDuelingFallbackMult() native
-float Function GetCloseRangeFlankingFlankDistance() native
-float Function GetCloseRangeFlankingStalkTime() native
-
-Function SetCloseRangeDuelingCircleMult(float mult) native
-Function SetCloseRangeDuelingFallbackMult(float mult) native
-Function SetCloseRangeFlankingFlankDistance(float mult) native
-Function SetCloseRangeFlankingStalkTime(float mult) native
-
-; functions related to the LongRange tab values
-float Function GetLongRangeStrafeMult() native
-Function SetLongRangeStrafeMult(float mult) native
-
-; functions related to the Flight tab values
-float Function GetFlightHoverChance() native
-float Function GetFlightDiveBombChance() native
-float Function GetFlightFlyingAttackChance() native
-
-Function SetFlightHoverChance(float chance) native
-Function SetFlightDiveBombChance(float chance) native
-Function SetFlightFlyingAttackChance(float mult) native
-
-
+scriptname combatstyle extends form hidden
+float function getoffensivemult() native
+float function getdefensivemult() native
+float function getgroupoffensivemult() native
+float function getavoidthreatchance() native
+float function getmeleemult() native
+float function getrangedmult() native
+float function getmagicmult() native
+float function getshoutmult() native
+float function getstaffmult() native
+float function getunarmedmult() native
+function setoffensivemult(float mult) native
+function setdefensivemult(float mult) native
+function setgroupoffensivemult(float mult) native
+function setavoidthreatchance(float chance) native
+function setmeleemult(float mult) native
+function setrangedmult(float mult) native
+function setmagicmult(float mult) native
+function setshoutmult(float mult) native
+function setstaffmult(float mult) native
+function setunarmedmult(float mult) native
+float function getmeleeattackstaggeredmult() native
+float function getmeleepowerattackstaggeredmult() native
+float function getmeleepowerattackblockingmult() native
+float function getmeleebashmult() native
+float function getmeleebashrecoiledmult() native
+float function getmeleebashattackmult() native
+float function getmeleebashpowerattackmult() native
+float function getmeleespecialattackmult() native
+bool function getallowdualwielding() native
+function setmeleeattackstaggeredmult(float mult) native
+function setmeleepowerattackstaggeredmult(float mult) native
+function setmeleepowerattackblockingmult(float mult) native
+function setmeleebashmult(float mult) native
+function setmeleebashrecoiledmult(float mult) native
+function setmeleebashattackmult(float mult) native
+function setmeleebashpowerattackmult(float mult) native
+function setmeleespecialattackmult(float mult) native
+function setallowdualwielding(bool allow) native
+float function getcloserangeduelingcirclemult() native
+float function getcloserangeduelingfallbackmult() native
+float function getcloserangeflankingflankdistance() native
+float function getcloserangeflankingstalktime() native
+function setcloserangeduelingcirclemult(float mult) native
+function setcloserangeduelingfallbackmult(float mult) native
+function setcloserangeflankingflankdistance(float mult) native
+function setcloserangeflankingstalktime(float mult) native
+float function getlongrangestrafemult() native
+function setlongrangestrafemult(float mult) native
+float function getflighthoverchance() native
+float function getflightdivebombchance() native
+float function getflightflyingattackchance() native
+function setflighthoverchance(float chance) native
+function setflightdivebombchance(float chance) native
+function setflightflyingattackchance(float mult) native
+;This file was cleaned with papyrusSourceHeadliner

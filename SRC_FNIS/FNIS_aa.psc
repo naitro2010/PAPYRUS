@@ -1,190 +1,124 @@
-Scriptname FNIS_aa Hidden
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-bool Function SetAnimGroup(actor ac, string animGroup, int base, int number, string mod, bool debugOutput = false) global
-endFunction
-
-bool Function SetAnimGroupEX(actor ac, string animGroup, int base, int number, string mod, bool debugOutput = false, bool skipForce3D = false) global
-endFunction
-
-int Function GetAAmodID(string myAAprefix, string mod, bool debugOutput = false) global
-endFunction
-
-int Function GetGroupBaseValue(int AAmodID, int AAgroupID, string mod, bool debugOutput = false) global
-endFunction
-
-int[] Function GetAllGroupBaseValues(int AAmodID, string mod, bool debugOutput = false) global
-endFunction
-
-int Function GetInstallationCRC() global
-endFunction
-
-Function GetAAsets(int nSets, int[] GroupId, int[] ModId, int[] Base, int[] Index, string mod, bool debugOutput = false) global
-endFunction
-
-int Function _mtidle() global
-endFunction
-
-int Function _1hmidle() global
-endFunction
-
-int Function _2hmidle() global
-endFunction
-
-int Function _2hwidle() global
-endFunction
-
-int Function _bowidle() global
-endFunction
-
-int Function _cbowidle() global
-endFunction
-
-int Function _h2hidle() global
-endFunction
-
-int Function _magidle() global
-endFunction
-
-int Function _sneakidle() global
-endFunction
-
-int Function _staffidle() global
-endFunction
-
-int Function _mt() global
-endFunction
-
-int Function _mtx() global
-endFunction
-
-int Function _mtturn() global
-endFunction
-
-int Function _1hmmt() global
-endFunction
-
-int Function _2hmmt() global
-endFunction
-
-int Function _bowmt() global
-endFunction
-
-int Function _magmt() global
-endFunction
-
-int Function _magcastmt() global
-endFunction
-
-int Function _sneakmt() global
-endFunction
-
-int Function _1hmatk() global
-endFunction
-
-int Function _1hmatkpow() global
-endFunction
-
-int Function _1hmblock() global
-endFunction
-
-int Function _1hmstag() global
-endFunction
-
-int Function _2hmatk() global
-endFunction
-
-int Function _2hmatkpow() global
-endFunction
-
-int Function _2hmblock() global
-endFunction
-
-int Function _2hmstag() global
-endFunction
-
-int Function _2hwatk() global
-endFunction
-
-int Function _2hwatkpow() global
-endFunction
-
-int Function _2hwblock() global
-endFunction
-
-int Function _2hwstag() global
-endFunction
-
-int Function _bowatk() global
-endFunction
-
-int Function _bowblock() global
-endFunction
-
-int Function _h2hatk() global
-endFunction
-
-int Function _h2hatkpow() global
-endFunction
-
-int Function _h2hstag() global
-endFunction
-
-int Function _magatk() global
-endFunction
-
-int Function _1hmeqp() global
-endFunction
-
-int Function _2hweqp() global
-endFunction
-
-int Function _2hmeqp() global
-endFunction
-
-int Function _axeeqp() global
-endFunction
-
-int Function _boweqp() global
-endFunction
-
-int Function _cboweqp() global
-endFunction
-
-int Function _dageqp() global
-endFunction
-
-int Function _h2heqp() global
-endFunction
-
-int Function _maceqp() global
-endFunction
-
-int Function _mageqp() global
-endFunction
-
-int Function _stfeqp() global
-endFunction
-
-int Function _shout() global
-endFunction
-
-int Function _magcon() global
-endFunction
-
-int Function _dw() global
-endFunction
-
-int Function _jump() global
-endFunction
-
-int Function _sprint() global
-endFunction
-
-int Function _shield() global
-endFunction
+scriptname fnis_aa hidden
+bool function setanimgroup(actor ac, string animgroup, int base, int number, string mod, bool debugoutput = false) global
+endfunction
+bool function setanimgroupex(actor ac, string animgroup, int base, int number, string mod, bool debugoutput = false, bool skipforce3d = false) global
+endfunction
+int function getaamodid(string myaaprefix, string mod, bool debugoutput = false) global
+endfunction
+int function getgroupbasevalue(int aamodid, int aagroupid, string mod, bool debugoutput = false) global
+endfunction
+int[] function getallgroupbasevalues(int aamodid, string mod, bool debugoutput = false) global
+endfunction
+int function getinstallationcrc() global
+endfunction
+function getaasets(int nsets, int[] groupid, int[] modid, int[] base, int[] index, string mod, bool debugoutput = false) global
+endfunction
+int function _mtidle() global
+endfunction
+int function _1hmidle() global
+endfunction
+int function _2hmidle() global
+endfunction
+int function _2hwidle() global
+endfunction
+int function _bowidle() global
+endfunction
+int function _cbowidle() global
+endfunction
+int function _h2hidle() global
+endfunction
+int function _magidle() global
+endfunction
+int function _sneakidle() global
+endfunction
+int function _staffidle() global
+endfunction
+int function _mt() global
+endfunction
+int function _mtx() global
+endfunction
+int function _mtturn() global
+endfunction
+int function _1hmmt() global
+endfunction
+int function _2hmmt() global
+endfunction
+int function _bowmt() global
+endfunction
+int function _magmt() global
+endfunction
+int function _magcastmt() global
+endfunction
+int function _sneakmt() global
+endfunction
+int function _1hmatk() global
+endfunction
+int function _1hmatkpow() global
+endfunction
+int function _1hmblock() global
+endfunction
+int function _1hmstag() global
+endfunction
+int function _2hmatk() global
+endfunction
+int function _2hmatkpow() global
+endfunction
+int function _2hmblock() global
+endfunction
+int function _2hmstag() global
+endfunction
+int function _2hwatk() global
+endfunction
+int function _2hwatkpow() global
+endfunction
+int function _2hwblock() global
+endfunction
+int function _2hwstag() global
+endfunction
+int function _bowatk() global
+endfunction
+int function _bowblock() global
+endfunction
+int function _h2hatk() global
+endfunction
+int function _h2hatkpow() global
+endfunction
+int function _h2hstag() global
+endfunction
+int function _magatk() global
+endfunction
+int function _1hmeqp() global
+endfunction
+int function _2hweqp() global
+endfunction
+int function _2hmeqp() global
+endfunction
+int function _axeeqp() global
+endfunction
+int function _boweqp() global
+endfunction
+int function _cboweqp() global
+endfunction
+int function _dageqp() global
+endfunction
+int function _h2heqp() global
+endfunction
+int function _maceqp() global
+endfunction
+int function _mageqp() global
+endfunction
+int function _stfeqp() global
+endfunction
+int function _shout() global
+endfunction
+int function _magcon() global
+endfunction
+int function _dw() global
+endfunction
+int function _jump() global
+endfunction
+int function _sprint() global
+endfunction
+int function _shield() global
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

@@ -1,1 +1,2 @@
-Scriptname Static Extends Form
+scriptname static extends form
+;This file was cleaned with papyrusSourceHeadliner

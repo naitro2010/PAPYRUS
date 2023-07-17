@@ -1,101 +1,94 @@
-Scriptname zadBoundCombatScript Extends Quest Hidden
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-zadLibs Property libs Auto
-zadConfig Property config Auto
-Package Property NPCBoundCombatPackage Auto
-Package Property NPCBoundCombatPackageSandbox Auto
-Spell Property ArmbinderDebuff Auto
-FormList Property zad_List_BCPerks Auto
-int Property ABC_ModID Auto
-int Property ABC_CRC Auto
-int Property ABC_h2heqp Auto
-int Property ABC_h2hidle Auto
-int Property ABC_h2hatkpow Auto
-int Property ABC_h2hatk Auto
-int Property ABC_h2hstag Auto
-int Property ABC_jump Auto
-int Property ABC_sneakmt Auto
-int Property ABC_sneakidle Auto
-int Property ABC_sprint Auto
-int Property ABC_shout Auto
-int Property ABC_mtx Auto
-int Property ABC_mt Auto
-int Property ABC_mtturn Auto
-int Property ABC_mtidle Auto
-int Property HBC_ModID Auto
-int Property HBC_CRC Auto
-int Property HBC_h2heqp Auto
-int Property HBC_h2hidle Auto
-int Property HBC_h2hatkpow Auto
-int Property HBC_h2hatk Auto
-int Property HBC_h2hstag Auto
-int Property HBC_jump Auto
-int Property HBC_sneakmt Auto
-int Property HBC_sneakidle Auto
-int Property HBC_sprint Auto
-int Property HBC_shout Auto
-int Property HBC_mtx Auto
-int Property HBC_mt Auto
-int Property HBC_mtturn Auto
-int Property HBC_mtidle Auto
-int Property PON_ModID Auto
-int Property PON_CRC Auto
-int Property PON_h2heqp Auto
-int Property PON_h2hidle Auto
-int Property PON_h2hatkpow Auto
-int Property PON_h2hatk Auto
-int Property PON_h2hstag Auto
-int Property PON_jump Auto
-int Property PON_sneakmt Auto
-int Property PON_sneakidle Auto
-int Property PON_sprint Auto
-int Property PON_shout Auto
-int Property PON_mtx Auto
-int Property PON_mt Auto
-int Property PON_mtturn Auto
-int Property PON_mtidle Auto
-
-Function UpdateValues()
-EndFunction
-Function CONFIG_ABC()
-EndFunction
-Function Maintenance_ABC()
-EndFunction
-bool Function HasCompatibleDevice(actor akActor)
-EndFunction
-Int Function GetPrimaryAAState(actor akActor)
-EndFunction
-Int Function GetSecondaryAAState(actor akActor)
-EndFunction
-Int Function SelectAnimationSet(actor akActor)
-EndFunction
-Function EvaluateAA(actor akActor)
-EndFunction
-Function ClearAA(actor akActor)
-EndFunction
-Function ResetExternalAA(actor akActor)
-EndFunction
-Function ApplyBCPerks(Actor akActor)
-EndFunction
-Function RemoveBCPerks(Actor akActor)
-EndFunction
-Function Apply_NPC_ABC(actor akActor)
-EndFunction
-Function Remove_NPC_ABC(actor akActor)
-EndFunction
-Function CleanupNPCs()
-EndFunction
-Function Apply_ABC(actor akActor)
-EndFunction
-Function Remove_ABC(actor akActor)
-EndFunction
-Function Apply_HBC(actor akActor)
-EndFunction
-Function Remove_HBC(actor akActor)
-EndFunction
+scriptname zadboundcombatscript extends quest hidden
+zadlibs property libs auto
+zadconfig property config auto
+package property npcboundcombatpackage auto
+package property npcboundcombatpackagesandbox auto
+spell property armbinderdebuff auto
+formlist property zad_list_bcperks auto
+int property abc_modid auto
+int property abc_crc auto
+int property abc_h2heqp auto
+int property abc_h2hidle auto
+int property abc_h2hatkpow auto
+int property abc_h2hatk auto
+int property abc_h2hstag auto
+int property abc_jump auto
+int property abc_sneakmt auto
+int property abc_sneakidle auto
+int property abc_sprint auto
+int property abc_shout auto
+int property abc_mtx auto
+int property abc_mt auto
+int property abc_mtturn auto
+int property abc_mtidle auto
+int property hbc_modid auto
+int property hbc_crc auto
+int property hbc_h2heqp auto
+int property hbc_h2hidle auto
+int property hbc_h2hatkpow auto
+int property hbc_h2hatk auto
+int property hbc_h2hstag auto
+int property hbc_jump auto
+int property hbc_sneakmt auto
+int property hbc_sneakidle auto
+int property hbc_sprint auto
+int property hbc_shout auto
+int property hbc_mtx auto
+int property hbc_mt auto
+int property hbc_mtturn auto
+int property hbc_mtidle auto
+int property pon_modid auto
+int property pon_crc auto
+int property pon_h2heqp auto
+int property pon_h2hidle auto
+int property pon_h2hatkpow auto
+int property pon_h2hatk auto
+int property pon_h2hstag auto
+int property pon_jump auto
+int property pon_sneakmt auto
+int property pon_sneakidle auto
+int property pon_sprint auto
+int property pon_shout auto
+int property pon_mtx auto
+int property pon_mt auto
+int property pon_mtturn auto
+int property pon_mtidle auto
+function updatevalues() 
+endfunction
+function config_abc()
+endfunction
+function maintenance_abc()
+endfunction
+bool function hascompatibledevice(actor akactor)
+endfunction
+int function getprimaryaastate(actor akactor)
+endfunction
+int function getsecondaryaastate(actor akactor)
+endfunction
+int function selectanimationset(actor akactor)
+endfunction
+function evaluateaa(actor akactor)
+endfunction
+function clearaa(actor akactor)
+endfunction
+function resetexternalaa(actor akactor)
+endfunction
+function applybcperks(actor akactor)
+endfunction
+function removebcperks(actor akactor)
+endfunction
+function apply_npc_abc(actor akactor)
+endfunction
+function remove_npc_abc(actor akactor)
+endfunction
+function cleanupnpcs()
+endfunction
+function apply_abc(actor akactor)
+endfunction
+function remove_abc(actor akactor)
+endfunction
+function apply_hbc(actor akactor)
+endfunction
+function remove_hbc(actor akactor)
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

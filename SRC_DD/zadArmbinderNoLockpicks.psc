@@ -1,18 +1,16 @@
-ScriptName zadArmbinderNoLockpicks extends ActiveMagicEffect
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-zadLibs Property Libs Auto
-actor Property Target Auto
-ObjectReference Property TheSafe Auto
-MiscObject Property Lockpick Auto
-
-Event OnEffectStart(Actor akTarget, Actor akCaster)
-EndEvent
-
-Event OnEffectFinish(Actor akTarget, Actor akCaster)
-EndEvent
+scriptname zadarmbindernolockpicks extends activemagiceffect
+zadlibs property libs auto
+actor property target auto
+objectreference property thesafe auto
+miscobject property lockpick auto
+event oneffectstart(actor aktarget, actor akcaster)
+endevent
+event oneffectfinish(actor aktarget, actor akcaster)
+endevent
+state normalmode
+event onbeginstate()
+endevent
+event onitemadded(form akbaseitem, int aiitemcount, objectreference akitemreference, objectreference aksourcecontainer)
+endevent
+endstate
+;This file was cleaned with papyrusSourceHeadliner

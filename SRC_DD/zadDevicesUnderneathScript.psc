@@ -1,40 +1,35 @@
-scriptname zadDevicesUnderneathScript extends Quest
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-zadLibs Property libs Auto
-Armor Property zad_DeviceHider Auto
-ArmorAddon Property zad_DeviceHiderAA Auto
-
-int[] Property SlotMaskFilters Auto
-int[] Property SlotMaskUsage Auto
-int[] Property ShiftCache Auto
-
-int Property SlotMask Auto ; Avoid repeated lookups
-
-Function SetDefaultSlotMasks()
-EndFunction
-Function HideEquipment(int slot1, int slot2)
-EndFunction
-Function Maintenance()
-EndFunction
-Function ApplySlotmask(Actor akActor)
-EndFunction
-Int Function FilterMask(Actor akActor, Int aiSloMask)
-EndFunction
-Bool Function IsDevice(Armor akArmor)
-EndFunction
-Function UpdateSlotmask(int index, int slot, bool equipOrUnequip)
-EndFunction
-Function RebuildSlotmask(actor akActor)
-EndFunction
-Function StartHiderMutex()
-EndFunction
-Function EndHiderMutex()
-EndFunction
-Function UpdateDeviceHiderSlot()
-EndFunction
+scriptname zaddevicesunderneathscript extends quest
+zadlibs property libs auto
+armor property zad_devicehider auto
+armoraddon property zad_devicehideraa auto
+int[] property slotmaskfilters auto
+int[] property slotmaskusage auto
+int[] property shiftcache auto
+int property slotmask auto ; avoid repeated lookups
+function setdefaultslotmasks()
+endfunction
+function hideequipment(int slot1, int slot2)
+endfunction
+function maintenance()
+endfunction
+function applyslotmask(actor akactor)
+endfunction
+int function filtermask(actor akactor, int aislomask)
+endfunction
+keyword property sos_schlongkw
+keyword function get()
+endfunction
+endproperty
+bool function isvalidforhide(armor akarmor)
+endfunction
+function updateslotmask(int index, int slot, bool equiporunequip)
+endfunction
+function rebuildslotmask(actor akactor)
+endfunction
+function starthidermutex()
+endfunction
+function endhidermutex()
+endfunction
+function updatedevicehiderslot()
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

@@ -1,231 +1,122 @@
-Scriptname Race extends Form Hidden
-
-; SKSE additions built 2015-05-24 00:46:48.937000 UTC
-; returns the number of spells for the race
-int Function GetSpellCount() native
-
-; returns the specified spell from the race
-Spell Function GetNthSpell(int n) native
-
-; returns whether the specified race flag is set
-bool Function IsRaceFlagSet(int n) native
-
-; sets the specified race flag
-Function SetRaceFlag(int n) native
-
-; clears the specified race flag
-Function ClearRaceFlag(int n) native
-
-; Returns the races default voice type
-VoiceType Function GetDefaultVoiceType(bool female) native
-
-; Sets the races default voice type
-Function SetDefaultVoiceType(bool female, VoiceType voice) native
-
-; Gets/sets the skin of the race
-Armor Function GetSkin() native
-Function SetSkin(Armor skin) native
-
-; Returns the number of playable races
-int Function GetNumPlayableRaces() native global
-
-; Returns the nth playable race
-Race Function GetNthPlayableRace(int n) native global
-
-; Returns a race by it's editorId name
-Race Function GetRace(string editorId) native global
-
-; race flags for previous functions
-int property kRace_Playable						= 0x00000001 AutoReadOnly
-int property kRace_FaceGenHead					= 0x00000002 AutoReadOnly
-int property kRace_Child						= 0x00000004 AutoReadOnly
-int property kRace_TiltFrontBack				= 0x00000008 AutoReadOnly
-int property kRace_TiltLeftRight				= 0x00000010 AutoReadOnly
-int property kRace_NoShadow						= 0x00000020 AutoReadOnly
-int property kRace_Swims						= 0x00000040 AutoReadOnly
-int property kRace_Flies						= 0x00000080 AutoReadOnly
-int property kRace_Walks						= 0x00000100 AutoReadOnly
-int property kRace_Immobile						= 0x00000200 AutoReadOnly
-int property kRace_NotPushable					= 0x00000400 AutoReadOnly
-int property kRace_NoCombatInWater				= 0x00000800 AutoReadOnly
-int property kRace_NoRotatingToHeadTrack		= 0x00001000 AutoReadOnly
-int property kRace_UseHeadTrackAnim				= 0x00008000 AutoReadOnly
-int property kRace_SpellsAlignWithMagicNode		= 0x00010000 AutoReadOnly
-int property kRace_UseWorldRaycasts				= 0x00020000 AutoReadOnly
-int property kRace_AllowRagdollCollision		= 0x00040000 AutoReadOnly
-int property kRace_CantOpenDoors				= 0x00100000 AutoReadOnly
-int property kRace_AllowPCDialogue				= 0x00200000 AutoReadOnly
-int property kRace_NoKnockdowns					= 0x00400000 AutoReadOnly
-int property kRace_AllowPickpocket				= 0x00800000 AutoReadOnly
-int property kRace_AlwaysUseProxyController		= 0x01000000 AutoReadOnly
-int property kRace_AllowMultipleMembraneShaders	= 0x20000000 AutoReadOnly
-int property kRace_AvoidsRoads					= 0x80000000 AutoReadOnly
-
-bool Function IsPlayable()
-	return IsRaceFlagSet(self.kRace_Playable)
-endFunction
-
-Function MakePlayable()
-	SetRaceFlag(self.kRace_Playable)
-endFunction
-
-Function MakeUnplayable()
-	ClearRaceFlag(self.kRace_Playable)
-endFunction
-
-bool Function IsChildRace()
-	return IsRaceFlagSet(self.kRace_Child)
-endFunction
-
-Function MakeChildRace()
-	SetRaceFlag(self.kRace_Child)
-endFunction
-
-Function MakeNonChildRace()
-	ClearRaceFlag(self.kRace_Child)
-endFunction
-
-bool Function CanFly()
-	return IsRaceFlagSet(self.kRace_Flies)
-endFunction
-
-Function MakeCanFly()
-	SetRaceFlag(self.kRace_Flies)
-endFunction
-
-Function MakeNonFlying()
-	ClearRaceFlag(self.kRace_Flies)
-endFunction
-
-bool Function CanSwim()
-	return IsRaceFlagSet(self.kRace_Swims)
-endFunction
-
-Function MakeCanSwim()
-	SetRaceFlag(self.kRace_Swims)
-endFunction
-
-Function MakeNonSwimming()
-	ClearRaceFlag(self.kRace_Swims)
-endFunction
-
-bool Function CanWalk()
-	return IsRaceFlagSet(self.kRace_Walks)
-endFunction
-
-Function MakeCanWalk()
-	SetRaceFlag(self.kRace_Walks)
-endFunction
-
-Function MakeNonWalking()
-	ClearRaceFlag(self.kRace_Walks)
-endFunction
-
-bool Function IsImmobile()
-	return IsRaceFlagSet(self.kRace_Immobile)
-endFunction
-
-Function MakeImmobile()
-	SetRaceFlag(self.kRace_Immobile)
-endFunction
-
-Function MakeMobile()
-	ClearRaceFlag(self.kRace_Immobile)
-endFunction
-
-bool Function IsNotPushable()
-	return IsRaceFlagSet(self.kRace_NotPushable)
-endFunction
-
-Function MakeNotPushable()
-	SetRaceFlag(self.kRace_NotPushable)
-endFunction
-
-Function MakePushable()
-	ClearRaceFlag(self.kRace_NotPushable)
-endFunction
-
-bool Function NoKnockdowns()
-	return IsRaceFlagSet(self.kRace_AllowPickpocket)
-endFunction
-
-Function MakeNoKnockdowns()
-	SetRaceFlag(self.kRace_AllowPickpocket)
-endFunction
-
-Function ClearNoKNockdowns()
-	ClearRaceFlag(self.kRace_AllowPickpocket)
-endFunction
-
-bool Function NoCombatInWater()
-	return IsRaceFlagSet(self.kRace_NoCombatInWater)
-endFunction
-
-Function SetNoCombatInWater()
-	SetRaceFlag(self.kRace_NoCombatInWater)
-endFunction
-
-Function ClearNoCombatInWater()
-	ClearRaceFlag(self.kRace_NoCombatInWater)
-endFunction
-
-bool Function AvoidsRoads()
-	return IsRaceFlagSet(self.kRace_AvoidsRoads)
-endFunction
-
-Function SetAvoidsRoads()
-	SetRaceFlag(self.kRace_AvoidsRoads)
-endFunction
-
-Function ClearAvoidsRoads()
-	ClearRaceFlag(self.kRace_AvoidsRoads)
-endFunction
-
-bool Function AllowPickpocket()
-	return IsRaceFlagSet(self.kRace_AllowPickpocket)
-endFunction
-
-Function SetAllowPickpocket()
-	SetRaceFlag(self.kRace_AllowPickpocket)
-endFunction
-
-Function ClearAllowPickpocket()
-	ClearRaceFlag(self.kRace_AllowPickpocket)
-endFunction
-
-bool Function AllowPCDialogue()
-	return IsRaceFlagSet(self.kRace_AllowPCDialogue)
-endFunction
-
-Function SetAllowPCDialogue()
-	SetRaceFlag(self.kRace_AllowPCDialogue)
-endFunction
-
-Function ClearAllowPCDialogue()
-	ClearRaceFlag(self.kRace_AllowPCDialogue)
-endFunction
-
-bool Function CantOpenDoors()
-	return IsRaceFlagSet(self.kRace_CantOpenDoors)
-endFunction
-
-Function SetCantOpenDoors()
-	SetRaceFlag(self.kRace_CantOpenDoors)
-endFunction
-
-Function ClearCantOpenDoors()
-	ClearRaceFlag(self.kRace_CantOpenDoors)
-endFunction
-
-bool Function NoShadow()
-	return IsRaceFlagSet(self.kRace_NoShadow)
-endFunction
-
-Function SetNoShadow()
-	SetRaceFlag(self.kRace_NoShadow)
-endFunction
-
-Function ClearNoShadow()
-	ClearRaceFlag(self.kRace_NoShadow)
-endFunction
-
+scriptname race extends form hidden
+int function getspellcount() native
+spell function getnthspell(int n) native
+bool function israceflagset(int n) native
+function setraceflag(int n) native
+function clearraceflag(int n) native
+voicetype function getdefaultvoicetype(bool female) native
+function setdefaultvoicetype(bool female, voicetype voice) native
+armor function getskin() native
+function setskin(armor skin) native
+int function getnumplayableraces() native global
+race function getnthplayablerace(int n) native global
+race function getrace(string editorid) native global
+int property krace_playable      = 0x00000001 autoreadonly
+int property krace_facegenhead     = 0x00000002 autoreadonly
+int property krace_child      = 0x00000004 autoreadonly
+int property krace_tiltfrontback    = 0x00000008 autoreadonly
+int property krace_tiltleftright    = 0x00000010 autoreadonly
+int property krace_noshadow      = 0x00000020 autoreadonly
+int property krace_swims      = 0x00000040 autoreadonly
+int property krace_flies      = 0x00000080 autoreadonly
+int property krace_walks      = 0x00000100 autoreadonly
+int property krace_immobile      = 0x00000200 autoreadonly
+int property krace_notpushable     = 0x00000400 autoreadonly
+int property krace_nocombatinwater    = 0x00000800 autoreadonly
+int property krace_norotatingtoheadtrack  = 0x00001000 autoreadonly
+int property krace_useheadtrackanim    = 0x00008000 autoreadonly
+int property krace_spellsalignwithmagicnode  = 0x00010000 autoreadonly
+int property krace_useworldraycasts    = 0x00020000 autoreadonly
+int property krace_allowragdollcollision  = 0x00040000 autoreadonly
+int property krace_cantopendoors    = 0x00100000 autoreadonly
+int property krace_allowpcdialogue    = 0x00200000 autoreadonly
+int property krace_noknockdowns     = 0x00400000 autoreadonly
+int property krace_allowpickpocket    = 0x00800000 autoreadonly
+int property krace_alwaysuseproxycontroller  = 0x01000000 autoreadonly
+int property krace_allowmultiplemembraneshaders = 0x20000000 autoreadonly
+int property krace_avoidsroads     = 0x80000000 autoreadonly
+bool function isplayable()
+endfunction
+function makeplayable()
+endfunction
+function makeunplayable()
+endfunction
+bool function ischildrace()
+endfunction
+function makechildrace()
+endfunction
+function makenonchildrace()
+endfunction
+bool function canfly()
+endfunction
+function makecanfly()
+endfunction
+function makenonflying()
+endfunction
+bool function canswim()
+endfunction
+function makecanswim()
+endfunction
+function makenonswimming()
+endfunction
+bool function canwalk()
+endfunction
+function makecanwalk()
+endfunction
+function makenonwalking()
+endfunction
+bool function isimmobile()
+endfunction
+function makeimmobile()
+endfunction
+function makemobile()
+endfunction
+bool function isnotpushable()
+endfunction
+function makenotpushable()
+endfunction
+function makepushable()
+endfunction
+bool function noknockdowns()
+endfunction
+function makenoknockdowns()
+endfunction
+function clearnoknockdowns()
+endfunction
+bool function nocombatinwater()
+endfunction
+function setnocombatinwater()
+endfunction
+function clearnocombatinwater()
+endfunction
+bool function avoidsroads()
+endfunction
+function setavoidsroads()
+endfunction
+function clearavoidsroads()
+endfunction
+bool function allowpickpocket()
+endfunction
+function setallowpickpocket()
+endfunction
+function clearallowpickpocket()
+endfunction
+bool function allowpcdialogue()
+endfunction
+function setallowpcdialogue()
+endfunction
+function clearallowpcdialogue()
+endfunction
+bool function cantopendoors()
+endfunction
+function setcantopendoors()
+endfunction
+function clearcantopendoors()
+endfunction
+bool function noshadow()
+endfunction
+function setnoshadow()
+endfunction
+function clearnoshadow()
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

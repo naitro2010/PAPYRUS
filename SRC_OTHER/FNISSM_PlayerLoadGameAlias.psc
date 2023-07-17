@@ -1,19 +1,10 @@
-scriptname FNISSM_PlayerLoadGameAlias extends ReferenceAlias
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-FNISSMquestScript Property FNISSMquest Auto
-Keyword Property ActorTypeNPC Auto
-
-bool DoMaleCheckOnce = true
-
-event OnPlayerLoadGame()
-endEvent
-Event OnCellLoad()
-endEvent
-Event OnRaceSwitchComplete()
-endEvent
+scriptname fnissm_playerloadgamealias extends referencealias
+fnissmquestscript property fnissmquest auto
+keyword property actortypenpc auto
+event onplayerloadgame()
+endevent
+event oncellload()
+endevent
+event onraceswitchcomplete()
+endevent
+;This file was cleaned with papyrusSourceHeadliner

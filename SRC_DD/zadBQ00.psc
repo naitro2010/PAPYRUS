@@ -1,225 +1,171 @@
-Scriptname zadBQ00 Extends zadBaseDeviceQuest Hidden
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-ReferenceAlias Property Alias_ArmBinderRescuer Auto
-ReferenceAlias Property Alias_Player Auto
-SexLabFramework property SexLab auto
-slaUtilScr Property Aroused Auto
-zadNPCQuestScript Property npcs Auto
-Message Property zad_eventSleepStopContent auto
-Message Property zad_eventSleepStopDesire auto
-Message Property zad_eventSleepStopHorny auto
-Message Property zad_eventSleepStopDesperate auto
-float Property modVersion Auto
-bool Property processMountedEvent Auto
-bool Property processDripEvent Auto
-bool Property processChafeMessageEvent Auto
-bool Property processHornyEvent Auto
-bool Property processTightBraEvent Auto
-bool Property processPostureCollarMessageEvent Auto
-bool Property processBumpPumpEvent Auto
-bool Property processBlindfoldEvent Auto
-bool Property processHarnessEvent Auto
-bool Property processPlugsEvent Auto
-bool Property Tainted Auto
-string[] Property Registry Auto
-
-function Shutdown(bool silent=false)
-EndFunction
-
-Event OnInit()
-EndEvent
-
-Event OnInitialize(string eventName, string strArg, float numArg, Form sender)
-EndEvent
-
-Function checkBlindfoldDarkFog()
-EndFunction
-
-Function Maintenance()
-EndFunction
-
-Function CheckCompatibility(string name, float required, float current)
-EndFunction
-
-Function VersionChecks()
-EndFunction
-
-function Rehook()
-EndFunction
-
-bool Function IsValidAnimation(sslBaseAnimation anim, bool permitOral, bool permitVaginal, bool permitAnal, bool permitBoobjob, bool HasBoundActors)
-EndFunction
-
-string Function GetAnimationNames(sslBaseAnimation[] anims)
-EndFunction
-
-sslBaseAnimation function GetBoundAnim(actor a, actor b, bool permitOral, bool permitVaginal, bool permitAnal, bool permitBoobjob)
-EndFunction
-
-String Function GetCreatureType(sslBaseAnimation previousAnim)
-EndFunction
-
-sslBaseAnimation[] function SelectValidDDAnimations(Actor[] actors, int count, bool forceaggressive = false, string includetag = "", string suppresstag = "")
+scriptname zadbq00 extends zadbasedevicequest hidden
+referencealias property alias_armbinderrescuer auto
+referencealias property alias_player auto
+function fragment_3()
 endfunction
-
-sslBaseAnimation[] function SelectValidAnimations(sslThreadController Controller, int count, sslBaseAnimation previousAnim, bool usingArmbinder, bool usingYoke,  bool HasBoundActors,  bool forceaggressive, bool permitOral, bool permitVaginal, bool permitAnal, bool permitBoobs)
+function fragment_4()
 endfunction
-
-string function getSuppressString(bool aggressive, bool boundArmbinder, bool boundYoke, bool permitOral, bool permitVaginal, bool permitAnal, bool permitBoobs, string suppresstag = "")	
+function fragment_1()
 endfunction
-
-string function getTagString(bool aggressive, string includetag = "")
+function fragment_2()
 endfunction
-
-int function CountRestrictedActors(actor[] actors, keyword permit, keyword restricted1, keyword restricted2=none, keyword restricted3=none)
-EndFunction
-
-int function CountBeltedActors(actor[] actors)
-EndFunction
-
-Function TogglePanelGag(actor[] actors, bool insert)
-EndFunction
-
-Function StoreHeavyBondage(actor[] originalActors)
-EndFunction
-
-Function RetrieveHeavyBondage(actor[] originalActors)
-EndFunction
-
-Function StoreBelts(actor[] originalActors)
-EndFunction
-
-Function RetrieveBelts(actor[] originalActors)
-EndFunction
-
-Function StoreGags(actor[] originalActors)
-EndFunction
-
-Function StoreUnblockedPlugs(actor[] originalActors)
-EndFunction
-
-Function StorePlugs(actor[] originalActors)
-EndFunction
-
-Function RetrievePlugs(actor[] originalActors)
-EndFunction
-
-Function RetrieveGags(actor[] originalActors)
-EndFunction
-
-Bool Function IsBlockedAnal(Actor akActor)
-EndFunction
-
-Bool Function IsBlockedVaginal(Actor akActor)
-EndFunction
-
-Bool Function IsBlockedBreast(Actor akActor)
-EndFunction
-
-Bool Function IsBlockedOral(Actor akActor)
-EndFunction
-
-Bool Function AnimHasNoProblematicDevices(sslThreadController Controller)
-EndFunction
-
-Bool Function StartValidDDAnimation(Actor[] SexActors, bool forceaggressive = false, string includetag = "", string suppresstag = "", Actor victim = None, Bool allowbed = False, string hook = "", bool nofallbacks = false)
-EndFunction
-
-function Logic(int threadID, bool HasPlayer)	
-EndFunction
-
-Function Wait_Animating_State(SslThreadController controller)
-EndFunction
-
-Bool Function HasBelt(Actor akActor)
-EndFunction
-
-Bool Function HasArmbinder(Actor akActor)
-EndFunction
-
-Bool Function HasYoke(Actor akActor)
-EndFunction
-
-Bool Function HasBBYoke(Actor akActor)
-EndFunction
-
-Bool Function HasFrontCuffs(Actor akActor)
-EndFunction
-
-Bool Function HasElbowbinder(Actor akActor)
-EndFunction
-
-Bool Function HasArmbinderNonStrict(Actor akActor)
-EndFunction
-
-Bool Function HasPetSuit(Actor akActor)
-EndFunction
-
-Bool Function HasHeavyBondage(Actor akActor)
-EndFunction
-
-Bool Function HasStraitJacket(Actor akActor)
-EndFunction
-
-Bool Function HasElbowShackles(Actor akActor)
-EndFunction
-
-sslBaseAnimation[] Function GetSoloAnimations(Actor akActor)
-EndFunction
-
-function ProcessSolos(actor[] solos)
-EndFunction
-
-Event OnAnimationStart(int threadID, bool HasPlayer)
-EndEvent
-
-Event OnLeadInEnd(int threadID, bool HasPlayer)
-EndEvent
-
-Event OnAnimationChange(int threadID, bool HasPlayer)
-EndEvent
-
-Function ChangeLockState(actor[] actors, bool lockState)
-EndFunction
-
-Event OnOrgasmStart(int threadID, bool HasPlayer)
-EndEvent
-
-Function RefreshBlindfoldState(actor[] actors)
-EndFunction
-
-Event OnAnimationEnd(int threadID, bool HasPlayer)
-EndEvent
-
-function RelieveSelf()
-EndFunction
-
-Event OnSleepStart(float afSleepStartTime, float afDesiredSleepEndTime)	
-EndEvent
-
-Event OnSleepStop(bool abInterrupted)
-EndEvent
-
-KeyWord Function GetKeywordByString(String s)
-EndFunction
-
-Event OnDDIEquipDevice(Form akActor, String DeviceType)
-EndEvent
-
-Event OnDDIRemoveDevice(Form akActor, String DeviceType)
-EndEvent
-
-Event OnDDICreateRestraintsKey(Form akActor)
-EndEvent
-	
-Event OnDDICreateChastityKey(Form akActor)
-EndEvent
-
-Event OnDDICreatePiercingKey(Form akActor)
-EndEvent
+function fragment_0()
+endfunction
+sexlabframework property sexlab auto
+slautilscr property aroused auto
+zadbeltedanims property zadanims  auto  
+zadnpcquestscript property npcs auto
+zadslboundanims property zadslanims auto
+zadarmbinderquestscript property abq auto
+zadyokequestscript property ybq auto
+zaddeviousmagic property zadmagic auto
+zadassets property assets auto
+zadbenchmark property benchmark auto
+message property zad_eventsleepstopcontent auto
+message property zad_eventsleepstopdesire auto
+message property zad_eventsleepstophorny auto
+message property zad_eventsleepstopdesperate auto
+float property modversion auto
+bool property processmountedevent auto
+bool property processdripevent auto
+bool property processchafemessageevent auto
+bool property processhornyevent auto
+bool property processtightbraevent auto ; name not applicable with current bra mesh, lol
+bool property processposturecollarmessageevent auto
+bool property processbumppumpevent auto
+bool property processblindfoldevent auto
+bool property processharnessevent auto
+bool property processplugsevent auto
+bool property tainted auto ; not going to offer support for tainted installations.
+string[] property registry auto
+function shutdown(bool silent=false)
+endfunction
+event oninit()
+endevent
+event oninitialize(string eventname, string strarg, float numarg, form sender)
+endevent
+function checkblindfolddarkfog()
+endfunction
+function maintenance()
+endfunction
+function checkcompatibility(string name, float required, float current)
+endfunction
+function versionchecks()
+endfunction
+function rehook()
+endfunction
+bool function isvalidanimation(sslbaseanimation anim, bool permitoral, bool permitvaginal, bool permitanal, bool permitboobjob, bool hasboundactors)
+endfunction
+string function getanimationnames(sslbaseanimation[] anims)
+endfunction
+sslbaseanimation function getboundanim(actor a, actor b, bool permitoral, bool permitvaginal, bool permitanal, bool permitboobjob)
+endfunction
+string function getcreaturetype(sslbaseanimation previousanim)
+endfunction
+sslbaseanimation[] function selectvalidddanimations(actor[] actors, int count, bool forceaggressive = false, string includetag = "", string suppresstag = "")
+endfunction
+sslbaseanimation[] function selectvalidanimations(sslthreadcontroller controller, int count, sslbaseanimation previousanim, bool usingarmbinder, bool usingyoke,  bool hasboundactors,  bool forceaggressive, bool permitoral, bool permitvaginal, bool permitanal, bool permitboobs)
+endfunction
+string function getsuppressstring(bool aggressive, bool boundarmbinder, bool boundyoke, bool permitoral, bool permitvaginal, bool permitanal, bool permitboobs, string suppresstag = "") 
+endfunction
+string function gettagstring(bool aggressive, string includetag = "")
+endfunction
+int function countrestrictedactors(actor[] actors, keyword permit, keyword restricted1, keyword restricted2=none, keyword restricted3=none)
+endfunction
+int function countbeltedactors(actor[] actors)
+endfunction
+function togglepanelgag(actor[] actors, bool insert)
+endfunction
+function storeheavybondage(actor[] originalactors)
+endfunction
+function retrieveheavybondage(actor[] originalactors)
+endfunction
+function storebelts(actor[] originalactors)
+endfunction
+function retrievebelts(actor[] originalactors)
+endfunction
+function storegags(actor[] originalactors)
+endfunction
+function storeunblockedplugs(actor[] originalactors)
+endfunction
+function storeplugs(actor[] originalactors)
+endfunction
+function retrieveplugs(actor[] originalactors)
+endfunction
+function retrievegags(actor[] originalactors)
+endfunction
+bool function isblockedanal(actor akactor)
+endfunction
+bool function isblockedvaginal(actor akactor)
+endfunction
+bool function isblockedbreast(actor akactor)
+endfunction
+bool function isblockedoral(actor akactor)
+endfunction
+bool function animhasnoproblematicdevices(sslthreadcontroller controller)
+endfunction
+bool function startvalidddanimation(actor[] sexactors, bool forceaggressive = false, string includetag = "", string suppresstag = "", actor victim = none, bool allowbed = false, string hook = "", bool nofallbacks = false)
+endfunction
+function logic(int threadid, bool hasplayer) 
+endfunction
+function wait_animating_state(sslthreadcontroller controller)
+endfunction
+bool function hasbelt(actor akactor)
+endfunction
+bool function hasarmbinder(actor akactor)
+endfunction
+bool function hasyoke(actor akactor)
+endfunction
+bool function hasbbyoke(actor akactor)
+endfunction
+bool function hasfrontcuffs(actor akactor)
+endfunction
+bool function haselbowbinder(actor akactor)
+endfunction
+bool function hasarmbindernonstrict(actor akactor)
+endfunction
+bool function haspetsuit(actor akactor)
+endfunction
+bool function hasheavybondage(actor akactor)
+endfunction
+bool function hasstraitjacket(actor akactor)
+endfunction
+bool function haselbowshackles(actor akactor)
+endfunction
+sslbaseanimation[] function getsoloanimations(actor akactor)
+endfunction
+function processsolos(actor[] solos)
+endfunction
+event onanimationstart(int threadid, bool hasplayer)
+endevent
+event onleadinend(int threadid, bool hasplayer)
+endevent
+event onanimationchange(int threadid, bool hasplayer)
+endevent
+function changelockstate(actor[] actors, bool lockstate)
+endfunction
+event onorgasmstart(int threadid, bool hasplayer)
+endevent
+function refreshblindfoldstate(actor[] actors)
+endfunction
+event onanimationend(int threadid, bool hasplayer)
+endevent
+function relieveself()
+endfunction
+event onsleepstart(float afsleepstarttime, float afdesiredsleependtime) 
+endevent
+event onsleepstop(bool abinterrupted)
+endevent
+keyword function getkeywordbystring(string s)
+endfunction
+event onddiequipdevice(form akactor, string devicetype)
+endevent
+event onddiremovedevice(form akactor, string devicetype)
+endevent
+event onddicreaterestraintskey(form akactor)
+endevent
+event onddicreatechastitykey(form akactor)
+endevent
+event onddicreatepiercingkey(form akactor)
+endevent 
+;This file was cleaned with papyrusSourceHeadliner

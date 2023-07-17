@@ -1,7 +1,4 @@
-Scriptname EquipSlot extends Form Hidden
-
-; Returns the number of parent slots
-int Function GetNumParents() native
-
-; Returns the Nth parent slot
-EquipSlot Function GetNthParent(int n) native
+scriptname equipslot extends form hidden
+int function getnumparents() native
+equipslot function getnthparent(int n) native
+;This file was cleaned with papyrusSourceHeadliner

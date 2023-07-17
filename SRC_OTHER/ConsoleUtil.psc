@@ -1,14 +1,8 @@
-scriptname ConsoleUtil Hidden
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-int function GetVersion() global native
-function PrintMessage(string text) global native
-string function ReadMessage() global native
-function ExecuteCommand(string text) global native
-ObjectReference function GetSelectedReference() global native
-function SetSelectedReference(ObjectReference obj) global native
+scriptname consoleutil hidden
+int function getversion() global native
+function printmessage(string text) global native
+string function readmessage() global native
+function executecommand(string text) global native
+objectreference function getselectedreference() global native
+function setselectedreference(objectreference obj) global native
+;This file was cleaned with papyrusSourceHeadliner

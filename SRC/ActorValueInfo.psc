@@ -1,66 +1,28 @@
-Scriptname ActorValueInfo extends Form Hidden
-
-; Returns the AVI by name
-ActorValueInfo Function GetActorValueInfoByName(string avName) global native
-ActorValueInfo Function GetAVIByName(string avName) global
-	return GetActorValueInfoByName(avName)
-EndFunction
-
-; Returns the AVI by id (0-164)
-ActorValueInfo Function GetActorValueInfoByID(int id) global native
-ActorValueInfo Function GetAVIByID(int id) global
-	return GetActorValueInfoByID(id)
-EndFunction
-
-; Returns whether this AVI is a skill
-bool Function IsSkill() native
-
-; Skill Multiplier manipulation
-float Function GetSkillUseMult() native
-Function SetSkillUseMult(float value) native
-
-float Function GetSkillOffsetMult() native
-Function SetSkillOffsetMult(float value) native
-
-float Function GetSkillImproveMult() native
-Function SetSkillImproveMult(float value) native
-
-float Function GetSkillImproveOffset() native
-Function SetSkillImproveOffset(float value) native
-
-; Returns the amount of experienced gained in this skill
-float Function GetSkillExperience() native
-
-; Does not trigger skill-up
-Function SetSkillExperience(float exp) native
-
-; Adds experience to this skill (Same as console AdvanceSkill, triggers skill-up)
-Function AddSkillExperience(float exp) native
-
-; Returns the experience required for skill-up
-; (ImproveMult * currentLevel ^ fSkillUseCurve + ImproveOffset)
-float Function GetExperienceForLevel(int currentLevel) native
-
-; Returns the legendary level of this skill
-int Function GetSkillLegendaryLevel() native
-
-; Sets the legendary level of this skill
-Function SetSkillLegendaryLevel(int level) native
-
-; Returns perks from the skill into the FormList
-; Actor filter applies to unowned and allRanks
-; unowned will add perks that the actor does not own, or only perks the actor owns
-; allRanks will add all ranks of each perk to the list, unowned/owned filter also applies
-Function GetPerkTree(FormList list, Actor akActor = None, bool unowned = true, bool allRanks = false) native
-
-; Same as GetPerkTree except returns into a new array
-Perk[] Function GetPerks(Actor akActor = None, bool unowned = true, bool allRanks = false) native
-
-; Same as Actor.GetActorValue (convenience function)
-float Function GetCurrentValue(Actor akActor) native
-
-; Same as Actor.GetBaseActorValue (convenience function)
-float Function GetBaseValue(Actor akActor) native
-
-; Acquires the Maximum value for the current ActorValue
-float Function GetMaximumValue(Actor akActor) native
+scriptname actorvalueinfo extends form hidden
+actorvalueinfo function getactorvalueinfobyname(string avname) global native
+actorvalueinfo function getavibyname(string avname) global
+endfunction
+actorvalueinfo function getactorvalueinfobyid(int id) global native
+actorvalueinfo function getavibyid(int id) global
+endfunction
+bool function isskill() native
+float function getskillusemult() native
+function setskillusemult(float value) native
+float function getskilloffsetmult() native
+function setskilloffsetmult(float value) native
+float function getskillimprovemult() native
+function setskillimprovemult(float value) native
+float function getskillimproveoffset() native
+function setskillimproveoffset(float value) native
+float function getskillexperience() native
+function setskillexperience(float exp) native
+function addskillexperience(float exp) native
+float function getexperienceforlevel(int currentlevel) native
+int function getskilllegendarylevel() native
+function setskilllegendarylevel(int level) native
+function getperktree(formlist list, actor akactor = none, bool unowned = true, bool allranks = false) native
+perk[] function getperks(actor akactor = none, bool unowned = true, bool allranks = false) native
+float function getcurrentvalue(actor akactor) native
+float function getbasevalue(actor akactor) native
+float function getmaximumvalue(actor akactor) native
+;This file was cleaned with papyrusSourceHeadliner

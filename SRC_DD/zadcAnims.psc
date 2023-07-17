@@ -1,24 +1,17 @@
-Scriptname zadcAnims extends sslAnimationFactory
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-SexlabFramework Property Sexlab Auto
-zadLibs Property libs Auto
-zadclibs Property clib Auto
-
-function LoadAnimations()
-EndFunction
-Function CreateDDZapPillorySex01(int id)
-EndFunction
-Function CreateDDZapPillorySex02(int id)
-EndFunction
-Function CreateDDZapPillorySex03(int id)
-EndFunction
-Function CreateDDZapPillorySex04(int id)
-EndFunction
-Function DDZapPilloryLick01(int id)
-EndFunction
+scriptname zadcanims extends sslanimationfactory
+sexlabframework property sexlab auto
+zadlibs property libs auto
+zadclibs property clib auto
+function loadanimations()
+endfunction
+function createddzappillorysex01(int id)
+endfunction
+function createddzappillorysex02(int id)
+endfunction
+function createddzappillorysex03(int id)
+endfunction
+function createddzappillorysex04(int id)
+endfunction
+function ddzappillorylick01(int id)
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

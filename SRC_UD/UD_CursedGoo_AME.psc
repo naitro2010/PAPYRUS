@@ -1,18 +1,7 @@
-Scriptname UD_CursedGoo_AME extends activemagiceffect  
-
-UDCustomDeviceMain Property UDCDmain auto
-UD_Libs Property UDlibs auto
-zadlibs Property libs auto
-Event OnEffectStart(Actor akTarget, Actor akCaster)
-    if !UDCDMain.UDmain.ActorIsValidForUD(akTarget)
-        return ;non valid actor, return
-    endif
-    UDCDmain.DisableActor(akTarget)
-    libs = UDCDmain.libs
-    UDlibs = UDCDmain.UDlibs
-    UDlibs.Update()
-    libs.LockDevice(akTarget,UDlibs.PunisherPiercing)
-    libs.LockDevice(akTarget,UDlibs.AbadonSuit)
-    libs.LockDevice(akTarget,UDlibs.PunisherArmbinder)
-    UDCDmain.EnableActor(akTarget)
-EndEvent
+scriptname ud_cursedgoo_ame extends activemagiceffect  
+udcustomdevicemain property udcdmain auto
+ud_libs property udlibs auto hidden
+zadlibs property libs auto
+event oneffectstart(actor aktarget, actor akcaster)
+endevent
+;This file was cleaned with papyrusSourceHeadliner

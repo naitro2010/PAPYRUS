@@ -1,1 +1,2 @@
-Scriptname Light extends Form Hidden
+scriptname light extends form hidden
+;This file was cleaned with papyrusSourceHeadliner

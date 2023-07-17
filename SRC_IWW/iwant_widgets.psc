@@ -1,164 +1,106 @@
-Scriptname iWant_Widgets extends SKI_WidgetBase
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-
-Int Function loadWidget(String filename, Int xpos = 10000, Int ypos = 10000, Bool visible = False)
-EndFunction
-
-Int Function loadLibraryWidget(String filename, Int xpos = 10000, Int ypos = 10000, Bool visible = False)
-EndFunction
-
-Int Function loadText(String displayString, String font = "$EverywhereFont", Int size = 24, Int xpos = 10000, Int ypos = 10000, Bool visible = False)
-EndFunction
-
-Int Function loadMeter(Int xpos = 10000, Int ypos = 10000, Bool visible = False)
-EndFunction
-
-Function _waitForReadyToLoad()
-EndFunction
-
-String Function _getMessageFromFlash()
-EndFunction
-
-Function setMeterPercent(Int id, Int percent)
-EndFunction
-
-Function setMeterFillDirection(Int id, String direction)
-EndFunction
-
-Function sendToBack(Int id)
-EndFunction
-
-Function sendToFront(Int id)
-EndFunction
-
-Function doMeterFlash(Int id)
-EndFunction
-
-Function setMeterRGB(Int id, Int lightR = 255, Int lightG = 255, Int lightB = 255, Int darkR = 0, Int darkG = 0, Int darkB = 0, Int flashR = 127, Int flashG = 127, Int flashB = 127)
-EndFunction
-
-Function setText(Int id, String displayString)
-EndFunction
-
-Function appendText(Int id, String displayString)
-EndFunction
-
-Function swapDepths(Int id1, Int id2)
-EndFunction
-
-Function setPos(Int id, Int xpos, Int ypos)
-EndFunction
-
-Function setSize(Int id, Int h, Int w)
-EndFunction
-
-Int Function getXsize(Int id)
-EndFunction
-
-Int Function getYsize(Int id)
-EndFunction
-
-Function setZoom(Int id, Int xscale, Int yscale)
-EndFunction
-
-Function setVisible(Int id, Int visible = 1)
-EndFunction
-
-Function setRotation(Int id, Int rotation)
-EndFunction
-
-Function setTransparency(Int id, Int a)
-EndFunction
-
-Function setRGB(Int id, Int r, Int g, Int b)
-EndFunction
-
-Function destroy(Int id)
-EndFunction
-
-Function drawShapeLine(Int[] list, Int XPos = 639, Int YPos = 359, Int XChange = 25, Int YChange = 25, Bool skipInvisible = True, Bool skipAlpha0 = True)
-EndFunction
-
-Function drawShapeCircle(Int[] list, Int XPos = 639, Int YPos = 359, Int radius = 50, Int startAngle = 0, Int degreeChange = 45, Bool skipInvisible = True, Bool skipAlpha0 = True, Bool autoSpace = False)
-EndFunction
-
-Function drawShapeOrbit(Int[] list, Int XPos = 639, Int YPos = 359, Int radius = 50, Int startAngle = 0, Int degreeChange = 45, Bool skipInvisible = True, Bool skipAlpha0 = True, Bool autoSpace = False)
-EndFunction
-
-Function doTransition(Int id, Int targetValue, Int frames = 60, String targetAttribute = "alpha", String easingClass = "none", String easingMethod = "none", Int delay = 0)
-EndFunction
-
-Function doTransitionByFrames(Int id, Int targetValue, Int frames = 120, String targetAttribute = "alpha", String easingClass = "none", String easingMethod = "none", Int delay = 0, Int fps = 60)
-EndFunction
-
-Function doTransitionByTime(Int id, Int targetValue, Float seconds = 2.0, String targetAttribute = "alpha", String easingClass = "none", String easingMethod = "none", Float delay = 0.0)
-EndFunction
-
-Function setAllVisible(Bool visible = True)
-EndFunction
-
-String Function _serializeArray(String[] a)
-EndFunction
-
-Function logWidgetData(Int id)
-EndFunction
-
-Function triggerReset()
-EndFunction
-
-Event OniWantWidgetsReset(String eventName, String strArg, Float numArg, Form sender)
-EndEvent
-
-Function setSkyrimTemperature(Int level)
-EndFunction
-
-Function setSkyrimHealthMeterPercent(Int percent)
-EndFunction
-
-Function setSkyrimStaminaMeterPercent(Int percent)
-EndFunction
-
-Function setSkyrimMagickaMeterPercent(Int percent)
-EndFunction
-
-String Function _getSkyrimTargetBase(String element)
-EndFunction
-
-Function setSkyrimTransparency(String element, Int a = 100)
-EndFunction
-
-Function setSkyrimZoom(String element, Int xscale = 100, Int yscale = 100)
-EndFunction
-
-Function setSkyrimVisible(String element, Int visible = 1)
-EndFunction
-
-Function _setSkyrimPos(String element, Int xpos = 0, Int ypos = 0)
-EndFunction
-
-Int Function _getSkyrimXPos(String element)
-EndFunction
-
-Int Function _getSkyrimYPos(String element)
-EndFunction
-
-Function _setSkyrimSize(String element, Int h, Int w)
-EndFunction
-
-Function _setSkyrimRotation(String element, Int rot = 0)
-EndFunction
-
-Event OnWidgetReset()
-EndEvent
-
-String Function GetWidgetSource()
-EndFunction
-
-String Function GetWidgetType()
-endFunction
+scriptname iwant_widgets extends ski_widgetbase
+int function loadwidget(string filename, int xpos = 10000, int ypos = 10000, bool visible = false)
+endfunction
+int function loadlibrarywidget(string filename, int xpos = 10000, int ypos = 10000, bool visible = false)
+endfunction
+int function loadtext(string displaystring, string font = "$everywherefont", int size = 24, int xpos = 10000, int ypos = 10000, bool visible = false)
+endfunction
+int function loadmeter(int xpos = 10000, int ypos = 10000, bool visible = false)
+endfunction
+function _waitforreadytoload()
+endfunction
+string function _getmessagefromflash()
+endfunction
+function setmeterpercent(int id, int percent)
+endfunction
+function setmeterfilldirection(int id, string direction)
+endfunction
+function sendtoback(int id)
+endfunction
+function sendtofront(int id)
+endfunction
+function dometerflash(int id)
+endfunction
+function setmeterrgb(int id, int lightr = 255, int lightg = 255, int lightb = 255, int darkr = 0, int darkg = 0, int darkb = 0, int flashr = 127, int flashg = 127, int flashb = 127)
+endfunction
+function settext(int id, string displaystring)
+endfunction
+function appendtext(int id, string displaystring)
+endfunction
+function swapdepths(int id1, int id2)
+endfunction
+function setpos(int id, int xpos, int ypos)
+endfunction
+function setsize(int id, int h, int w)
+endfunction
+int function getxsize(int id)
+endfunction
+int function getysize(int id)
+endfunction
+function setzoom(int id, int xscale, int yscale)
+endfunction
+function setvisible(int id, int visible = 1)
+endfunction
+function setrotation(int id, int rotation)
+endfunction
+function settransparency(int id, int a)
+endfunction
+function setrgb(int id, int r, int g, int b)
+endfunction
+function destroy(int id)
+endfunction
+function drawshapeline(int[] list, int xpos = 639, int ypos = 359, int xchange = 25, int ychange = 25, bool skipinvisible = true, bool skipalpha0 = true)
+endfunction
+function drawshapecircle(int[] list, int xpos = 639, int ypos = 359, int radius = 50, int startangle = 0, int degreechange = 45, bool skipinvisible = true, bool skipalpha0 = true, bool autospace = false)
+endfunction
+function drawshapeorbit(int[] list, int xpos = 639, int ypos = 359, int radius = 50, int startangle = 0, int degreechange = 45, bool skipinvisible = true, bool skipalpha0 = true, bool autospace = false)
+endfunction
+function dotransition(int id, int targetvalue, int frames = 60, string targetattribute = "alpha", string easingclass = "none", string easingmethod = "none", int delay = 0)
+endfunction
+function dotransitionbyframes(int id, int targetvalue, int frames = 120, string targetattribute = "alpha", string easingclass = "none", string easingmethod = "none", int delay = 0, int fps = 60)
+endfunction
+function dotransitionbytime(int id, int targetvalue, float seconds = 2.0, string targetattribute = "alpha", string easingclass = "none", string easingmethod = "none", float delay = 0.0)
+endfunction
+function setallvisible(bool visible = true)
+endfunction
+string function _serializearray(string[] a)
+endfunction
+function logwidgetdata(int id)
+endfunction
+function triggerreset()
+endfunction
+event oniwantwidgetsreset(string eventname, string strarg, float numarg, form sender)
+endevent
+function setskyrimtemperature(int level)
+endfunction
+function setskyrimhealthmeterpercent(int percent)
+endfunction
+function setskyrimstaminameterpercent(int percent)
+endfunction
+function setskyrimmagickameterpercent(int percent)
+endfunction
+string function _getskyrimtargetbase(string element)
+endfunction
+function setskyrimtransparency(string element, int a = 100)
+endfunction
+function setskyrimzoom(string element, int xscale = 100, int yscale = 100)
+endfunction
+function setskyrimvisible(string element, int visible = 1)
+endfunction
+function _setskyrimpos(string element, int xpos = 0, int ypos = 0)
+endfunction
+int function _getskyrimxpos(string element)
+endfunction
+int function _getskyrimypos(string element)
+endfunction
+function _setskyrimsize(string element, int h, int w)
+endfunction
+function _setskyrimrotation(string element, int rot = 0)
+endfunction
+event onwidgetreset()
+endevent
+string function getwidgetsource()
+endfunction
+string function getwidgettype()
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

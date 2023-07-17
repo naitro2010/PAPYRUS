@@ -1,26 +1,13 @@
-Scriptname ConstructibleObject extends MiscObject Hidden
-
-; SKSE additions built 2015-05-24 00:46:48.937000 UTC
-
-; Gets/Sets the result of this recipe
-Form Function GetResult() native
-Function SetResult(Form result) native
-
-; Gets/Sets the amount of results of this recipe
-int Function GetResultQuantity() native
-Function SetResultQuantity(int quantity) native
-
-; Gets the number of ingredients
-int Function GetNumIngredients() native
-
-; Gets/Sets the Nth ingredient required
-Form Function GetNthIngredient(int n) native
-Function SetNthIngredient(Form required, int n) native
-
-; Gets/Sets the quantity of Nth ingredient required
-int Function GetNthIngredientQuantity(int n) native
-Function SetNthIngredientQuantity(int value, int n) native
-
-; Gets/Sets the Workbench keyword (Which apparatus creates this)
-Keyword Function GetWorkbenchKeyword() native
-Function SetWorkbenchKeyword(Keyword aKeyword) native
+scriptname constructibleobject extends miscobject hidden
+form function getresult() native
+function setresult(form result) native
+int function getresultquantity() native
+function setresultquantity(int quantity) native
+int function getnumingredients() native
+form function getnthingredient(int n) native
+function setnthingredient(form required, int n) native
+int function getnthingredientquantity(int n) native
+function setnthingredientquantity(int value, int n) native
+keyword function getworkbenchkeyword() native
+function setworkbenchkeyword(keyword akeyword) native
+;This file was cleaned with papyrusSourceHeadliner

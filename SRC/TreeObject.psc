@@ -1,7 +1,6 @@
-Scriptname TreeObject extends Form Hidden
-
-SoundDescriptor Function GetHarvestSound() native
-Function SetHarvestSound(SoundDescriptor akSoundDescriptor) native
-
-Form Function GetIngredient() native
-Function SetIngredient(Form akIngredient) native
+scriptname treeobject extends form hidden
+sounddescriptor function getharvestsound() native
+function setharvestsound(sounddescriptor aksounddescriptor) native
+form function getingredient() native
+function setingredient(form akingredient) native
+;This file was cleaned with papyrusSourceHeadliner

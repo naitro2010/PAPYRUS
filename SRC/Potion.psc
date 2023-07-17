@@ -1,53 +1,19 @@
-Scriptname Potion extends Form
-
-; Is this postion classified as hostile?
-bool Function IsHostile() native
-
-; SKSE additions built 2015-05-24 00:46:48.937000 UTC
-; Is this potion classified as Food?
-bool Function IsFood() native
-
-; Is this potion classified as Poison?
-bool Function IsPoison() native
-
-; return the number of the effects
-int Function GetNumEffects() native
-
-; return the magnitude of the specified effect
-float Function GetNthEffectMagnitude(int index) native
-
-; return the area of the specified effect
-int Function GetNthEffectArea(int index) native
-
-; return the duration of the specified effect
-int Function GetNthEffectDuration(int index) native
-
-; return the magic effect of the specified effect
-MagicEffect Function GetNthEffectMagicEffect(int index) native
-
-; return the index of the costliest effect
-int Function GetCostliestEffectIndex() native
-
-; sets the magnitude of the specified effect
-Function SetNthEffectMagnitude(int index, float value) native
-
-; sets the area of the specified effect
-Function SetNthEffectArea(int index, int value) native
-
-; sets the duration of the specified effect
-Function SetNthEffectDuration(int index, int value) native
-
-; gets the use sound of this potion
-SoundDescriptor Function GetUseSound() native
-
-; Returns all the magnitudes of this object in order
-float[] Function GetEffectMagnitudes() native
-
-; Returns all the areas of this object in order
-int[] Function GetEffectAreas() native
-
-; Returns all the durations of this object in order
-int[] Function GetEffectDurations() native
-
-; Returns all the magic effects of this object in order
-MagicEffect[] Function GetMagicEffects() native
+scriptname potion extends form
+bool function ishostile() native
+bool function isfood() native
+bool function ispoison() native
+int function getnumeffects() native
+float function getntheffectmagnitude(int index) native
+int function getntheffectarea(int index) native
+int function getntheffectduration(int index) native
+magiceffect function getntheffectmagiceffect(int index) native
+int function getcostliesteffectindex() native
+function setntheffectmagnitude(int index, float value) native
+function setntheffectarea(int index, int value) native
+function setntheffectduration(int index, int value) native
+sounddescriptor function getusesound() native
+float[] function geteffectmagnitudes() native
+int[] function geteffectareas() native
+int[] function geteffectdurations() native
+magiceffect[] function getmagiceffects() native
+;This file was cleaned with papyrusSourceHeadliner

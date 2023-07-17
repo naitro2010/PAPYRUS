@@ -1,67 +1,42 @@
-Scriptname UIListMenu extends UIMenuBase
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-string property		ROOT_MENU		= "CustomMenu" autoReadonly
-string Property 	MENU_ROOT		= "_root.listMenu." autoReadonly
-
-int Function GetResultInt()
-EndFunction
-
-float Function GetResultFloat()
-EndFunction
-
-string Function GetResultString()
-EndFunction
-
-Function SetPropertyInt(string propertyName, int value)
-EndFunction
-
-Function SetPropertyBool(string propertyName, bool value)
-EndFunction
-
-Function SetPropertyStringA(string propertyName, string[] value)
-EndFunction
-
-int Function AddEntryItem(string entryName, int entryParent = -1, int entryCallback = -1, bool entryHasChildren = false)
-EndFunction
-
-Function SetPropertyIndexInt(string propertyName, int index, int value)
-EndFunction
-
-Function SetPropertyIndexBool(string propertyName, int index, bool value)
-EndFunction
-
-Function SetPropertyIndexString(string propertyName, int index, string value)
-EndFunction
-
-int Function GetPropertyInt(string propertyName)
-EndFunction
-
-Function OnInit()
-EndFunction
-
-Function ResetMenu()
-EndFunction
-
-int Function OpenMenu(Form aForm = None, Form aReceiver = None)
-EndFunction
-
-string Function GetMenuName()
-EndFunction
-
-Event OnSelect(string eventName, string strArg, float numArg, Form formArg)
-EndEvent
-
-Event OnSelectText(string eventName, string strArg, float numArg, Form formArg)
-EndEvent
-
-Event OnLoadMenu(string eventName, string strArg, float numArg, Form formArg)
-EndEvent
-
-Event OnUnloadMenu(string eventName, string strArg, float numArg, Form formArg)
-EndEvent
+scriptname uilistmenu extends uimenubase
+string property  root_menu  = "custommenu" autoreadonly
+string property  menu_root  = "_root.listmenu." autoreadonly
+int function getresultint()
+endfunction
+float function getresultfloat()
+endfunction
+string function getresultstring()
+endfunction
+function setpropertyint(string propertyname, int value)
+endfunction
+function setpropertybool(string propertyname, bool value)
+endfunction
+function setpropertystringa(string propertyname, string[] value)
+endfunction
+int function addentryitem(string entryname, int entryparent = -1, int entrycallback = -1, bool entryhaschildren = false)
+endfunction
+function setpropertyindexint(string propertyname, int index, int value)
+endfunction
+function setpropertyindexbool(string propertyname, int index, bool value)
+endfunction
+function setpropertyindexstring(string propertyname, int index, string value)
+endfunction
+int function getpropertyint(string propertyname)
+endfunction
+function oninit()
+endfunction
+function resetmenu()
+endfunction
+int function openmenu(form aform = none, form areceiver = none)
+endfunction
+string function getmenuname()
+endfunction
+event onselect(string eventname, string strarg, float numarg, form formarg)
+endevent
+event onselecttext(string eventname, string strarg, float numarg, form formarg)
+endevent
+event onloadmenu(string eventname, string strarg, float numarg, form formarg)
+endevent
+event onunloadmenu(string eventname, string strarg, float numarg, form formarg)
+endevent
+;This file was cleaned with papyrusSourceHeadliner

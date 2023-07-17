@@ -1,319 +1,180 @@
-scriptname SKI_ConfigBase extends SKI_QuestBase
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-; CONSTANTS ---------------------------------------------------------------------------------------
-
-int property		OPTION_FLAG_NONE		= 0x00 autoReadonly
-int property		OPTION_FLAG_DISABLED	= 0x01 autoReadonly
-int property		OPTION_FLAG_HIDDEN		= 0x02 autoReadonly			; @since 3
-int property		OPTION_FLAG_WITH_UNMAP	= 0x04 autoReadonly			; @since 3
-
-int property		LEFT_TO_RIGHT			= 1	autoReadonly
-int property		TOP_TO_BOTTOM			= 2 autoReadonly
-
-
-; PROPERTIES --------------------------------------------------------------------------------------
-
-string property		ModName auto
-
-string[] property	Pages auto
-
-string property		CurrentPage
-	string function get()
-		Guard()
-		return  ""
-	endFunction
-endProperty
-
-
-; EVENTS ------------------------------------------------------------------------------------------
-
-event OnConfigInit()
-endEvent
-
-event OnConfigRegister()
-endEvent
-
-event OnConfigOpen()
-endEvent
-
-event OnConfigClose()
-endEvent
-
-event OnVersionUpdate(int aVersion)
-endEvent
-
-event OnPageReset(string a_page)
-endEvent
-
-event OnOptionHighlight(int a_option)
-endEvent
-
-event OnOptionSelect(int a_option)
-endEvent
-
-event OnOptionDefault(int a_option)
-endEvent
-
-event OnOptionSliderOpen(int a_option)
-endEvent
-
-event OnOptionSliderAccept(int a_option, float a_value)
-endEvent
-
-event OnOptionMenuOpen(int a_option)
-endEvent
-
-event OnOptionMenuAccept(int a_option, int a_index)
-endEvent
-
-event OnOptionColorOpen(int a_option)
-endEvent
-
-event OnOptionColorAccept(int a_option, int a_color)
-endEvent
-
-event OnOptionKeyMapChange(int a_option, int a_keyCode, string a_conflictControl, string a_conflictName)
-endEvent
-
-; @since 4
-event OnOptionInputOpen(int a_option)
-endEvent
-
-; @since 4
-event OnOptionInputAccept(int a_option, string a_input)
-endEvent
-
-; @since 2
-event OnHighlightST()
-endEvent
-
-; @since 2
-event OnSelectST()
-endEvent
-
-; @since 2
-event OnDefaultST()
-endEvent
-
-; @since 2
-event OnSliderOpenST()
-endEvent
-
-; @since 2
-event OnSliderAcceptST(float a_value)
-endEvent
-
-; @since 2
-event OnMenuOpenST()
-endEvent
-
-; @since 2
-event OnMenuAcceptST(int a_index)
-endEvent
-
-; @since 2
-event OnColorOpenST()
-endEvent
-
-; @since 2
-event OnColorAcceptST(int a_color)
-endEvent
-
-; @since 2
-event OnKeyMapChangeST(int a_keyCode, string a_conflictControl, string a_conflictName)
-endEvent
-
-; @since 4
-event OnInputOpenST()
-endEvent
-
-; @since 4
-event OnInputAcceptST(string a_input)
-endEvent
-
-
-; FUNCTIONS ---------------------------------------------------------------------------------------
-
-int function GetVersion()
-endFunction
-
-string function GetCustomControl(int a_keyCode)
-endFunction
-
-function ForcePageReset()
-endFunction
-
-function SetTitleText(string a_text)
-endFunction
-
-function SetInfoText(string a_text)
-endFunction
-
-function SetCursorPosition(int a_position)
-endFunction
-
-function SetCursorFillMode(int a_fillMode)
-endFunction
-
-int function AddEmptyOption()
-endFunction
-
-int function AddHeaderOption(string a_text, int a_flags = 0)
-endFunction
-
-int function AddTextOption(string a_text, string a_value, int a_flags = 0)
-endFunction
-
-int function AddToggleOption(string a_text, bool a_checked, int a_flags = 0)
+scriptname ski_configbase extends ski_questbase
+int property  option_flag_none  = 0x00 autoreadonly
+int property  option_flag_disabled = 0x01 autoreadonly
+int property  option_flag_hidden  = 0x02 autoreadonly   ; @since 3
+int property  option_flag_with_unmap = 0x04 autoreadonly   ; @since 3
+int property  left_to_right   = 1 autoreadonly
+int property  top_to_bottom   = 2 autoreadonly
+string property  modname auto
+string[] property pages auto
+string property  currentpage
+string function get()
 endfunction
-
-int function AddSliderOption(string a_text, float a_value, string a_formatString = "{0}", int a_flags = 0)
-endFunction
-
-int function AddMenuOption(string a_text, string a_value, int a_flags = 0)
-endFunction
-
-int function AddColorOption(string a_text, int a_color, int a_flags = 0)
-endFunction
-
-int function AddKeyMapOption(string a_text, int a_keyCode, int a_flags = 0)
-endFunction
-
-; @since 4
-int function AddInputOption(string a_text, string a_value, int a_flags = 0)
-endFunction
-
-; @since 2
-function AddTextOptionST(string a_stateName, string a_text, string a_value, int a_flags = 0)
-endFunction
-
-; @since 2
-function AddToggleOptionST(string a_stateName, string a_text, bool a_checked, int a_flags = 0)
+endproperty
+event onconfiginit()
+endevent
+event onconfigregister()
+endevent
+event onconfigopen()
+endevent
+event onconfigclose()
+endevent
+event onversionupdate(int aversion)
+endevent
+event onpagereset(string a_page)
+endevent
+event onoptionhighlight(int a_option)
+endevent
+event onoptionselect(int a_option)
+endevent
+event onoptiondefault(int a_option)
+endevent
+event onoptionslideropen(int a_option)
+endevent
+event onoptionslideraccept(int a_option, float a_value)
+endevent
+event onoptionmenuopen(int a_option)
+endevent
+event onoptionmenuaccept(int a_option, int a_index)
+endevent
+event onoptioncoloropen(int a_option)
+endevent
+event onoptioncoloraccept(int a_option, int a_color)
+endevent
+event onoptionkeymapchange(int a_option, int a_keycode, string a_conflictcontrol, string a_conflictname)
+endevent
+event onoptioninputopen(int a_option)
+endevent
+event onoptioninputaccept(int a_option, string a_input)
+endevent
+event onhighlightst()
+endevent
+event onselectst()
+endevent
+event ondefaultst()
+endevent
+event onslideropenst()
+endevent
+event onslideracceptst(float a_value)
+endevent
+event onmenuopenst()
+endevent
+event onmenuacceptst(int a_index)
+endevent
+event oncoloropenst()
+endevent
+event oncoloracceptst(int a_color)
+endevent
+event onkeymapchangest(int a_keycode, string a_conflictcontrol, string a_conflictname)
+endevent
+event oninputopenst()
+endevent
+event oninputacceptst(string a_input)
+endevent
+int function getversion()
 endfunction
-
-; @since 2
-function AddSliderOptionST(string a_stateName, string a_text, float a_value, string a_formatString = "{0}", int a_flags = 0)
-endFunction
-
-; @since 2
-function AddMenuOptionST(string a_stateName, string a_text, string a_value, int a_flags = 0)
-endFunction
-
-; @since 2
-function AddColorOptionST(string a_stateName, string a_text, int a_color, int a_flags = 0)
-endFunction
-
-; @since 2
-function AddKeyMapOptionST(string a_stateName, string a_text, int a_keyCode, int a_flags = 0)
-endFunction
-
-; @since 4
-function AddInputOptionST(string a_stateName, string a_text, string a_value, int a_flags = 0)
-endFunction
-
-function LoadCustomContent(string a_source, float a_x = 0.0, float a_y = 0.0)
-endFunction
-
-function UnloadCustomContent()
-endFunction
-
-function SetOptionFlags(int a_option, int a_flags, bool a_noUpdate = false)
-endFunction
-
-function SetTextOptionValue(int a_option, string a_value, bool a_noUpdate = false)
-endFunction
-
-function SetToggleOptionValue(int a_option, bool a_checked, bool a_noUpdate = false)
+string function getcustomcontrol(int a_keycode)
 endfunction
-
-function SetSliderOptionValue(int a_option, float a_value, string a_formatString = "{0}", bool a_noUpdate = false)
-endFunction
-
-function SetMenuOptionValue(int a_option, string a_value, bool a_noUpdate = false)
-endFunction
-
-function SetColorOptionValue(int a_option, int a_color, bool a_noUpdate = false)
-endFunction
-
-function SetKeyMapOptionValue(int a_option, int a_keyCode, bool a_noUpdate = false)
-endFunction
-
-; @since 4
-function SetInputOptionValue(int a_option, string a_value, bool a_noUpdate = false)
-endFunction
-
-; @since 2
-function SetOptionFlagsST(int a_flags, bool a_noUpdate = false, string a_stateName = "")
-endFunction
-
-; @since 2
-function SetTextOptionValueST(string a_value, bool a_noUpdate = false, string a_stateName = "")
-endFunction
-
-; @since 2
-function SetToggleOptionValueST(bool a_checked, bool a_noUpdate = false, string a_stateName = "")
-endFunction
-
-; @since 2
-function SetSliderOptionValueST(float a_value, string a_formatString = "{0}", bool a_noUpdate = false, string a_stateName = "")
-endFunction
-
-; @since 2
-function SetMenuOptionValueST(string a_value, bool a_noUpdate = false, string a_stateName = "")
-endFunction
-
-; @since 2
-function SetColorOptionValueST(int a_color, bool a_noUpdate = false, string a_stateName = "")
-endFunction
-
-; @since 2
-function SetKeyMapOptionValueST(int a_keyCode, bool a_noUpdate = false, string a_stateName = "")
-endFunction
-
-; @since 4
-function SetInputOptionValueST(string a_value, bool a_noUpdate = false, string a_stateName = "")
-endFunction
-
-function SetSliderDialogStartValue(float a_value)
-endFunction
-
-function SetSliderDialogDefaultValue(float a_value)
-endFunction
-
-function SetSliderDialogRange(float a_minValue, float a_maxValue)
-endFunction
-
-function SetSliderDialogInterval(float a_value)
-endFunction
-
-function SetMenuDialogStartIndex(int a_value)
-endFunction
-
-function SetMenuDialogDefaultIndex(int a_value)
-endFunction
-
-function SetMenuDialogOptions(string[] a_options)
-endFunction
-
-function SetColorDialogStartColor(int a_color)
-endFunction
-
-function SetColorDialogDefaultColor(int a_color)
-endFunction
-
-; @since 4
-function SetInputDialogStartText(string a_text)
-endFunction
-
-bool function ShowMessage(string a_message, bool a_withCancel = true, string a_acceptLabel = "$Accept", string a_cancelLabel = "$Cancel")
-endFunction
-
-function Guard()
-endFunction
-
+function forcepagereset()
+endfunction
+function settitletext(string a_text)
+endfunction
+function setinfotext(string a_text)
+endfunction
+function setcursorposition(int a_position)
+endfunction
+function setcursorfillmode(int a_fillmode)
+endfunction
+int function addemptyoption()
+endfunction
+int function addheaderoption(string a_text, int a_flags = 0)
+endfunction
+int function addtextoption(string a_text, string a_value, int a_flags = 0)
+endfunction
+int function addtoggleoption(string a_text, bool a_checked, int a_flags = 0)
+endfunction
+int function addslideroption(string a_text, float a_value, string a_formatstring = "{0}", int a_flags = 0)
+endfunction
+int function addmenuoption(string a_text, string a_value, int a_flags = 0)
+endfunction
+int function addcoloroption(string a_text, int a_color, int a_flags = 0)
+endfunction
+int function addkeymapoption(string a_text, int a_keycode, int a_flags = 0)
+endfunction
+int function addinputoption(string a_text, string a_value, int a_flags = 0)
+endfunction
+function addtextoptionst(string a_statename, string a_text, string a_value, int a_flags = 0)
+endfunction
+function addtoggleoptionst(string a_statename, string a_text, bool a_checked, int a_flags = 0)
+endfunction
+function addslideroptionst(string a_statename, string a_text, float a_value, string a_formatstring = "{0}", int a_flags = 0)
+endfunction
+function addmenuoptionst(string a_statename, string a_text, string a_value, int a_flags = 0)
+endfunction
+function addcoloroptionst(string a_statename, string a_text, int a_color, int a_flags = 0)
+endfunction
+function addkeymapoptionst(string a_statename, string a_text, int a_keycode, int a_flags = 0)
+endfunction
+function addinputoptionst(string a_statename, string a_text, string a_value, int a_flags = 0)
+endfunction
+function loadcustomcontent(string a_source, float a_x = 0.0, float a_y = 0.0)
+endfunction
+function unloadcustomcontent()
+endfunction
+function setoptionflags(int a_option, int a_flags, bool a_noupdate = false)
+endfunction
+function settextoptionvalue(int a_option, string a_value, bool a_noupdate = false)
+endfunction
+function settoggleoptionvalue(int a_option, bool a_checked, bool a_noupdate = false)
+endfunction
+function setslideroptionvalue(int a_option, float a_value, string a_formatstring = "{0}", bool a_noupdate = false)
+endfunction
+function setmenuoptionvalue(int a_option, string a_value, bool a_noupdate = false)
+endfunction
+function setcoloroptionvalue(int a_option, int a_color, bool a_noupdate = false)
+endfunction
+function setkeymapoptionvalue(int a_option, int a_keycode, bool a_noupdate = false)
+endfunction
+function setinputoptionvalue(int a_option, string a_value, bool a_noupdate = false)
+endfunction
+function setoptionflagsst(int a_flags, bool a_noupdate = false, string a_statename = "")
+endfunction
+function settextoptionvaluest(string a_value, bool a_noupdate = false, string a_statename = "")
+endfunction
+function settoggleoptionvaluest(bool a_checked, bool a_noupdate = false, string a_statename = "")
+endfunction
+function setslideroptionvaluest(float a_value, string a_formatstring = "{0}", bool a_noupdate = false, string a_statename = "")
+endfunction
+function setmenuoptionvaluest(string a_value, bool a_noupdate = false, string a_statename = "")
+endfunction
+function setcoloroptionvaluest(int a_color, bool a_noupdate = false, string a_statename = "")
+endfunction
+function setkeymapoptionvaluest(int a_keycode, bool a_noupdate = false, string a_statename = "")
+endfunction
+function setinputoptionvaluest(string a_value, bool a_noupdate = false, string a_statename = "")
+endfunction
+function setsliderdialogstartvalue(float a_value)
+endfunction
+function setsliderdialogdefaultvalue(float a_value)
+endfunction
+function setsliderdialogrange(float a_minvalue, float a_maxvalue)
+endfunction
+function setsliderdialoginterval(float a_value)
+endfunction
+function setmenudialogstartindex(int a_value)
+endfunction
+function setmenudialogdefaultindex(int a_value)
+endfunction
+function setmenudialogoptions(string[] a_options)
+endfunction
+function setcolordialogstartcolor(int a_color)
+endfunction
+function setcolordialogdefaultcolor(int a_color)
+endfunction
+function setinputdialogstarttext(string a_text)
+endfunction
+bool function showmessage(string a_message, bool a_withcancel = true, string a_acceptlabel = "$accept", string a_cancellabel = "$cancel")
+endfunction
+function guard()
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

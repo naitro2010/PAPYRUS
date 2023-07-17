@@ -1,31 +1,20 @@
-Scriptname Perk extends Form Hidden
-
-
-; SKSE additions built 2015-05-24 00:46:48.937000 UTC
-Perk Function GetNextPerk() native
-
-int Function GetNumEntries() native
-
-int Function GetNthEntryRank(int n) native
-bool Function SetNthEntryRank(int n, int rank) native
-
-int Function GetNthEntryPriority(int n) native
-bool Function SetNthEntryPriority(int n, int priority) native
-
-Quest Function GetNthEntryQuest(int n) native
-bool Function SetNthEntryQuest(int n, Quest newQuest) native
-
-int Function GetNthEntryStage(int n) native
-bool Function SetNthEntryStage(int n, int stage) native
-
-Spell Function GetNthEntrySpell(int n) native
-bool Function SetNthEntrySpell(int n, Spell newSpell) native
-
-LeveledItem Function GetNthEntryLeveledList(int n) native
-bool Function SetNthEntryLeveledList(int n, LeveledItem lList) native
-
-string Function GetNthEntryText(int n) native
-bool Function SetNthEntryText(int n, string newText) native
-
-float Function GetNthEntryValue(int n, int i) native
-bool Function SetNthEntryValue(int n, int i, float value) native
+scriptname perk extends form hidden
+perk function getnextperk() native
+int function getnumentries() native
+int function getnthentryrank(int n) native
+bool function setnthentryrank(int n, int rank) native
+int function getnthentrypriority(int n) native
+bool function setnthentrypriority(int n, int priority) native
+quest function getnthentryquest(int n) native
+bool function setnthentryquest(int n, quest newquest) native
+int function getnthentrystage(int n) native
+bool function setnthentrystage(int n, int stage) native
+spell function getnthentryspell(int n) native
+bool function setnthentryspell(int n, spell newspell) native
+leveleditem function getnthentryleveledlist(int n) native
+bool function setnthentryleveledlist(int n, leveleditem llist) native
+string function getnthentrytext(int n) native
+bool function setnthentrytext(int n, string newtext) native
+float function getnthentryvalue(int n, int i) native
+bool function setnthentryvalue(int n, int i, float value) native
+;This file was cleaned with papyrusSourceHeadliner

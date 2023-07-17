@@ -1,144 +1,137 @@
-Scriptname zadclibs extends Quest  
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-zadlibs Property libs Auto
-slaUtilScr Property Aroused Auto
-zadcAnims Property cAnims Auto
-Quest Property zadc_nearbyfurniture Auto
-Keyword Property zadc_FurnitureDevice Auto
-Keyword Property zadc_FurnitureKit Auto
-Key Property zadc_FurnitureKey Auto
-Outfit Property zadc_outfit_naked Auto
-Package Property zadc_pk_donothing Auto
-ReferenceAlias Property UserRef  Auto
-FormList Property zadc_CellFurnitureList Auto
-Armor Property zadc_NoWaitItem Auto
-Armor Property zadc_PrisonerChainsInventory Auto
-Armor Property zadc_PrisonerChainsRendered Auto
-Actor Property SelectedUser Auto Hidden
-Activator Property zadc_BondageChair Auto
-Activator Property zadc_BondagePole Auto
-Activator Property zadc_cross Auto
-Activator Property zadc_gallowspole_overhead Auto
-Activator Property zadc_gallowspole_strappado Auto
-Activator Property zadc_gallowspole_suspend_hogtie Auto
-Activator Property zadc_gallowspole_upside_down Auto
-Activator Property zadc_gallowspole_woodenhorse Auto
-Activator Property zadc_Pillory Auto
-Activator Property zadc_Pillory2 Auto
-Activator Property zadc_RestraintPost Auto
-Activator Property zadc_ShackleWallIron Auto
-Activator Property zadc_TorturePole01 Auto
-Activator Property zadc_TorturePole02 Auto
-Activator Property zadc_TorturePole03 Auto
-Activator Property zadc_TorturePole04 Auto
-Activator Property zadc_TorturePole05 Auto
-Activator Property zadc_WoodenHorse Auto
-Activator Property zadc_xcross Auto
-MiscObject Property zadc_kit_bondagechair Auto
-MiscObject Property zadc_kit_bondagepost Auto
-MiscObject Property zadc_kit_cross Auto
-MiscObject Property zadc_kit_gallowspolehogtie Auto
-MiscObject Property zadc_kit_gallowspoleoverhead Auto
-MiscObject Property zadc_kit_gallowspolestrappado Auto
-MiscObject Property zadc_kit_gallowspoleupsidedown Auto
-MiscObject Property zadc_kit_gallowspolewoodenhorse Auto
-MiscObject Property zadc_kit_pillory Auto
-MiscObject Property zadc_kit_pillory2 Auto
-MiscObject Property zadc_kit_restraintpost Auto
-MiscObject Property zadc_kit_torturepole Auto
-MiscObject Property zadc_kit_torturepole2 Auto
-MiscObject Property zadc_kit_torturepole3 Auto
-MiscObject Property zadc_kit_torturepole4 Auto
-MiscObject Property zadc_kit_torturepole5 Auto
-MiscObject Property zadc_kit_wallshackle Auto
-MiscObject Property zadc_kit_woodenhorse Auto
-MiscObject Property zadc_kit_xcross Auto
-
-Bool Function GetIsFurnitureDevice(ObjectReference FurnitureDevice)
-EndFunction
-Actor Function GetUser(ObjectReference FurnitureDevice)
-EndFunction
-Bool Function IsValidActor(Actor akActor)
-EndFunction
-ObjectReference Function GetDevice(Actor act)
-EndFunction
-Key Function GetDeviceKey(ObjectReference FurnitureDevice)
-EndFunction
-ObjectReference Function GetClosestFurnitureDevice()
-EndFunction
-ObjectReference Function GetLinkedDevice(ObjectReference FurnitureDevice, int Position)
-EndFunction
-FormList Function FindFurnitureDevicesInCell()
-EndFunction
-Function SetOverridePose(ObjectReference FurnitureDevice, Package pose)
-EndFunction
-Package Function GetOverridePose(ObjectReference FurnitureDevice)	
-EndFunction
-Function ClearOverridePose(ObjectReference FurnitureDevice)
-EndFunction
-Bool Function SetTimedRelease(ObjectReference FurnitureDevice, Int Hours, Bool ResetStartTime = False)
-EndFunction
-Bool Function LockActor(Actor akActor, ObjectReference FurnitureDevice, Package OverridePose = None)
-EndFunction
-Bool Function UnlockActor(Actor akActor)
-EndFunction
-Bool Function PlaySexScene(Actor User, Actor Partner, String AnimationName = "")
-EndFunction
-Bool Function GetIsTransportable(ObjectReference FurnitureDevice)
-EndFunction
-Bool Function GetHasBlueprint(ObjectReference FurnitureDevice)
-EndFunction
-MiscObject Function GetBlueprint(ObjectReference FurnitureDevice)
-EndFunction
-Bool Function SetIsTransportable(ObjectReference FurnitureDevice)
-EndFunction
-Bool Function SetBlueprint(ObjectReference FurnitureDevice, MiscObject Blueprint)
-EndFunction
-ObjectReference Function BobTheBuilder(Activator FurnitureToBuild, ObjectReference WhereToBuild = None)
-EndFunction
-Event OnInit()
-EndEvent
-Function InitLibrary()
-EndFunction
-Event OnRegisterMCMKeys(string eventName, string strArg, float numArg, Form sender)
-EndEvent
-Function Reinitialize()
-EndFunction
-Event OnKeyDown(Int KeyCode)
-EndEvent
-Bool Function GetIsFemale(Actor act)
-EndFunction
-Function Test()
-EndFunction
-bool Function IsAnimating(actor akActor)
-EndFunction
-Function FurnitureAction()
-EndFunction
-Function CloseMenus()
-EndFunction
-Function AlignObject(ObjectReference ObjectToAlign, ObjectReference ObjectToAlignWith)
-EndFunction
-Function MoveObjectByVector(ObjectReference ObjectToMove, ObjectReference ObjectToMoveFrom, Float Distance = 100.0)	
-EndFunction
-Function StripOutfit(Actor akActor)
-EndFunction
-Function RestoreOutfit(Actor akActor)
-EndFunction
-Function ClearDevice(Actor act)
-EndFunction
-Function StoreDevice(Actor act, ObjectReference obj)
-EndFunction
-Function StoreBondage(Actor akActor, Keyword[] InvalidDevices, Bool Force = False)
-EndFunction
-Function RestoreBondage(Actor akActor)	
-EndFunction
-Function SetNiOverrideOverride(Actor aktarget)
-EndFunction
-Function ResetNiOverrideOverride(Actor aktarget)
-EndFunction
+scriptname zadclibs extends quest  
+zadlibs property libs auto
+slautilscr property aroused auto
+zadcanims property canims auto
+quest property zadc_nearbyfurniture auto
+keyword property zadc_furnituredevice auto
+keyword property zadc_furniturekit auto
+key property zadc_furniturekey auto
+outfit property zadc_outfit_naked auto
+package property zadc_pk_donothing auto
+referencealias property userref  auto  
+formlist property zadc_cellfurniturelist auto
+armor property zadc_nowaititem auto
+armor property zadc_prisonerchainsinventory auto
+armor property zadc_prisonerchainsrendered auto
+actor property selecteduser auto hidden
+activator property zadc_bondagechair auto
+activator property zadc_bondagepole auto
+activator property zadc_cross auto
+activator property zadc_gallowspole_overhead auto
+activator property zadc_gallowspole_strappado auto
+activator property zadc_gallowspole_suspend_hogtie auto
+activator property zadc_gallowspole_upside_down auto
+activator property zadc_gallowspole_woodenhorse auto
+activator property zadc_pillory auto
+activator property zadc_pillory2 auto
+activator property zadc_restraintpost auto
+activator property zadc_shacklewalliron auto
+activator property zadc_torturepole01 auto
+activator property zadc_torturepole02 auto
+activator property zadc_torturepole03 auto
+activator property zadc_torturepole04 auto
+activator property zadc_torturepole05 auto
+activator property zadc_woodenhorse auto
+activator property zadc_xcross auto
+miscobject property zadc_kit_bondagechair auto
+miscobject property zadc_kit_bondagepost auto
+miscobject property zadc_kit_cross auto
+miscobject property zadc_kit_gallowspolehogtie auto
+miscobject property zadc_kit_gallowspoleoverhead auto
+miscobject property zadc_kit_gallowspolestrappado auto
+miscobject property zadc_kit_gallowspoleupsidedown auto
+miscobject property zadc_kit_gallowspolewoodenhorse auto
+miscobject property zadc_kit_pillory auto
+miscobject property zadc_kit_pillory2 auto
+miscobject property zadc_kit_restraintpost auto
+miscobject property zadc_kit_torturepole auto
+miscobject property zadc_kit_torturepole2 auto
+miscobject property zadc_kit_torturepole3 auto
+miscobject property zadc_kit_torturepole4 auto
+miscobject property zadc_kit_torturepole5 auto
+miscobject property zadc_kit_wallshackle auto
+miscobject property zadc_kit_woodenhorse auto
+miscobject property zadc_kit_xcross auto
+bool function getisfurnituredevice(objectreference furnituredevice)
+endfunction
+actor function getuser(objectreference furnituredevice)
+endfunction
+bool function isvalidactor(actor akactor)
+endfunction
+objectreference function getdevice(actor act)
+endfunction
+key function getdevicekey(objectreference furnituredevice)
+endfunction
+objectreference function getclosestfurnituredevice()
+endfunction
+objectreference function getlinkeddevice(objectreference furnituredevice, int position)
+endfunction
+formlist function findfurnituredevicesincell()
+endfunction
+function setoverridepose(objectreference furnituredevice, package pose)
+endfunction
+package function getoverridepose(objectreference furnituredevice) 
+endfunction
+function clearoverridepose(objectreference furnituredevice)
+endfunction
+bool function settimedrelease(objectreference furnituredevice, int hours, bool resetstarttime = false)
+endfunction
+bool function lockactor(actor akactor, objectreference furnituredevice, package overridepose = none)
+endfunction
+bool function unlockactor(actor akactor)
+endfunction
+bool function playsexscene(actor user, actor partner, string animationname = "")
+endfunction
+bool function getistransportable(objectreference furnituredevice)
+endfunction
+bool function gethasblueprint(objectreference furnituredevice)
+endfunction
+miscobject function getblueprint(objectreference furnituredevice)
+endfunction
+bool function setistransportable(objectreference furnituredevice)
+endfunction
+bool function setblueprint(objectreference furnituredevice, miscobject blueprint)
+endfunction
+objectreference function bobthebuilder(activator furnituretobuild, objectreference wheretobuild = none)
+endfunction
+event oninit()  
+endevent
+function initlibrary()
+endfunction
+event onregistermcmkeys(string eventname, string strarg, float numarg, form sender)
+endevent
+function reinitialize()
+endfunction
+event onkeydown(int keycode)  
+endevent
+bool function getisfemale(actor act)
+endfunction
+function test()
+endfunction
+bool function isanimating(actor akactor)
+endfunction
+function furnitureaction()
+endfunction
+function closemenus()
+endfunction
+function alignobject(objectreference objecttoalign, objectreference objecttoalignwith)
+endfunction
+function moveobjectbyvector(objectreference objecttomove, objectreference objecttomovefrom, float distance = 100.0) 
+endfunction
+function stripoutfit(actor akactor)  
+endfunction
+function restoreoutfit(actor akactor)  
+endfunction
+function cleardevice(actor act)
+endfunction
+function storedevice(actor act, objectreference obj)
+endfunction
+function storebondage(actor akactor, keyword[] invaliddevices, bool force = false)  
+endfunction
+function restorebondage(actor akactor) 
+endfunction
+function setnioverrideoverride(actor aktarget)
+endfunction
+function resetnioverrideoverride(actor aktarget)
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

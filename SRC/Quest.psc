@@ -1,268 +1,117 @@
-Scriptname Quest extends Form Hidden
-
-; non-native functions
-
-; thread-safe way to modify a global value
-; optional parameters:
-; aiObjectiveID = objective ID to redisplay
-; afTargetValue = value you're counting up (or down) towards -- if included, function will return TRUE when the global reaches the target value
-; abCountingUp = by default, function assumes you're counting up towards the target value; make this false to count DOWN towards target value
-; abCompleteObjective = by default, function assumes you're completing the objective once you reach the target value; make this false to FAIL the objective
-; abRedisplayObjective = by default, function asssume you want to redisplay the objective every time the global is incremeneted; make this FALSE to only display the objectives on complete or failure
-bool Function ModObjectiveGlobal(float afModValue, GlobalVariable aModGlobal, int aiObjectiveID = -1, float afTargetValue = -1.0, bool abCountingUp = true, bool abCompleteObjective = true, bool abRedisplayObjective = true)
-	aModGlobal.Mod(afModValue)
-	UpdateCurrentInstanceGlobal(aModGlobal)
-	if aiObjectiveID >= 0
-		; display/complete objectives automatically
-		if afTargetValue > -1
-			if (abCountingUp && aModGlobal.value >= afTargetValue) || (!abCountingUp && aModGlobal.value <= afTargetValue)
-				if (abCompleteObjective)
-					; complete objective
-					SetObjectiveCompleted(aiObjectiveID)
-					return true
-				Else
-					; fail objective
-					SetObjectiveFailed(aiObjectiveID)
-					return true
-				Endif
-			elseIf (abRedisplayObjective)
-				; redisplay objective
-				SetObjectiveDisplayed(aiObjectiveID, true, true)
-			Else
-				SetObjectiveDisplayed(aiObjectiveID, true, false)
-			endif
-		elseIf (abRedisplayObjective)
-			; no target value, always redisplay objective
-			SetObjectiveDisplayed(aiObjectiveID, true, true)
-		Else
-			SetObjectiveDisplayed(aiObjectiveID, true, false)
-		endif
-	endif
-	return false
-endFunction
-
-
-; native functions
-
-; Flags all objectives as complete
-Function CompleteAllObjectives() native
-
-; Flags this quest as completed
-Function CompleteQuest() native
-
-; Flags all objectives as failed
-Function FailAllObjectives() native
-
-; Obtains the specified alias on the quest
-Alias Function GetAlias(int aiAliasID) native
-
-; Obtains the id of the highest completed stage on this quest
-int Function GetCurrentStageID() native
-
-; Alias for GetCurrentStage - obtains the highest completed stage on this quest
-int Function GetStage()
-  return GetCurrentStageID()
-EndFunction
-
-; Alias for IsStageDone - checks to see whether the given stage is done or not
-bool Function GetStageDone(int aiStage)
-  return IsStageDone(aiStage)
-EndFunction
-
-; Is this quest "active" (tracked by the player)?
-bool Function IsActive() native
-
-; Checks to see if the quest is completed
-bool Function IsCompleted() native
-
-; Checks to see if the specified objective is completed
-bool Function IsObjectiveCompleted(int aiObjective) native
-
-; Checks to see if the specified objective is displayed
-bool Function IsObjectiveDisplayed(int aiObjective) native
-
-; Checks to see if the specified objective is failed
-bool Function IsObjectiveFailed(int aiObjective) native
-
-; Checks to see if the quest is running
-bool Function IsRunning() native
-
-; Obtains whether the specified stage is done or not
-bool Function IsStageDone(int aiStage) native
-
-; Checks to see if the quest is enabled but not running yet
-bool Function IsStarting() native
-
-; Checks to see if the quest is not enabled anymore but still shutting down
-bool Function IsStopping() native
-
-; Checks to see if the quest is no longer enabled or running
-bool Function IsStopped() native
-
-; Resets the quest
-Function Reset() native
-
-; Flags this quest as "active" (tracked by the player)
-Function SetActive(bool abActive = true) native
-
-; Set the quest to the requested stage ID - returns true if stage exists and was set.
-; This function is latent and will wait for the quest to start up before returning (if it needed to be started)
-bool Function SetCurrentStageID(int aiStageID) native
-
-; Sets the specified objective to completed or not
-Function SetObjectiveCompleted(int aiObjective, bool abCompleted = true) native
-
-; Sets the specified objective to displayed or hidden - if abForce is true, will display the objective even if it has already been displayed
-Function SetObjectiveDisplayed(int aiObjective, bool abDisplayed = true, bool abForce = false) native
-
-; Sets the specified objective to failed or not
-Function SetObjectiveFailed(int aiObjective, bool abFailed = true) native
-
-; Alias of SetCurrentStage - Set the quest to the requested stage
-; This function is latent and will wait for the quest to start up before returning (if it needed to be started)
-bool Function SetStage(int aiStage)
-  return SetCurrentStageID(aiStage)
-EndFunction
-
-; Starts the quest - returns whether the quest was able to be started or not
-; This function is latent and will wait for the quest to start up before returning
-bool Function Start() native
-
-; Stops the quest
-Function Stop() native
-
-; Updates current instance's value for the given global
-bool Function UpdateCurrentInstanceGlobal( GlobalVariable aUpdateGlobal ) native
-
-; Story manager events - fired in parallel with the quest startup stage
-
-Event OnStoryAddToPlayer(ObjectReference akOwner, ObjectReference akContainer, \
-	Location akLocation, Form akItemBase, int aiAcquireType)
-EndEvent
-
-Event OnStoryArrest(ObjectReference akArrestingGuard, ObjectReference akCriminal, \
-	Location akLocation, int aiCrime)
-EndEvent
-
-Event OnStoryAssaultActor(ObjectReference akVictim, ObjectReference akAttacker, \
-	Location akLocation, int aiCrime)
-EndEvent
-
-Event OnStoryBribeNPC(ObjectReference akActor)
-EndEvent
-
-Event OnStoryCastMagic(ObjectReference akCastingActor, ObjectReference akSpellTarget, \
-	Location akLocation, Form akSpell)
-EndEvent
-
-Event OnStoryChangeLocation(ObjectReference akActor, Location akOldLocation, \
-	Location akNewLocation)
-EndEvent
-
-Event OnStoryCrimeGold(ObjectReference akVictim, ObjectReference akCriminal, \
-	Form akFaction, int aiGoldAmount, int aiCrime)
-EndEvent
-
-Event OnStoryCure(Form akInfection)
-EndEvent
-
-Event OnStoryDialogue(Location akLocation, ObjectReference akActor1, ObjectReference akActor2)
-EndEvent
-
-Event OnStoryDiscoverDeadBody(ObjectReference akActor, ObjectReference akDeadActor, \
-	Location akLocation)
-EndEvent
-
-Event OnStoryEscapeJail(Location akLocation, Form akCrimeGroup)
-EndEvent
-
-Event OnStoryActivateActor(Location akLocation, ObjectReference akActor)
-EndEvent
-
-Event OnStoryFlatterNPC(ObjectReference akActor)
-EndEvent
-
-Event OnStoryHello(Location akLocation, ObjectReference akActor1, ObjectReference akActor2)
-EndEvent
-
-Event OnStoryIncreaseLevel(int aiNewLevel)
-EndEvent
-
-Event OnStoryIncreaseSkill(string asSkill)
-EndEvent
-
-Event OnStoryInfection(ObjectReference akTransmittingActor, Form akInfection)
-EndEvent
-
-Event OnStoryIntimidateNPC(ObjectReference akActor)
-EndEvent
-
-Event OnStoryJail(ObjectReference akGuard, Form akCrimeGroup, Location akLocation, \
-	int aiCrimeGold)
-EndEvent
-
-Event OnStoryKillActor(ObjectReference akVictim, ObjectReference akKiller, \
-	Location akLocation, int aiCrimeStatus, int aiRelationshipRank)
-EndEvent
-
-Event OnStoryCraftItem(ObjectReference akBench, Location akLocation, Form akCreatedItem)
-EndEvent
-
-Event OnStoryNewVoicePower(ObjectReference akActor, Form akVoicePower)
-EndEvent
-
-Event OnStoryPickLock(ObjectReference akActor, ObjectReference akLock)
-EndEvent
-
-Event OnStoryPayFine(ObjectReference akCriminal, ObjectReference akGuard, \
-	Form akCrimeGroup, int aiCrimeGold)
-EndEvent
-
-Event OnStoryPlayerGetsFavor(ObjectReference akActor)
-EndEvent
-
-Event OnStoryRelationshipChange(ObjectReference akActor1, ObjectReference akActor2, \
-	int aiOldRelationship, int aiNewRelationship)
-EndEvent
-
-Event OnStoryRemoveFromPlayer(ObjectReference akOwner, ObjectReference akItem, \
-	Location akLocation, Form akItemBase, int aiRemoveType)
-EndEvent
-
-Event OnStoryScript(Keyword akKeyword, Location akLocation, ObjectReference akRef1, \
-	ObjectReference akRef2, int aiValue1, int aiValue2)
-EndEvent
-
-Event OnStoryServedTime(Location akLocation, Form akCrimeGroup, int aiCrimeGold, \
-	int aiDaysJail)
-EndEvent
-
-Event OnStoryTrespass(ObjectReference akVictim, ObjectReference akTrespasser, \
-	Location akLocation, int aiCrime)
-EndEvent
-
-; SKSE additions built 2015-05-24 00:46:48.937000 UTC
-
-; returns the quest with the specified editor id
-Quest Function GetQuest(string editorId) global native
-
-; returns the editor ID of the quest
-string Function GetID() native
-
-; returns the priority of the quest
-int Function GetPriority() native
-
-; returns the number of aliases associated with the quest
-int Function GetNumAliases() native
-
-; returns the specified alias associated with the queest
-Alias Function GetNthAlias(int index) native
-
-; returns the alias associated with the quest by name
-Alias Function GetAliasByName(string name) native
-
-; returns the alias by AlisID
-Alias Function GetAliasById(int aliasId) native
-
-; Returns all the aliases of this quest
-Alias[] Function GetAliases() native
+scriptname quest extends form hidden
+bool function modobjectiveglobal(float afmodvalue, globalvariable amodglobal, int aiobjectiveid = -1, float aftargetvalue = -1.0, bool abcountingup = true, bool abcompleteobjective = true, bool abredisplayobjective = true)
+endfunction
+function completeallobjectives() native
+function completequest() native
+function failallobjectives() native
+alias function getalias(int aialiasid) native
+int function getcurrentstageid() native
+int function getstage()
+endfunction
+bool function getstagedone(int aistage)
+endfunction
+bool function isactive() native
+bool function iscompleted() native
+bool function isobjectivecompleted(int aiobjective) native
+bool function isobjectivedisplayed(int aiobjective) native
+bool function isobjectivefailed(int aiobjective) native
+bool function isrunning() native
+bool function isstagedone(int aistage) native
+bool function isstarting() native
+bool function isstopping() native
+bool function isstopped() native
+function reset() native
+function setactive(bool abactive = true) native
+bool function setcurrentstageid(int aistageid) native
+function setobjectivecompleted(int aiobjective, bool abcompleted = true) native
+function setobjectivedisplayed(int aiobjective, bool abdisplayed = true, bool abforce = false) native
+function setobjectivefailed(int aiobjective, bool abfailed = true) native
+bool function setstage(int aistage)
+endfunction
+bool function start() native
+function stop() native
+bool function updatecurrentinstanceglobal( globalvariable aupdateglobal ) native
+event onstoryaddtoplayer(objectreference akowner, objectreference akcontainer, \
+ location aklocation, form akitembase, int aiacquiretype)
+endevent
+event onstoryarrest(objectreference akarrestingguard, objectreference akcriminal, \
+ location aklocation, int aicrime)
+endevent
+event onstoryassaultactor(objectreference akvictim, objectreference akattacker, \
+ location aklocation, int aicrime)
+endevent
+event onstorybribenpc(objectreference akactor)
+endevent
+event onstorycastmagic(objectreference akcastingactor, objectreference akspelltarget, \
+ location aklocation, form akspell)
+endevent
+event onstorychangelocation(objectreference akactor, location akoldlocation, \
+ location aknewlocation)
+endevent
+event onstorycrimegold(objectreference akvictim, objectreference akcriminal, \
+ form akfaction, int aigoldamount, int aicrime)
+endevent
+event onstorycure(form akinfection)
+endevent
+event onstorydialogue(location aklocation, objectreference akactor1, objectreference akactor2)
+endevent
+event onstorydiscoverdeadbody(objectreference akactor, objectreference akdeadactor, \
+ location aklocation)
+endevent
+event onstoryescapejail(location aklocation, form akcrimegroup)
+endevent
+event onstoryactivateactor(location aklocation, objectreference akactor)
+endevent
+event onstoryflatternpc(objectreference akactor)
+endevent
+event onstoryhello(location aklocation, objectreference akactor1, objectreference akactor2)
+endevent
+event onstoryincreaselevel(int ainewlevel)
+endevent
+event onstoryincreaseskill(string asskill)
+endevent
+event onstoryinfection(objectreference aktransmittingactor, form akinfection)
+endevent
+event onstoryintimidatenpc(objectreference akactor)
+endevent
+event onstoryjail(objectreference akguard, form akcrimegroup, location aklocation, \
+ int aicrimegold)
+endevent
+event onstorykillactor(objectreference akvictim, objectreference akkiller, \
+ location aklocation, int aicrimestatus, int airelationshiprank)
+endevent
+event onstorycraftitem(objectreference akbench, location aklocation, form akcreateditem)
+endevent
+event onstorynewvoicepower(objectreference akactor, form akvoicepower)
+endevent
+event onstorypicklock(objectreference akactor, objectreference aklock)
+endevent
+event onstorypayfine(objectreference akcriminal, objectreference akguard, \
+ form akcrimegroup, int aicrimegold)
+endevent
+event onstoryplayergetsfavor(objectreference akactor)
+endevent
+event onstoryrelationshipchange(objectreference akactor1, objectreference akactor2, \
+ int aioldrelationship, int ainewrelationship)
+endevent
+event onstoryremovefromplayer(objectreference akowner, objectreference akitem, \
+ location aklocation, form akitembase, int airemovetype)
+endevent
+event onstoryscript(keyword akkeyword, location aklocation, objectreference akref1, \
+ objectreference akref2, int aivalue1, int aivalue2)
+endevent
+event onstoryservedtime(location aklocation, form akcrimegroup, int aicrimegold, \
+ int aidaysjail)
+endevent
+event onstorytrespass(objectreference akvictim, objectreference aktrespasser, \
+ location aklocation, int aicrime)
+endevent
+quest function getquest(string editorid) global native
+string function getid() native
+int function getpriority() native
+int function getnumaliases() native
+alias function getnthalias(int index) native
+alias function getaliasbyname(string name) native
+alias function getaliasbyid(int aliasid) native
+alias[] function getaliases() native
+;This file was cleaned with papyrusSourceHeadliner

@@ -1,10 +1,4 @@
-Scriptname FNISCreatureVersion Hidden
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-String Function Get() global
-EndFunction
+scriptname fniscreatureversion hidden
+string function get() global
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

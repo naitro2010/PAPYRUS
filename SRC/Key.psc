@@ -1,1 +1,2 @@
-Scriptname Key extends MiscObject Hidden
+scriptname key extends miscobject hidden
+;This file was cleaned with papyrusSourceHeadliner

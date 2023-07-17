@@ -1,17 +1,10 @@
-Scriptname LeveledSpell extends Form Hidden
-
-; Adds the given count of the given form to the under the given level in this leveled list
-Function AddForm(Form apForm, int aiLevel) native
-
-; Removes all script added forms from this leveled list
-Function Revert() native
-
-; SKSE additions built 2015-05-24 00:46:48.937000 UTC
-int function GetChanceNone() native
-Function SetChanceNone(int chance) native
-
-int Function GetNumForms() native
-Form Function GetNthForm(int n) native
-
-int Function GetNthLevel(int n) native
-Function SetNthLevel(int n, int level) native
+scriptname leveledspell extends form hidden
+function addform(form apform, int ailevel) native
+function revert() native
+int function getchancenone() native
+function setchancenone(int chance) native
+int function getnumforms() native
+form function getnthform(int n) native
+int function getnthlevel(int n) native
+function setnthlevel(int n, int level) native
+;This file was cleaned with papyrusSourceHeadliner

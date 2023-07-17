@@ -1,25 +1,18 @@
-Scriptname zadx_BondageMittensEffectScript extends activemagiceffect
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-zadlibs Property libs  Auto
-Armor Property zad_DeviceHider Auto
-
-bool function hasAnyWeaponEquipped(actor a)
-EndFunction
-function stripweapons(actor a, bool unequiponly = true)
+scriptname zadx_bondagemittenseffectscript extends activemagiceffect  
+zadlibs property libs  auto  
+armor property zad_devicehider auto
+bool function hasanyweaponequipped(actor a)
 endfunction
-bool Function isDeviousDevice(Form device)
-EndFunction
-bool Function isValidItem(Form item)
-EndFunction
-Event OnEffectStart(Actor akTarget, Actor akCaster)
-EndEvent
-Event OnObjectEquipped(Form akBaseObject, ObjectReference akReference)
-EndEvent
-Event OnItemAdded(Form akBaseItem, int aiItemCount, ObjectReference akItemReference, ObjectReference akSourceContainer)
-EndEvent
+function stripweapons(actor a, bool unequiponly = true)  
+endfunction
+bool function isdeviousdevice(form device)
+endfunction
+bool function isvaliditem(form item)
+endfunction
+event oneffectstart(actor aktarget, actor akcaster)
+endevent
+event onobjectequipped(form akbaseobject, objectreference akreference)
+endevent
+event onitemadded(form akbaseitem, int aiitemcount, objectreference akitemreference, objectreference aksourcecontainer)
+endevent
+;This file was cleaned with papyrusSourceHeadliner

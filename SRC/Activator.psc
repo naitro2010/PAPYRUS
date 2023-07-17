@@ -1,1 +1,2 @@
-Scriptname Activator extends Form Hidden
+scriptname activator extends form hidden
+;This file was cleaned with papyrusSourceHeadliner

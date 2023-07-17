@@ -1,1 +1,2 @@
-Scriptname Class extends Form Hidden
+scriptname class extends form hidden
+;This file was cleaned with papyrusSourceHeadliner

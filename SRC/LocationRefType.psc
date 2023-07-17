@@ -1,1 +1,2 @@
-Scriptname LocationRefType extends Keyword Hidden
+scriptname locationreftype extends keyword hidden
+;This file was cleaned with papyrusSourceHeadliner

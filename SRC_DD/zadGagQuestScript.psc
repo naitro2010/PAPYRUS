@@ -1,30 +1,19 @@
-Scriptname zadGagQuestScript extends Quest  Conditional
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-Bool Property canTalk = false  Auto  Conditional
-Actor Property PlayerRef  Auto  
-GlobalVariable Property zadGagExpertise  Auto  
-GlobalVariable Property zadPlayerMasochism  Auto  
-Spell      Property zadgag_SpeechDebuff  Auto
-slaFrameworkScr Property sla Auto
-zadLibs Property libs Auto
-
-function enableTalk()
-endFunction
-
-event OnInit()
-endEvent
- 
-event OnMenuClose(String asMenuName)
-endEvent
-
-function increaseGagExp()
-endFunction
-
-function increasePlayerMaso()
-endFunction
+scriptname zadgagquestscript extends quest  conditional
+bool property cantalk = false  auto  conditional
+actor property playerref  auto  
+globalvariable property zadgagexpertise  auto  
+globalvariable property zadplayermasochism  auto  
+spell      property zadgag_speechdebuff  auto
+slaframeworkscr property sla auto
+zadlibs property libs auto
+function enabletalk()
+endfunction
+event oninit()
+endevent
+event onmenuclose(string asmenuname)
+endevent
+function increasegagexp()
+endfunction
+function increaseplayermaso()
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

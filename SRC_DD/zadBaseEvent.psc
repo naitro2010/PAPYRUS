@@ -1,30 +1,22 @@
-scriptName zadBaseEvent extends ReferenceAlias
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-zadLibs Property libs Auto
-bool Property Process = False Auto Hidden
-Int Property Probability = -1 Auto Hidden
-String Property Name Auto
-String Property Help = "" Auto 
-Int Property DefaultProbability Auto 
-
-Bool Function Filter(actor akActor, int chanceMod = 0)
-EndFunction
-bool Function HasKeywords(actor akActor)
-EndFunction
-Function Execute(actor akActor)
-EndFunction
-Function Eval(actor akActor)
-EndFunction
-Event OnPlayerLoadGame()
-EndEvent
-Event OnRegisterEvents(string eventName, string strArg, float numArg, Form sender)
-EndEvent
-Function RegisterDeviceEffect()
-EndFunction
-
+scriptname zadbaseevent extends referencealias
+zadlibs property libs auto
+bool property process = false auto hidden
+int property probability = -1 auto hidden
+string property name auto ; event name. note, that events are also based upon this name: if you change it, mods that listen for your event will also need to update.
+string property help = "" auto ; mcm help text
+int property defaultprobability auto ; base event probability.
+bool function filter(actor akactor, int chancemod = 0)
+endfunction
+bool function haskeywords(actor akactor)
+endfunction
+function execute(actor akactor)
+endfunction
+function eval(actor akactor)
+endfunction
+event onplayerloadgame()
+endevent
+event onregisterevents(string eventname, string strarg, float numarg, form sender)
+endevent
+function registerdeviceeffect()
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

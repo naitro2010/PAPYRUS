@@ -1,25 +1,14 @@
-Scriptname UD_PlayerSlotScript  extends UD_CustomDevice_NPCSlot
-
-Event OnInit()
-    parent.OnInit()
-    Game.getPlayer().addToFaction(UDCDmain.RegisteredNPCFaction)
-    InitOrgasmUpdate()
-EndEvent
-
-Function update(float fTimePassed)
-    if UDCDmain.UD_HardcoreMode
-        UDCDmain.CheckHardcoreDisabler(UDmain.Player)
-    endif
-    parent.update(fTimePassed)
-EndFunction
-
-bool Function isPlayer()
-    return True
-EndFunction
-
-Function AddOrgasmExhaustion()
-    UDOM.addOrgasmExhaustion(getActor())
-EndFunction
-
-Function _UpdateOrgasmExhaustion(Int aiUpdateTime)
-EndFunction
+scriptname ud_playerslotscript  extends ud_customdevice_npcslot
+event oninit()
+endevent
+function update(float ftimepassed)
+endfunction
+bool function isplayer()
+endfunction
+function addorgasmexhaustion()
+endfunction
+function _updateorgasmexhaustion(int aiupdatetime)
+endfunction
+actor function getactor()
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

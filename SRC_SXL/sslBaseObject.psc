@@ -1,85 +1,58 @@
-scriptname sslBaseObject extends ReferenceAlias hidden
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-sslSystemConfig property Config auto hidden
-
-int property SlotID auto hidden
-string property Name auto hidden
-bool property Enabled auto hidden
-
-string property Registry auto hidden
-bool property Registered hidden
-	bool function get()
-	endFunction
-endProperty
-
-string[] function GetRawTags()
-endFunction
-string[] function GetTags()
-endFunction
-
-bool function HasTag(string Tag)
-endFunction
-
-bool function AddTag(string Tag)
-endFunction
-
-bool function RemoveTag(string Tag)
-endFunction
-
-function AddTags(string[] TagList)
-endFunction
-
-function SetTags(string TagList)
-endFunction
-
-bool function ToggleTag(string Tag)
-endFunction
-
-bool function AddTagConditional(string Tag, bool AddTag)
-endFunction
-
-bool function CheckTags(string[] CheckTags, bool RequireAll = true, bool Suppress = false)
-endFunction
-
-bool function ParseTags(string[] TagList, bool RequireAll = true)
-endFunction
-
-bool function TagSearch(string[] TagList, string[] Suppress, bool RequireAll)
-endFunction
-
-bool function HasOneTag(string[] TagList)
-endFunction
-
-bool function HasAllTag(string[] TagList)
-endFunction
-
-Form property Storage auto hidden
-bool property Ephemeral hidden
-	bool function get()
-	endFunction
-endProperty
-
-function MakeEphemeral(string Token, Form OwnerForm)
-endFunction
-
-string function Key(string type = "")
-endFunction
-
-function Log(string Log, string Type = "NOTICE")
-endFunction
-
-bool property Saved hidden
-	bool function get()
-	endFunction
-endProperty
-function Save(int id = -1)
-endFunction
-
-function Initialize()
-endFunction
+scriptname sslbaseobject extends referencealias hidden
+sslsystemconfig property config auto hidden
+int property slotid auto hidden
+string property name auto hidden
+bool property enabled auto hidden
+string property registry auto hidden
+bool property registered hidden
+bool function get()
+endfunction
+endproperty
+string[] function getrawtags()
+endfunction
+string[] function gettags()
+endfunction
+bool function hastag(string tag)
+endfunction
+bool function addtag(string tag)
+endfunction
+bool function removetag(string tag)
+endfunction
+function addtags(string[] taglist)
+endfunction
+function settags(string taglist)
+endfunction
+bool function toggletag(string tag)
+endfunction
+bool function addtagconditional(string tag, bool addtag)
+endfunction
+bool function checktags(string[] checktags, bool requireall = true, bool suppress = false)
+endfunction
+bool function parsetags(string[] taglist, bool requireall = true)
+endfunction
+bool function tagsearch(string[] taglist, string[] suppress, bool requireall)
+endfunction
+bool function hasonetag(string[] taglist)
+endfunction
+bool function hasalltag(string[] taglist)
+endfunction
+form property storage auto hidden
+bool property ephemeral hidden
+bool function get()
+endfunction
+endproperty
+function makeephemeral(string token, form ownerform)
+endfunction
+string function key(string type = "")
+endfunction
+function log(string log, string type = "notice")
+endfunction
+bool property saved hidden
+bool function get()
+endfunction
+endproperty
+function save(int id = -1)
+endfunction
+function initialize()
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

@@ -1,14 +1,8 @@
-scriptname FNISSM_NPCAlias extends ReferenceAlias
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-FNISSMQuestScript Property FNISSMQuest Auto
-MiscObject property FNISSMCoin Auto 
-Actorbase Property PlayerHouseMannequin Auto
-SoulGem Property WhiterunSoulGem Auto
-
-event OnInit()
-endEvent
+scriptname fnissm_npcalias extends referencealias
+fnissmquestscript property fnissmquest auto
+miscobject property fnissmcoin auto 
+actorbase property playerhousemannequin auto
+soulgem property whiterunsoulgem auto
+event oninit()
+endevent
+;This file was cleaned with papyrusSourceHeadliner

@@ -1,10 +1,8 @@
-Scriptname Shout extends Form Hidden
-
-; SKSE additions built 2015-05-24 00:46:48.937000 UTC
-WordOfPower Function GetNthWordOfPower(int n) native
-Spell Function GetNthSpell(int n) native
-float Function GetNthRecoveryTime(int n) native
-
-Function SetNthWordOfPower(int n, WordOfPower aWoop) native
-Function SetNthSpell(int n, Spell aSpell) native
-Function SetNthRecoveryTime(int n, float time) native
+scriptname shout extends form hidden
+wordofpower function getnthwordofpower(int n) native
+spell function getnthspell(int n) native
+float function getnthrecoverytime(int n) native
+function setnthwordofpower(int n, wordofpower awoop) native
+function setnthspell(int n, spell aspell) native
+function setnthrecoverytime(int n, float time) native
+;This file was cleaned with papyrusSourceHeadliner

@@ -1,19 +1,8 @@
-Scriptname Scene extends Form Hidden
-
-; Forces a scene to start and kills the current scenes running on any ref in that scene
-Function ForceStart() native
-
-; Starts this scene
-Function Start() native
-
-; Stops the scene
-Function Stop() native
-
-; Is this scene currently playing?
-bool Function IsPlaying() native
-
-; Returns the quest that owns this scene
-Quest Function GetOwningQuest() native
-
-; Returns whether the specified action is complete or not
-bool Function IsActionComplete(int aiActionID) native
+scriptname scene extends form hidden
+function forcestart() native
+function start() native
+function stop() native
+bool function isplaying() native
+quest function getowningquest() native
+bool function isactioncomplete(int aiactionid) native
+;This file was cleaned with papyrusSourceHeadliner

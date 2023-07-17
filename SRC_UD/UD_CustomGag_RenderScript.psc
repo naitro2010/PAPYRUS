@@ -1,191 +1,110 @@
-Scriptname UD_CustomGag_RenderScript extends UD_CustomDevice_RenderScript  
-
-import UnforgivingDevicesMain
-
-Function InitPost()
-    UD_DeviceType = "Gag"
-EndFunction
-
-Function patchDevice()
-    UDCDmain.UDPatcher.patchGag(self)
-EndFunction
-
-float Function getAccesibility()
-    float loc_res = parent.getAccesibility()
-    
-    if loc_res && getWearer().wornhaskeyword(libs.zad_DeviousHood) && !deviceRendered.haskeyword(libs.zad_DeviousHood)
-        loc_res *= 0.35
-    endif
-    
-    return ValidateAccessibility(loc_res)
-EndFunction
-
-bool Function OnUpdateHourPost()
-    if Utility.randomInt(1,99) < 35
-        UDCDmain.ApplyDroolEffect(GetWearer())
-        if WearerIsPlayer()
-            UDmain.Print("Gag is making you drool uncontrollably",3)
-        elseif UDCDmain.AllowNPCMessage(getWearer())
-            UDmain.Print("Gag is making " + getWearerName() + " drool uncontrollably",3)
-        endif
-    endif
-    return parent.OnUpdateHourPost()
-EndFunction
-
-;Priority for AI
-Int Function GetAiPriority()
-    return 26 ;generic value
-EndFunction
-
-;============================================================================================================================
-;unused override function, theese are from base script. Extending different script means you also have to add their overrride functions                                                
-;theese function should be on every object instance, as not having them may cause multiple function calls to default class
-;more about reason here https://www.creationkit.com/index.php?title=Function_Reference, and Notes on using Parent section
-;============================================================================================================================
-Function safeCheck() ;called on init. Should be used to check if some properties are not filled, and fill them
-    parent.safeCheck()
-EndFunction
-Function activateDevice() ;Device custom activate effect. You need to create it yourself. Don't forget to remove parent.activateDevice() if you don't want parent effect
-    parent.activateDevice()
-EndFunction
-bool Function canBeActivated() ;Switch. Used to determinate if device can be currently activated
-    return parent.canBeActivated()
-EndFunction
-bool Function OnMendPre(float mult) ;called on device mend (regain durability)
-    return parent.OnMendPre(mult)
-EndFunction
-Function OnMendPost(float mult) ;called on device mend (regain durability). Only called if OnMendPre returns true
-    parent.OnMendPost(mult)
-EndFunction
-bool Function OnCritDevicePre() ;called on minigame crit
-    return parent.OnCritDevicePre()
-EndFunction
-Function OnCritDevicePost() ;called on minigame crit. Is only called if OnCritDevicePre returns true 
-    parent.OnCritDevicePost()
-EndFunction
-bool Function OnOrgasmPre(bool sexlab = false) ;called on wearer orgasm. Is only called if wearer is registered
-    return parent.OnOrgasmPre(sexlab)
-EndFunction
-Function OnMinigameOrgasm(bool sexlab = false) ;called on wearer orgasm while in minigame. Is only called if wearer is registered
-    parent.OnMinigameOrgasm(sexlab)
-EndFunction
-Function OnMinigameOrgasmPost() ;called on wearer orgasm while in minigame. Is only called after OnMinigameOrgasm. Is only called if wearer is registered
-    parent.OnMinigameOrgasmPost()
-EndFunction
-Function OnOrgasmPost(bool sexlab = false) ;called on wearer orgasm. Is only called if OnOrgasmPre returns true. Is only called if wearer is registered
-    parent.OnOrgasmPost(sexlab)
-EndFunction
-Function OnMinigameStart() ;called when minigame start
-    parent.OnMinigameStart()
-EndFunction
-Function OnMinigameEnd() ;called when minigame end
-    parent.OnMinigameEnd()
-EndFunction
-Function OnMinigameTick(Float abUpdateTime) ;called every on every tick of minigame. Uses MCM performance setting
-    parent.OnMinigameTick(abUpdateTime)
-EndFunction
-Function OnMinigameTick1() ;called every 1s of minigame
-    parent.OnMinigameTick1()
-EndFunction
-Function OnMinigameTick3() ;called every 3s of minigame
-    parent.OnMinigameTick3()
-EndFunction
-Function OnCritFailure() ;called on crit failure (wrong key pressed)
-    parent.OnCritFailure()
-EndFunction
-Function OnDeviceCutted() ;called when device is cutted
-    parent.OnDeviceCutted()
-EndFunction
-Function OnDeviceLockpicked() ;called when device is lockpicked
-    parent.OnDeviceLockpicked()
-EndFunction
-Function OnLockReached() ;called when device lock is reached
-    parent.OnLockReached()
-EndFunction
-Function OnLockJammed() ;called when device lock is jammed
-    parent.OnLockJammed()
-EndFunction
-Function OnDeviceUnlockedWithKey() ;called when device is unlocked with key
-    parent.OnDeviceUnlockedWithKey()
-EndFunction
-Function OnUpdatePre(float timePassed) ;called on update. Is only called if wearer is registered
-    parent.OnUpdatePre(timePassed)
-EndFunction
-Function OnUpdatePost(float timePassed) ;called on update. Is only called if wearer is registered
-    parent.OnUpdatePost(timePassed)
-EndFunction
-bool Function OnCooldownActivatePre()
-    return parent.OnCooldownActivatePre()
-EndFunction
-Function OnCooldownActivatePost()
-    parent.OnCooldownActivatePost()
-EndFunction
-Function DeviceMenuExt(int msgChoice)
-    parent.DeviceMenuExt(msgChoice)
-EndFunction
-Function DeviceMenuExtWH(int msgChoice)
-    parent.DeviceMenuExtWH(msgChoice)
-EndFunction
-bool Function OnUpdateHourPre()
-    return parent.OnUpdateHourPre()
-EndFunction
-Function onDeviceMenuInitPost(bool[] aControl)
-    parent.onDeviceMenuInitPost(aControl)
-EndFunction
-Function onDeviceMenuInitPostWH(bool[] aControl)
-    parent.onDeviceMenuInitPostWH(aControl)
-EndFunction
-Function InitPostPost()
-    parent.InitPostPost()
-EndFunction
-Function OnRemoveDevicePre(Actor akActor)
-    parent.OnRemoveDevicePre(akActor)
-EndFunction
-Function onRemoveDevicePost(Actor akActor)
-    parent.onRemoveDevicePost(akActor)
-EndFunction
-Function onLockUnlocked(bool lockpick = false)
-    parent.onLockUnlocked(lockpick)
-EndFunction
-Function onSpecialButtonPressed(float fMult)
-    parent.onSpecialButtonPressed(fMult)
-EndFunction
-Function onSpecialButtonReleased(Float fHoldTime)
-    parent.onSpecialButtonReleased(fHoldTime)
-EndFunction
-bool Function onWeaponHitPre(Weapon source)
-    return parent.onWeaponHitPre(source)
-EndFunction
-Function onWeaponHitPost(Weapon source)
-    parent.onWeaponHitPost(source)
-EndFunction
-bool Function onSpellHitPre(Spell source)
-    return parent.onSpellHitPre(source)
-EndFunction
-Function onSpellHitPost(Spell source)
-    parent.onSpellHitPost(source)
-EndFunction
-string Function addInfoString(string str = "")
-    return parent.addInfoString(str)
-EndFunction
-Function updateWidget(bool force = false)
-    parent.updateWidget(force)
-EndFunction
-Function updateWidgetColor()
-    parent.updateWidgetColor()
-EndFunction
-bool Function proccesSpecialMenu(int msgChoice)
-    return parent.proccesSpecialMenu(msgChoice)
-EndFunction
-bool Function proccesSpecialMenuWH(Actor akSource,int msgChoice)
-    return parent.proccesSpecialMenuWH(akSource,msgChoice)
-EndFunction
-int Function getArousalRate()
-    return parent.getArousalRate()
-EndFunction
-float Function getStruggleOrgasmRate()
-    return parent.getStruggleOrgasmRate()
-EndFunction
-Float[] Function GetCurrentMinigameExpression()
-	return parent.GetCurrentMinigameExpression()
-EndFunction
+scriptname ud_customgag_renderscript extends ud_customdevice_renderscript  
+function initpost()
+endfunction
+function patchdevice()
+endfunction
+float function getaccesibility()
+endfunction
+bool function onupdatehourpost()
+endfunction
+int function getaipriority()
+endfunction
+function safecheck() ;called on init. should be used to check if some properties are not filled, and fill them
+endfunction
+function activatedevice() ;device custom activate effect. you need to create it yourself. don't forget to remove parent.activatedevice() if you don't want parent effect
+endfunction
+bool function canbeactivated() ;switch. used to determinate if device can be currently activated
+endfunction
+bool function onmendpre(float mult) ;called on device mend (regain durability)
+endfunction
+function onmendpost(float mult) ;called on device mend (regain durability). only called if onmendpre returns true
+endfunction
+bool function oncritdevicepre() ;called on minigame crit
+endfunction
+function oncritdevicepost() ;called on minigame crit. is only called if oncritdevicepre returns true 
+endfunction
+bool function onorgasmpre(bool sexlab = false) ;called on wearer orgasm. is only called if wearer is registered
+endfunction
+function onminigameorgasm(bool sexlab = false) ;called on wearer orgasm while in minigame. is only called if wearer is registered
+endfunction
+function onminigameorgasmpost() ;called on wearer orgasm while in minigame. is only called after onminigameorgasm. is only called if wearer is registered
+endfunction
+function onorgasmpost(bool sexlab = false) ;called on wearer orgasm. is only called if onorgasmpre returns true. is only called if wearer is registered
+endfunction
+function onminigamestart() ;called when minigame start
+endfunction
+function onminigameend() ;called when minigame end
+endfunction
+function onminigametick(float abupdatetime) ;called every on every tick of minigame. uses mcm performance setting
+endfunction
+function onminigametick1() ;called every 1s of minigame
+endfunction
+function onminigametick3() ;called every 3s of minigame
+endfunction
+function oncritfailure() ;called on crit failure (wrong key pressed)
+endfunction
+function ondevicecutted() ;called when device is cutted
+endfunction
+function ondevicelockpicked() ;called when device is lockpicked
+endfunction
+function onlockreached() ;called when device lock is reached
+endfunction
+function onlockjammed() ;called when device lock is jammed
+endfunction
+function ondeviceunlockedwithkey() ;called when device is unlocked with key
+endfunction
+function onupdatepre(float timepassed) ;called on update. is only called if wearer is registered
+endfunction
+function onupdatepost(float timepassed) ;called on update. is only called if wearer is registered
+endfunction
+bool function oncooldownactivatepre()
+endfunction
+function oncooldownactivatepost()
+endfunction
+function devicemenuext(int msgchoice)
+endfunction
+function devicemenuextwh(int msgchoice)
+endfunction
+bool function onupdatehourpre()
+endfunction
+function ondevicemenuinitpost(bool[] acontrol)
+endfunction
+function ondevicemenuinitpostwh(bool[] acontrol)
+endfunction
+function initpostpost()
+endfunction
+function onremovedevicepre(actor akactor)
+endfunction
+function onremovedevicepost(actor akactor)
+endfunction
+function onlockunlocked(bool lockpick = false)
+endfunction
+function onspecialbuttonpressed(float fmult)
+endfunction
+function onspecialbuttonreleased(float fholdtime)
+endfunction
+bool function onweaponhitpre(weapon source)
+endfunction
+function onweaponhitpost(weapon source)
+endfunction
+bool function onspellhitpre(spell source)
+endfunction
+function onspellhitpost(spell source)
+endfunction
+string function addinfostring(string str = "")
+endfunction
+function updatewidget(bool force = false)
+endfunction
+function updatewidgetcolor()
+endfunction
+bool function proccesspecialmenu(int msgchoice)
+endfunction
+bool function proccesspecialmenuwh(actor aksource,int msgchoice)
+endfunction
+int function getarousalrate()
+endfunction
+float function getstruggleorgasmrate()
+endfunction
+float[] function getcurrentminigameexpression()
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

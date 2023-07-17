@@ -1,12 +1,5 @@
-Scriptname zadHiderScript extends ObjectReference  
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-zadLibs Property libs Auto
-
-Event OnContainerChanged(ObjectReference akNewContainer, ObjectReference akOldContainer)
-EndEvent
+scriptname zadhiderscript extends objectreference  
+zadlibs property libs auto
+event oncontainerchanged(objectreference aknewcontainer, objectreference akoldcontainer)
+endevent
+;This file was cleaned with papyrusSourceHeadliner

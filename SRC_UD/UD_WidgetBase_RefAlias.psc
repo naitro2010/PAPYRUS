@@ -1,14 +1,10 @@
-Scriptname UD_WidgetBase_RefAlias extends ReferenceAlias  
-
-String  Property    Name            = ""        Auto Hidden         ; name of the entity (used to identify in API calls)
-Bool    Property    IsNew           = True      Auto Hidden         ; flag that this entity is just created (reseted)
-Int     Property    PosX            = -1        Auto Hidden         ; x coordinate 
-Int     Property    PosY            = -1        Auto Hidden         ; y coordinate 
-
-Function Reset()
-    Name = ""
-    IsNew = True
-EndFunction
-
-Function SoftReset()
-EndFunction
+scriptname ud_widgetbase_refalias extends referencealias  
+string  property    name            = ""        auto hidden         ; name of the entity (used to identify in api calls)
+bool    property    isnew           = true      auto hidden         ; flag that this entity is just created (reseted)
+int     property    posx            = -1        auto hidden         ; x coordinate 
+int     property    posy            = -1        auto hidden         ; y coordinate 
+function reset()
+endfunction
+function softreset()
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

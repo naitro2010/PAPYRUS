@@ -1,89 +1,40 @@
-Scriptname NetImmerse Hidden
-
-; Note that only local transforms can be set as the world transform
-; is computed based on the entire hierarchy rather than a single node
-
-; Return whether the object has the particular node
-bool Function HasNode(ObjectReference ref, string node, bool firstPerson) native global
-
-; NiNode Manipulation
-float Function GetNodeWorldPositionX(ObjectReference ref, string node, bool firstPerson) native global
-float Function GetNodeWorldPositionY(ObjectReference ref, string node, bool firstPerson) native global
-float Function GetNodeWorldPositionZ(ObjectReference ref, string node, bool firstPerson) native global
-
-; Returns nodeB - nodeA
-float Function GetRelativeNodePositionX(ObjectReference ref, string nodeA, string nodeB, bool firstPerson) native global
-float Function GetRelativeNodePositionY(ObjectReference ref, string nodeA, string nodeB, bool firstPerson) native global
-float Function GetRelativeNodePositionZ(ObjectReference ref, string nodeA, string nodeB, bool firstPerson) native global
-
-float Function GetNodeLocalPositionX(ObjectReference ref, string node, bool firstPerson) native global
-float Function GetNodeLocalPositionY(ObjectReference ref, string node, bool firstPerson) native global
-float Function GetNodeLocalPositionZ(ObjectReference ref, string node, bool firstPerson) native global
-
-Function SetNodeLocalPositionX(ObjectReference ref, string node, float x, bool firstPerson) native global
-Function SetNodeLocalPositionY(ObjectReference ref, string node, float y, bool firstPerson) native global
-Function SetNodeLocalPositionZ(ObjectReference ref, string node, float z, bool firstPerson) native global
-
-; Sets the scale of a particular Nif node
-float Function GetNodeScale(ObjectReference ref, string node, bool firstPerson) native global
-Function SetNodeScale(ObjectReference ref, string node, float scale, bool firstPerson) native global
-
-; Sets a NiTriShape's textures by name of the Nif node
-Function SetNodeTextureSet(ObjectReference ref, string node, TextureSet tSet, bool firstPerson) native global
-
-
-; Array based functions, return true when successful, false when unsuccessful (node did not exist, or array wrong size)
-
-; returns the node's world position into the specify array, must be size of 3
-bool Function GetNodeWorldPosition(ObjectReference ref, string node, float[] in, bool firstPerson) native global
-
-; returns the node's relative world position of nodeB minus nodeA into the specify array, must be size of 3
-bool Function GetRelativeNodePosition(ObjectReference ref, string nodeA, string nodeB, float[] in, bool firstPerson) native global
-
-; returns the node's local position into the specify array, must be size of 3
-bool Function GetNodeLocalPosition(ObjectReference ref, string node, float[] in, bool firstPerson) native global
-
-; sets the node's local position of the specified array, must be size of 3
-bool Function SetNodeLocalPosition(ObjectReference ref, string node, float[] in, bool firstPerson) native global
-
-; Euler Rotation in DEGREES (heading, attitude, bank)
-; returns the euler rotation of the node into the specified array, must be size of 3
-bool Function GetNodeWorldRotationEuler(ObjectReference ref, string node, float[] in, bool firstPerson) native global
-
-; returns the euler rotation of the node into the specified array, must be size of 3
-bool Function GetNodeLocalRotationEuler(ObjectReference ref, string node, float[] in, bool firstPerson) native global
-
-; sets the euler rotation for the node of the specified array, must be size of 3
-bool Function SetNodeLocalRotationEuler(ObjectReference ref, string node, float[] in, bool firstPerson) native global
-
-; Matrix Rotation in RADIANS
-; returns the matrix rotation of the node into the specified array, must be size of 9
-bool Function GetNodeWorldRotationMatrix(ObjectReference ref, string node, float[] in, bool firstPerson) native global
-
-; returns the matrix rotation of the node into the specified array, must be size of 9
-bool Function GetNodeLocalRotationMatrix(ObjectReference ref, string node, float[] in, bool firstPerson) native global
-
-; sets the matrix rotation for the node of the specified array, must be size of 9
-bool Function SetNodeLocalRotationMatrix(ObjectReference ref, string node, float[] in, bool firstPerson) native global
-
-
-; DEPRECATED FUNCTIONS
-Function SetNodePositionX(ObjectReference ref, string node, float x, bool firstPerson) global
-	NetImmerse.SetNodeLocalPositionX(ref, node, x, firstPerson)
-EndFunction
-Function SetNodePositionY(ObjectReference ref, string node, float y, bool firstPerson) global
-	NetImmerse.SetNodeLocalPositionY(ref, node, y, firstPerson)
-EndFunction
-Function SetNodePositionZ(ObjectReference ref, string node, float z, bool firstPerson) global
-	NetImmerse.SetNodeLocalPositionZ(ref, node, z, firstPerson)
-EndFunction
-
-float Function GetNodePositionX(ObjectReference ref, string node, bool firstPerson) global
-	return NetImmerse.GetNodeWorldPositionX(ref, node, firstPerson)
-EndFunction
-float Function GetNodePositionY(ObjectReference ref, string node, bool firstPerson) global
-	return NetImmerse.GetNodeWorldPositionY(ref, node, firstPerson)
-EndFunction
-float Function GetNodePositionZ(ObjectReference ref, string node, bool firstPerson) global
-	return NetImmerse.GetNodeWorldPositionZ(ref, node, firstPerson)
-EndFunction
+scriptname netimmerse hidden
+bool function hasnode(objectreference ref, string node, bool firstperson) native global
+float function getnodeworldpositionx(objectreference ref, string node, bool firstperson) native global
+float function getnodeworldpositiony(objectreference ref, string node, bool firstperson) native global
+float function getnodeworldpositionz(objectreference ref, string node, bool firstperson) native global
+float function getrelativenodepositionx(objectreference ref, string nodea, string nodeb, bool firstperson) native global
+float function getrelativenodepositiony(objectreference ref, string nodea, string nodeb, bool firstperson) native global
+float function getrelativenodepositionz(objectreference ref, string nodea, string nodeb, bool firstperson) native global
+float function getnodelocalpositionx(objectreference ref, string node, bool firstperson) native global
+float function getnodelocalpositiony(objectreference ref, string node, bool firstperson) native global
+float function getnodelocalpositionz(objectreference ref, string node, bool firstperson) native global
+function setnodelocalpositionx(objectreference ref, string node, float x, bool firstperson) native global
+function setnodelocalpositiony(objectreference ref, string node, float y, bool firstperson) native global
+function setnodelocalpositionz(objectreference ref, string node, float z, bool firstperson) native global
+float function getnodescale(objectreference ref, string node, bool firstperson) native global
+function setnodescale(objectreference ref, string node, float scale, bool firstperson) native global
+function setnodetextureset(objectreference ref, string node, textureset tset, bool firstperson) native global
+bool function getnodeworldposition(objectreference ref, string node, float[] in, bool firstperson) native global
+bool function getrelativenodeposition(objectreference ref, string nodea, string nodeb, float[] in, bool firstperson) native global
+bool function getnodelocalposition(objectreference ref, string node, float[] in, bool firstperson) native global
+bool function setnodelocalposition(objectreference ref, string node, float[] in, bool firstperson) native global
+bool function getnodeworldrotationeuler(objectreference ref, string node, float[] in, bool firstperson) native global
+bool function getnodelocalrotationeuler(objectreference ref, string node, float[] in, bool firstperson) native global
+bool function setnodelocalrotationeuler(objectreference ref, string node, float[] in, bool firstperson) native global
+bool function getnodeworldrotationmatrix(objectreference ref, string node, float[] in, bool firstperson) native global
+bool function getnodelocalrotationmatrix(objectreference ref, string node, float[] in, bool firstperson) native global
+bool function setnodelocalrotationmatrix(objectreference ref, string node, float[] in, bool firstperson) native global
+function setnodepositionx(objectreference ref, string node, float x, bool firstperson) global
+endfunction
+function setnodepositiony(objectreference ref, string node, float y, bool firstperson) global
+endfunction
+function setnodepositionz(objectreference ref, string node, float z, bool firstperson) global
+endfunction
+float function getnodepositionx(objectreference ref, string node, bool firstperson) global
+endfunction
+float function getnodepositiony(objectreference ref, string node, bool firstperson) global
+endfunction
+float function getnodepositionz(objectreference ref, string node, bool firstperson) global
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

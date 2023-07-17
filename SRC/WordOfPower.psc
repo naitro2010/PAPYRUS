@@ -1,1 +1,2 @@
-Scriptname WordOfPower Extends Form Hidden
+scriptname wordofpower extends form hidden
+;This file was cleaned with papyrusSourceHeadliner

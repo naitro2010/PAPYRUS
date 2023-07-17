@@ -1,1 +1,2 @@
-Scriptname Projectile extends Form Hidden
+scriptname projectile extends form hidden
+;This file was cleaned with papyrusSourceHeadliner

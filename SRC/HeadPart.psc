@@ -1,27 +1,18 @@
-Scriptname HeadPart extends Form Hidden
-
-int Property Type_Misc = 0 AutoReadOnly
-int Property Type_Face = 1 AutoReadOnly
-int Property Type_Eyes = 2 AutoReadOnly
-int Property Type_Hair = 3 AutoReadOnly
-int Property Type_FacialHair = 4 AutoReadOnly
-int Property Type_Scar = 5 AutoReadOnly
-int Property Type_Brows = 6 AutoReadOnly
-
-HeadPart Function GetHeadPart(string name) native global
-
-; Returns the head part type
-int Function GetType() native
-
-int Function GetNumExtraParts() native
-HeadPart Function GetNthExtraPart(int n) native
-
-bool Function HasExtraPart(HeadPart p) native
-int Function GetIndexOfExtraPart(HeadPart p) native
-
-; Returns a formlist of the valid races for this head part
-FormList Function GetValidRaces() native
-Function SetValidRaces(FormList vRaces) native
-
-; Returns whether the head part is an extra part
-bool Function IsExtraPart() native
+scriptname headpart extends form hidden
+int property type_misc = 0 autoreadonly
+int property type_face = 1 autoreadonly
+int property type_eyes = 2 autoreadonly
+int property type_hair = 3 autoreadonly
+int property type_facialhair = 4 autoreadonly
+int property type_scar = 5 autoreadonly
+int property type_brows = 6 autoreadonly
+headpart function getheadpart(string name) native global
+int function gettype() native
+int function getnumextraparts() native
+headpart function getnthextrapart(int n) native
+bool function hasextrapart(headpart p) native
+int function getindexofextrapart(headpart p) native
+formlist function getvalidraces() native
+function setvalidraces(formlist vraces) native
+bool function isextrapart() native
+;This file was cleaned with papyrusSourceHeadliner

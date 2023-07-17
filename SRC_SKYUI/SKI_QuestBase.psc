@@ -1,27 +1,15 @@
-scriptname SKI_QuestBase extends Quest hidden
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-event OnInit()
-endEvent
-
-int property CurrentVersion auto hidden
-
-function CheckVersion()
-endFunction
-
-int function GetVersion()
-endFunction
-
-event OnVersionUpdate(int a_version)
-endEvent
-
-event OnGameReload()
-endEvent
-
-function Guard()
-endFunction
+scriptname ski_questbase extends quest hidden
+event oninit()
+endevent
+int property currentversion auto hidden
+function checkversion()
+endfunction
+int function getversion()
+endfunction
+event onversionupdate(int a_version)
+endevent
+event ongamereload()
+endevent
+function guard()
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

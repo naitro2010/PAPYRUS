@@ -1,4 +1,4 @@
-Scriptname Art extends Form Hidden
-
-string Function GetModelPath() native
-Function SetModelPath(string path) native
+scriptname art extends form hidden
+string function getmodelpath() native
+function setmodelpath(string path) native
+;This file was cleaned with papyrusSourceHeadliner

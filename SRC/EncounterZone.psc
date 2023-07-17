@@ -1,1 +1,2 @@
-Scriptname EncounterZone extends Form Hidden
+scriptname encounterzone extends form hidden
+;This file was cleaned with papyrusSourceHeadliner

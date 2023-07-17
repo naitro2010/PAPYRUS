@@ -1,8 +1,5 @@
-Scriptname UD_CustomDevice_PlayerScript extends ReferenceAlias  
-
-UnforgivingDevicesMain Property UDmain auto
-
-Event OnPlayerLoadGame()
-    UDmain.OnGameReload()
-EndEvent
-
+scriptname ud_customdevice_playerscript extends referencealias  
+unforgivingdevicesmain property udmain auto
+event onplayerloadgame()
+endevent
+;This file was cleaned with papyrusSourceHeadliner

@@ -1,7 +1,4 @@
-Scriptname VisualEffect extends Form Hidden
-
-; Plays this visual effect on the specified object, for a certain length of time (negative for infinite) and possibly facing another object
-Function Play(ObjectReference akObject, float afTime = -1.0, ObjectReference akFacingObject = None) native
-
-; Stops this visual effect from playing in the specified object
-Function Stop(ObjectReference akObject) native
+scriptname visualeffect extends form hidden
+function play(objectreference akobject, float aftime = -1.0, objectreference akfacingobject = none) native
+function stop(objectreference akobject) native
+;This file was cleaned with papyrusSourceHeadliner

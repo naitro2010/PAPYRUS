@@ -1,34 +1,16 @@
-Scriptname GlobalVariable extends Form Hidden
-
-; Obtains the global's current value
-float Function GetValue() native
-
-; Sets the global's current value
-Function SetValue(float afNewValue) native
-
-; convenience functions for ints
-int Function GetValueInt()
-	return GetValue() as int
-endFunction
-
-; Sets the global's current value
-Function SetValueInt(int aiNewValue)
-	SetValue(aiNewValue as float)
-endFunction
-
-; Easy access to the global's value
-float Property Value Hidden
-  float Function get()
-    return GetValue()
-  EndFunction
-  
-  Function set(float afValue)
-    SetValue(afValue)
-  EndFunction
-EndProperty
-
-; the threadsafe way to modify a global variable
-float Function Mod(float afHowMuch)
-                Value += afHowMuch
-                Return Value
-EndFunction
+scriptname globalvariable extends form hidden
+float function getvalue() native
+function setvalue(float afnewvalue) native
+int function getvalueint()
+endfunction
+function setvalueint(int ainewvalue)
+endfunction
+float property value hidden
+  float function get()
+  endfunction
+  function set(float afvalue)
+  endfunction
+endproperty
+float function mod(float afhowmuch)
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

@@ -1,1 +1,2 @@
-Scriptname ImpactDataSet extends Form Hidden
+scriptname impactdataset extends form hidden
+;This file was cleaned with papyrusSourceHeadliner

@@ -1,19 +1,16 @@
-Scriptname ColorComponent Hidden
-
-int Function GetAlpha(int argb) global native
-int Function GetRed(int argb) global native
-int Function GetGreen(int argb) global native
-int Function GetBlue(int argb) global native
-
-float Function GetHue(int argb) global native
-float Function GetSaturation(int argb) global native
-float Function GetValue(int argb) global native
-
-int Function SetAlpha(int argb, int a) global native
-int Function SetRed(int argb, int r) global native
-int Function SetGreen(int argb, int g) global native
-int Function SetBlue(int argb, int b) global native
-
-int Function SetHue(int argb, float h) global native
-int Function SetSaturation(int argb, float s) global native
-int Function SetValue(int argb, float v) global native
+scriptname colorcomponent hidden
+int function getalpha(int argb) global native
+int function getred(int argb) global native
+int function getgreen(int argb) global native
+int function getblue(int argb) global native
+float function gethue(int argb) global native
+float function getsaturation(int argb) global native
+float function getvalue(int argb) global native
+int function setalpha(int argb, int a) global native
+int function setred(int argb, int r) global native
+int function setgreen(int argb, int g) global native
+int function setblue(int argb, int b) global native
+int function sethue(int argb, float h) global native
+int function setsaturation(int argb, float s) global native
+int function setvalue(int argb, float v) global native
+;This file was cleaned with papyrusSourceHeadliner

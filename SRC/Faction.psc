@@ -1,131 +1,62 @@
-Scriptname Faction extends Form Hidden
-
-; Checks to see if the player can pay the crime gold for this faction
-bool Function CanPayCrimeGold() native
-
-; Gets the amount of gold the player is to pay to this faction for crimes
-int Function GetCrimeGold() native
-
-; Gets the amount of gold the player is to pay to this faction for non-violent crimes
-int Function GetCrimeGoldNonViolent() native
-
-; Gets the amount of gold the player is to pay to this faction for violent crimes
-int Function GetCrimeGoldViolent() native
-
-; Get the player's "infamy" with this faction (accumulated crime gold)
-int Function GetInfamy() native
-
-; Get the player's "non-violent infamy" with this faction (accumulated non-violent crime gold)
-int Function GetInfamyNonViolent() native
-
-; Get the player's "violent infamy" with this faction (accumulated violent crime gold)
-int Function GetInfamyViolent() native
-
-; Gets this faction's reaction towards the other
-int Function GetReaction(Faction akOther) native
-
-; Obtains the value of all items stolen by the player from this faction that was witnessed
-int Function GetStolenItemValueCrime() native
-
-; Obtains the value of all items stolen by the player from this faction that was NOT witnessed
-int Function GetStolenItemValueNoCrime() native
-
-; Is the passed in faction in this faction's crime group
-bool Function IsFactionInCrimeGroup(Faction akOther) native
-
-; Is the player expelled from this faction?
-bool Function IsPlayerExpelled() native
-
-; Modifies the amount of crime gold for this faction - violent or non-violent
-Function ModCrimeGold(int aiAmount, bool abViolent = false) native
-
-; Modifies this faction's reaction towards the other faction
-Function ModReaction(Faction akOther, int aiAmount) native
-
-; Has the player pay the crime gold for this faction
-Function PlayerPayCrimeGold(bool abRemoveStolenItems = true, bool abGoToJail = true) native
-
-; Finds a nearby NPC in this faction and has them behave as if assaulted
-Function SendAssaultAlarm() native
-
-; Sends the player to this faction's jail - removing inventory if requested, and to a "real" jail or not
-Function SendPlayerToJail(bool abRemoveInventory = true, bool abRealJail = true) native
-
-; Sets this faction and the other as allies or friends - if the friend booleans are true - the specified one-way relationship
-; is a friend instead of an ally
-Function SetAlly(Faction akOther, bool abSelfIsFriendToOther = false, bool abOtherIsFriendToSelf = false) native
-
-; Sets the non-violent crime gold on this faction
-Function SetCrimeGold(int aiGold) native
-
-; Sets the violent crime gold on this faction
-Function SetCrimeGoldViolent(int aiGold) native
-
-; Sets this faction and the other as enemies or neutral - if the friend booleans are true - the specified one-way relationship
-; is a neutral instead of an enemy
-Function SetEnemy(Faction akOther, bool abSelfIsNeutralToOther = false, bool abOtherIsNeutralToSelf = false) native
-
-; Sets or clears the player as an enemy of this faction
-Function SetPlayerEnemy(bool abIsEnemy = true) native
-
-; Sets or clears the expelled flag for this faction on the player
-Function SetPlayerExpelled(bool abIsExpelled = true) native
-
-; Sets this faction's reaction towards the other
-Function SetReaction(Faction akOther, int aiNewValue) native
-
-; SKSE additions built 2015-05-24 00:46:48.937000 UTC
-
-int property kFaction_HiddenFromNPC				= 0x00000001 AutoReadOnly
-int property kFaction_SpecialCombat				= 0x00000002 AutoReadOnly
-int property kFaction_TrackCrime				= 0x00000010 AutoReadOnly
-int property kFaction_IgnoreMurder				= 0x00000020 AutoReadOnly
-int property kFaction_IgnoreAssault				= 0x00000040 AutoReadOnly
-int property kFaction_IgnoreStealing			= 0x00000080 AutoReadOnly
-int property kFaction_IgnoreTrespass			= 0x00000100 AutoReadOnly
-int property kFaction_NoReportCrime				= 0x00000200 AutoReadOnly
-int property kFaction_CrimeGoldDefaults			= 0x00000400 AutoReadOnly
-int property kFaction_IgnorePickpocket			= 0x00000800 AutoReadOnly
-int property kFaction_Vendor					= 0x00001000 AutoReadOnly
-int property kFaction_CanBeOwner				= 0x00002000 AutoReadOnly
-int property kFaction_IgnoreWerewolf			= 0x00004000 AutoReadOnly
-
-; Not recommended unless the faction was previously a vendor
-; due to the faction not having a package location the vendor
-; may not be able to set up shop anywhere at all
-Function MakeVendor()
-	SetFactionFlag(self.kFaction_Vendor)
-EndFunction
-
-bool Function IsVendor()
-	return IsFactionFlagSet(self.kFaction_Vendor)
-EndFunction
-
-Function ClearVendor()
-	ClearFactionFlag(self.kFaction_Vendor)
-EndFunction
-
-bool Function IsFactionFlagSet(int flag) native
-Function SetFactionFlag(int flag) native
-Function ClearFactionFlag(int flag) native
-
-bool Function OnlyBuysStolenItems() native
-Function SetOnlyBuysStolenItems(bool onlyStolen) native
-
-int Function GetVendorStartHour() native
-Function SetVendorStartHour(int hour) native
-
-int Function GetVendorEndHour() native
-Function SetVendorEndHour(int hour) native
-
-int Function GetVendorRadius() native
-Function SetVendorRadius(int radius) native
-
-ObjectReference Function GetMerchantContainer() native
-Function SetMerchantContainer(ObjectReference akContainer) native
-
-bool Function IsNotSellBuy() native
-Function SetNotSellBuy(bool notSellBuy) native
-
-FormList Function GetBuySellList() native
-Function SetBuySellList(FormList akList) native
+scriptname faction extends form hidden
+bool function canpaycrimegold() native
+int function getcrimegold() native
+int function getcrimegoldnonviolent() native
+int function getcrimegoldviolent() native
+int function getinfamy() native
+int function getinfamynonviolent() native
+int function getinfamyviolent() native
+int function getreaction(faction akother) native
+int function getstolenitemvaluecrime() native
+int function getstolenitemvaluenocrime() native
+bool function isfactionincrimegroup(faction akother) native
+bool function isplayerexpelled() native
+function modcrimegold(int aiamount, bool abviolent = false) native
+function modreaction(faction akother, int aiamount) native
+function playerpaycrimegold(bool abremovestolenitems = true, bool abgotojail = true) native
+function sendassaultalarm() native
+function sendplayertojail(bool abremoveinventory = true, bool abrealjail = true) native
+function setally(faction akother, bool abselfisfriendtoother = false, bool abotherisfriendtoself = false) native
+function setcrimegold(int aigold) native
+function setcrimegoldviolent(int aigold) native
+function setenemy(faction akother, bool abselfisneutraltoother = false, bool abotherisneutraltoself = false) native
+function setplayerenemy(bool abisenemy = true) native
+function setplayerexpelled(bool abisexpelled = true) native
+function setreaction(faction akother, int ainewvalue) native
+int property kfaction_hiddenfromnpc    = 0x00000001 autoreadonly
+int property kfaction_specialcombat    = 0x00000002 autoreadonly
+int property kfaction_trackcrime    = 0x00000010 autoreadonly
+int property kfaction_ignoremurder    = 0x00000020 autoreadonly
+int property kfaction_ignoreassault    = 0x00000040 autoreadonly
+int property kfaction_ignorestealing   = 0x00000080 autoreadonly
+int property kfaction_ignoretrespass   = 0x00000100 autoreadonly
+int property kfaction_noreportcrime    = 0x00000200 autoreadonly
+int property kfaction_crimegolddefaults   = 0x00000400 autoreadonly
+int property kfaction_ignorepickpocket   = 0x00000800 autoreadonly
+int property kfaction_vendor     = 0x00001000 autoreadonly
+int property kfaction_canbeowner    = 0x00002000 autoreadonly
+int property kfaction_ignorewerewolf   = 0x00004000 autoreadonly
+function makevendor()
+endfunction
+bool function isvendor()
+endfunction
+function clearvendor()
+endfunction
+bool function isfactionflagset(int flag) native
+function setfactionflag(int flag) native
+function clearfactionflag(int flag) native
+bool function onlybuysstolenitems() native
+function setonlybuysstolenitems(bool onlystolen) native
+int function getvendorstarthour() native
+function setvendorstarthour(int hour) native
+int function getvendorendhour() native
+function setvendorendhour(int hour) native
+int function getvendorradius() native
+function setvendorradius(int radius) native
+objectreference function getmerchantcontainer() native
+function setmerchantcontainer(objectreference akcontainer) native
+bool function isnotsellbuy() native
+function setnotsellbuy(bool notsellbuy) native
+formlist function getbuyselllist() native
+function setbuyselllist(formlist aklist) native
+;This file was cleaned with papyrusSourceHeadliner

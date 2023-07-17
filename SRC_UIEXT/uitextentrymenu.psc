@@ -1,39 +1,22 @@
-Scriptname UITextEntryMenu extends UIMenuBase
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-string property		ROOT_MENU		= "CustomMenu" autoReadonly
-string Property 	MENU_ROOT		= "_root.textEntry." autoReadonly
-
-string Function GetMenuName()
-EndFunction
-
-string Function GetResultString()
-EndFunction
-
-Function SetPropertyString(string propertyName, string value)
-EndFunction
-
-Function ResetMenu()
-EndFunction
-
-int Function OpenMenu(Form inForm = None, Form akReceiver = None)
-EndFunction
-
-Event OnLoadMenu(string eventName, string strArg, float numArg, Form formArg)
-EndEvent
-
-Event OnUnloadMenu(string eventName, string strArg, float numArg, Form formArg)
-EndEvent
-
-Event OnTextChanged(string eventName, string strArg, float numArg, Form formArg)
-	Unlock()
-EndEvent
-
-Function UpdateTextEntryString()
-EndFunction
-
+scriptname uitextentrymenu extends uimenubase
+string property  root_menu  = "custommenu" autoreadonly
+string property  menu_root  = "_root.textentry." autoreadonly
+string function getmenuname()
+endfunction
+string function getresultstring()
+endfunction
+function setpropertystring(string propertyname, string value)
+endfunction
+function resetmenu()
+endfunction
+int function openmenu(form inform = none, form akreceiver = none)
+endfunction
+event onloadmenu(string eventname, string strarg, float numarg, form formarg)
+endevent
+event onunloadmenu(string eventname, string strarg, float numarg, form formarg)
+endevent
+event ontextchanged(string eventname, string strarg, float numarg, form formarg)
+endevent
+function updatetextentrystring()
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

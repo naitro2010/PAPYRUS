@@ -1,6 +1,2 @@
-Scriptname slaUtilScr extends slaFrameworkScr
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
+scriptname slautilscr extends slaframeworkscr
+;This file was cleaned with papyrusSourceHeadliner

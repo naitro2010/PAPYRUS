@@ -1,1 +1,2 @@
-Scriptname AssociationType extends Form Hidden
+scriptname associationtype extends form hidden
+;This file was cleaned with papyrusSourceHeadliner

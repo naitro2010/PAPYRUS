@@ -1,54 +1,20 @@
-Scriptname Scroll extends Form Hidden
-
-; Cast this scroll from an ObjectReference, optionally toward another.
-Function Cast(ObjectReference akSource, ObjectReference akTarget=NONE) native	
-
-; SKSE additions built 2015-05-24 00:46:48.937000 UTC
-; return the casting time
-float Function GetCastTime() native
-
-; return the perk associated with the spell
-Perk Function GetPerk() native
-
-; return the number of the effects
-int Function GetNumEffects() native
-
-; return the magnitude of the specified effect
-float Function GetNthEffectMagnitude(int index) native
-
-; return the area of the specified effect
-int Function GetNthEffectArea(int index) native
-
-; return the duration of the specified effect
-int Function GetNthEffectDuration(int index) native
-
-; return the magic effect of the specified effect
-MagicEffect Function GetNthEffectMagicEffect(int index) native
-
-; return the index of the costliest effect
-int Function GetCostliestEffectIndex() native
-
-; sets the magnitude of the specified effect
-Function SetNthEffectMagnitude(int index, float value) native
-
-; sets the area of the specified effect
-Function SetNthEffectArea(int index, int value) native
-
-; sets the duration of the specified effect
-Function SetNthEffectDuration(int index, int value) native
-
-; Returns the particular equipslot type
-EquipSlot Function GetEquipType() native
-Function SetEquipType(EquipSlot type) native
-
-; Returns all the magnitudes of this object in order
-float[] Function GetEffectMagnitudes() native
-
-; Returns all the areas of this object in order
-int[] Function GetEffectAreas() native
-
-; Returns all the durations of this object in order
-int[] Function GetEffectDurations() native
-
-; Returns all the magic effects of this object in order
-MagicEffect[] Function GetMagicEffects() native
+scriptname scroll extends form hidden
+function cast(objectreference aksource, objectreference aktarget=none) native 
+float function getcasttime() native
+perk function getperk() native
+int function getnumeffects() native
+float function getntheffectmagnitude(int index) native
+int function getntheffectarea(int index) native
+int function getntheffectduration(int index) native
+magiceffect function getntheffectmagiceffect(int index) native
+int function getcostliesteffectindex() native
+function setntheffectmagnitude(int index, float value) native
+function setntheffectarea(int index, int value) native
+function setntheffectduration(int index, int value) native
+equipslot function getequiptype() native
+function setequiptype(equipslot type) native
+float[] function geteffectmagnitudes() native
+int[] function geteffectareas() native
+int[] function geteffectdurations() native
+magiceffect[] function getmagiceffects() native
+;This file was cleaned with papyrusSourceHeadliner

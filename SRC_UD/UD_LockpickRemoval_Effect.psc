@@ -1,22 +1,7 @@
-Scriptname UD_LockpickRemoval_Effect extends zadArmbinderNoLockpicks  
-
-UD_libs Property UDlibs auto
-
-Event OnEffectStart(Actor akTarget, Actor akCaster)
-    if akTarget.hasspell(UDlibs.TelekinesisSpell)
-        return
-    else
-        parent.OnEffectStart(akTarget, akCaster)
-        RegisterForSingleUpdate(3.0)
-    endif
-EndEvent
-
-
-Event OnUpdate()    
-    if !Target.hasspell(UDlibs.TelekinesisSpell)
-        RegisterForSingleUpdate(3.0)
-    else
-        dispel()
-    endif
-EndEvent
-
+scriptname ud_lockpickremoval_effect extends zadarmbindernolockpicks  
+ud_libs property udlibs auto
+event oneffectstart(actor aktarget, actor akcaster)
+endevent
+event onupdate()    
+endevent
+;This file was cleaned with papyrusSourceHeadliner

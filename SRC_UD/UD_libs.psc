@@ -1,261 +1,139 @@
-Scriptname UD_libs extends Quest  
-
-import UnforgivingDevicesMain
-
-UnforgivingDevicesMain Property main auto
-
-;zadlibs slots
-;zad_DeviousHood                30
-;hair                           31
-;zad_DeviousSuit                32
-;zad_DeviousGloves              33
-;VANILLA                        34-36
-;zad_DeviousBoots               37
-;VANILLA                        38-43
-;zad_DeviousGag                 44
-;zad_DeviousCollar              45
-;zad_DeviousHeavyBondage        46
-;??????                         47
-;zad_DeviousPlugAnal            48
-;zad_DeviousBelt                49
-;zad_DeviousPiercingsVaginal    50
-;zad_DeviousPiercingsNipple     51
-;SOS                            52
-;zad_DeviousLegCuffs            53
-;???                            54
-;zad_DeviousBlindfold           55
-;zad_DeviousBra                 56
-;zad_DeviousPlugVaginal         57
-;zad_DeviousHarness             58
-;zad_DeviousCorset              58
-;zad_DeviousArmCuffs            59
-;???                            60
-
-;misc
-MiscObject Property Gold auto
-Soulgem Property EmptySoulgem_Petty auto
-Soulgem Property EmptySoulgem_Lesser auto
-Soulgem Property EmptySoulgem_Common auto
-Soulgem Property EmptySoulgem_Great  auto
-Soulgem Property EmptySoulgem_Grand  auto
-Soulgem Property FilledSoulgem_Petty auto
-Soulgem Property FilledSoulgem_Lesser auto
-Soulgem Property FilledSoulgem_Common auto
-Soulgem Property FilledSoulgem_Great  auto
-Soulgem Property FilledSoulgem_Grand  auto
-
-MiscObject Property SteelIngot auto
-
-
-Bool Property Ready = False auto
-Event OnInit()
-    Ready = True
-EndEvent
-
-Function Update()
-    if !PunisherArmbinder
-        PunisherArmbinder = GetMeMyForm(0x15B53D,"UnforgivingDevices.esp") as Armor
-    endif
-    
-    if !PunisherPiercing
-        PunisherPiercing = GetMeMyForm(0x15B538,"UnforgivingDevices.esp") as Armor
-    endif
-
-    if !PreventCombat_KW
-        main.Error("PreventCombat_KW not detected. Loading...")
-        PreventCombat_KW = GetMeMyForm(0x15B551,"UnforgivingDevices.esp") as Keyword
-        main.Error("PreventCombat_KW loaded")
-    endif
-
-    if !PreventCombatSpell
-        main.Error("PreventCombatSpell not detected. Loading...")
-        PreventCombatSpell = GetMeMyForm(0x15B553,"UnforgivingDevices.esp") as Spell
-        main.Error("PreventCombatSpell loaded")
-    endif
-    
-    if !ActorTypeNPC
-        main.Error("ActorTypeNPC not detected. Loading...")
-        ActorTypeNPC = GetMeMyForm(0x013794,"Skyrim.esm") as Keyword
-        main.Error("ActorTypeNPC loaded " + ActorTypeNPC)
-    endif
-EndFunction
-
-;plug
-Armor Property AbadonPlug auto
-Armor Property AbadonPlugAnal auto
-Armor Property LittleHelper auto
-Armor Property ControlablePlugVag auto
-Armor Property ControlablePlugAnal auto
-Armor Property CursedInflatablePlugAnal auto
-Armor Property InflatablePlugAnal auto
-Armor Property InflatablePlugVag auto
-
-;hand restrains
-Armor Property AbadonArmbinder auto
-Armor Property AbadonArmbinderEbonite auto
-Armor Property AbadonElbowbinderEbonite auto
-Armor Property AbadonCursedStraitjacket auto
-Armor Property AbadonStraitjacket auto
-Armor Property AbadonStraitjacketEbonite auto
-Armor Property AbadonStraitjacketEboniteOpen auto
-Armor Property AbadonArmbinderWhite auto
-Armor Property AbadonArmbinderRope auto
-Armor Property AbadonYoke auto
-
-
-Armor Property AbadonWeakArmbinder auto
-Armor Property AbadonWeakStraitjacket auto
-Armor Property AbadonWeakElbowbinder auto
-Armor Property AbadonWeakYoke auto
-
-;gags
-Armor Property AbadonBallGag auto
-Armor Property AbadonPanelGag auto
-Armor Property AbadonRingGag auto
-Armor Property AbadonGagTape auto
-Armor Property AbadonExtremeBallGag auto
-Armor Property AbadonExtremeInflatableGag auto
-;blindfolds
-Armor Property AbadonBlindfold auto
-Armor Property AbadonBlindfoldWhite auto
-;cuffs
-Armor Property AbadonArmCuffs auto
-Armor Property AbadonLegsCuffs auto
-;collar
-Armor Property AbadonCuffCollar auto
-Armor Property AbadonRestrictiveCollar auto
-;gasmaska
-Armor Property AbadonGasmask auto
-Armor Property CursedAbadonGasmask auto
-;catsuit
-Armor Property AbadonSuit auto
-Armor Property AbadonTransSuit auto
-;boots
-Armor Property AbadonBalletBoots auto
-Armor Property AbadonRestrictiveBoots auto
-Armor Property AbadonTransBoots auto
-Armor Property AbadonPonyBootsWhite auto
-;gloves
-Armor Property AbadonRestrictiveGloves auto
-Armor Property AbadonMittens auto
-;belt
-Armor Property AbadonBelt auto
-Armor Property AbadonHarness auto
-;corset
-Armor Property AbadonCorset auto
-;bra
-Armor Property AbadonBra auto
-;piercings
-Armor Property AbadonPiercingVaginal auto
-Armor Property AbadonPiercingNipple auto
-
-;other items
-Armor Property CustomArmbinder auto
-
-;rare restrains
-Armor Property MageBinder auto
-Armor Property RogueBinder auto
-Armor Property AbadonBlueArmbinder auto
-Armor Property PunisherArmbinder auto
-Armor Property PunisherPiercing auto
-
-;INVISIBLE RESTRAINS
-Armor Property InvisibleArmbinder auto
-Armor Property InvisibleHobble auto
-Keyword Property InvisibleHBKW auto
-Keyword Property InvisibleHobbleKW auto
-
-;Other armors
-Armor Property OrgasmResistCirclet auto
-Armor Property OrgasmResistRing auto
-
-;other
-Ingredient Property BlackGoo auto
-Ingredient Property AncientSeed auto
-MiscObject Property AbadonGem auto
-  
-;keywords
-Keyword Property QuestDevice auto
-Keyword Property AbadonPlugkw auto
-Keyword Property CustomHeavyBondageQuestDevice auto
-Keyword Property UnforgivingDevice auto
-Keyword Property CustomHeavyBondage auto 
-Keyword Property PatchedDevice auto
-Keyword Property PatchedInventoryDevice auto
-Keyword Property HardcoreDisable_KW auto
-Keyword Property OrgasmCheck_KW auto
-Keyword Property ArousalCheck_KW auto
-Keyword Property PreventCombat_KW auto
-
-;spells
-Spell Property MinigameDisableSpell auto
-Spell Property HardcoreDisableSpell auto
-Spell Property OrgasmExhaustionSpell auto
-Spell Property StruggleExhaustionSpell auto
-Spell Property OrgasmCheckSpell auto
-Spell Property OrgasmCheckAbilitySpell auto
-Spell Property ArousalCheckSpell auto
-Spell Property ArousalCheckAbilitySpell auto
-;Spell Property BreathingDebuffSpell auto
-Spell Property TelekinesisSpell auto
-Spell Property AphrodisiacsSpell auto
-Spell Property NPCRegisterSpell auto
-Spell Property PreventCombatSpell auto
-
-;crits
-Spell Property GreenCrit auto
-Spell Property BlueCrit auto
-Spell Property RedCrit auto
-
-
-;ME keywords
-Keyword Property OrgasmExhaustionEffect_KW auto
-Keyword Property StruggleExhaustionEffect_KW auto
-Keyword Property MinigameDisableEffect_KW auto
-Keyword Property AphrodisiacsEffect_KW auto
-
-;sharp WEAPON keywords
-Keyword[] Property SharpWeaponsKeywords auto
-
-;zad objects
-ObjectReference Property TheSafe Auto
-ObjectReference Property TheFridge Auto
-
-;formlists
-FormList Property GiftMenuFilter auto
-
-;Optional mods
-Keyword Property ZAZTears_KW auto
-Spell Property ZAZTearsSpell auto
-
-Keyword Property ZAZDrool_KW auto
-Spell Property ZAZDroolSpell auto
-
-;DEBUG
-Spell Property DEBUGMagickEffect auto
-
-;skyrim keywords
-Keyword  Property ActorTypeNPC auto
-Keyword  Property ArmorShield auto
-FormList Property WeaponKeywords auto
-
-;Device abilities
-Spell Property ArousingMovement auto
-
-;Patched devices keywords
-Keyword Property PatchNoModes_KW auto
-Keyword Property PatchVeryEasy_KW auto
-Keyword Property PatchEasy_KW auto
-Keyword Property PatchHard_KW auto
-Keyword Property PatchVeryHard_KW auto
-
-Keyword Property WoodedWeapon auto
-
-;actor in this faction will be taken as registered in static NPC slot
-Faction Property StaticNPC auto
-
-;perks which reduce skill gain. Used to reduce skill gained from device lockpick minigames 
-Perk Property LockpickPerk00 auto ;reduce gain by 100%, no skill will be gained
-Perk Property LockpickPerk10 auto ;reduce gain by 90%
-Perk Property LockpickPerk25 auto ;reduce gain by 75%
-Perk Property LockpickPerk50 auto ;reduce gain by 50%
+scriptname ud_libs extends quest  
+unforgivingdevicesmain property main auto
+miscobject property gold auto
+soulgem property emptysoulgem_petty auto
+soulgem property emptysoulgem_lesser auto
+soulgem property emptysoulgem_common auto
+soulgem property emptysoulgem_great  auto
+soulgem property emptysoulgem_grand  auto
+soulgem property filledsoulgem_petty auto
+soulgem property filledsoulgem_lesser auto
+soulgem property filledsoulgem_common auto
+soulgem property filledsoulgem_great  auto
+soulgem property filledsoulgem_grand  auto
+miscobject property steelingot auto
+bool property ready = false auto
+event oninit()
+endevent
+function update()
+endfunction
+armor property abadonplug auto
+armor property abadonpluganal auto
+armor property littlehelper auto
+armor property controlableplugvag auto
+armor property controlablepluganal auto
+armor property cursedinflatablepluganal auto
+armor property inflatablepluganal auto
+armor property inflatableplugvag auto
+armor property abadonarmbinder auto
+armor property abadonarmbinderebonite auto
+armor property abadonelbowbinderebonite auto
+armor property abadoncursedstraitjacket auto
+armor property abadonstraitjacket auto
+armor property abadonstraitjacketebonite auto
+armor property abadonstraitjacketeboniteopen auto
+armor property abadonarmbinderwhite auto
+armor property abadonarmbinderrope auto
+armor property abadonyoke auto
+armor property abadonweakarmbinder auto
+armor property abadonweakstraitjacket auto
+armor property abadonweakelbowbinder auto
+armor property abadonweakyoke auto
+armor property abadonballgag auto
+armor property abadonpanelgag auto
+armor property abadonringgag auto
+armor property abadongagtape auto
+armor property abadonextremeballgag auto
+armor property abadonextremeinflatablegag auto
+armor property abadonblindfold auto
+armor property abadonblindfoldwhite auto
+armor property abadonarmcuffs auto
+armor property abadonlegscuffs auto
+armor property abadoncuffcollar auto
+armor property abadonrestrictivecollar auto
+armor property abadongasmask auto
+armor property cursedabadongasmask auto
+armor property abadonsuit auto
+armor property abadontranssuit auto
+armor property abadonballetboots auto
+armor property abadonrestrictiveboots auto
+armor property abadontransboots auto
+armor property abadonponybootswhite auto
+armor property abadonrestrictivegloves auto
+armor property abadonmittens auto
+armor property abadonbelt auto
+armor property abadonharness auto
+armor property abadoncorset auto
+armor property abadonbra auto
+armor property abadonpiercingvaginal auto
+armor property abadonpiercingnipple auto
+armor property customarmbinder auto
+armor property magebinder auto
+armor property roguebinder auto
+armor property abadonbluearmbinder auto
+armor property punisherarmbinder auto
+armor property punisherpiercing auto
+armor property invisiblearmbinder auto
+armor property invisiblehobble auto
+keyword property invisiblehbkw auto
+keyword property invisiblehobblekw auto
+armor property orgasmresistcirclet auto
+armor property orgasmresistring auto
+ingredient property blackgoo auto
+ingredient property ancientseed auto
+miscobject property abadongem auto
+keyword property questdevice auto
+keyword property abadonplugkw auto
+keyword property customheavybondagequestdevice auto
+keyword property unforgivingdevice auto
+keyword property customheavybondage auto 
+keyword property patcheddevice auto
+keyword property patchedinventorydevice auto
+keyword property hardcoredisable_kw auto
+keyword property orgasmcheck_kw auto
+keyword property arousalcheck_kw auto
+keyword property preventcombat_kw auto
+spell property minigamedisablespell auto
+spell property hardcoredisablespell auto
+spell property orgasmexhaustionspell auto
+spell property struggleexhaustionspell auto
+spell property orgasmcheckspell auto
+spell property orgasmcheckabilityspell auto
+spell property arousalcheckspell auto
+spell property arousalcheckabilityspell auto
+spell property telekinesisspell auto
+spell property aphrodisiacsspell auto
+spell property npcregisterspell auto
+spell property preventcombatspell auto
+spell property greencrit auto
+spell property bluecrit auto
+spell property redcrit auto
+keyword property orgasmexhaustioneffect_kw auto
+keyword property struggleexhaustioneffect_kw auto
+keyword property minigamedisableeffect_kw auto
+keyword property aphrodisiacseffect_kw auto
+keyword[] property sharpweaponskeywords auto
+objectreference property thesafe auto
+objectreference property thefridge auto
+formlist property giftmenufilter auto
+keyword property zaztears_kw auto
+spell property zaztearsspell auto
+keyword property zazdrool_kw auto
+spell property zazdroolspell auto
+spell property debugmagickeffect auto
+keyword  property actortypenpc auto
+keyword  property armorshield auto
+formlist property weaponkeywords auto
+spell property arousingmovement auto
+keyword property patchnomodes_kw auto
+keyword property patchveryeasy_kw auto
+keyword property patcheasy_kw auto
+keyword property patchhard_kw auto
+keyword property patchveryhard_kw auto
+keyword property woodedweapon auto
+faction property staticnpc auto
+perk property lockpickperk00 auto ;reduce gain by 100%, no skill will be gained
+perk property lockpickperk10 auto ;reduce gain by 90%
+perk property lockpickperk25 auto ;reduce gain by 75%
+perk property lockpickperk50 auto ;reduce gain by 50%
+;This file was cleaned with papyrusSourceHeadliner

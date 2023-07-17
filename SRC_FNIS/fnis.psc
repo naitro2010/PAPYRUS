@@ -1,38 +1,22 @@
-Scriptname FNIS Hidden
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-
-int Function set_AACondition(actor ac, string AAtype, string mod, int AAcond, int AAdebug = 1) global
-endFunction
-
-Function AAReport(string longReport, string shortReport, int AAdebug = 0, bool isError = true) global
-endFunction
-
-bool function IsGenerated() global
-endFunction
-
-string function VersionToString( bool abCreature = false ) global
-endFunction
-
-int function VersionCompare( int iCompMajor, int iCompMinor1, int iCompMinor2, bool abCreature = false ) global
-endFunction
-
-int function GetMajor( bool abCreature = false ) global
-endFunction
-
-int function GetMinor1( bool abCreature = false ) global
-endFunction
-
-int function GetMinor2( bool abCreature = false ) global
-endFunction
-
-int function GetFlags( bool abCreature = false ) global
-endFunction
-
-Bool function IsRelease( bool abCreature = false ) global
-endFunction
+scriptname fnis hidden
+int function set_aacondition(actor ac, string aatype, string mod, int aacond, int aadebug = 1) global
+endfunction
+function aareport(string longreport, string shortreport, int aadebug = 0, bool iserror = true) global
+endfunction
+bool function isgenerated() global
+endfunction
+string function versiontostring( bool abcreature = false ) global
+endfunction
+int function versioncompare( int icompmajor, int icompminor1, int icompminor2, bool abcreature = false ) global
+endfunction
+int function getmajor( bool abcreature = false ) global
+endfunction
+int function getminor1( bool abcreature = false ) global
+endfunction
+int function getminor2( bool abcreature = false ) global
+endfunction
+int function getflags( bool abcreature = false ) global
+endfunction
+bool function isrelease( bool abcreature = false ) global
+endfunction
+;This file was cleaned with papyrusSourceHeadliner

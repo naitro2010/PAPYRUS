@@ -1,29 +1,19 @@
-Scriptname zadGagScript extends zadEquipScript
-
-; ============================================================================
-; ============================================================================
-; THIS IS COPY OF ORIGINAL SCRIPT WHICH IS ONLY USED FOR COMPILING UD SCRIPTS 
-; ============================================================================
-; ============================================================================
-
-Message Property callForHelpMsg Auto
-Message Property zad_GagPreEquipMsg Auto
-Message Property zad_GagEquipMsg Auto
-Message Property zad_GagRemovedMsg Auto
-Message Property zad_GagPickLockFailMsg Auto
-Message Property zad_GagPickLockSuccessMsg Auto
-Message Property zad_GagArmsTiedMsg Auto
-Message Property zad_GagBruteForceArmsTiedMsg Auto
-Message Property zad_GagBruteForceMsg Auto
-
-Function OnEquippedPre(actor akActor, bool silent=false)
-EndFunction
-
-Function DeviceMenuExt(int msgChoice)
-EndFunction
-
-Function OnRemoveDevice(actor akActor)
-EndFunction
-
-Function OnEquippedPost(actor akActor)
-EndFunction
+scriptname zadgagscript extends zadequipscript
+message property callforhelpmsg auto
+message property zad_gagpreequipmsg auto
+message property zad_gagequipmsg auto
+message property zad_gagremovedmsg auto
+message property zad_gagpicklockfailmsg auto
+message property zad_gagpicklocksuccessmsg auto
+message property zad_gagarmstiedmsg auto
+message property zad_gagbruteforcearmstiedmsg auto
+message property zad_gagbruteforcemsg auto
+function onequippedpre(actor akactor, bool silent=false)
+endfunction
+function devicemenuext(int msgchoice)
+endfunction
+function onremovedevice(actor akactor)
+endfunction
+function onequippedpost(actor akactor)
+endfunction
+;This file was cleaned with papyrusSourceHeadliner
