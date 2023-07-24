@@ -108,7 +108,8 @@ bool property zadexpressionsysteminstalled = false auto hidden
 bool property deviousstrikeinstalled    = false auto hidden
 bool property forhiminstalled           = false auto hidden
 bool property po3installed              = false auto hidden ;https://www.nexusmods.com/skyrimspecialedition/mods/22854
-bool property allowmenbondage           = true auto hidden
+bool property improvedcamerainstalled   = false auto hidden
+bool property allowmenbondage           = true  auto hidden
 bool property ready = false auto hidden
 bool function udready()
 endfunction
@@ -140,6 +141,8 @@ endfunction
 function _resetupdatecounter()
 endfunction
 function _incrementupdatecounter()
+endfunction
+int function getupdateprogress()
 endfunction
 function ongamereload()
 endfunction
@@ -312,4 +315,4 @@ bool function ismessageboxopen()
 endfunction
 ud_staticnpcslots function getstaticslots(string asname)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

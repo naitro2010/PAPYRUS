@@ -14,4 +14,4 @@ string function getusertextinput()
 endfunction
 int function getuserlistinput(string[] aalist)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

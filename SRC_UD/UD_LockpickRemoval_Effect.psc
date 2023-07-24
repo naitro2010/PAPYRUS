@@ -4,4 +4,4 @@ event oneffectstart(actor aktarget, actor akcaster)
 endevent
 event onupdate()    
 endevent
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

@@ -32,4 +32,4 @@ function spawndummy()
 endfunction
 function startdialogue(string eventname, string type, float farg, form sender)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

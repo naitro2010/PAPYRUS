@@ -8,4 +8,4 @@ event onupdate()
 endevent
 float function calculateload(float argtime)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

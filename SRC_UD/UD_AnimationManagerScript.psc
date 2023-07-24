@@ -97,4 +97,4 @@ function _restoreactorposition(actor akactor)
 endfunction
 function _benchmark(int aicycles = 10)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

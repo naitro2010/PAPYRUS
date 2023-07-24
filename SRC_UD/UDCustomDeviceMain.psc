@@ -353,38 +353,6 @@ endfunction
 string function gethelperdetails(actor akactor)
 endfunction
 int property ud_skillefficiency = 1 auto ;% increase per one skill point
-float function getagilityskill(actor akactor)
-endfunction
-float function getactoragilityskills(actor akactor)
-endfunction
-float function getactoragilityskillsperc(actor akactor)
-endfunction
-float function getstrengthskill(actor akactor)
-endfunction
-float function getactorstrengthskills(actor akactor)
-endfunction
-float function getactorstrengthskillsperc(actor akactor)
-endfunction
-float function getmagickskill(actor akactor)
-endfunction
-float function getactormagickskills(actor akactor)
-endfunction
-float function getactormagickskillsperc(actor akactor)
-endfunction
-float function getcuttingskill(actor akactor)
-endfunction
-float function getactorcuttingskills(actor akactor)
-endfunction
-float function getactorcuttingskillsperc(actor akactor)
-endfunction
-float function getsmithingskill(actor akactor)
-endfunction
-float function getactorsmithingskills(actor akactor)
-endfunction
-float function getactorsmithingskillsperc(actor akactor)
-endfunction
-int function getperkskill(actor akactor, formlist akperklist, int aiskillperperk = 10)
-endfunction
 float function getactorcuttingweaponmultiplier(actor akactor)
 endfunction
 weapon function getsharpestweapon(actor akactor)
@@ -535,4 +503,4 @@ int function reducekeydurability(actor akactor, form akkey, int aidurability = 1
 endfunction
 int[] function distributelockshields(int ailocknum, int ailockshieldnum)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

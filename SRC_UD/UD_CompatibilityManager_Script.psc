@@ -1,6 +1,6 @@
 scriptname ud_compatibilitymanager_script extends quest hidden
 unforgivingdevicesmain  property udmain                 auto
-udcustomdevicemain      property udcdmain                       hidden            
+udcustomdevicemain      property udcdmain                       hidden
 udcustomdevicemain function get()
 endfunction
 endproperty
@@ -21,10 +21,10 @@ function ordinator_addperkstolist(formlist akperklist, form[] apperkstoadd)
 endfunction
 function ordinator_removeperksfromlist(formlist akperklist, form[] apperkstoremove)
 endfunction
-form[] function ordinator_getagilityperks()
+function ordinator_getagilityperks()
 endfunction
-form[] function ordinator_getstrengthperks()
+function ordinator_getstrengthperks()
 endfunction
-form[] function ordinator_getmagickperks()
+function ordinator_getmagickperks()
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

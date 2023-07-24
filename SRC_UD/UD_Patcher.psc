@@ -81,4 +81,4 @@ function patchdefaultvalues(ud_customdevice_renderscript device,float fmult)
 endfunction
 function checkresist(ud_customdevice_renderscript device)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

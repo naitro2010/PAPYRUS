@@ -99,4 +99,4 @@ function updatewidgetcolor()
 endfunction
 float[] function getcurrentminigameexpression()
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

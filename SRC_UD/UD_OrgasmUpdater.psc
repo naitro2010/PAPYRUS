@@ -47,4 +47,4 @@ endfunction
 function evaluate()
 endfunction
 endstate
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

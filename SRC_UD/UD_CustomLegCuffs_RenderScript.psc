@@ -111,4 +111,4 @@ float[] function getcurrentminigameexpression()
 endfunction
 bool function canbeactivated()
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

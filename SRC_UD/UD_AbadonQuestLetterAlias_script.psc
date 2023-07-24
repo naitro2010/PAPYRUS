@@ -4,4 +4,4 @@ endevent
 event onread()
 endevent
 ud_mcm_script property mcm auto
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

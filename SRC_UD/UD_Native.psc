@@ -4,7 +4,7 @@ function endminigameeffect          (actor akactor)                     global n
 bool    function isminigameeffecton         (actor akactor)                     global native
 function updateminigameeffectmult   (actor akactor, float afnewmult)    global native
 function toggleminigameeffect       (actor akactor, bool abtoggle)      global native ;abtoggle = true -> enabled, abtoggle = false -> disabled
-bool    function minigamestatscheck         (actor akactor)                     global native
+bool    function minigamestatscheck         (actor akactor, float abstaminarate, float abhealthrate, float abmagickarate)                 global native
 function minigameeffectupdatehealth (actor akactor, float afnewhealth)  global native
 function minigameeffectupdatestamina(actor akactor, float afnewstamina) global native
 function minigameeffectupdatemagicka(actor akactor, float afnewmagicka) global native
@@ -32,4 +32,10 @@ form[]  function getinventorydevices        (actor akactor, bool abworn)        
 form[]  function getrenderdevices           (actor akactor, bool abworn)        global native
 weapon  function getsharpestweapon          (actor akactor)                     global native
 int     function getactorconstrains         (actor akactor)                     global native
-;This file was cleaned with papyrusSourceHeadliner
+int     function calculateskillfromperks    (actor akactor,formlist aklist,int aiincrease)      global native
+bool    function hasmodifier                (string[] aamodifiers, string asmodname)            global native
+int     function getmodifierindex           (string[] aamodifiers, string asmodname)            global native
+bool    function modifierhaveparams         (string[] aamodifiers, string asmodname)            global native
+string[] function getmodifierallparam       (string[] aamodifiers, string asmodname)            global native
+int     function getmodifierparamnum        (string[] aamodifiers, string asmodname)            global native
+;This file was cleaned with PapyrusSourceHeadliner 1

@@ -136,4 +136,4 @@ perk property lockpickperk00 auto ;reduce gain by 100%, no skill will be gained
 perk property lockpickperk10 auto ;reduce gain by 90%
 perk property lockpickperk25 auto ;reduce gain by 75%
 perk property lockpickperk50 auto ;reduce gain by 50%
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

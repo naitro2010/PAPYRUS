@@ -24,4 +24,4 @@ bool function lilhaveform(leveleditem aklil, form akform)
 endfunction
 int function addformtolil(form akform, formlist akformlist)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

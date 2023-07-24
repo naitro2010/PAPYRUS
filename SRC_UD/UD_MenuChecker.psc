@@ -28,4 +28,4 @@ function _startbitmutex()
 endfunction
 function _endbitmutex()
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

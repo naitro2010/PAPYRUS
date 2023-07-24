@@ -29,4 +29,4 @@ ud_mutexscript function waitforfreeandset_lock(actor akactor,armor invdevice)
 endfunction
 ud_mutexscript function waitforfreeandset_unlock(actor akactor,armor invdevice)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

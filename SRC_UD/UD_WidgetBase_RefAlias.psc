@@ -7,4 +7,4 @@ function reset()
 endfunction
 function softreset()
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

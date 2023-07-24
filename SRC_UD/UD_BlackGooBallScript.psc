@@ -6,4 +6,4 @@ int     property ud_mindevices      = 1     auto
 int     property ud_maxdevices      = 5     auto
 event oncontainerchanged(objectreference aknewcontainer, objectreference akoldcontainer)
 endevent
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

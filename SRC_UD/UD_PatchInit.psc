@@ -59,4 +59,4 @@ function registercustomabadonsuitevent(string asevent,string assuitname)
 endfunction
 function equipsuit(actor akactor,string aseventname)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

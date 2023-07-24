@@ -9,4 +9,4 @@ int     property ud_hornyanimationduration          = 5     auto hidden
 int     property ud_orgasmarousalreduce             = 25    auto hidden
 int     property ud_orgasmarousalreduceduration     = 7     auto hidden
 int     property ud_orgasmexhaustionstrugglemax     = 6     auto hidden
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

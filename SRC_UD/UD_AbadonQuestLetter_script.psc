@@ -4,4 +4,4 @@ endevent
 event onread()
 endevent
 quest property abadonquest  auto  
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

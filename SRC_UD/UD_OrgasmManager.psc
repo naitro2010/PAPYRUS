@@ -156,4 +156,4 @@ function receive_updatebaseorgasmvals(form akformactor, int aiduration, float af
 endfunction
 function focusorgasmresistminigame(actor akactor)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

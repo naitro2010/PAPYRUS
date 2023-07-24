@@ -19,4 +19,4 @@ function registerstaticslots()
 endfunction
 event oninit()
 endevent
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

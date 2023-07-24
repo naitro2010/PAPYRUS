@@ -612,7 +612,7 @@ int function getmodifierindex(string asmodifier)
 endfunction
 bool function editstringmodifier(string asmodifier,int aiindex, string asnewvalue)
 endfunction
-bool function modifierhaveparams(string modifier)
+bool function modifierhaveparams(string asmodifier)
 endfunction
 int function getmodifierparamnum(string asmodifier)
 endfunction
@@ -1154,4 +1154,4 @@ int function codebit(int icodedmap,int ivalue,int isize,int iindex)
 endfunction
 int function decodebit(int icodedmap,int isize,int iindex)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

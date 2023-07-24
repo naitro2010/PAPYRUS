@@ -11,4 +11,4 @@ bool function waitforreset()
 endfunction
 bool function blockuntilclosed()
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

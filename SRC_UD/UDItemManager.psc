@@ -33,4 +33,4 @@ endfunction
 zadlibs property libs auto 
 zadxlibs property libsx auto
 zadxlibs2 property libsx2 auto
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

@@ -14,4 +14,4 @@ globalvariable property udg_aiminigameinfo  auto
 float property ud_locktimeoutid         = 1.0 autoreadonly
 float property ud_locktimeoutrd         = 2.0 autoreadonly
 float property ud_mutextimeout          = 3.5 autoreadonly
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

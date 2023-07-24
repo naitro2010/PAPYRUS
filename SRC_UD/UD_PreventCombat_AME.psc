@@ -16,4 +16,4 @@ function evaluate()
 endfunction
 event oneffectfinish(actor aktarget, actor akcaster)
 endevent
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

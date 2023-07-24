@@ -20,4 +20,4 @@ function config_abc()
 endfunction
 function updatevalues()
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

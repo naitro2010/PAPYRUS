@@ -135,4 +135,4 @@ endfunction
 function updateslotdevices(ud_customdevice_npcslot akslot, float aftimepassed)
 endfunction
 endstate
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

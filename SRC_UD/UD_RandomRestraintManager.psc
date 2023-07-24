@@ -57,4 +57,4 @@ bool function additioncheck(actor akactor,int iindex)
 endfunction
 bool function conflictnone(actor akactor,armor to_check)                                        ; returns true if no conflicts present
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

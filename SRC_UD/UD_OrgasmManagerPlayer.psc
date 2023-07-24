@@ -19,4 +19,4 @@ event onkeyup(int keycode, float holdtime)
 endevent
 function focusorgasmresistminigame(actor akactor)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

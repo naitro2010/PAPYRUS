@@ -100,4 +100,4 @@ string function buildvibrationstring(actor akactor, int vibstrength, bool vplug,
 endfunction
 string function buildpostvibrationstring(actor akactor, int vibstrength, bool vplug, bool aplug, bool vpiercings, bool npiercings)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

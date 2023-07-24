@@ -7,4 +7,4 @@ referencealias property alias_abadonpluganalalias auto
 function fragment_2()
 endfunction
 wicourierscript property courierscript  auto  
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

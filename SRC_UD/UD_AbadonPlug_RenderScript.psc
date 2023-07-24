@@ -74,4 +74,4 @@ function onupdatepost(float timepassed)
 endfunction
 bool function canbestruggled(float afaccesibility = -1.0)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

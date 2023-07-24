@@ -57,4 +57,4 @@ function validateprice()
 endfunction
 function lockrandomhandrestrain(objectreference akspeakerref)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

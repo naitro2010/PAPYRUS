@@ -11,4 +11,4 @@ function _updateorgasmexhaustion(int aiupdatetime)
 endfunction
 actor function getactor()
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

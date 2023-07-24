@@ -345,4 +345,4 @@ function startminigameavcheckloop(ud_customdevice_renderscript akdevice)
 endfunction
 function _receive_minigameavcheckloop()
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

@@ -57,4 +57,4 @@ function procces_lootgold_remove(ud_customdevice_renderscript argdevice)
 endfunction
 int function manifestdevices(actor akactor,string strsource ,int ichance,int inumber)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

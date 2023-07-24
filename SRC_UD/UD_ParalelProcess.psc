@@ -52,4 +52,4 @@ function send_orgasm(actor akactor, int iforce, bool bwairforreceive = false)
 endfunction
 function receive_orgasm(form factor,int iforce,int bwairforreceive)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

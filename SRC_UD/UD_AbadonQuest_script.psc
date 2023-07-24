@@ -50,4 +50,4 @@ function abadonequipsuit(actor target,int suit)
 endfunction
 function equipabadondevices(actor aktarget,int aimindevices, int aimaxdevices)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1
