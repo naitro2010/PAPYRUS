@@ -334,17 +334,175 @@
         
         <h3 class="UDMinigameHeader"> Lockpick minigame </h3>
         <div class="UDMinigameDescription">
-            TODO
+            Lockpick minigame allow wearer to unlock locks by using skyrim lockpick minigame.
+            If minigame succeds, lock will be unlocked. 
+            Every lock can have lock shields, which prevents unlock of lock untill all shields are removed.
+            Every time lock is lockpicked, one lock will be removed.
+            Lock can't be unlocked if its jammed!
         </div>
+        <br>
+        <table class="UDMinigame">
+          <tr>
+            <td class="UDMinigameName"> Durability damage formula </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Damage multiplier </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Condition multiplier </td>
+            <td class="UDMinigameVal"> 0% (No condition damage) </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Stamina usage </td>
+            <td class="UDMinigameVal"> 100% * BaseDrain </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Magicka usage </td>
+            <td class="UDMinigameVal"> -1 * 50% * MagickaRegen </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Health  usage </td>
+            <td class="UDMinigameVal"> -1 * 50% * HealthRegen </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum stamina </td>
+            <td class="UDMinigameVal"> 80% * MaxStamina </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum magicka </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum health </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Exhaustion multiplier </td>
+            <td class="UDMinigameVal"> 100% </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Crit </td>
+            <td class="UDMinigameVal"> Starts skyrim lockpick minigame </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Pressing Special Button </td>
+            <td class="UDMinigameVal"> Use telekinesis (if player have learned it), increasing crit chance </td>
+          </tr>
+        </table>
         
         <h3 class="UDMinigameHeader"> Unlock lock minigame </h3>
         <div class="UDMinigameDescription">
-            TODO
+            Lock unlock minigame allow wearer to unlock locks by using device keys.
+            This ignores lock shields.
+            Lock can't be unlocked if its jammed!
         </div>
-        
+        <br>
+        <table class="UDMinigame">
+          <tr>
+            <td class="UDMinigameName"> Durability damage formula </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Damage multiplier </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Condition multiplier </td>
+            <td class="UDMinigameVal"> 0% (No condition damage) </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Stamina usage </td>
+            <td class="UDMinigameVal"> 100% * BaseDrain </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Magicka usage </td>
+            <td class="UDMinigameVal"> -1 * 50% * MagickaRegen </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Health  usage </td>
+            <td class="UDMinigameVal"> -1 * 50% * HealthRegen </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum stamina </td>
+            <td class="UDMinigameVal"> 60% * MaxStamina </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum magicka </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum health </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Exhaustion multiplier </td>
+            <td class="UDMinigameVal"> 0% (no exhaustion) </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Crit </td>
+            <td class="UDMinigameVal"> Unlocks the lock (reduces key durability) </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Pressing Special Button </td>
+            <td class="UDMinigameVal"> Use telekinesis (if player have learned it), increasing crit chance </td>
+          </tr>
+        </table>
         <h3 class="UDMinigameHeader"> Repair lock minigame </h3>
         <div class="UDMinigameDescription">
-            TODO
+            This minigame can be used to repair jammed lock. Can be only used on jammed locks.
         </div>
+        <br>
+        <table class="UDMinigame">
+          <tr>
+            <td class="UDMinigameName"> Durability damage formula </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Damage multiplier </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Condition multiplier </td>
+            <td class="UDMinigameVal"> 0% (No condition damage) </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Stamina usage </td>
+            <td class="UDMinigameVal"> 125% * BaseDrain </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Magicka usage </td>
+            <td class="UDMinigameVal"> -1 * 50% * MagickaRegen </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Health  usage </td>
+            <td class="UDMinigameVal"> -1 * 50% * HealthRegen </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum stamina </td>
+            <td class="UDMinigameVal"> 80% * MaxStamina </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum magicka </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Minimum health </td>
+            <td class="UDMinigameVal"> 0 </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Exhaustion multiplier </td>
+            <td class="UDMinigameVal"> 100% </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Crit </td>
+            <td class="UDMinigameVal"> Repair lock by moderate ammount </td>
+          </tr>
+          <tr>
+            <td class="UDMinigameName"> Pressing Special Button </td>
+            <td class="UDMinigameVal"> Use telekinesis (if player have learned it), increasing crit chance </td>
+          </tr>
+        </table>
     </body>
 </html>
