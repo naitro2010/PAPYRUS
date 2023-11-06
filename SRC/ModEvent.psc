@@ -7,4 +7,4 @@ function pushint(int handle, int value) global native
 function pushfloat(int handle, float value) global native
 function pushstring(int handle, string value) global native
 function pushform(int handle, form value) global native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

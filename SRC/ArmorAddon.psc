@@ -12,4 +12,4 @@ int function addslottomask(int slotmask) native
 int function removeslotfrommask(int slotmask) native
 int function getmaskforslot(int slot) global
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

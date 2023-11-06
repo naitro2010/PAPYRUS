@@ -32,4 +32,4 @@ function traceandbox(string astexttoprint, int aiseverity = 0) global
 endfunction
 function showrefposition(objectreference arref) native global
 function dbsendplayerposition() native global
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

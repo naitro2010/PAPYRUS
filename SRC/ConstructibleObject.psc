@@ -10,4 +10,4 @@ int function getnthingredientquantity(int n) native
 function setnthingredientquantity(int value, int n) native
 keyword function getworkbenchkeyword() native
 function setworkbenchkeyword(keyword akeyword) native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

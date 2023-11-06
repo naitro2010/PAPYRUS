@@ -17,4 +17,4 @@ string function getnthentrytext(int n) native
 bool function setnthentrytext(int n, string newtext) native
 float function getnthentryvalue(int n, int i) native
 bool function setnthentryvalue(int n, int i, float value) native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

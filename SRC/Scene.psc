@@ -5,4 +5,4 @@ function stop() native
 bool function isplaying() native
 quest function getowningquest() native
 bool function isactioncomplete(int aiactionid) native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

@@ -59,4 +59,4 @@ bool function isnotsellbuy() native
 function setnotsellbuy(bool notsellbuy) native
 formlist function getbuyselllist() native
 function setbuyselllist(formlist aklist) native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

@@ -25,4 +25,4 @@ perk[] function getperks(actor akactor = none, bool unowned = true, bool allrank
 float function getcurrentvalue(actor akactor) native
 float function getbasevalue(actor akactor) native
 float function getmaximumvalue(actor akactor) native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

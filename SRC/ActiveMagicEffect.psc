@@ -99,10 +99,10 @@ endevent
 event ontranslationfailed()
 endevent
 event ontraphit(objectreference aktarget, float afxvel, float afyvel, float afzvel, float afxpos, float afypos, float afzpos, \
- int aematerial, bool abinitialhit, int aemotiontype)
+int aematerial, bool abinitialhit, int aemotiontype)
 endevent
 event ontraphitstart(objectreference aktarget, float afxvel, float afyvel, float afzvel, float afxpos, float afypos, float afzpos, \
- int aematerial, bool abinitialhit, int aemotiontype)
+int aematerial, bool abinitialhit, int aemotiontype)
 endevent
 event ontraphitstop(objectreference aktarget)
 endevent
@@ -188,4 +188,4 @@ function unregisterforninodeupdate() native
 event onninodeupdate(objectreference akactor)
 endevent
 float function getmagnitude() native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

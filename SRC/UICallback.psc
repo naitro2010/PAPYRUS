@@ -10,4 +10,4 @@ function pushboola(int handle, bool[] args) global native
 function pushinta(int handle, int[] args) global native
 function pushfloata(int handle, float[] args) global native
 function pushstringa(int handle, string[] args) global native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

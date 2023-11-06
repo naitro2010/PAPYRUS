@@ -7,4 +7,4 @@ int function getnumkeyspressed() global native
 int function getnthkeypressed(int n) global native
 int function getmappedkey(string control, int devicetype = 0xff) global native
 string function getmappedcontrol(int keycode) global native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

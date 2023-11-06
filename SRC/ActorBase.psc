@@ -44,4 +44,4 @@ function setskin(armor skin) native
 armor function getskinfar() native
 function setskinfar(armor skin) native
 actorbase function gettemplate() native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

@@ -134,4 +134,4 @@ int property ksoundoutput = 131 autoreadonly
 int property kcollisionlayer = 132 autoreadonly
 int property kcolorform = 133 autoreadonly
 int property kreverbparam = 134 autoreadonly
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

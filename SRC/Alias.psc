@@ -79,4 +79,4 @@ function registerforninodeupdate() native
 function unregisterforninodeupdate() native
 event onninodeupdate(objectreference akactor)
 endevent
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

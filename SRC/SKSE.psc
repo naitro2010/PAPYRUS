@@ -6,4 +6,4 @@ int function getversionrelease() global native
 int function getscriptversionrelease() global
 endfunction
 int function getpluginversion(string name) global native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

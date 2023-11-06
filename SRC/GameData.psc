@@ -18,4 +18,4 @@ form[] function getallingredients(string modname, keyword[] keywords = none) glo
 form[] function getallscrolls(string modname, keyword[] keywords = none) global native
 form[] function getallkeys(string modname, keyword[] keywords = none) global native
 form[] function getallmiscitems(string modname, keyword[] keywords = none) global native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

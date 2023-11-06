@@ -30,4 +30,4 @@ function invokeform(string menuname, string target, form arg) global native
 bool function istextinputenabled() global native
 function opencustommenu(string swfpath, int flags = 0) global native
 function closecustommenu() global native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

@@ -12,4 +12,4 @@ function setntheffectduration(int index, int value) native
 enchantment function getbaseenchantment() native
 formlist function getkeywordrestrictions() native
 function setkeywordrestrictions(formlist newkeywordlist) native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

@@ -15,4 +15,4 @@ int function getindexofextrapart(headpart p) native
 formlist function getvalidraces() native
 function setvalidraces(formlist vraces) native
 bool function isextrapart() native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

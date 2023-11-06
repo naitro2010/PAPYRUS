@@ -13,4 +13,4 @@ int function getnumreferencealiases(actor akactor, int handslot, int slotmask) g
 referencealias function getnthreferencealias(actor akactor, int handslot, int slotmask, int n) global native
 potion function getpoison(actor akactor, int handslot, int slotmask) global native
 referencealias[] function getreferencealiases(actor akactor, int handslot, int slotmask) global native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

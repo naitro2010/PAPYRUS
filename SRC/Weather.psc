@@ -13,4 +13,4 @@ float function getsundamage() native
 float function getwinddirection() native
 float function getwinddirectionrange() native
 float function getfogdistance(bool day, int type) native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

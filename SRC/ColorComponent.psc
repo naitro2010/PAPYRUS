@@ -13,4 +13,4 @@ int function setblue(int argb, int b) global native
 int function sethue(int argb, float h) global native
 int function setsaturation(int argb, float s) global native
 int function setvalue(int argb, float v) global native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

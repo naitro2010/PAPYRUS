@@ -42,4 +42,4 @@ perk function getperk() native
 function setperk(perk obj) native
 int function getcastingtype() native
 int function getdeliverytype() native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

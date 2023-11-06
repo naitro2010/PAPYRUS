@@ -6,11 +6,11 @@ endfunction
 function setvalueint(int ainewvalue)
 endfunction
 float property value hidden
-  float function get()
-  endfunction
-  function set(float afvalue)
-  endfunction
+float function get()
+endfunction
+function set(float afvalue)
+endfunction
 endproperty
 float function mod(float afhowmuch)
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

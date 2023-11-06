@@ -19,4 +19,4 @@ int function logicalor(int arg1, int arg2) global native
 int function logicalxor(int arg1, int arg2) global native
 int function logicalnot(int arg1) global native
 float function log(float arg1) global native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

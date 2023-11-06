@@ -11,4 +11,4 @@ bool function issamelocation(location akotherlocation, keyword akkeyword = none)
 endfunction
 function setkeyworddata(keyword akkeyword, float afdata) native
 function setcleared(bool abcleared = true) native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

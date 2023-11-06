@@ -17,4 +17,4 @@ float[] function geteffectmagnitudes() native
 int[] function geteffectareas() native
 int[] function geteffectdurations() native
 magiceffect[] function getmagiceffects() native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

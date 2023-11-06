@@ -53,4 +53,4 @@ float function getflightflyingattackchance() native
 function setflighthoverchance(float chance) native
 function setflightdivebombchance(float chance) native
 function setflightflyingattackchance(float mult) native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

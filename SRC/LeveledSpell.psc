@@ -7,4 +7,4 @@ int function getnumforms() native
 form function getnthform(int n) native
 int function getnthlevel(int n) native
 function setnthlevel(int n, int level) native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

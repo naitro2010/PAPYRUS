@@ -7,4 +7,4 @@ int function getfrequencyvariance() native
 function setfrequencyvariance(int frequencyvariance) native
 int function getfrequencyshift() native
 function setfrequencyshift(int frequencyshift) native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

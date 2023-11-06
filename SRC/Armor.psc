@@ -89,4 +89,4 @@ int property kslotmask58 = 0x10000000 autoreadonly
 int property kslotmask59 = 0x20000000 autoreadonly
 int property kslotmask60 = 0x40000000 autoreadonly
 int property kslotmask61 = 0x80000000 autoreadonly
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

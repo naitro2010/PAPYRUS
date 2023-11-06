@@ -14,16 +14,16 @@ endfunction
 function addkeyifneeded(objectreference objectwithneededkey)
 endfunction
 float property x
-  float function get()
-  endfunction
+float function get()
+endfunction
 endproperty
 float property y
-  float function get()
-  endfunction
+float function get()
+endfunction
 endproperty
 float property z
-  float function get()
-  endfunction
+float function get()
+endfunction
 endproperty
 bool function activate(objectreference akactivator, bool abdefaultprocessingonly = false) native
 bool function adddependentanimatedobjectreference( objectreference akdependent ) native
@@ -217,10 +217,10 @@ endevent
 event ontranslationfailed()
 endevent
 event ontraphit(objectreference aktarget, float afxvel, float afyvel, float afzvel, float afxpos, float afypos, float afzpos, \
- int aematerial, bool abinitialhit, int aemotiontype)
+int aematerial, bool abinitialhit, int aemotiontype)
 endevent
 event ontraphitstart(objectreference aktarget, float afxvel, float afyvel, float afzvel, float afxpos, float afypos, float afzpos, \
- int aematerial, bool abinitialhit, int aemotiontype)
+int aematerial, bool abinitialhit, int aemotiontype)
 endevent
 event ontraphitstop(objectreference aktarget)
 endevent
@@ -262,4 +262,4 @@ potion function getpoison() native
 function getallforms(formlist tofill) native
 form[] function getcontainerforms() native
 referencealias[] function getreferencealiases() native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

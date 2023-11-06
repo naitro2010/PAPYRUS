@@ -39,4 +39,4 @@ bool[] function resizeboolarray(bool[] source, int size, bool fill = false) glob
 string[] function resizestringarray(string[] source, int size, string fill = "") global native
 form[] function resizeformarray(form[] source, int size, form fill = none) global native
 alias[] function resizealiasarray(alias[] source, int size, alias fill = none) global native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

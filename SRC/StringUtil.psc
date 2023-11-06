@@ -10,4 +10,4 @@ string function substring(string s, int startindex, int len = 0) global native
 int function asord(string c) global native
 string function aschar(int c) global native
 string[] function split(string s, string delim) global native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

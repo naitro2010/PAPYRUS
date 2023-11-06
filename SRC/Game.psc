@@ -8,9 +8,9 @@ int function calculatefavorcost(int aifavorprice) native global
 function clearprison() native global
 function cleartempeffects() native global
 function disableplayercontrols(bool abmovement = true, bool abfighting = true, bool abcamswitch = false, bool ablooking = false, \
-  bool absneaking = false, bool abmenu = true, bool abactivate = true, bool abjournaltabs = false, int aidisablepovtype = 0) native global
+bool absneaking = false, bool abmenu = true, bool abactivate = true, bool abjournaltabs = false, int aidisablepovtype = 0) native global
 function enableplayercontrols(bool abmovement = true, bool abfighting = true, bool abcamswitch = true, bool ablooking = true, \
-  bool absneaking = true, bool abmenu = true, bool abactivate = true, bool abjournaltabs = true, int aidisablepovtype = 0) native global
+bool absneaking = true, bool abmenu = true, bool abactivate = true, bool abjournaltabs = true, int aidisablepovtype = 0) native global
 function enablefasttravel(bool abenable = true) native global
 function fadeoutgame(bool abfadingout, bool abblackfade, float afsecsbeforefade, float affadeduration) native global
 function fasttravel(objectreference akdestination) native global
@@ -63,7 +63,7 @@ bool function isplayersungazing() native global
 bool function issneakingcontrolsenabled() native global
 bool function iswordunlocked(wordofpower akword) native global
 function playbink(string asfilename, bool abinterruptible = false, bool abmuteaudio = true, bool abmutemusic = true, \
-  bool abletterbox = true ) native global
+bool abletterbox = true ) native global
 function precachechargen() native global
 function precachechargenclear() native global
 int function querystat(string asstat) native global
@@ -143,4 +143,4 @@ objectreference function getdialoguetarget() global native
 objectreference function getcurrentcrosshairref() global native
 objectreference function getcurrentconsoleref() global native
 function setplayerlevel(int level) global native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

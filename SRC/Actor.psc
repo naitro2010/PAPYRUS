@@ -268,4 +268,4 @@ function setexpressionphoneme(int index, float value) native
 function setexpressionmodifier(int index, float value) native
 function resetexpressionoverrides() native
 faction[] function getfactions(int minrank, int maxrank) native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

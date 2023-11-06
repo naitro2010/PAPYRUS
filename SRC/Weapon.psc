@@ -59,4 +59,4 @@ bool function iswarhammer()
 endfunction
 bool function iswaraxe()
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

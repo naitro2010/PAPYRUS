@@ -119,4 +119,4 @@ function setnoshadow()
 endfunction
 function clearnoshadow()
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

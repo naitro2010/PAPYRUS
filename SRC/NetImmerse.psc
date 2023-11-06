@@ -37,4 +37,4 @@ float function getnodepositiony(objectreference ref, string node, bool firstpers
 endfunction
 float function getnodepositionz(objectreference ref, string node, bool firstperson) global
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

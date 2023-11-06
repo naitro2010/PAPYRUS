@@ -8,4 +8,4 @@ function removeaddedform(form apform) native
 function revert() native
 form[] function toarray() native
 function addforms(form[] forms) native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

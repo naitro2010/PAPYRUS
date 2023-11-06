@@ -100,4 +100,4 @@ int function getworldmodelnumtexturesets() native
 textureset function getworldmodelnthtextureset(int n) native
 function setworldmodelnthtextureset(textureset nset, int n) native
 bool function isplayable() native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

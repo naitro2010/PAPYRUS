@@ -88,10 +88,10 @@ endevent
 event ontranslationfailed()
 endevent
 event ontraphit(objectreference aktarget, float afxvel, float afyvel, float afzvel, float afxpos, float afypos, float afzpos, \
- int aematerial, bool abinitialhit, int aemotiontype)
+int aematerial, bool abinitialhit, int aemotiontype)
 endevent
 event ontraphitstart(objectreference aktarget, float afxvel, float afyvel, float afzvel, float afxpos, float afypos, float afzpos, \
- int aematerial, bool abinitialhit, int aemotiontype)
+int aematerial, bool abinitialhit, int aemotiontype)
 endevent
 event ontraphitstop(objectreference aktarget)
 endevent
@@ -137,4 +137,4 @@ event onplayerbowshot(weapon akweapon, ammo akammo, float afpower, bool absungaz
 endevent
 event onplayerloadgame()
 endevent
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

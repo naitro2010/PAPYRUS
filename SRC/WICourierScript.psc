@@ -22,4 +22,4 @@ event onupdate()  ;registered in stage 0, unregistered in stage 200
 endevent
 quest property wicourier  auto  
 book property dbentranceletter  auto  
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

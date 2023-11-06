@@ -32,31 +32,31 @@ bool function start() native
 function stop() native
 bool function updatecurrentinstanceglobal( globalvariable aupdateglobal ) native
 event onstoryaddtoplayer(objectreference akowner, objectreference akcontainer, \
- location aklocation, form akitembase, int aiacquiretype)
+location aklocation, form akitembase, int aiacquiretype)
 endevent
 event onstoryarrest(objectreference akarrestingguard, objectreference akcriminal, \
- location aklocation, int aicrime)
+location aklocation, int aicrime)
 endevent
 event onstoryassaultactor(objectreference akvictim, objectreference akattacker, \
- location aklocation, int aicrime)
+location aklocation, int aicrime)
 endevent
 event onstorybribenpc(objectreference akactor)
 endevent
 event onstorycastmagic(objectreference akcastingactor, objectreference akspelltarget, \
- location aklocation, form akspell)
+location aklocation, form akspell)
 endevent
 event onstorychangelocation(objectreference akactor, location akoldlocation, \
- location aknewlocation)
+location aknewlocation)
 endevent
 event onstorycrimegold(objectreference akvictim, objectreference akcriminal, \
- form akfaction, int aigoldamount, int aicrime)
+form akfaction, int aigoldamount, int aicrime)
 endevent
 event onstorycure(form akinfection)
 endevent
 event onstorydialogue(location aklocation, objectreference akactor1, objectreference akactor2)
 endevent
 event onstorydiscoverdeadbody(objectreference akactor, objectreference akdeadactor, \
- location aklocation)
+location aklocation)
 endevent
 event onstoryescapejail(location aklocation, form akcrimegroup)
 endevent
@@ -75,10 +75,10 @@ endevent
 event onstoryintimidatenpc(objectreference akactor)
 endevent
 event onstoryjail(objectreference akguard, form akcrimegroup, location aklocation, \
- int aicrimegold)
+int aicrimegold)
 endevent
 event onstorykillactor(objectreference akvictim, objectreference akkiller, \
- location aklocation, int aicrimestatus, int airelationshiprank)
+location aklocation, int aicrimestatus, int airelationshiprank)
 endevent
 event onstorycraftitem(objectreference akbench, location aklocation, form akcreateditem)
 endevent
@@ -87,24 +87,24 @@ endevent
 event onstorypicklock(objectreference akactor, objectreference aklock)
 endevent
 event onstorypayfine(objectreference akcriminal, objectreference akguard, \
- form akcrimegroup, int aicrimegold)
+form akcrimegroup, int aicrimegold)
 endevent
 event onstoryplayergetsfavor(objectreference akactor)
 endevent
 event onstoryrelationshipchange(objectreference akactor1, objectreference akactor2, \
- int aioldrelationship, int ainewrelationship)
+int aioldrelationship, int ainewrelationship)
 endevent
 event onstoryremovefromplayer(objectreference akowner, objectreference akitem, \
- location aklocation, form akitembase, int airemovetype)
+location aklocation, form akitembase, int airemovetype)
 endevent
 event onstoryscript(keyword akkeyword, location aklocation, objectreference akref1, \
- objectreference akref2, int aivalue1, int aivalue2)
+objectreference akref2, int aivalue1, int aivalue2)
 endevent
 event onstoryservedtime(location aklocation, form akcrimegroup, int aicrimegold, \
- int aidaysjail)
+int aidaysjail)
 endevent
 event onstorytrespass(objectreference akvictim, objectreference aktrespasser, \
- location aklocation, int aicrime)
+location aklocation, int aicrime)
 endevent
 quest function getquest(string editorid) global native
 string function getid() native
@@ -114,4 +114,4 @@ alias function getnthalias(int index) native
 alias function getaliasbyname(string name) native
 alias function getaliasbyid(int aliasid) native
 alias[] function getaliases() native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1
