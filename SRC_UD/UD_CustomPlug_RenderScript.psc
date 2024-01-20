@@ -1,5 +1,9 @@
 scriptname ud_customplug_renderscript extends ud_customvibratorbase_renderscript  
 float property ud_plugremovepressmult = 0.3 autoreadonly
+string property ud_armovkey
+string function get()
+endfunction
+endproperty
 function initpost()
 endfunction
 function safecheck()

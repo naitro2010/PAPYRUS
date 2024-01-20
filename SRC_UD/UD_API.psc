@@ -72,8 +72,6 @@ function    warning(string asmsg)
 endfunction
 function    info(string asmsg)
 endfunction
-bool    function    actorisplayer(actor akactor)
-endfunction
 bool    function    actorisfollower(actor akactor)
 endfunction
 bool    function    actorisvalidforud(actor akactor)
@@ -98,17 +96,13 @@ ud_customdevice_npcslot     function    getnpcslotbyactorname(string asname)
 endfunction
 int     function    getnumberoffreenpcslots()
 endfunction
-function    updatebaseorgasmvals(actor akactor, int aiduration, float aforgasmrate, float afforcing = 0.0, float afarousalrate = 0.0)
-endfunction
 int     function    getorgasmexhaustion(actor akactor)
 endfunction
 float   function    getorgasmrate(actor akactor, int aimode = 0)
 endfunction
-int     function    getarousal(actor akactor)
+float     function    getarousal(actor akactor)
 endfunction
 float   function    getarousalrate(actor akactor,int abmode = 0)
-endfunction
-float   function    getantiorgasmrate(actor akactor)
 endfunction
 float   function    getactororgasmforcing(actor akactor)
 endfunction
@@ -125,20 +119,6 @@ endfunction
 float   function    getorgasmprogressperc(actor akactor)
 endfunction
 float   function    getactororgasmcapacity(actor akactor)
-endfunction
-float   function    updateorgasmrate(actor akactor ,float aforgasmrate,float aforgasmforcing)
-endfunction
-float   function    updatearousalrate(actor akactor ,float afarousalrate)
-endfunction
-float   function    updateorgasmratemultiplier(actor akactor ,float aforgasmratemultiplier)
-endfunction
-float   function    updateorgasmresist(actor akactor ,float aforgasmresist)
-endfunction
-float   function    updateorgasmresistmultiplier(actor akactor ,float aforgasmresistmultiplier)
-endfunction
-float   function    updatearousalratemultiplier(actor akactor ,float afarousalratemultiplier)
-endfunction
-int     function    updatetactororgasmcapacity(actor akactor,int aivalue)
 endfunction
 function    orgasm(actor akactor,int aiduration,int aiarousaldecrease = 10,int aiforce = 0, bool abblocking = true)
 endfunction

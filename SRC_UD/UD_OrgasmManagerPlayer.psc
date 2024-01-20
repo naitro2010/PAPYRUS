@@ -1,9 +1,9 @@
 scriptname ud_orgasmmanagerplayer extends ud_orgasmmanager conditional
 function registermodevents()
 endfunction
-function sendorgasmresistcritupdateloop(int ichance,float fdifficulty)
+function sendorgasmresistcritupdateloop(int aichance,float afdifficulty)
 endfunction
-function critlooporgasmresist(int ichance,float fdifficulty)
+function critlooporgasmresist(int aichance,float afdifficulty)
 endfunction
 function oncritsuccesorgasmresist()
 endfunction

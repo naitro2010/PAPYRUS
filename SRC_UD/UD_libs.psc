@@ -25,6 +25,7 @@ armor property controlablepluganal auto
 armor property cursedinflatablepluganal auto
 armor property inflatablepluganal auto
 armor property inflatableplugvag auto
+keyword property abadondevice_kw auto
 armor property abadonarmbinder auto
 armor property abadonarmbinderebonite auto
 armor property abadonelbowbinderebonite auto

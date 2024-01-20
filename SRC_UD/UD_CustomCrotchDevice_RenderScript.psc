@@ -1,5 +1,7 @@
-scriptname ud_customcrotchdevice_renderscript extends ud_custombelt_renderscript  
+scriptname ud_customcrotchdevice_renderscript extends ud_custombelt_renderscript
 function initpost()
+endfunction
+function onremovedevicepost(actor akactor)
 endfunction
 function safecheck() ;called on init. should be used to check if some properties are not filled, and fill them
 endfunction
@@ -72,8 +74,6 @@ endfunction
 function initpostpost()
 endfunction
 function onremovedevicepre(actor akactor)
-endfunction
-function onremovedevicepost(actor akactor)
 endfunction
 function onlockunlocked(bool lockpick = false)
 endfunction

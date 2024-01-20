@@ -9,7 +9,6 @@ formlist property ud_abadondevicelist_heavybondageweak auto
 formlist property ud_abadondevicelist_heavybondage auto
 formlist property ud_abadondevicelist_heavybondagehard auto
 zaddevicelists property zaddl auto
-int property ud_randomdevice_globalfilter = 0xffffffff auto
 function startmutex()
 endfunction
 function endmutex()
@@ -23,6 +22,8 @@ endevent
 function update()
 endfunction
 function filloutcheckkeywords()
+endfunction
+bool function isdevicefiltered(int aiindex)
 endfunction
 armor function getrandomdevicebykeyword_ll(actor akactor,keyword akkeyword)
 endfunction
@@ -53,7 +54,7 @@ keyword function getrandomsuitablekeyword(actor akactor,int iprefswitch = 0xffff
 endfunction
 form[] function getallsuitablekeywords(actor akactor,int iprefswitch = 0xffffffff)
 endfunction
-bool function additioncheck(actor akactor,int iindex)
+bool function _additioncheck(actor akactor,int iindex)
 endfunction
 bool function conflictnone(actor akactor,armor to_check)                                        ; returns true if no conflicts present
 endfunction

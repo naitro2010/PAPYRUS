@@ -20,36 +20,12 @@ function update()
 endfunction
 function registerevents()
 endfunction
-function start_minigamestartermutex()
-endfunction
-function end_minigamestartermutex()
-endfunction
-function send_minigamestarter(actor akactor,ud_customdevice_renderscript uddevice)
-endfunction
-function receive_minigamestarter(form factor)
-endfunction
-function start_minigameparalelmutex()
-endfunction
-function end_minigameparalelmutex()
-endfunction
-function send_minigameparalel(actor akactor,ud_customdevice_renderscript uddevice)
-endfunction
-function receive_minigameparalel(form factor)
-endfunction
-function start_minigamecritloopmutex()
-endfunction
-function end_minigamecritloopmutex()
-endfunction
-function send_minigamecritloop(actor akactor,ud_customdevice_renderscript uddevice)
-endfunction
-function receive_minigamecritloop(form factor)
-endfunction
 function start_orgasmmutex()
 endfunction
 function end_orgasmmutex()
 endfunction
-function send_orgasm(actor akactor, int iforce, bool bwairforreceive = false)
+function send_orgasm(actor akactor, bool abwairforreceive = false)
 endfunction
-function receive_orgasm(form factor,int iforce,int bwairforreceive)
+function receive_orgasm(form factor,int abwairforreceive)
 endfunction
 ;This file was cleaned with PapyrusSourceHeadliner 1

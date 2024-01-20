@@ -1,7 +1,6 @@
 scriptname uditemmanager extends quest  
 udcustomdevicemain      property udcdmain               auto
 unforgivingdevicesmain  property udmain                 auto
-bool                    property ud_usehoods = true     auto
 ud_abadonquest_script   property abadonscript           auto
 bool property ready = false auto
 event oninit()

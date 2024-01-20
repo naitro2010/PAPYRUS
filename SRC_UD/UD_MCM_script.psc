@@ -41,7 +41,7 @@ endfunction
 bool property ready = false auto
 event onconfiginit()
 endevent
-bool function init()
+function init()
 endfunction
 function update()
 endfunction
@@ -62,6 +62,8 @@ event resetfilterpage()
 endevent
 event resetcustombondagepage()
 endevent
+function resetmodifierspage()
+endfunction
 event resetcustomorgasmpage()
 endevent
 event resetnpcspage()
@@ -97,6 +99,10 @@ endfunction
 event onoptionselect(int option)
 endevent
 function optionselectgeneral(int option)
+endfunction
+function optionselectpatcher(int option)
+endfunction
+function optionselectmodifiers(int option)
 endfunction
 function optionselectfilter(int option)
 endfunction
@@ -150,6 +156,8 @@ function onoptionslideropenuiwidget(int option)
 endfunction
 function onoptionslideropenanimations(int option)
 endfunction
+function onoptionslideropenmodifiers(int option)
+endfunction
 event onoptionslideraccept(int option, float value)
 endevent
 function onoptionslideracceptgeneral(int option, float value)
@@ -170,6 +178,8 @@ function onoptionslideracceptuiwidget(int option, float value)
 endfunction
 function onoptionslideracceptanimations(int option, float value)
 endfunction
+function onoptionslideracceptmodifiers(int option, float value)
+endfunction
 event onoptionmenuopen(int option)
 endevent
 function onoptionmenuopendefault(int option)
@@ -184,6 +194,8 @@ function onoptionmenuopenuiwidget(int option)
 endfunction
 function onoptionmenuopenanimations(int option)
 endfunction
+function onoptionmenuopenmodifiers(int option)
+endfunction
 event onoptionmenuaccept(int option, int index)
 endevent
 function onoptionmenuacceptdefault(int option, int index)
@@ -197,6 +209,8 @@ endfunction
 function onoptionmenuacceptuiwidget(int option, int index)
 endfunction
 function onoptionmenuacceptanimations(int option, int index)
+endfunction
+function onoptionmenuacceptmodifiers(int option, int index)
 endfunction
 bool function checkminigamekeyconflict(int ikeycode)
 endfunction
@@ -231,6 +245,8 @@ endevent
 function generalpageinfo(int option)
 endfunction
 function filterpageinfo(int option)
+endfunction
+function modifierpageinfo(int option)
 endfunction
 function custombondagepageinfo(int option)
 endfunction

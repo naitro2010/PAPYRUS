@@ -2,10 +2,18 @@ scriptname ud_customdevice_renderscript extends objectreference
 function debug_logbitmaps(string argtitle = "bitmask")
 endfunction
 armor       property deviceinventory                auto
-zadlibs     property libs                           auto
+zadlibs     property libs hidden
+zadlibs function get()
+endfunction
+endproperty
 key         property zad_devicekey                  auto
 keyword  property ud_devicekeyword                              auto hidden ;keyword of this device for better manipulation. is taken from id
-armor    property devicerendered                                auto hidden ;is taken from id
+armor    property devicerendered                                hidden ;is taken from id
+armor function get()
+endfunction
+function set(armor akdevice)
+endfunction
+endproperty
 string[] property ud_devicestrugglekeywords                     auto hidden ;keywords (as string array) used to filter struggle animations
 string   property ud_activeeffectname           = "share"       auto hidden ;name of active effect
 string   property ud_devicetype                 = "generic"     auto hidden ;name of the device type
@@ -83,12 +91,15 @@ endfunction
 endproperty
 int         property ud_cooldown                    = 0             auto
 float       property ud_defaulthealth               = 100.0         auto
-string[]    property ud_modifiers                                   auto    ;modifiers
+alias[]     property ud_modifiersref          auto
+string[]    property ud_modifiersdatastr      auto
+form[]      property ud_modifiersdataform1    auto
+form[]      property ud_modifiersdataform2    auto
+form[]      property ud_modifiersdataform3    auto
 message     property ud_messagedeviceinteraction                    auto
 message     property ud_messagedeviceinteractionwh                  auto
 message     property ud_specialmenuinteraction                      auto
 message     property ud_specialmenuinteractionwh                    auto
-leveleditem property ud_ondestroyitemlist                           auto
 form[]      property ud_deviceabilities                             auto    ;array of abilities which are added on actor when device is equipped
 int[]       property ud_deviceabilities_flags                       auto
 int[]       property ud_locklist                                    auto
@@ -113,8 +124,6 @@ endfunction
 endproperty
 unforgivingdevicesmain      property udmain     hidden ;main libs
 unforgivingdevicesmain function get()
-endfunction
-function set(unforgivingdevicesmain akform)
 endfunction
 endproperty
 ud_libs                     property udlibs     hidden ;device/keyword library
@@ -329,6 +338,24 @@ bool function get()
 endfunction
 endproperty
 bool    property ud_allowwidgetupdate               hidden
+function set(bool bval)
+endfunction
+bool function get()
+endfunction
+endproperty
+bool property ud_usewidgetsec hidden
+function set(bool bval)
+endfunction
+bool function get()
+endfunction
+endproperty
+bool property ud_widgetautocolorsec hidden
+function set(bool bval)
+endfunction
+bool function get()
+endfunction
+endproperty
+bool property ud_allowwidgetupdatesec hidden
 function set(bool bval)
 endfunction
 bool function get()
@@ -576,11 +603,11 @@ function shockhelper(int aiarousalupdate = 50,float afhealth = 0.0, bool abcanki
 endfunction
 function unlockrestrain(bool abforcedestroy = false,bool abwaitforremove = true)
 endfunction
-function checksentient(float mult = 1.0)
+function checksentient(float afmult = 1.0)
 endfunction
-function weaponhit(weapon source)
+function weaponhit(weapon aksource)
 endfunction
-function spellhit(spell source)
+function spellhit(spell aksource)
 endfunction
 bool function cooldownactivate()
 endfunction
@@ -596,31 +623,29 @@ function removeallabilities(actor akactor)
 endfunction
 bool function evaluatenpcai()
 endfunction
-bool function addmodifier(string asmodifier,string asparam = "")
+float function getrealtimelockedtime()
 endfunction
-bool function removemodifier(string asmodifier)
+function resetrealtimelockedtime()
+endfunction
+ud_modifier function getnthmodifier(int aiindex)
+endfunction
+bool function addmodifier(ud_modifier akmodifier,string asparam = "", form akform1 = none, form akform2 = none, form akform3 = none)
+endfunction
+bool function removemodifier(ud_modifier akmodifier)
 endfunction
 bool function hasmodifier(string asmodifier)
 endfunction
-string function getmodifierheader(string asrawmodifier)
+bool function hasmodifierref(ud_modifier akmodifier)
 endfunction
 string[] function getmodifierallparam(string asmodifier)
 endfunction
-string function getmodifier(string asmodifier)
+ud_modifier function getmodifier(string asmodifier)
+endfunction
+string function getmodifierparam(string asmodifier)
 endfunction
 int function getmodifierindex(string asmodifier)
 endfunction
 bool function editstringmodifier(string asmodifier,int aiindex, string asnewvalue)
-endfunction
-bool function modifierhaveparams(string asmodifier)
-endfunction
-int function getmodifierparamnum(string asmodifier)
-endfunction
-int function getmodifierintparam(string asmodifier,int aiindex = 0,int aidefaultvalue = 0)
-endfunction
-float function getmodifierfloatparam(string asmodifier,int aiindex = 0,float afdefaultvalue = 0.0)
-endfunction
-string function getmodifierparam(string asmodifier,int aiindex = 0,string asdefaultvalue = "error")
 endfunction
 bool function setmodifierintparam(string asmodifier,int aivalue,int aiindex = 0)
 endfunction
@@ -728,7 +753,7 @@ bool[] function createcontrolarrayfalse() global
 endfunction
 bool[] function createcontrolarraytrue() global
 endfunction
-function _filtercontrol(bool[] acontrolfilter)
+function _filtercontrol(bool[] acontrolfilter, bool abreadonly = false)
 endfunction
 function _devicemenuinit(bool[] aacontrol)
 endfunction
@@ -792,9 +817,11 @@ int function _gettelekinesislockmodifier()
 endfunction
 function setwidgetval(float afval, bool abforce = false)
 endfunction
+function setsecwidgetval(float afval, bool abforce = false)
+endfunction
 function setmainwidgetappearance(int aicolor1, int aicolor2 = -1, int aiflashcolor = -1, string asiconname = "")
 endfunction
-function setconditionwidgetappearance(int aicolor1, int aicolor2 = -1, int aiflashcolor = -1)
+function setsecwidgetappearance(int aicolor1, int aicolor2 = -1, int aiflashcolor = -1, string asiconname = "")
 endfunction
 function showwidget(bool abupdate = true, bool abupdatecolor = true)
 endfunction
@@ -820,13 +847,9 @@ function refilldurability(float afvalue)
 endfunction
 function refillcuttingprogress(float afvalue)
 endfunction
-function updatemend(float aftimepassed)
-endfunction
 function _updatecondition(bool decrease = true)
 endfunction
 string function getconditionstring()
-endfunction
-function menddevice(float afmult = 1.0,float aftimepassed)
 endfunction
 bool function canshowhud()
 endfunction
@@ -918,6 +941,8 @@ function setminigameeffecthelpervar(bool abunused1 = true,bool aballowexhaustion
 endfunction
 function setminigamewidgetvar(bool abusewidget = false, bool abwidgetautocolor = true, bool abwidgetupdate = true, int aicolor1 = -1, int aicolor2 = -1, int aiflashcolor = -1, string asiconname = "")
 endfunction
+function setsecwidgetvar(bool abusewidget = false, bool abwidgetautocolor = true, bool abwidgetupdate = true, int aicolor1 = -1, int aicolor2 = -1, int aiflashcolor = -1, string asiconname = "")
+endfunction
 function _unsetminigamedevice()
 endfunction
 int function getstruggleminigamesubtype()
@@ -942,8 +967,6 @@ function minigame()
 endfunction
 function _stopminigameanimation()
 endfunction
-function minigamestarter()
-endfunction
 function _checkandupdateanimationcache(bool bclearcache = false)
 endfunction
 int[] function _pickandplaystruggleanimation(bool bclearcache = false, bool bcontinueanimation = false)
@@ -962,15 +985,15 @@ function critfailure()
 endfunction
 function critdevice()
 endfunction
-function specialbuttonpressed(float fmult = 1.0)
+function specialbuttonpressed(float afmult = 1.0)
 endfunction
-function specialbuttonreleased(float fholdtime)
+function specialbuttonreleased(float afholdtime)
 endfunction
-function orgasm(bool sexlab = false)
+function orgasm(bool absexlab = false)
 endfunction
 function edge()
 endfunction
-function showhudbars(bool flashcall = true)
+function showhudbars(bool abflashcall = true)
 endfunction
 function hidehudbars()
 endfunction
@@ -993,8 +1016,6 @@ endfunction
 function showmodifiers()
 endfunction
 function showlockdetails()
-endfunction
-function _showrawmodifiers()
 endfunction
 function showdebuginfo()
 endfunction
@@ -1133,25 +1154,19 @@ endfunction
 state updatepaused
 function update(float timepassed)
 endfunction
-function updatemend(float timepassed)
-endfunction
 function updatehour(float mult)
 endfunction
 endstate
-function startbitmapmutexcheck()
+function registerdevice(actor akactor,armor akinvdevice, armor akrendevice)
 endfunction
-function endbitmapmutexcheck()
+function _sendminigamethreads(bool abstarter, bool abcritloop, bool abparalelthread, bool abavloop)
 endfunction
-function startbitmapmutexcheck2()
+function _minigamestarterthread()
 endfunction
-function endbitmapmutexcheck2()
+function _minigameparalelthread()
 endfunction
-function startbitmapmutexcheck3()
+function _minigamecritloopthread()
 endfunction
-function endbitmapmutexcheck3()
-endfunction
-int function codebit(int icodedmap,int ivalue,int isize,int iindex)
-endfunction
-int function decodebit(int icodedmap,int isize,int iindex)
+function _minigameavcheckloopthread()
 endfunction
 ;This file was cleaned with PapyrusSourceHeadliner 1

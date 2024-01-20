@@ -2,26 +2,26 @@ scriptname ud_patcher extends quest
 zadlibs property libs auto
 udcustomdevicemain property udcdmain auto
 ud_libs property udlibs auto
-float       property ud_patchmult           =  1.0     auto ;global patch multiplier, applies to all devices
-int         property ud_escapemodifier      =   10     auto
-int         property ud_minlocks            =    0    auto
-int         property ud_maxlocks            =    2    auto
-float property ud_patchmult_heavybondage        = 1.0 auto
-float property ud_patchmult_gag                 = 1.0 auto
-float property ud_patchmult_blindfold           = 1.0 auto
-float property ud_patchmult_chastitybra         = 1.0 auto
-float property ud_patchmult_chastitybelt        = 1.0 auto
-float property ud_patchmult_plug                = 1.0 auto
-float property ud_patchmult_piercing            = 1.0 auto
-float property ud_patchmult_hood                = 1.0 auto
-float property ud_patchmult_generic             = 1.0 auto
-float property ud_minresistmult =   -1.0 auto
-float property ud_maxresistmult =    1.0 auto
-float property ud_manifestmod = 1.0 auto
-int property ud_maochancemod    = 100 auto
-int property ud_maomod          = 100 auto
-int property ud_mahchancemod    = 100 auto
-int property ud_mahmod          = 100 auto
+ud_modifiermanager_script property udmom hidden
+ud_modifiermanager_script function get()
+endfunction
+endproperty
+float       property ud_patchmult           =  1.0    auto hidden ;global patch multiplier, applies to all devices
+int         property ud_escapemodifier      =   10    auto hidden
+int         property ud_minlocks            =    0    auto hidden
+int         property ud_maxlocks            =    2    auto hidden
+float property ud_patchmult_heavybondage        = 1.0 auto hidden
+float property ud_patchmult_gag                 = 1.0 auto hidden
+float property ud_patchmult_blindfold           = 1.0 auto hidden
+float property ud_patchmult_chastitybra         = 1.0 auto hidden
+float property ud_patchmult_chastitybelt        = 1.0 auto hidden
+float property ud_patchmult_plug                = 1.0 auto hidden
+float property ud_patchmult_piercing            = 1.0 auto hidden
+float property ud_patchmult_hood                = 1.0 auto hidden
+float property ud_patchmult_generic             = 1.0 auto hidden
+float property ud_minresistmult =   -1.0 auto hidden
+float property ud_maxresistmult =    1.0 auto hidden
+bool  property ud_timedlocks    = true   auto hidden
 bool property ready = false auto
 event oninit()
 endevent
@@ -45,31 +45,11 @@ function patchgeneric(ud_customdevice_renderscript device)
 endfunction
 function patchpiercing(ud_custompiercing_renderscript device)
 endfunction
-bool function isebonite(ud_customdevice_renderscript device)
+function processmodifiers(ud_customdevice_renderscript akdevice)
 endfunction
-bool function issteel(ud_customdevice_renderscript device)
+bool function devicecanhavemodes(ud_customdevice_renderscript akdevice)
 endfunction
-bool function isrope(ud_customdevice_renderscript device)
-endfunction
-bool function issecure(ud_customdevice_renderscript akdevice)
-endfunction
-bool function devicecanhavemodes(ud_customdevice_renderscript device)
-endfunction
-function checksentientmodifier(ud_customdevice_renderscript device,int chance,float modifier)
-endfunction
-function checkmendingmodifier(ud_customdevice_renderscript device,int chance,float modifier)
-endfunction
-function checkloosemodifier(ud_customdevice_renderscript device,int chance,float rand_start = 0.0,float rand_end = 1.0)
-endfunction
-function checkmahmodifier(ud_customdevice_renderscript device,int chance,int rand_start_c = 0,int rand_end_c = 100,int rand_start_d = 1,int rand_end_d = 1)
-endfunction
-function checkmaomodifier(ud_customdevice_renderscript device,int chance,int rand_start_c = 0,int rand_end_c = 100,int rand_start_d = 1,int rand_end_d = 1)
-endfunction
-function checkhealmodifier(ud_customdevice_renderscript device,int chance,int rand_start_d = 25,int rand_end_d = 50)
-endfunction
-function checklcheapmodifier(ud_customdevice_renderscript device,int chance,int rand_start_d = 5,int rand_end_d = 20)
-endfunction
-function patchfinish(ud_customdevice_renderscript device,int argcontrolvar = 0x0f,float fmult = 1.0, int aitype = 0)
+function patchfinish(ud_customdevice_renderscript akdevice,int aicontrolvar = 0x0f,float afmult = 1.0, int aitype = 0)
 endfunction
 function checkinventoryscript(ud_customdevice_renderscript device,int argcontrolvar = 0x0f,float fmult = 1.0, int aitype = 0)
 endfunction

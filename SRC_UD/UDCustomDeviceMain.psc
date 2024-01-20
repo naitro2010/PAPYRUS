@@ -133,7 +133,6 @@ event oninit()
 endevent
 bool function checksubmodules()
 endfunction
-bool property zazanimationsinstalled = false auto hidden
 function update()
 endfunction
 bool property currentdevicemenu_allowstruggling         = false auto conditional hidden
@@ -148,6 +147,7 @@ bool property currentdevicemenu_allowcommand            = false auto conditional
 bool property currentdevicemenu_allowdetails            = false auto conditional hidden
 bool property currentdevicemenu_allowlockmenu           = false auto conditional hidden
 bool property currentdevicemenu_allowspecialmenu        = false auto conditional hidden
+bool property currentdevicemenu_allowescape             = false auto conditional hidden
 bool property currentdevicemenu_switch1                 = false auto conditional hidden
 bool property currentdevicemenu_switch2                 = false auto conditional hidden
 bool property currentdevicemenu_switch3                 = false auto conditional hidden
@@ -175,8 +175,6 @@ endfunction
 function endminigamedisable(actor akactor,int aiisplayer = -1)
 endfunction
 bool function isbussy(actor akactor)
-endfunction
-function updateplayercontrol()
 endfunction
 function checkhardcoredisabler(actor akactor)
 endfunction
@@ -335,13 +333,11 @@ endfunction
 int property ud_undressmask = 0xffffff9f auto
 function undressallarmor(actor akactor)
 endfunction
-function undressoutfit(actor akactor)
-endfunction
-function dressoutfit(actor akactor)
-endfunction
 bool function checkrenderdeviceequipped(actor akactor, armor akrenddevice)
 endfunction
-armor function getconflictdevice(actor akactor, armor renddevice)
+bool function _isdevice(armor akarmor)
+endfunction
+armor function getconflictdevice(actor akactor, armor akrenddevice)
 endfunction
 int function checkrenderdeviceconflict(actor akactor, armor akrenddevice)
 endfunction
@@ -461,7 +457,7 @@ function setarousalperks()
 endfunction
 bool function applytearseffect(actor akactor)
 endfunction
-bool function applydrooleffect(actor akactor) ;works only for player
+bool function applydrooleffect(actor akactor)
 endfunction
 form function slaperkfastfetch(int formnumber, bool osl = false)
 endfunction
@@ -502,5 +498,7 @@ endfunction
 int function reducekeydurability(actor akactor, form akkey, int aidurability = 1)
 endfunction
 int[] function distributelockshields(int ailocknum, int ailockshieldnum)
+endfunction
+int function manifestdevices(actor akactor,string assource ,int aichance,int ainumber)
 endfunction
 ;This file was cleaned with PapyrusSourceHeadliner 1

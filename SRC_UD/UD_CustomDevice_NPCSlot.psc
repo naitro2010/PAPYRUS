@@ -1,8 +1,8 @@
 scriptname ud_customdevice_npcslot  extends referencealias
 udcustomdevicemain property udcdmain auto
-unforgivingdevicesmain property udmain 
+unforgivingdevicesmain property udmain
 unforgivingdevicesmain function get()
-endfunction    
+endfunction
 endproperty
 ud_customdevices_npcslotsmanager property udnpcm hidden
 ud_customdevices_npcslotsmanager function get()
@@ -14,10 +14,6 @@ endfunction
 endproperty
 ud_orgasmmanager property udom hidden
 ud_orgasmmanager function get()
-endfunction
-endproperty
-ud_expressionmanager property udem hidden
-ud_expressionmanager function get()
 endfunction
 endproperty
 ud_config property udconf hidden
@@ -165,12 +161,9 @@ int function debugsize()
 endfunction
 function orgasm()
 endfunction
-int property ud_orgasmexhaustiontime = 45 auto hidden
 function addorgasmexhaustion()
 endfunction
 function _updateorgasmexhaustion(int aiupdatetime)
-endfunction
-int function getorgasmexhaustionduration()
 endfunction
 event onactivatedevice(string sdevicename)
 endevent
@@ -256,10 +249,6 @@ function resetvalues()
 endfunction
 function regaindevices()
 endfunction
-event onitemadded(form akbaseitem, int aiitemcount, objectreference akitemreference, objectreference aksourcecontainer)
-endevent
-event onitemremoved(form akbaseitem, int aiitemcount, objectreference akitemreference, objectreference akdestcontainer)
-endevent
 weapon function getbestweapon()
 endfunction
 function updateskills()
@@ -305,44 +294,22 @@ function initorgasmupdate()
 endfunction
 function _orgasmgameupdate()
 endfunction
-function initorgasmexpression()
-endfunction
 function updateorgasm(float afupdatetime)
+endfunction
+function orsevent_onactororgasm(actor akactor, float aforgasmrate, float afarousal, float afhornylevel, int aiorgasmcount)
 endfunction
 function calculateorgasmprogress()
 endfunction
 function updateorgasmsecond()
 endfunction
-function _getorgasmvarsfromstorage()
-endfunction
-function updatehornyexpression()
+function orslinkedwidgetupdate(string aseventname, string asunused, float afmod, form akactorf)
 endfunction
 function updateorgasmhornyanimation()
-endfunction
-function sendorgasmevent()
-endfunction
-function sendedgeevent()
 endfunction
 function cleanorgasmupdate()
 endfunction
 function vibrateupdate(int aiupdatetime)
 endfunction
 function endallvibrators()
-endfunction
-function send_minigamestarter(ud_customdevice_renderscript uddevice)
-endfunction
-function receive_minigamestarter()
-endfunction
-function send_minigameparalel(ud_customdevice_renderscript uddevice)
-endfunction
-function receive_minigameparalel()
-endfunction
-function send_minigamecritloop(ud_customdevice_renderscript uddevice)
-endfunction
-function receive_minigamecritloop()
-endfunction
-function startminigameavcheckloop(ud_customdevice_renderscript akdevice)
-endfunction
-function _receive_minigameavcheckloop()
 endfunction
 ;This file was cleaned with PapyrusSourceHeadliner 1

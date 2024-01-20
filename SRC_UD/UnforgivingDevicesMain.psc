@@ -92,14 +92,12 @@ endfunction
 endproperty
 float property ud_lowperformancetime    = 1.0   autoreadonly
 float property ud_hightperformancetime  = 0.25  autoreadonly
-bool  property ud_usenativefunctions    = false auto hidden ;switch for native functions
 float property ud_baseupdatetime hidden
 float function get()
 endfunction
 endproperty
 zadconfig   property ddconfig                   auto
 string[]    property ud_officialpatches         auto
-bool property zazanimationpackinstalled = false auto hidden
 bool property oslarousedinstalled       = false auto hidden
 bool property consoleutilinstalled      = false auto hidden
 bool property slavetatsinstalled        = false auto hidden
@@ -109,6 +107,8 @@ bool property deviousstrikeinstalled    = false auto hidden
 bool property forhiminstalled           = false auto hidden
 bool property po3installed              = false auto hidden ;https://www.nexusmods.com/skyrimspecialedition/mods/22854
 bool property improvedcamerainstalled   = false auto hidden
+bool property experienceinstalled       = false auto hidden
+bool property skyrimsoulsinstalled      = false auto hidden
 bool property allowmenbondage           = true  auto hidden
 bool property ready = false auto hidden
 bool function udready()
@@ -118,6 +118,8 @@ endfunction
 event oninit()
 endevent
 unforgivingdevicesmain function getudmain() global
+endfunction
+zadlibs function getzadlibs() global
 endfunction
 bool function checksubmodules()
 endfunction
@@ -202,27 +204,7 @@ string function getplugsvibrationstrengthstring(int aistrenght) global
 endfunction
 string function inttobit(int argint) global
 endfunction
-int function codebit(int aicodedmap,int aivalue,int aisize,int aiindex) global
-endfunction
-int function decodebit(int aicodedmap,int aisize,int aiindex) global
-endfunction
-float function frange(float afvalue,float afmin,float afmax) global
-endfunction
-int function irange(int aivalue,int aimin,int aimax) global
-endfunction
-bool function iinrange(int aivalue,int aimin,int aimax) global
-endfunction
-bool function finrange(float afvalue,float afmin,float afmax) global
-endfunction
-string function formatstring(string asvalue,int affloatpoints) global
-endfunction
-float function checklimit(float afvalue,float aflimit) global
-endfunction
-int function round(float afvalue) global
-endfunction
 int function iunsig(int aivalue) global
-endfunction
-float function funsig(float afvalue) global
 endfunction
 float function converttime(float akhours, float akminutes = 0.0, float akseconds = 0.0) global
 endfunction
@@ -264,12 +246,6 @@ float function getmaxactorvalue(actor akactor,string akvalue, float afperc = 1.0
 endfunction
 float function getcurrentactorvalueperc(actor akactor,string akvalue) global
 endfunction
-bool function actorisplayer(actor akactor)
-endfunction
-bool function gactorisplayer(actor akactor) global
-endfunction
-string function getactorname(actor akactor) global
-endfunction
 bool function actorisfollower(actor akactor)
 endfunction
 bool function actorisvalidforud(actor akactor)
@@ -303,7 +279,11 @@ bool function ismenuopen()
 endfunction
 bool function isanymenuopen()
 endfunction
+bool function isanymenuopenrt()
+endfunction
 bool function ismenuopenid(int aiid)
+endfunction
+int function getopenmenumap()
 endfunction
 bool function iscontainermenuopen()
 endfunction

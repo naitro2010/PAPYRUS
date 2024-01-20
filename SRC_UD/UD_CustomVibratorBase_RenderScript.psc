@@ -4,10 +4,15 @@ int     property     ud_vibstrength         = -1        auto
 float   property     ud_arousalmult         = 1.0       auto
 float   property     ud_orgasmmult          = 1.0       auto
 int     property     ud_edgingmode          = -1        auto
-float   property     ud_edgingthreshold     = 0.75      auto
+float   property     ud_edgingthreshold     = 0.95      auto
 bool    property     ud_shocking            = false     auto
 int     property     ud_chaos               = 0         auto
 sound   property     ud_vibsound                        auto
+int     property     ud_erozones            = 0         auto
+string property      ud_orgasmchangemainkey                     hidden
+string function get()
+endfunction
+endproperty
 string  property     vibrationeffectslot                        hidden
 string function get()
 endfunction

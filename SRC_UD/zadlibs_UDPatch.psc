@@ -38,10 +38,6 @@ bool function unlockdevicebykeyword(actor akactor, keyword zad_deviousdevice, bo
 endfunction
 armor function getwornrendereddevicebykeyword(actor akactor, keyword kw)
 endfunction
-armor function getworndevice(actor akactor, keyword kw)
-endfunction
-armor function getworndevicepatched(actor akactor, keyword kw)
-endfunction
 function inflateanalplug(actor akactor, int amount = 1)    
 endfunction
 function inflatevaginalplug(actor akactor, int amount = 1)    
@@ -52,7 +48,7 @@ function stopvibrating(actor akactor)
 endfunction
 int function vibrateeffect(actor akactor, int vibstrength, int duration, bool teaseonly=false, bool silent = false)
 endfunction
-function shockactorpatched(actor akactor,int iarousalupdate = 25,float fhealth = 0.0, bool bcankill = false)
+function shockactorpatched(actor akactor,int aiarousalupdate = 25,float afhealth = 0.0, bool abcankill = false)
 endfunction
 bool[] function startthirdpersonanimation(actor akactor, string animation, bool permitrestrictive=false)
 endfunction
@@ -64,29 +60,15 @@ function actororgasm(actor akactor, int setarousalto=-1, int vsid=-1)
 endfunction
 function updateexposure(actor akref, float val, bool skipmultiplier=false)
 endfunction
-function applyexpression(actor akactor, sslbaseexpression expression, int strength, bool openmouth=false)
-endfunction
-function resetexpression(actor akactor, sslbaseexpression expression)
-endfunction
-function applygageffect(actor akactor) 
-endfunction
-function removegageffect(actor akactor)
-endfunction
 event startboundeffects(actor aktarget)
 endevent
 event startboundeffectspatched(actor aktarget)
 endevent
-armor function getrendereddevice(armor device)
-endfunction
 function updatecontrols()
-endfunction
-function startprocessplayercontrolsmutex()
-endfunction
-function endprocessplayercontrolsmutex()
 endfunction
 function processplayercontrols(bool abcheckminigame = true)
 endfunction
-function stripweapons(actor a, bool unequiponly = true)        
+function stripweapons(actor akactor, bool abunequiponly = true)
 endfunction
 function repopulatenpcs()
 endfunction

@@ -45,15 +45,11 @@ function gameupdate()
 endfunction
 function slotgameupdate()
 endfunction
-function checkorgasmloops()
-endfunction
 event onupdate()
 endevent
 event onupdategametime()
 endevent
 function updateslots()
-endfunction
-function undressslots()
 endfunction
 function updateslot(ud_customdevice_npcslot akslot)
 endfunction

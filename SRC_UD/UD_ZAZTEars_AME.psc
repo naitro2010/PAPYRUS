@@ -1,4 +1,4 @@
-scriptname ud_zaztears_ame extends activemagiceffect  
+scriptname ud_zaztears_ame extends activemagiceffect
 udcustomdevicemain property udcdmain auto
 unforgivingdevicesmain property udmain
 unforgivingdevicesmain function get()

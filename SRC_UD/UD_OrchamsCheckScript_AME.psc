@@ -8,16 +8,4 @@ ud_playerslotscript property ud_playerslot
 ud_playerslotscript function get()
 endfunction
 endproperty
-event oneffectstart(actor aktarget, actor akcaster)
-endevent
-event oneffectfinish(actor aktarget, actor akcaster)
-endevent
-function update()
-endfunction
-event onupdate()
-endevent
-bool function isrunning()
-endfunction
-event onplayerloadgame()
-endevent
 ;This file was cleaned with PapyrusSourceHeadliner 1

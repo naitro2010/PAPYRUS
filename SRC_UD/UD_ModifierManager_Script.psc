@@ -25,36 +25,52 @@ ud_libs function get()
 endfunction
 endproperty
 bool property ready = false auto hidden
+int function addmodifierstorage(ud_modifierstorage akstorage)
+endfunction
+int function getmodifierstoragecount()
+endfunction
+ud_modifierstorage function getnthmodifierstorage(int aiindex)
+endfunction
+ud_modifier function getmodifier(string asalias)
+endfunction
+function updatestorage()
+endfunction
 function oninit()
 endfunction
 function update()
+endfunction
+string[]        property ud_modifierlist    auto hidden
+alias[]         property ud_modifierlistref auto hidden
+function updatelists()
 endfunction
 event onupdate()
 endevent
 event onupdategametime()
 endevent
-function updatemodifiers(float argtimepassed)
+function updatemodifiers(float aitimepassed)
 endfunction
-function updatemodifiers_hour(float argmult)
+function updatemodifiers_hour(float afmult)
 endfunction
-function updatemodifiers_orgasm(ud_customdevice_npcslot argslot)
+function updatemodifiers_orgasm(ud_customdevice_npcslot akslot)
 endfunction
-function procces_updatemodifiers(ud_customdevice_renderscript argdevice,float argtimepassed)
+function procces_updatemodifiers(ud_customdevice_renderscript akdevice,float aitimepassed)
 endfunction
-function procces_updatemodifiers_hour(ud_customdevice_renderscript argdevice,float argmult)
+function procces_updatemodifiers_hour(ud_customdevice_renderscript akdevice,float afmult)
 endfunction
-function procces_updatemodifiers_orgasm(ud_customdevice_renderscript argdevice)
+function procces_updatemodifiers_orgasm(ud_customdevice_renderscript akdevice)
 endfunction
-function procces_updatemodifiers_remove(ud_customdevice_renderscript argdevice) ;directly accesed from device
+function procces_updatemodifiers_added(ud_customdevice_renderscript akdevice) ;directly accesed from device
 endfunction
-function procces_mah_hour(ud_customdevice_renderscript argdevice,float argmult)
+function procces_updatemodifiers_remove(ud_customdevice_renderscript akdevice) ;directly accesed from device
 endfunction
-function procces__l_cheap_hour(ud_customdevice_renderscript argdevice,float argmult)
+bool function getmodifierstate_minigameallowed(ud_customdevice_renderscript akdevice) ;directly accesed from device
 endfunction
-function procces_mao_orgasm(ud_customdevice_renderscript argdevice)
+function procces_updatemodifiers_minigamestarted(ud_customdevice_renderscript akdevice) ;directly accesed from device
 endfunction
-function procces_lootgold_remove(ud_customdevice_renderscript argdevice)
+function procces_updatemodifiers_minigameended(ud_customdevice_renderscript akdevice) ;directly accesed from device
 endfunction
-int function manifestdevices(actor akactor,string strsource ,int ichance,int inumber)
+function debug_addmodifier(ud_customdevice_renderscript akdevice)
+endfunction
+function debug_removemodifier(ud_customdevice_renderscript akdevice)
 endfunction
 ;This file was cleaned with PapyrusSourceHeadliner 1

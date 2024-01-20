@@ -1,4 +1,4 @@
-scriptname ud_widgetstatuseffect_refalias extends ud_widgetbase_refalias  
+scriptname ud_widgetstatuseffect_refalias extends ud_widgetbase_refalias
 int     property    cluster       = -1    auto hidden
 int     property    variant       = 0     auto hidden    
 int     property    variantloaded = -1    auto hidden

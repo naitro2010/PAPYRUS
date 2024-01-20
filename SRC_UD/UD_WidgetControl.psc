@@ -147,6 +147,10 @@ function meter_setnativevalue(string asmeter, float afvalue)
 endfunction
 float function meter_updatenativevalue(string asmeter,float afdiff)
 endfunction
+function meter_linkactororgasm(actor akactor, string asmeter)
+endfunction
+function meter_unlinkactororgasm(actor akactor)
+endfunction
 function notification_push(string astext, int aicolor = 0xffffff)
 endfunction
 function notification_reset()
@@ -253,6 +257,8 @@ endfunction
 function meter_setnativevalue(string asmeter, float afvalue)
 endfunction
 float function meter_updatenativevalue(string asmeter,float afdiff)
+endfunction
+function meter_linkactororgasm(actor akactor, string asmeter)
 endfunction
 function notification_push(string astext, int aicolor = 0xffffff)
 endfunction
