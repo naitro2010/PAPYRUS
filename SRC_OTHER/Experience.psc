@@ -1,17 +1,36 @@
-scriptname experience hidden
-int function getscriptversion() global
-endfunction
-int function getversion() native global
-function addexperience(float a_points, bool a_meter = false) global native
-function shownotification(string a_text, string a_status, string a_sound) global native
-float function getskillcap(int a_skill) global native
-int function getsettingint(string a_setting) global native
-float function getsettingfloat(string a_setting) global native
-bool function getsettingbool(string a_setting) global native
-string function getsettingstring(string a_setting) global native
-function setsettingint(string a_setting, int a_value) global native
-function setsettingfloat(string a_setting, float a_value) global native
-function setsettingbool(string a_setting, bool a_value) global native
-function setsettingstring(string a_setting, string a_value) global native
-function savesettings() global native
-;This file was cleaned with PapyrusSourceHeadliner 1
+; Version 3.5.0
+
+ScriptName Experience hidden
+
+; --- Public ---------
+
+int Function GetScriptVersion() global
+	return 3
+endFunction
+
+; Verion format: Major.Minor.Patch.Build 
+string Function GetVersion() native global
+
+; Adds specified amount of experience points, optionally shows meter
+Function AddExperience(int points, bool meter = false) global native
+
+; Shows middle of screen notification, optionally plays sound
+Function ShowNotification(string text, string status, string sound) global native
+
+; www.creationkit.com/index.php?title=ActorValueInfo_Script
+float Function GetSkillCap(int skill) global native
+
+; --- Settings -------
+
+int Function GetSettingInt(string setting) global native
+float Function GetSettingFloat(string setting) global native
+bool Function GetSettingBool(string setting) global native
+string Function GetSettingString(string setting) global native
+
+Function SetSettingInt(string setting, int value) global native
+Function SetSettingFloat(string setting, float value) global native
+Function SetSettingBool(string setting, bool value) global native
+Function SetSettingString(string setting, string value) global native
+
+; Saves all setting modifications to file
+Function SaveSettings() global native
