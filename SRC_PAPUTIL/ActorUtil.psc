@@ -4,4 +4,4 @@ bool function removepackageoverride(actor targetactor, package targetpackage) gl
 int function countpackageoverride(actor targetactor) global native
 int function clearpackageoverride(actor targetactor) global native
 int function removeallpackageoverride(package targetpackage) global native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

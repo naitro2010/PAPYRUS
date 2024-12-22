@@ -1,11 +1,12 @@
 scriptname miscutil hidden
-objectreference[] function scancellobjects(int formtype, objectreference centeron, float radius = 5000.0, keyword haskeyword = none) global native
-actor[] function scancellnpcs(objectreference centeron, float radius = 5000.0, keyword haskeyword = none, bool ignoredead = true) global native
-actor[] function scancellnpcsbyfaction(faction findfaction, objectreference centeron, float radius = 5000.0, int minrank = 0, int maxrank = 127, bool ignoredead = true) global native
+objectreference[] function scancellobjects(int formtype, objectreference centeron, float radius = 0.0, keyword haskeyword = none) global native
+actor[] function scancellnpcs(objectreference centeron, float radius = 0.0, keyword haskeyword = none, bool ignoredead = true) global native
+actor[] function scancellnpcsbyfaction(faction findfaction, objectreference centeron, float radius = 0.0, int minrank = 0, int maxrank = 127, bool ignoredead = true) global native
 function togglefreecamera(bool stoptime = false) global native
 function setfreecameraspeed(float speed) global native
 function setfreecamerastate(bool enable, float speed = 10.0) global native
 string[] function filesinfolder(string directory, string extension="*") global native
+string[] function foldersinfolder(string directory) global native
 bool function fileexists(string filename) global native
 string function readfromfile(string filename) global native
 bool function writetofile(string filename, string text, bool append = true, bool timestamp = false) global native
@@ -19,4 +20,4 @@ function executebat(string filename) global
 endfunction
 actor[] function scancellactors(objectreference centeron, float radius = 5000.0, keyword haskeyword = none) global
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

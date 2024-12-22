@@ -20,6 +20,27 @@ form[] function removeform(form[] arrayvalues, form toremove) global native
 alias[] function removealias(alias[] arrayvalues, alias toremove) global native
 actor[] function removeactor(actor[] arrayvalues, actor toremove) global native
 objectreference[] function removeobjref(objectreference[] arrayvalues, objectreference toremove) global native
+float[] function removedupefloat(float[] arrayvalues) global native
+int[] function removedupeint(int[] arrayvalues) global native
+string[] function removedupestring(string[] arrayvalues) global native
+form[] function removedupeform(form[] arrayvalues) global native
+alias[] function removedupealias(alias[] arrayvalues) global native
+actor[] function removedupeactor(actor[] arrayvalues) global native
+objectreference[] function removedupeobjref(objectreference[] arrayvalues) global native
+float[] function getdifffloat(float[] arrayvalues1, float[] arrayvalues2, bool compareboth = false, bool includedupes = false) global native
+int[] function getdiffint(int[] arrayvalues1, int[] arrayvalues2, bool compareboth = false, bool includedupes = false) global native
+string[] function getdiffstring(string[] arrayvalues1, string[] arrayvalues2, bool compareboth = false, bool includedupes = false) global native
+form[] function getdiffform(form[] arrayvalues1, form[] arrayvalues2, bool compareboth = false, bool includedupes = false) global native
+alias[] function getdiffalias(alias[] arrayvalues1, alias[] arrayvalues2, bool compareboth = false, bool includedupes = false) global native
+actor[] function getdiffactor(actor[] arrayvalues1, actor[] arrayvalues2, bool compareboth = false, bool includedupes = false) global native
+objectreference[] function getdiffobjref(objectreference[] arrayvalues1, objectreference[] arrayvalues2, bool compareboth = false, bool includedupes = false) global native
+float[] function getmatchingfloat(float[] arrayvalues1, float[] arrayvalues2) global native
+int[] function getmatchingint(int[] arrayvalues1, int[] arrayvalues2) global native
+string[] function getmatchingstring(string[] arrayvalues1, string[] arrayvalues2) global native
+form[] function getmatchingform(form[] arrayvalues1, form[] arrayvalues2) global native
+alias[] function getmatchingalias(alias[] arrayvalues1, alias[] arrayvalues2) global native
+actor[] function getmatchingactor(actor[] arrayvalues1, actor[] arrayvalues2) global native
+objectreference[] function getmatchingobjref(objectreference[] arrayvalues1, objectreference[] arrayvalues2) global native
 int function countfloat(float[] arrayvalues, float equalto) global native
 int function countint(int[] arrayvalues, int equalto) global native
 int function countbool(bool[] arrayvalues, bool equalto) global native
@@ -97,4 +118,4 @@ form[] function resizeformarray(form[] arrayvalues, int tosize, form filler = no
 endfunction
 alias[] function resizealiasarray(alias[] arrayvalues, int tosize, alias filler = none) global
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

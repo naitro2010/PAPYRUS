@@ -88,6 +88,10 @@ int function adjustintvalue(string filename, string keyname, int amount) global 
 float function adjustfloatvalue(string filename, string keyname, float amount) global native
 int function intlistadjust(string filename, string keyname, int index, int amount) global native
 float function floatlistadjust(string filename, string keyname, int index, float amount) global native
+int function intlistrandom(string filename, string keyname) global native
+float function floatlistrandom(string filename, string keyname) global native
+string function stringlistrandom(string filename, string keyname) global native
+form function formlistrandom(string filename, string keyname) global native
 int function countintvalueprefix(string filename, string prefixkey) global native
 int function countfloatvalueprefix(string filename, string prefixkey) global native
 int function countstringvalueprefix(string filename, string prefixkey) global native
@@ -130,5 +134,6 @@ function setpathfloatarray(string filename, string path, float[] arr, bool appen
 function setpathstringarray(string filename, string path, string[] arr, bool append = false) global native
 function setpathformarray(string filename, string path, form[] arr, bool append = false) global native
 function clearpath(string filename, string path) global native
+function clearpathindex(string filename, string path, int index) global native
 function clearall(string filename) global native
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1

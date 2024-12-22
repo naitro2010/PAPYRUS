@@ -99,6 +99,10 @@ int[] function intlisttoarray(form objkey, string keyname) global native
 float[] function floatlisttoarray(form objkey, string keyname) global native
 string[] function stringlisttoarray(form objkey, string keyname) global native
 form[] function formlisttoarray(form objkey, string keyname) global native
+int function intlistrandom(form objkey, string keyname) global native
+float function floatlistrandom(form objkey, string keyname) global native
+string function stringlistrandom(form objkey, string keyname) global native
+form function formlistrandom(form objkey, string keyname) global native
 form[] function formlistfilterbytypes(form objkey, string keyname, int[] formtypeids, bool returnmatching = true) global native
 form[] function formlistfilterbytype(form objkey, string keyname, int formtypeid, bool returnmatching = true) global
 endfunction
@@ -367,4 +371,4 @@ bool function importfile(string filename, string restrictkey = "", int restrictt
 endfunction
 bool function exportfile(string filename, string restrictkey = "", int restricttype = -1, form restrictform = none, bool restrictglobal = false, bool keycontains = false, bool append = true) global
 endfunction
-;This file was cleaned with papyrusSourceHeadliner
+;This file was cleaned with PapyrusSourceHeadliner 1
