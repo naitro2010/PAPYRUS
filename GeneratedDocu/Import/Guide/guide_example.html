@@ -24,72 +24,78 @@
           </tr>
         </table>
 
-        <h1> Example </h1>
+        <h1> Example on how to create your own unique new items (essentially making you a mod author) </h1>
         
-        Purpose of this page is to give a practical example on how to use the mod. All moding will be done with SSEEdit (TES5Edit would also work). 
+        Purpose of this page is to give a practical example on how to create your very own unique new items out of existing items from the mod, in case you are interested in that.
+        It may be a lot if you have never done that before, but there are good tutorials on everything you need.  All modding will be done with SSEEdit (TES5Edit would also work). 
+        There is are some good YouTube Tutorials on how to install xEdit (which is often renamed to SSEEdit, but is the same software).  
+        One not too old tutorial example is this one:  <a href="https://www.youtube.com/watch?v=YCAmgBm6o8I">How to Install & Setup xEdit - Ultimate Modding Tool</a>
+        After you have installed xEdit/SSEEdit, add it to your MO2 executable list and start it from there, so all your installed mods will be listed.  
+        <br>
+         <br>
+        Some Papyrus scripts (the ones we create/modify) will need to be compiled on the way, but ready-made build scripts are provided here, so this should basically work with the click of a button.  
+        Basically, all you need to create your own content within this mod, is to have xEdit and working a working Unforgiving Devices installation. <br>
         
-        Papyrus scripts will be compiled using provided build scripts, so it is not required to download additional script. Basically, all you need to create this mod, is to have xEdit and working Unforgiving Devices.
-        
-        So, for purpose of the example, our goal will be following to create following devices
+        So, for purpose of this example, our goal will be to create the following brand new devices:
         
          <ol>
-          <li>Ponygirl armbinder - Device will fastly repair itself if wearer doesn't move</li>
-          <li>Ponygirl anal plug - Anal plug which whose vibration strength will change based on distance traveled. The more the wearer moves, the more will plug vibrate to reward its victim. But it will also slowly loose durability when moving. But only if actor is not belted</li>
-          <li>Ponygirl boots - Boots which will slowly reduce wearers health if they don't move</li>
+          <li><b>Ponygirl armbinder : </b>An new device will repair itself quickly, if wearer doesn't move, essentially making the wearer run around a lot like a pony</li>
+          <li><b>Ponygirl anal plug : </b>Anal plug where the vibration strength will change based on distance traveled.  The more the wearer moves, the more the plug will vibrate to reward its wearer. 
+            But it will also slowly loose durability when moving.  And to top it off, we condition that, so it will only apply when the wearer (often called 'Actor') is not belted</li>
+          <li><b>Ponygirl boots : </b>Boots which will slowly reduce wearers health, if they are not moving, essentially making the wearer run around even more, like a pony</li>
         </ol>
 
         <h2> Getting started </h2>
         
-        Everytime we will be creating new device, we will use new existing devices to make our job easier. For that reason, lets open up the xEdit and select both UnforgivingDevices.esp and all DeviousDevices .esm modules (assests, integration, expansion)
-        
-        
-        Then lets find a device which we will use for our devices. Lets use following devices
+        Every time we will be creating a new device, we will use existing devices to make our job easier. For that reason, lets open up the xEdit and select both 
+        UnforgivingDevices.esp and all DeviousDevices .esm modules (assets, integration, expansion).  Usually they should be selected automatically after selecting UnforgivingDevices.
+        Now we look for devices that we can use as the starting point for our modified devices.  We need 3 such starting points.  Lets use following devices:
         
          <ol>
-          <li>Ponygirl armbinder - Black Ebonite armbinder</li>
+          <li>For the Ponygirl armbinder : The 'Black Ebonite armbinder' seems to be a good choice.  In SSEEdit Open up the mod 'Devious Devices Expansion' and then open the section 'Armour' and find it in the list.  </li>
           <li>Ponygirl anal plug - </li>
           <li>Ponygirl boots - Black ebonite pony boots</li>
         </ol>
         
-        
-        For now lets only copy Inventory Devices. Theese are the devices which have the name. So we can easily find the required device by name.
+        Now there are (at least) two elements here for each device.  One is the "Inventory Device" (the one which has something in the 'Name' column of xEdit) and then there is something like a "Script instance". 
+        For now lets only copy Inventory Devices.  These are the devices which have the name.  So we can easily find the required device by name.  
         After finding the device, right click it and select "Copy as new record into...". Rename the editorID so it is more clear what device it is.
-
-        After that, select "(new file).esp", and the one without ESM flag. This will copy our device to our new mod. Lets new our new mod "Unforgiving Devices - Example"
-
+        After that, select "(new file).esp", and the one without ESM flag. This will copy our device to our new mod. Lets name our new mod "Unforgiving Devices - Example"
+        <br>
+        <br>
         <div>
           <img src="../Media/Example1.jpg" alt="Example1" width="600" height="400">
         </div>
-        
-        Now we need to also copy the render devices. Easiest way will be to just open our copied device, and check property deviceRendered on script zadequipscript. So lets
-        
+        <br>
+        Now we need to also copy the render devices. Easiest way will be to just open our copied device, and check property deviceRendered on script zadequipscript. So lets do that.
+        <br>
+        <br>
         <div>
           <img src="../Media/Example2.jpg" alt="Example2" width="400" height="200">
         </div>
-        
-        After that, we can hold Right Ctrl and click on the editorID of render device. This will open the form with the render device. After it opens, just do the same thing as with Inventory devices.
-        If you followed the steps correctly, you should now have something like this:
-        
+        <br>
+        After that, we can hold Right Ctrl and click on the editorID of render device.  This will make xEdit jump to the form with the render device.  The other item that we didn't copy so far.  
+        So let's just do the same thing as with Inventory devices and copy that as well, giving it a slightly different name again, to mark it as our version of the initial device.
+        If you followed the steps correctly for all 3 devices, you should now have something like this:
+        <br><br>
         <div>
           <img src="../Media/Example3.jpg" alt="Example3" width="600" height="400">
         </div>
-        
+        <br>
         Now we need to update properties so they are linked to our new devices. Open every single of the device and change properties deviceInventory and deviceRendered.
         The said properties have to be linked to the forms we just created. For example, the created UD_Example_PonyArmbinder_ID should have the properties updates like this
-        
+        <br>
+        <br>
         <div>
           <img src="../Media/Example4.jpg" alt="Example4" width="1000" height="400">
         </div>
-        
-        This have to be done for all 3 inventory devices. After that save the plugin with Ctrl+S so we don't loose our progress in case of some unexpected issue.
-        
-        Now we can edit the devices to be more in tought with our idea. We are just going to rename tham as otherwise this example will be too long. 
+        <br>
+        This has to be done for all 3 inventory devices.  After that save the plugin with Ctrl+S so we don't loose our progress in case of some unexpected issue.<br>
+        Now we can edit the devices to be more in tune with our special ideas initially mentioned.  We are just going to rename them as otherwise this example will be too long. 
         I will only say that if you want to change the textures or 3D of device, you can do it by editing render script.
-        
         Devices can be renamed by editing field "FULL - Name" on the form. It is under the script so you have to scroll a little.
-        
-        After it is renamed, our mod looks like this
-        
+        After it is renamed, our mod looks like this<br>
+        <br>
         <div>
           <img src="../Media/Example5.jpg" alt="Example5" width="600" height="400">
         </div>
@@ -97,62 +103,127 @@
         <h2> Patching devices </h2>
         
         Till now this had nothing to do with Unforgiving Devices, and if you want to create new Devious Devices, you will most likely use exact same approach. 
-        Now we need to patch our device so it works correctly with UD. but before we do it, we will first have to add Unforgiving Devices as master to our mod. 
-        Right click our mod and select "Add master". Then select UnforigingDevices.esp
-        
+        If you want, you can still try out the new device though.  Don't forget to enable our newly-created .esp file in the plugins section of MO2, so the new mod will be loaded.
+        Load order and all that should be irrelevant at this point, since nothing is overwritten.
+        Once the game has started, you should be able to use the console (just press the ~ key, usually the one right below the ESC key to open/close the console in game) to add 
+        the new device to inventory and try it on.  In our example (using the number from our SSEEdit session) we would write:<br>
+        <br>
+        Player.AddItem 0A000800 1<br>
+        <br>
+        where you have to replace 0A000800 with the correct number from your mod.  This should add exactly one piece of the new item to your inventory.  
+        As said above, you will not be able to use UD controls on it, as it is currently an unpatched DD item.<br>
+        <br>
+        Now we need to patch our device so it works correctly with UD.  But before we do it, we will first have to add Unforgiving Devices as master to our mod. 
+        Still in xEdit, right click our mod and select "Add master". Then select UnforgivingDevices.esp
+        <br>
         <div>
           <img src="../Media/Example6.jpg" alt="Example6" width="400" height="500">
         </div>
-        
-        Patching time. First we have to get the patching script. The script is not in the installed mod, but in the fomod. So oyu have to open the mod installer. 
-        The patching scripts are in folder dev/xEdit. The scripts have to be copied to "Edit Scripts" folder, which will be in folder that you placed xEdit in. Now before we start the patch, its good idea to save our mod.
-        Click on our mod with right click and select "Apply script...". In followup window, select "UD_PatchingScript" script from "script" dropdown menu, and click on Ok.
-        
+        <br>
+        Patching time.<br>
+        Patching will be done from xEdit again.<br>
+        But xEdit will want to run scripts, that installed with SSEEdit.  So we go to where the SSEEdit executable is, and from there you should be able to see a folder named "Edit Scripts".
+        The Patching Script from UD needs to be placed into this folder, or otherwise SSEEdit will not offer it.
+        When you look into that folder, you see that all the files there have a .pas extension.<br>
+        After searching up and down in Unforgiving Devices and it's online repository, you find, that the patching script is not there.  It has to be be downloaded from 
+        <a href="https://www.loverslab.com/files/file/16938-unforgiving-devices">the old 2.1.1 version home page of the mod</a>.  There you will find "UD patching kit 1.7.zip" as a possible download option.
+        In addition, you will also find a short description of how to work with xEdit and the script on that page.
+        Now look into that zip file to copy all .pas files from there into the folder with all the other .pas files of SSEEdit.  This should set you up for the next step.<br>
+        The important thing is, that you now have the script "UD_PatchingScript" in that SSEEdit sub-folder.
+        <br><br>
+        Now before we start the patch, its good idea to save our mod.<br>
+        <br>
+        Once done, click on our mod with right click and select "Apply script...". In followup window, select "UD_PatchingScript" script from "script" dropdown menu, and click on Ok.<br>
         If all went ok, following text should show up in Messages
-        
+        <br>
+        <br>
         <div>
           <img src="../Media/Example7.jpg" alt="Example7" width="600" height="200">
         </div>
-        
-        Check if patched devices seems ok. They should not shows error in any of the properties.
+        <br>
+        Check if the patched devices seem okay.  They should not show errors in any of the properties.  Usually those are highlighted in bright colors by xEdit.<br>
+        If you want, you can try out the newly created items in game again at this point:   Once you equip one of them, they should show up in the UD list of items currently worn. 
         
         <h2> Devices customization </h2>
         
-        Now that our devices are usable in UD, we can start to edit them to our liking. I recommend to check documentation first, and mainly the Customization groupd of UD_CustomDevice_RenderScript
-        
-        Most, if not all furthere customization will be only done on Render device, as that is where all magick happens. It is important to note all patched devices are processed differently in UD then the ones that are unpatched.
-        If you for example change some setting of the device while it still have Patched keyword, the value will be most liekly changed when device is locked on. 
-        Because off that, lets remove Patching keywords from our Pony Armbinder device, so we have at least one device to customize.
+        Now that our devices are usable in UD, we can start to edit them to our liking. 
+        I recommend to check documentation first, and edit mainly the Customization group of UD_CustomDevice_RenderScript.<br>
+        (((But where to find such documentation??  I personally go to the Unforgiving Devices folder and enter e.g.<br>
+        findstr /S /C:"UD_StruggleCritMul" *.psc<br>
+        This will bring up all mentions of UD_StruggleCritMul in the Papyrus code, so that I can see how and where the property is used.  Maybe inside of the scripts there is even more documentation.
+        But anyway, that can be a starting point.)))<br>
+        <br>
+        Most, if not all further customization will be only done on Render device (so not the one with the 'Name', but the other one), as that is where all magic happens. 
+        It is important to note all patched devices are processed differently in UD then the ones that are unpatched.
+        If you for example change some setting of the device, while it still has the 'Patched' keyword, the value will be most likely changed when the device is locked on. 
+        Because off that, lets remove the Patching keyword from our Pony Armbinder device, so we have at least one device to customize.
         
         <div>
           <img src="../Media/Example8.jpg" alt="Example8" width="1200" height="600">
         </div>
         
-        Lets do following changes to our Pony Armbinder
+        Lets do following changes to our Pony Armbinder:
         
         <ol>
           <li>UD_durability_damage_base -> 0.75 = This way device will be little harder, but not too much</li>
           <li>UD_base_stat_drain -> 5 = Struggling will last longer as less stats will be drained</li>
-          <li>UD_ResistPhysical -> 0.2 = Device will have physical resistence of 20%</li>
-          <li>UD_ResistMagicka -> 2.0 = Device will regain durability if actor tried to struggle using magick</li>
+          <li>UD_ResistPhysical -> 0.2 = Device will have physical resistance of 20%</li>
+          <li>UD_ResistMagicka -> 2.0 = Device will regain durability if actor tried to struggle using magicka</li>
           <li>UD_StruggleCritChance -> 45 = Big (45%) chance of crit on every second of minigame</li>
           <li>UD_StruggleCritDuration -> 0.7 = Duration of crit is only 0.7 seconds</li>
           <li>UD_StruggleCritMul -> 2.5 = Crit multiplier is 2.5x</li>
-          <li>UD_Level -> -2 = Device will have similiar level as its wearer</li>
+          <li>UD_Level -> -2 = Device will have similar level as its wearer</li>
         </ol>
         
-        Lets also add UD_PatchHard keyword to other 2 devices, so they are little harder to escape
+        For that you have to click on the render device (the one with no name) and then look at the 
+        settings on the right of the screen.  Click open VMAD, then Scripts(sorted), the Script and Properties (sorted).
+        Right-click next to 'Properties (sorted)' and select "Add" from the context menu to add a new property.
+        Copy-and-paste properties from other items (then you can also see the data type and such things)
+        or just copy the property names from the list above.  Most will be 'Float' data type.
+
+        <div>
+          <img src="../Media/Example16.jpg" alt="Example16" width="801" height="742">
+        </div>
         
-        Now that all of that is done, we can start the scripting, which will give our devies their unique behaviour
+        <br>
+        Lets also add UD_PatchHard keyword to other 2 devices, so they are little harder to escape.<br>
+        <br>
+        Now save and close the xEdit, so our mod .esp file is created. 
+        Create new mod, if using ModOrganizer, and then move your new .esp file from the Overwrite folder into your newly created mod, if you want.  
+        The important thing is, that the .esp is enabled in your plugin list, so you can try it out in game as above and see you changes in effect.<br>
+        <br>
+        Congratulations are in order!  You have created your first mod, that actually does something to the game.<br> 
+        <br>
+        Now that all of that is done, we can start the scripting, which will give our devices their unique behavior.
         
+
+
+
+
+
+
+
         <h2> Scripting </h2>
         
-        First, save and close the xEdit so our mod esp is created. Create new mod if using ModOrganizer and place our esp in to it. Create new folder Script in it. Next create folder Source inside the folder Scripts.
+        <h3> Setting your machine up for development </h3>
+
+        In the following, we will change the scripts associated with your newly created items.
+        For that, we should first try to compile a basically unchanged script from the original item, to see if your setup works.
+        Once that is assured, we can make changes to the scripts and make them actually unique.<br>
+        <br>
+        Note:  For the this step, you need to have GIT installed.  (Installation should be straightforward with a windows installer.)
+        I'm not sure, but you may also need to have the Creation Kit (CK) installed.  
+        It used to be available from Bethesda's Website, but now it is exclusively available from Steam.
+        The Skyrim SE version is probably what you want there.<br>
+        <br>
+        
+        Now inside of your newly created mod, i.e. inside of that same folder, that contains your newly created .esp file, create another folder named 'Script'. 
+        Next create folder 'Source' inside the folder 'Scripts'.
         Lastly copy following files
         
         <ol>
           <li>BUILD_ALL.bat from Scripts folder in Unforgiving Devices installed mod (1.main/Scripts in fomod zip). Copy it to our Scripts folder (but not the Source folder!)</li>
-          <li>RenderDeviceTemplate.psc from docs folder to our Scripts/Source folder</li>
+          <li>RenderDeviceTemplate.psc from docs folder of Unforgiving Devices mod to our Scripts/Source folder</li>
         </ol>
         
         Now, copy the RenderDeviceTemplate.psc 2 times, so you have exactly 3 copies of the script
@@ -162,20 +233,25 @@
         <div>
           <img src="../Media/Example9.jpg" alt="Example9" width="600" height="150">
         </div>
-        
-        Now we have to edit the templates so it works. For now all we need to do is to edit ;/DEVICE SCRIPT NAME/; so it says correct name, and ;/PARENT SCRIPT NAME/; which says the name of parent script.
+        <br>
+        If we run BUILD_ALL now, compilation will fail.  (That isn't a problem.  Try it out to see what it looks like.)<br>
+        We have to edit the newly renamed .psc files.  You can do that with any text editor you like.  
+        Many people prefer VS code, because of the nice syntax highlighting with the Papyrus-Extension, but that is optional and you don't need that for compiling or anything.<br>
+        In the opening section of the UD_PonyArmbinder_RD.psc file (and the other files), there should be a line like this:<br>
+        <br>
+        Scriptname ;/DEVICE SCRIPT NAME/; extends ;/PARENT SCRIPT NAME/;  <br>
+        <br>
+        Now we change  ;/DEVICE SCRIPT NAME/; so it says correct name, and ;/PARENT SCRIPT NAME/; which says the name of parent script.
         
         <ol>
           <li>;/DEVICE SCRIPT NAME/; - Name of the script file. So in our example, it will be UD_PonyArmbinder_RD, etc...</li>
-          <li>;/PARENT SCRIPT NAME/; - Parent script. For Pony Armbinder, we will use UD_CustomHeavyBondage_RenderScript. For Pony Boots, we will use UD_CustomBoots_RenderScript. For Pony Plug, we will use UD_CustomPlug_RenderScript</li>
+          <li>;/PARENT SCRIPT NAME/; - Parent script. For Pony Armbinder, we will use UD_CustomHeavyBondage_RenderScript. For Pony Boots, we will use UD_CustomBoots_RenderScript. 
+            For Pony Plug, we will use UD_CustomPlug_RenderScript</li>
         </ol>
         
-        After changing all files correctly, we can try to compile them.
-        
-        Open the Source folder, and run BUILD_ALL.bat. Note that it first needs to download all required sources, so it depending on your connection it might take a while. 
-        Good new is that it only needs to download once. 
-        After that, you can compile offline if you want to.
-        
+        After changing all files correctly, we can try to compile them, i.e. open the Source folder, and run BUILD_ALL.bat. 
+        Note that it first needs to download all required sources (if you never started BUILD_ALL before), so it might take a while depending on your connection. 
+        Good new is that it only needs to download once.  After that, you can compile offline if you want to.
         If you did everything ok, the BUILD_ALL.bat should show something like this
         
         <div>
@@ -190,14 +266,39 @@
           <img src="../Media/Example12.jpg" alt="Example12" width="500" height="400">
         </div>
         
-        Do it for all of our devices. After its done, we can finaly get to scripting.
+        Do it for all of our devices. After its done, we can finally get to scripting.
+
+
+
+
+
+
+
+        <h3> Writing your first papyrus code:  Pony Armbinder </h3>
         
-        First lets edit UD_DeviceType in function InitPost. For armbinder, lets change the UD_DeviceType to "Pony Armbinder". For other scripts, we will do the similiar
-        
-        <h3> Pony Armbinder </h3>
-        
-        As said on beginning, we want this device to be repairing itself while actor stands in one place. Following is snippet from the code that does exactly that.
-        You can see that only functions InitPost, OnUpdatePost and GetAiPriority were edited. New Deactivation minigame is also added to demonstrate how to add simple minigame.
+        At this point, it might be good to just briefly read over the  UD_PonyArmbinder_RD, preferably with syntax highlighting from VS code or another Papyrus editor.
+        Most of the available functions and hooks, where we could add new effects are documented in the code.  
+        To make a super-simple example, we could edit the function IntiPostPost.  By default it does nothing else except what the parent script would have done.
+        But we can add a message, just to try and see how it works.  If we put a Debug.Messagebox here, a message should pop up as soon as we have equipped the New
+        device.  We can compile that and try it out right away.
+        <br>
+        <code style="white-space: pre;">
+;/  Function: InitPostPost
+    Called as absolutely last instruction of whole initialization chain.
+    You can use this for some resource heavy processes, or even add infinite loop there.
+    Should always call parent script, to prevent unintended behavior
+/;
+Function InitPostPost()
+    parent.InitPostPost()
+    Debug.MessageBox("The new armbinder has been equipped (and our function InitPostPost been triggered).")
+EndFunction
+        </code>
+        <br>
+        You get the idea and can go from there.  Below is quite a big example, that may be a bit of a leap from here.          
+        First lets edit UD_DeviceType in function InitPost.  For the armbinder, lets change the UD_DeviceType to "Pony Armbinder". For other scripts, we will do something similar.
+        As outlined in the beginning, for this tutorial we want this device to be repairing itself while actor stands in one place. Below you find a snippet from the code, that does exactly that.
+        You can see that only the functions InitPost, OnUpdatePost and GetAiPriority were edited. 
+        The other part, the new Deactivation minigame, is also added to demonstrate how to add a simple minigame, but that is already beyond our initial thought.
         
         <br> <code style="white-space: pre;">
         Scriptname UD_PonyArmbinder_RD extends UD_CustomHeavyBondage_RenderScript
@@ -228,7 +329,7 @@
             ;minigame will not damage device
             setMinigameOffensiveVar(False,0.0,0.0,True)
             
-            ;minigame willdrain 100% of base stat drain + 10% of actor stamina per second
+            ;minigame will drain 100% of base stat drain + 10% of actor stamina per second
             setMinigameWearerVar(True,UD_base_stat_drain + getMaxActorValue(getWearer(),"Stamina",0.1))
             
             ;minigame will cause exhaustion with only 50% duration
