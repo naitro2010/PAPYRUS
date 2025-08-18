@@ -22,14 +22,18 @@ int function RegisterDecorator(String decoratorID, String sourceScript, String f
 ;
 ; - actionName: Will be visible to the LLM. Take care when naming so the llm will call it in the right circumstances.
 ; - parameterSchemaJson: Describes expected parameters, e.g., {"target": "string", "duration": "number"}
-; - categoryStr: Should be PAPYRUS
-
+; - categoryStr: Should be PAPYRUS unless the action should only be visible in a custom category which requires PAPYRUS_CUSTOM instead
+; - customCategory: Should be the name of a custom sub-category if normal category is PAPYRUS_CUSTOM
 int function RegisterAction(String actionName, String description, \
                            String eligibilityScriptName, String eligibilityFunctionName, \
                            String executionScriptName, String executionFunctionName, \
                            String triggeringEventTypesCsv, String categoryStr, \
                            int defaultPriority, String parameterSchemaJson, String customCategory="", String tags="") Global Native
 
+; Register a sub-category which can contain other actions and categories
+; - actionName: What the LLM uses to select a category.  Will be visible to the LLM. Take care when naming so the llm will call it in the right circumstances.
+; - customParentCategory: leave blank unless the sub-category is inside another custom category
+; - customCategory: The name of the new custom sub-category that can contain actions and other sub-categories.
 ; Register a custom sub-category for PAPYRUS_CUSTOM actions
 int function RegisterSubCategory (String actionName, String description, \
                                 String eligibilityScriptName, String eligibilityFunctionName, \
@@ -162,6 +166,86 @@ bool function IsRecordingInput() Global Native
 ; Returns true if running in VR, false otherwise
 bool function IsRunningVR() Global Native
 
+; Get the current number of tasks in the speech generation queue
+; Returns the number of speech tasks currently queued for processing
+int function GetSpeechQueueSize() Global Native
+
+; Render a prompt template with a custom variable
+; - templateName: The name of the template file to render (e.g., "my_custom_template")
+; - variableName: The name of the variable to set (can be empty to render without custom variables)
+; - variableValue: The value to assign to the variable (ignored if variableName is empty)
+; Returns the rendered template as a string, or an error message if rendering fails
+String function RenderTemplate(String templateName, String variableName, String variableValue) Global Native
+
+; Parse a string with variable substitution using the PromptEngine
+; - inputStr: The string to parse, containing variable placeholders (e.g., "Hello {{mydata.name}}, welcome to {{mydata.location}}!")
+; - variableName: The name of the variable to set (can be empty to parse without custom variables) (e.g "mydata")
+; - variableValue: The value to assign to the variable (ignored if variableName is empty) (e.g "{\"name\":"Bill\", "location\":\"our home\"}")
+; Returns the parsed string with variables substituted, or an error message if parsing fails (e.g "Hello Bill, welcome to our home")
+String function ParseString(String inputStr, String variableName, String variableValue) Global Native
+
+; Update the dynamic biography for an actor using the DynamicBioManager
+; - actor: The actor whose dynamic bio should be updated
+; Returns a summary of changes made to the actor's bio, or an empty string if the update failed
+String function UpdateActorDynamicBio(Actor actor) Global Native
+
+; -----------------------------------------------------------------------------
+; --- Event Schema Registry Functions ---
+; -----------------------------------------------------------------------------
+
+; Register a custom event schema for structured event data
+; - eventType: Unique identifier for the event type (e.g., "custom_spell_learn", "merchant_interaction")
+; - displayName: Human-readable name for the event type
+; - description: Description of what this event represents
+; - fieldsJson: JSON array defining the schema fields. Each field object should contain:
+;   - "name": Field name (string)
+;   - "type": Field type (0=String, 1=Integer, 2=Boolean, 3=Double, 4=Object, 5=Array)
+;   - "required": Whether the field is required (boolean)
+;   - "description": Field description (string)
+;   - "defaultValue": Optional default value (type must match field type)
+;   Example: [{"name":"actor","type":0,"required":true,"description":"Actor name"},{"name":"spell_level","type":1,"required":false,"description":"Spell level","defaultValue":1}]
+; - formatTemplatesJson: JSON object defining format templates for different modes:
+;   - "recent_events": Template for recent events display (usually includes time_desc) - Used for scene context, most commonly used formatting mode
+;   - "raw": Template for raw data access - Used for event history
+;   - "compact": Template for compact display - Used for memories
+;   - "verbose": Template for detailed display - Used for diagnostics
+;   Example: {"recent_events":"**{{actor}}** learned {{spell_name}} ({{time_desc}})","raw":"{{actor}} learned {{spell_name}}","compact":"{{actor}} learned {{spell_name}}","verbose":"{{actor}} learned the {{spell_level}} level spell {{spell_name}}"}
+; - isEphemeral: Whether events of this type should be automatically cleaned up (true) or persist (false)
+; - defaultTTLMs: Default time-to-live in milliseconds for ephemeral events (ignored if isEphemeral is false)
+; Returns 0 on success, 1 on failure
+int function RegisterEventSchema(String eventType, String displayName, String description, \
+                                String fieldsJson, String formatTemplatesJson, bool isEphemeral, int defaultTTLMs) Global Native
+
+; Validate event data against a registered schema
+; - eventType: The event type to validate against
+; - dataJson: JSON string containing the event data to validate
+; Returns true if the data is valid for the schema, false otherwise
+bool function ValidateEventData(String eventType, String dataJson) Global Native
+
+; Format an event using its registered schema
+; - eventJson: Complete event JSON string (must include "type" field and event data)
+; - mode: Format mode to use ("recent_events", "raw", "compact", "verbose")
+; Returns formatted string according to the schema's template for the specified mode
+String function FormatEvent(String eventJson, String mode) Global Native
+
+; Get schema information for a specific event type
+; - eventType: The event type to get information for
+; Returns JSON string containing schema details (fields, templates, etc.) or "{}" if not found
+String function GetSchemaInfo(String eventType) Global Native
+
+; Get all registered event types
+; Returns JSON array of strings containing all registered event type names
+String function GetAllEventTypes() Global Native
+
+; Check if a specific event type has a registered schema
+; - eventType: The event type to check
+; Returns true if the event type is registered, false otherwise
+bool function IsEventTypeRegistered(String eventType) Global Native
+
+; Get information about all registered schemas
+; Returns JSON object where keys are event types and values are schema information objects
+String function GetAllSchemasInfo() Global Native
+
 ; -----------------------------------------------------------------------------
 ; --- Web Interface ---
 ; -----------------------------------------------------------------------------
@@ -219,6 +303,14 @@ int function TriggerToggleGameMaster() Global Native
 ; - Only works if GameMaster agent is already enabled
 ; Functions identically to pressing the configured continuous mode toggle key
 int function TriggerToggleContinuousMode() Global Native
+
+; Simulates pressing the world event reactions toggle hotkey
+; - Toggles whether NPCs react to world events (dialogue (Including AI dialogue), combat, death, quest stages, etc.)
+; - This effectively disables NPCs from reacting to other NPCs dialogue. No interjections, no interruptions.
+; - Shows notification with current state (NPC Reactions: ON/OFF)
+; - When disabled, NPCs will not autonomously react to world events
+; Functions identically to pressing the configured world event reactions toggle key
+int function TriggerToggleWorldEventReactions() Global Native
 
 ; --- Thought System Functions ---
 
