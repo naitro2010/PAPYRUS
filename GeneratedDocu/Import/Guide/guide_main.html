@@ -24,31 +24,163 @@
           </tr>
         </table>
 
-        <h1> Device Minegames </h1>
+        <h1> Device Minigames </h1>
 
         <div>
           <img src="../Media/minigame1.jpg" alt="Example of minigame" width="400" height="400">
           <img src="../Media/minigame2.jpg" alt="Device menu with available minigames" width="400" height="400">
-          <img src="../Media/minigame3.jpg" alt="Example of crit in minigame" width="400" height="400">
+          <img src="../Media/minigame3.jpg" alt="Struggling with help from someone" width="400" height="400"> 
+
+          <img src="../Media/minigame4.jpg" alt="UD device overview page" width="400" height="400">
+          <img src="../Media/minigame5.jpg" alt="Lockpicking minigame" width="400" height="400">
+          <img src="../Media/minigame6.jpg" alt="Single UD device description" width="400" height="400"> <br>
+
+          <img src="../Media/animation.gif" alt="Example of crit in minigame" width="700" height="394">
         </div>
 
-        Device minigames are a more immersive rework of a Devious Devices way of escaping device. <br>
+        <br>
+        Device minigames are a more immersive rework of the way escaping devices works in Devious Devices. <br>
         
-        While original aproache was to only play animation and then based on RNG escape or fail to escape device. <br>
+        While the original approach in Devious Devices was to just have a random number generator decide on the outcome of an unlocking attempt, the         
+        Unforgiving Devices approach is to give the player <b>more options</b> and higher <b>participation/immersion</b> when trying to escape a device. <br>
+        In addition, every custom device type can also have it's own custom minigame, allowing for a unique approach when trying to escape from it. <br>
         
-        Unforgiving Devices approach is to give player more degrees of freedom when trying to escape the device. Every custom device type can also have custom mingame, giving it unique approach when escaping from it.
-        
-        
-        <h2> Default struggle minigame </h2>
-        
-        Default type of minigame which as available for most of devices (if not set otherwise or if device is inescapable) <br>
-        
-        While in minigame, actors stats are constantly drained. Once one of the stats reaches 0, minigame will end. Different minigames can require different stats and different ammount of stats per second. <br>
-        
-        While in minigame, crit can occur. Crit can be recognized by visual effect (on either HUD or player shader, depending on MCM setting). 
-        While crit is on, player can press the corresponding crit button, which will generaly result in benefical bonus (durability reduction, stats refill)
+        <h2> How to escape a device? </h2>
 
-        Following default minigames are available
+        Same as in Devious Devices, there are basically three things you can try, when a device is locked onto you and you want to get rid of it.
+        You can  <br>  <br>
+        1.  Try to <b>open the locks</b> of the device (if there is any lock at all). <br>
+        2.  Try to <b>struggle out of it</b>, by moving your body and trying to simply slip out of what is holding you. <br>
+        3.  Try to <b>cut the device</b>, by rubbing against a sharp edge, like the sharpest weapon you have in inventory.  <br>
+        4.  Inspect the <b>details</b> of your bondage, to find weaknesses and ways to escape from it.
+        <br>
+
+        <h2> Default minigame structure</h2>
+
+        While the minigame can be a bit confusing at first glance, the basic structure is this:<br>
+        The main character enters into an animation scene, and either magicka, health or stamina will be drained (or multiple of those) as the player character is straining to get out of the selected device.<br>
+        The device also has statistics like health and condition, which will also be drained. <br>
+        <b>Once the player cannot continue</b> due to spent magicka, health or stamina, this attempt at getting out of the device is over, and the device stays on.<br>
+        <b>Once the device statistics (condition or health) go to zero</b>, this attempt at getting out of the decice is over, and the player character gets out of the device.<br>
+        Even if the player character had to stop due to spent magicka, health or stamina, there may be still some damage already done to the device, and the next attempt will have a better starting point.  
+        But of course, you will have to recover magicka, stamina or health first and an additional cooldown before the next attempt may also apply.<br>
+      
+        <br>
+        While waiting for stamina/magicka/health to drain during the minigame and while waiting for the device statistics to deteriorate as well, 
+        occasionally the main character will light up while the minigame animation is playing, usually in blue or green color.
+        Once that happens, the press the magic key (A on the <a href="guide_controls.html">default keyboard layout</a>) in case of a blue flash or alternatively 
+        the stamina key (D on the <a href="guide_controls.html">default keyboard layout</a>).
+        If this happens in time with the flash, this will be considered a <b>critical hit</b>.<br>
+        Critical hits can do a variety of things.  They may add extra damage to the device.  They may help you recover some of your drained health/magicka/stamina.  
+        Or they may allow to open a lock with your key.  Or to enter into the lockpicking scene for lockpicking attempts.
+        Opening a lock with an appropriate key will require at least one successful critical hit, to get the key into the lock.<br>
+        The animation above actually shows a nice <b>video example of the struggle minigame</b>:  Stamina and Health are drained, 
+        but when the player character flashes up in green color, the player obviously hit the 'D' key in time, because you can see the
+        device health statistics on the bottom right taking a big hit in that moment as well as some of the stamina and health drain of the player character being reversed,
+        and then the same happens when the player character flashes up in blue color.  The player hit the 'D' key in time and the same effects are granted once more.  <br>
+
+        This minigame structure will be used in various ways, during all escape attempts.
+    
+
+        <h2> Opening device locks</h2>
+
+        If you <b>go for the locks</b>, you should either have a matching key or bring a stash of lockpicks.  The device in question can have multiple locks and each of them can be protected by additional shields. <br>
+        Before even starting the lockpicking, a minigame will be started and you have to place a critical hit in the minigame (explained below) to get your lockpick (or key) into the lock.  
+        Only once that is done, you will proceed to the actual lockpicking.
+        Note, that in this lockpicking game, you can only use 2 of your lockpicks on a given lock.  
+        Once these two lockpicks are used up, you will have to place a fresh critical hit in the minigame in order to continue picking the lock.
+        Locks change however after each 2 lockpicks, so the <b>lockpicking is much harder when trying to pick the lock of a device you are wearing</b> than when trying to open a chest lock of the same grade.   <br>
+        A  <b>shield</b> added to the lock can be removed in much the same way:  Winning a lockpicking scene after landing a critical hit will just remove the shield. <br>
+        Once all the shields are removed and all the locks are open, the device will finally come off and you will be free again. <br>
+        Of course some tricky and unique devices may require a special unique key and have no way of picking them.  
+        Some devices may also feature time-locks (so that the lock in not available for picking or opening with a key before a certain time has passed). 
+        And some may require other pre-conditions first.  Finally, some devices might not even have locks.  In those cases no options for locks will be available.
+
+
+
+        <h2> Cutting a device open</h2>
+
+        Many devices can simply be cut open.  This sounds easy and straightforward, and sometimes it is.  The cutting minigame follows a somewhat similar pattern.
+        Stamina will drain from the player character and while there is stamina left, the player can try to cut the device as much as possible.
+        A cutting meter will be displayed on the right.  Try to press the special key (S on the <a href="guide_controls.html">default keyboard layout</a>) when the cutting meter is almost full, in order to land an effective mini-cut as often as possible.
+        This should make the device lose health.  If in addition the main character flashes up in the usual blue resp. green color, press A resp. D keys to land an additional critical hit, which will do extra cutting damage and might get you to your goal much quicker.
+
+
+        <h2> Struggling out of a device </h2>
+        
+        If the locks and cutting are not good options, maybe simply struggling ouf of the device will do.  There are five ways to approach this: <br>  <br>
+        1.  <b><font color="green"></b> A regular attempt </font><br>
+        2.  An attempt <b><font color="red">using all your strength</font></b>. <br>
+        3.  An attempt <b><font color="blue">using magic</font></b> <br>
+        4.  Struggling effortlessly <br>
+        5.  Strugge uselessly <br>
+        <br>
+        
+        <b><font color="green"> A regular attempt</font></b> will just drain stamina.  You can place critical hits in the minigame in the same way as above.  It may not be the most effective way to get out of severe bondage, but in some cases it will already do.
+        Success in this attempt is tied to pickpocketing skill.  Detailed damage stats can be found in the Appendix section below under the headline 'default minigame'.<br>
+        
+        An attempt <b><font color="red">using all your strength</font></b> will drain stamina as well as health.  Be careful.  Especially in combination with devices, that deliver little electric shocks it's possible to kill yourself in the process, so watch your health as well.
+        Success in this attempt is tied to Two-handed weapon skill.  Detailed damage stats can be found in the Appendix section below under the headline 'desperate struggle'.<br>
+       
+        An attempt <b><font color="blue">using magic</font></b> will drain stamina as well as magicka.  
+        Success in this attempt is tied to destruction magic skill.  Detailed damage stats can be found in the Appendix section below under the headline 'magicka struggle'.<br>
+        
+        An attempt at <b>struggling but doing so effortlessly</b> will not drain your stamina or other statistics in meaningful ways.  
+        But struggle progress will also be very limited with most devices.  You can always use the E key (at least on the <a href="guide_controls.html">default keyboard layout</a>) to exit out of this attempt, if it's not getting you anywhere.  Detailed damage stats can be found in the Appendix section below under the headline 'slow strugge'.<br>
+      
+        Finally, in some cases <b>struggling uselessly</b> will be an option.  As the name implies, this won't help in any way, usually because the device is not of the kind that can be struggled out from.
+        But if you really want to try, you have the option to do it.  
+       
+
+        <h2> Accessibility of devices </h2>
+
+        When trapped in a lot of devious bondage devices at the same time, things can get complicated.
+        For example the nipple piercings might be a bother due to them manifesting other devices, so you would like to get rid of them asap.
+        However, when they are hidden below the locked chastity bra, which you are also wearing, you may not be able to do anything about the piercings, because their <b>accessibility</b> is low (or zero).
+        In this case it makes sense to work on other devices first, like the bra.  And once that has come off, the piercings will be available again.
+        With some special plugs of the more unforgiving kind, accessibility can become quite an issue even if the plug is the only devious device left on you.
+        In some cases you need to wait for the right time, when the plug shifts, such that you can finally grasp it and get it removed. 
+
+        <h2> Selecting which device to work on </h2>
+
+        When caught up in multiple devious bondage devices, it may make sense to proceed strategically. <br>
+        The . key (at least on the <a href="guide_controls.html">default keyboard layout</a>) will bring up the currently selected device. <br>
+        Pressing the same key for longer (at least a second), will bring up the overview of all unforgiving devices you are currently wearing.  
+        The currently selected device will be usually be shown as the top position in that list.  (I.e. it may show up twice in the list, don't get confused, this is normal.)
+        By pressing the W and S keys (or using the mouse), you should be able to navigate up and down the list to select any UD item you want to work on next.
+        This is especially useful since in some cases, you may not be able to access items via your normal inventory due to some heavy bondage. <br>
+         <br>
+        The list in the screenshot above shows not only the equipped UD devices, but also their accessibility.  
+        In the screenshot, only the Abadon Butterfly has accessibility of 100, while the Abadon Long Mittens have 30.  
+        Many of the other devices are currently not accessible at all (0%) so you can't do anything about those for the moment. 
+        On the same screenshot you can also see that the Abadon Hood and the Abadon Face Mask both have one lock, while the Abadon Cat Suit features even five locks, the first of which is still time-locked as the blue color indicates.
+        Many of those devices have some modifiers, that can be checked via the 'Details' option of each single device.   <br>
+        <br>
+        On the above screenshot some more common modifiers include:<br> 
+        <b><font color="blue">GOLD+</font></b> indicates a monetary reward in gold upon defeating the device, <br>
+        <b><font color="pink">ITEM+</font></b> indicates that these devices may be able to heal other devices, <br>
+        <b><font color="purple">SNT</font></b> indicates a sentient device, that may be able to talk to you, <br>
+        <b><font color="aqua">EVL+ </font></b> indicates, that the device may evolve into a different version of itself, and <br>
+        <b><font color="teal">MAN </font></b>  indicates, that this device may be able to lock even other additional UD items onto you under certain conditions.<br>
+        <br>
+        All of those devices are in perfect condition (100%), so this seems to be a lot of freshly equipped bondage that <b>may pose quite a challenge especially for beginner players.</b>  <br>
+        Be sure to have brought enough keys/lockpicks/piercing-removal-tools and a fat stash of health/magicka/stamina potions or you may find yourself in over your head with this kind of bondage.<br>
+         <br>
+         <b>Note: </b> Only devices that are compatible/patched for use with Unforgiving Devices will appear in this list.  
+         If you are wearing a Devious Devices item, that is not shown on the list, this is not a problem.  
+         It simply means, that the standard Devious Devices handling will apply to that item.<br>
+
+         <b>Note: </b> Should you absolutely want all of your Devious Device items to be converted to Unforgiving Devices, you can follow through on that idea and make a synthesis patch for your personal collection of installed mods.
+         Instructions for that can be found on the <a href="https://www.loverslab.com/files/file/41829-unforgiving-devices">homepage of the 3.01 release of Unforgiving Devices</a>, but you don't have to do that, if you just want to try out and play the mod.
+         During Installation of the Unforgiving Devices 3.01 mod, you are offered patches for Devious Devices NG 0.4.1 already.  This is (as of the time of this writing) the latest and greatest
+         version of Devious Devices anyway and the one you should be using.  With this patch you will have most of the DD items converted to UD already anyway.  In addition, there are patch options
+         for Lauras Bondage Shop, Devious Pink, Vivis Cockcage, Treasure Hunter Whore, Complete Alchemy and Cooking Overhaul
+         as well as Security Overhaul SKSE and Devious Chastity Piercing.  But the most important one of those is surely Devious Devices NG 0.4.1 and you will have a plethora of already patched devices from that.
+         It goes without saying, that of course, your Unforgiving Devices installation must have a higher load order priority than Devious Devices for that to work.
+
+
+        
+        <h2> Appendix </h2>
         
         <h3 class="UDMinigameHeader"> Normal struggle </h3>
         <div class="UDMinigameDescription">
