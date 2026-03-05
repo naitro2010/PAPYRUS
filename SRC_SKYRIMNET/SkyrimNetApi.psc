@@ -47,6 +47,19 @@ int function RegisterTag(String tagName, String eligibilityScriptName, String el
 ; Returns true if the action exists, false otherwise
 bool function IsActionRegistered(String actionName) Global Native
 
+; Unregister an action from the action library
+; Returns 0 on success, 1 on failure (action not found)
+int function UnregisterAction(String actionName) Global Native
+
+; Makes the specified actor run the specified action. Arguments can be supplied as a json string. Runs the action irrespective of cooldowns or eligibility.
+int function ExecuteAction(string actionName, Actor akOriginator, string argsJson) global native
+
+; Sets the cooldown for the specified action
+int function SetActionCooldown(string actionName, int cooldownTimeSeconds) global native
+
+; Gets the remaining cooldown time for the specified action in seconds. Returns -1 if no cooldown is set.
+int function GetRemainingCooldown(string actionName) global native
+
 ; -----------------------------------------------------------------------------
 ; --- Event Management ---
 ; -----------------------------------------------------------------------------
@@ -77,6 +90,20 @@ int function RegisterDialogue(Actor speaker, String dialogue) Global Native
 ; Returns 0 on success, 1 on failure
 int function RegisterDialogueToListener(Actor speaker, Actor listener, String dialogue) Global Native
 
+; Immediately purge all ongoing NPC dialogue
+; This function stops all dialogue processing:
+; - Clears the speech/TTS generation queue
+; - Clears streaming text buffers
+; - Clears dialogue queues for all actors
+; - Invalidates pending TTS generation tasks
+; If abDeferToCurrentFinished is false (default): also interrupts currently playing audio immediately
+; If abDeferToCurrentFinished is true: allows currently playing audio to finish naturally;
+;   only queues are cleared so nothing follows after the current line ends
+; Note: This is a blocking call on the Papyrus thread. For non-blocking behavior
+; with hotkey-style checks and notifications, use TriggerInterruptDialogue() instead.
+; Returns 1 if audio was interrupted mid-playback, 0 otherwise (always 0 in deferred mode)
+int function PurgeDialogue(bool abDeferToCurrentFinished = false) Global Native
+
 ; -----------------------------------------------------------------------------
 ; --- Package Management ---
 ; -----------------------------------------------------------------------------
@@ -101,18 +128,51 @@ int function ClearAllPackagesGlobally() Global Native
 ; Cancel any pending package removal tasks for an actor
 int function CancelPendingPackageTasks(Actor akActor) Global Native
 
-; Check if an actor has a specific package applied
+; Check if an actor currently has a specific skyrimnet package applied
 int function HasPackage(Actor akActor, String packageName) Global Native
+
+; Re-apply all SkyrimNet packages to an actor
+int function ReinforcePackages(Actor akActor) Global Native
 
 ; -----------------------------------------------------------------------------
 ; --- LLM Interaction ---
 ; -----------------------------------------------------------------------------
 
 ; Send a custom prompt to the LLM and receive a callback when it responds
-; Returns a request ID (positive integer) on success, or a negative error code on failure
-; The callback function should have the signature: Function OnLLMResponse(String response) on the specified script
-int function SendCustomPromptToLLM(String promptName, float temperature, int maxTokens, \
-                                  String callbackScriptName, String callbackFunctionName) Global Native
+; 
+; Parameters:
+;   promptName          - Name of the prompt template to render (e.g., "my_custom_prompt")
+;   variant             - OpenRouter variant to use (e.g., "meta", "dialogue"), empty string for default
+;   contextJson         - JSON object string with template variables (e.g., "{\"playerName\":\"Dragonborn\"}")
+;                         Pass empty string "" if no custom variables needed
+;   callbackQuest       - The quest containing the callback script (typically GetOwningQuest())
+;   callbackScriptName  - Name of the script attached to the quest
+;   callbackFunctionName - Name of the callback function to invoke
+;
+; Returns:
+;   1 on success (task queued)
+;   -1 if promptName is empty
+;   -2 if callback parameters are empty/null
+;   -3 if LLM configuration failed
+;
+; The callback function signature should be:
+;   Function OnLLMResponse(String response, int success)
+;   - response: The LLM response text (capped at 750 characters), or error message if failed
+;   - success: Status code indicating the result:
+;       1 = Success - LLM responded successfully, response contains the generated text
+;       0 = Error - Something went wrong, response contains the error message
+;           Possible errors include: template render failure, LLM initialization failure,
+;           empty LLM response, network timeout, or other exceptions
+;
+; Example usage:
+;   ; Simple call with default variant and no custom variables:
+;   SkyrimNetApi.SendCustomPromptToLLM("my_prompt", "", "", GetOwningQuest(), "MyQuestScript", "OnMyLLMResponse")
+;   
+;   ; With variant and custom context variables:
+;   String context = "{\"npcName\":\"Lydia\",\"location\":\"Whiterun\"}"
+;   SkyrimNetApi.SendCustomPromptToLLM("my_prompt", "dialogue", context, GetOwningQuest(), "MyQuestScript", "OnMyLLMResponse")
+int function SendCustomPromptToLLM(String promptName, String variant, String contextJson, \
+                                  Quest callbackQuest, String callbackScriptName, String callbackFunctionName) Global Native
 
 ; Register a direct narration event that forces the LLM to respond to a factual event
 ; This function creates an event that NPCs will respond to as established fact, such as:
@@ -127,13 +187,57 @@ int function SendCustomPromptToLLM(String promptName, float temperature, int max
 ; If targetActor is specified, the speaker will address that specific target
 ; If targetActor is not specified, the speaker will address everyone nearby (general announcement)
 ; 
+; Special behavior: If content is empty (""), the event will be registered as a short-lived (ephemeral) event
+; that appears in scene context but does not persist to the database. This is useful for triggering
+; immediate responses without cluttering event history.
+; 
 ; Examples:
 ; DirectNarration("A wolf howls in the distance") ; System selects speaker, addresses all
 ; DirectNarration("The shopkeeper drops a bottle", shopkeeperRef) ; Shopkeeper speaks to all
 ; DirectNarration("The guard thinks that the player looks tired", guardRef, Game.GetPlayer()) ; Guard speaks to player
+; DirectNarration("", someActor) ; Trigger immediate response without persistent event
 ; 
 ; Returns 0 on success, 1 on failure
 int function DirectNarration(String content, Actor originatorActor = None, Actor targetActor = None) Global Native
+
+; Register a persistent event that informs actors without triggering dialogue reactions
+; This function creates an event that NPCs will be aware of for context, but will NOT
+; respond to with dialogue. Use this for:
+; - Background events that add context but shouldn't interrupt scenes
+; - State changes that actors should know about but not react to immediately
+; - Information that should be stored in actor memory without triggering conversation
+; 
+; Unlike DirectNarration, this event type has NPC reactions disabled by default.
+; The event will still be persisted to the database and appear in the event history
+;
+; Content must not be empty - empty content will be rejected and return 1 (failure).
+;
+; If originatorActor is specified, that actor will be associated with the event
+; If targetActor is specified, that actor will also be associated with the event
+;
+; Examples:
+; RegisterPersistentEvent("The sun sets over the mountains") ; General atmospheric event
+; RegisterPersistentEvent("A caravan arrives at the gates", caravanLeaderRef) ; Associated with an actor
+; RegisterPersistentEvent("The player appears tired from travel", None, Game.GetPlayer()) ; Targets the player
+; 
+; Returns 0 on success, 1 on failure (including empty content)
+int function RegisterPersistentEvent(String content, Actor originatorActor = None, Actor targetActor = None) Global Native
+
+; Transform freeform text into player dialogue using the LLM dialogue pipeline
+; This is the API equivalent of the "Transform Dialogue" hotkey feature.
+; The text is processed through the player dialogue prompt template, transformed
+; by the LLM into character-appropriate speech, and then spoken by the player.
+; Nearby NPCs will react to the transformed dialogue.
+;
+; This function is asynchronous - it returns immediately and the dialogue
+; processing happens in the background.
+;
+; Examples:
+; TransformDialogue("I need to buy some potions") ; Player says this in-character
+; TransformDialogue("Tell me about the recent dragon attack")
+;
+; Returns 0 on success, 1 on failure (including empty text)
+int function TransformDialogue(String dialogueText) Global Native
 
 ; -----------------------------------------------------------------------------
 ; --- Utility Functions ---
@@ -146,11 +250,31 @@ bool function GetJsonBool(String jsonString, String key, bool defaultValue) Glob
 float function GetJsonFloat(String jsonString, String key, float defaultValue) Global Native
 Actor function GetJsonActor(String jsonString, String key, Actor defaultValue) Global Native
 
+; Find an actor by name among nearby actors (within 4000 units of the player)
+; - actorName: The display name of the actor to find (case-insensitive)
+; Returns: The actor if found, None otherwise
+; Note: "everyone" or empty string returns None (no specific target)
+; This searches both the player and all nearby NPCs
+Actor function FindActorByName(String actorName) Global Native
+
+; Joins a list of strings into a comma/and-separated list with optional noun phrase
+; - strings: The array of strings to join (e.g., ["apple", "orange", "banana"])
+; - noun: Optional array with [singular, plural] forms (e.g., ["creature", "creatures"])
+;         If provided, appends " is <singular>" for 1 item or " are <plural>" for multiple
+; Returns: The joined string (e.g., "apple, orange and banana" or "apple is creature")
+String function JoinStrings(String[] strings, String[] noun) Global Native
+
 ; Utility functions to access configuration values
 String function GetConfigString(String configName, String path, String defaultValue) Global Native
 int function GetConfigInt(String configName, String path, int defaultValue) Global Native
 bool function GetConfigBool(String configName, String path, bool defaultValue) Global Native
 float function GetConfigFloat(String configName, String path, float defaultValue) Global Native
+
+; Utility functions to set configuration values
+; - name: The name of the configuration section to modify. Options:
+;       game, OpenRouter, XTTS, Zonos, Piper, STT, ActorFilter, Phonetic, Hotkey, furniture, PlayerDialogue, VirtualEntities, Entity, Memory, ItemCustomization, Actions, DynamicBio, Events, VastAI, WebServer, VoiceSamples, SpellCustomization
+; - jsonPath: The partial json, of the values to apply to the config
+bool function PatchConfig(String name, String jsonPatch) Global Native
 
 ; Utility functions to get build information
 ; Returns the SkyrimNet version string (e.g., "0.0.1.0")
@@ -170,6 +294,10 @@ bool function IsRunningVR() Global Native
 ; Returns the number of speech tasks currently queued for processing
 int function GetSpeechQueueSize() Global Native
 
+; Get the time in milliseconds since the last audio finished playing
+; Returns the number of milliseconds since the last audio ended, or 0 if no audio has played yet
+int function GetTimeSinceLastAudioEnded() Global Native
+
 ; Render a prompt template with a custom variable
 ; - templateName: The name of the template file to render (e.g., "my_custom_template")
 ; - variableName: The name of the variable to set (can be empty to render without custom variables)
@@ -179,15 +307,22 @@ String function RenderTemplate(String templateName, String variableName, String 
 
 ; Parse a string with variable substitution using the PromptEngine
 ; - inputStr: The string to parse, containing variable placeholders (e.g., "Hello {{mydata.name}}, welcome to {{mydata.location}}!")
-; - variableName: The name of the variable to set (can be empty to parse without custom variables) (e.g "mydata")
+; - variableName: The name of the variable to set (can be empty to parse without custom variables) (e.g "mydata" or "MyData" - will be converted to lowercase)
 ; - variableValue: The value to assign to the variable (ignored if variableName is empty) (e.g "{\"name\":"Bill\", "location\":\"our home\"}")
 ; Returns the parsed string with variables substituted, or an error message if parsing fails (e.g "Hello Bill, welcome to our home")
+; Note: The variable name will be automatically converted to lowercase for consistency
 String function ParseString(String inputStr, String variableName, String variableValue) Global Native
 
 ; Update the dynamic biography for an actor using the DynamicBioManager
 ; - actor: The actor whose dynamic bio should be updated
 ; Returns a summary of changes made to the actor's bio, or an empty string if the update failed
 String function UpdateActorDynamicBio(Actor actor) Global Native
+
+; Generate a diary entry for an actor using the DiaryManager
+; - actor: The actor who should write a diary entry
+; Returns a status message indicating whether the diary generation was submitted successfully
+; The generation happens asynchronously in the background
+String function GenerateDiaryEntry(Actor actor) Global Native
 
 ; -----------------------------------------------------------------------------
 ; --- Event Schema Registry Functions ---
@@ -212,9 +347,14 @@ String function UpdateActorDynamicBio(Actor actor) Global Native
 ;   Example: {"recent_events":"**{{actor}}** learned {{spell_name}} ({{time_desc}})","raw":"{{actor}} learned {{spell_name}}","compact":"{{actor}} learned {{spell_name}}","verbose":"{{actor}} learned the {{spell_level}} level spell {{spell_name}}"}
 ; - isEphemeral: Whether events of this type should be automatically cleaned up (true) or persist (false)
 ; - defaultTTLMs: Default time-to-live in milliseconds for ephemeral events (ignored if isEphemeral is false)
+; - shortLivedEnabled: Whether short-lived scene context events should be created for this type (default true)
+;   Set to false for high-volume events that shouldn't clutter scene context
+; - interrupt: Whether this event type can interrupt ongoing speech/actions (default false)
+;   Set to true for player-initiated events that should take priority
 ; Returns 0 on success, 1 on failure
 int function RegisterEventSchema(String eventType, String displayName, String description, \
-                                String fieldsJson, String formatTemplatesJson, bool isEphemeral, int defaultTTLMs) Global Native
+                                String fieldsJson, String formatTemplatesJson, bool isEphemeral, int defaultTTLMs, \
+                                bool shortLivedEnabled = true, bool interrupt = false) Global Native
 
 ; Validate event data against a registered schema
 ; - eventType: The event type to validate against
@@ -245,6 +385,39 @@ bool function IsEventTypeRegistered(String eventType) Global Native
 ; Get information about all registered schemas
 ; Returns JSON object where keys are event types and values are schema information objects
 String function GetAllSchemasInfo() Global Native
+
+; -----------------------------------------------------------------------------
+; --- Virtual NPC Functions ---
+; -----------------------------------------------------------------------------
+
+; Register a new virtual NPC
+; - name: Unique identifier for the virtual NPC
+; - displayName: The display name shown in-game
+; - voiceId: Voice identifier for TTS
+; - conversationMode: Conversation mode setting. Must be "public" or "private"
+; - language: Language setting for the virtual NPC
+; Returns 0 on success or if the virtual NPC already exists, 1 on failure
+int function RegisterVirtualNPC(String name, String displayName, String voiceId, String conversationMode, String language) Global Native
+
+; Update an existing virtual NPC's properties
+; Name is required, other parameters will be updated if not empty
+; - name: Unique identifier of the virtual NPC to update
+; - displayName: The new display name
+; - voiceId: New voice identifier for TTS
+; - conversationMode: New conversation mode setting. Must be "public", "private", or empty
+; - language: New language setting
+; Returns 0 on success, 1 on failure
+int function UpdateVirtualNPC(String name, String displayName, String voiceId, String conversationMode, String language) Global Native
+
+; Enable a virtual NPC
+; - name: Unique identifier of the virtual NPC to enable
+; Returns 0 on success, 1 on failure
+int function EnableVirtualNPC(String name) Global Native
+
+; Disable a virtual NPC
+; - name: Unique identifier of the virtual NPC to disable
+; Returns 0 on success, 1 on failure
+int function DisableVirtualNPC(String name) Global Native
 
 ; -----------------------------------------------------------------------------
 ; --- Web Interface ---
@@ -279,6 +452,12 @@ int function TriggerRecordSpeechPressed() Global Native
 ; Functions identically to releasing the configured voice recording key
 int function TriggerRecordSpeechReleased(float duration) Global Native
 
+; Simulates pressing the open mic toggle hotkey
+; - Shows notification
+; - Toggles open mic mode
+; Functions identically to pressing the configured open mic toggle key
+int function TriggerToggleOpenMic() Global Native
+
 ; --- Text Input Functions ---
 
 ; Simulates pressing the text input hotkey
@@ -311,6 +490,14 @@ int function TriggerToggleContinuousMode() Global Native
 ; - When disabled, NPCs will not autonomously react to world events
 ; Functions identically to pressing the configured world event reactions toggle key
 int function TriggerToggleWorldEventReactions() Global Native
+
+; --- Interaction Control Functions ---
+
+; Simulates pressing the whisper mode toggle hotkey
+; - Toggles interaction.maxDistance between interaction.whisperMaxDistance and interaction.normalMaxDistance
+; - Shows notification with current state (Whisper mode: ON/OFF)
+; Functions identically to pressing the configured whisper toggle key
+int function TriggerToggleWhisperMode() Global Native
 
 ; --- Thought System Functions ---
 
@@ -407,6 +594,94 @@ int function TriggerPlayerThought() Global Native
 ; Triggers an autonomous dialogue from the player based on current circumstances and context
 ; Returns 0 on success, 1 on failure
 int function TriggerPlayerDialogue() Global Native
+
+; Sends a line of player dialogue directly to TTS, without prompting the LLM or saving to context
+int function TriggerPlayerTTS(String dialogue) Global Native
+
+; Polling API for player TTS completion (for DBVO integration)
+bool function IsPlayerTTSFinished() Global Native
+
+; Pre-generate TTS for silent NPC responses
+; Returns 0 on success, 1 on error
+int function PrepareNPCDialogue(String playerDialogueText) Global Native
+
+; Check if NPC dialogue (vanilla or TTS-generated) is ready to play
+bool function IsNPCDialogueReady() Global Native
+
+; -----------------------------------------------------------------------------
+; --- C++ Hotkey Manager Control ---
+; -----------------------------------------------------------------------------
+
+; Enable or disable the C++ hotkey manager
+; - enabled: true to enable C++ hotkeys, false to disable them
+; Returns 0 on success, 1 on failure
+int function SetCppHotkeysEnabled(bool enabled) Global Native
+
+; Check if C++ hotkey manager is currently enabled
+; Returns true if C++ hotkeys are enabled, false otherwise
+bool function IsCppHotkeysEnabled() Global Native
+
+; -----------------------------------------------------------------------------
+; --- GameMaster State Queries ---
+; -----------------------------------------------------------------------------
+
+; Check if continuous scene mode is enabled
+; When enabled, NPCs will keep talking autonomously after player interaction ends
+; Returns true if continuous mode is enabled, false otherwise
+bool function IsContinuousModeEnabled() Global Native
+
+; -----------------------------------------------------------------------------
+; --- Crosshair Capture Hotkey (OmniSight) ---
+; -----------------------------------------------------------------------------
+
+; Simulates pressing the crosshair capture hotkey (OmniSight)
+; No action on press - waits for release to determine intent
+; Returns 0 on success, 1 on failure
+int function TriggerCaptureCrosshairPressed() Global Native
+
+; Simulates releasing the crosshair capture hotkey (OmniSight)
+; - holdDuration: How long the key was held in seconds
+;   - Quick press (< 1.0s): Captures crosshair target (actor or furniture)
+;   - Long press (>= 1.0s): Captures player
+; Returns 0 on success, 1 on failure
+int function TriggerCaptureCrosshairReleased(float holdDuration) Global Native
+
+; -----------------------------------------------------------------------------
+; --- Diary and Bio Generation Hotkey ---
+; -----------------------------------------------------------------------------
+
+; Simulates pressing the generate diary and bio hotkey
+; - Displays a menu to select target scope:
+;   - 0 = Player Only
+;   - 1 = Nearby Actors
+;   - 2 = Pinned Actors
+;   - 3 = Target in Crosshair
+; - Generates diary entries and dynamic bio updates for all matching actors
+; Returns 0 on success, 1 on failure
+int function TriggerGenerateDiaryBio() Global Native
+
+; -----------------------------------------------------------------------------
+; --- Interrupt Dialogue Hotkey ---
+; -----------------------------------------------------------------------------
+
+; Simulates pressing the interrupt dialogue hotkey
+; - Clears the audio queue and speech/TTS generation queue
+; - Clears streaming text buffers and dialogue queues for all actors
+; If abDeferToCurrentFinished is false (default): also interrupts currently playing audio immediately
+; If abDeferToCurrentFinished is true: allows currently playing audio to finish naturally;
+;   only queues are cleared so nothing follows after the current line ends
+; Useful for cutting off NPCs mid-sentence or clearing stuck dialogue
+; Returns 0 on success, 1 on failure
+int function TriggerInterruptDialogue(bool abDeferToCurrentFinished = false) Global Native
+
+; Simulates pressing the silent narration hotkey
+; - Shows "Enter silent narration text..." notification
+; - Opens text input dialog for silent event registration
+; - Registers a persistent_generic event that informs actors without triggering NPC responses
+; - Useful for establishing facts or outcomes without causing dialogue
+; Functions identically to pressing the configured silent narration key
+; Returns 0 on success
+int function TriggerSilentNarration() Global Native
 
 ; -----------------------------------------------------------------------------
 ; --- Events ---
